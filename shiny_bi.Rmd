@@ -1,0 +1,14 @@
+---
+title: "Shiny BI"
+author: "Noah Pollock"
+date: "November 11, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r shiny_bi}
+knitr::include_app("https://ncpolloc.shinyapps.io/first_shiny_app/")
+```

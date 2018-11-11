@@ -1,0 +1,38 @@
+name: "np_site"
+navbar:
+  title: "MAADS"
+  type: inverse
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "About Me"
+      icon: fa-info
+      href: about_me.html
+    - text: "Blog"
+      icon: fa-street-view
+      href: blog.html
+    - text: "Dashboards"
+      icon: fa-gear
+      menu:
+        - text: "Static"
+        - text: "Flex Example"
+          href: flex_dash.html
+        - text: "---------"
+        - text: "Dynamic"
+        - text: "BI with Shiny"
+          href: shiny_bi.html
+        - text: "Pick Your Pizza"
+          href: pizza.html
+  right:
+    - icon: fa-question fa-lg
+      href: https://google.com
+output:
+  html_document:
+    theme: united
+    highlight: textmate
+    include:
+      after_body: 
+    css: 
+exclude: ["flex_dash.html", "*.csv"]
+output_dir: "."

@@ -1,0 +1,38 @@
+---
+title: "R Piece of the Pie"
+author: "Noah Pollock"
+date: "October 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+pie_df <- data.frame(
+  store = rep(c("Little Cesars","Jets","Hungry Howies","Papa Romanos","Giordanos"),3),
+  size = rep(c("Small","Medium","Large"),5),
+  price = 1:15
+)
+```
+
+## Square Inches for Round Pizzas
+
+Price per ounce, price per square foot, price per square inch.
+
+I should allow user input to ocreate a tool that will determine the price per square inch and determine which of two pizzas you should purchase.
+
+Would need digital calipers to determine thickness. But calories (e.g., high fat mozzarella vs low fat mozzarella).
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

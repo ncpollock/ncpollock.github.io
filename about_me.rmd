@@ -1,0 +1,56 @@
+---
+title: "I am Noah Pollock"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV here. And just for fun, I recreated my CV below using ggplot!
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+```
+
+You can also find me on LinkedIn: https://www.linkedin.com/in/noah-pollock-5b5804157/
+
+```{r cv_dataframe}
+
+cv_df <- data.frame(
+  section = c(
+    rep("Education",3)
+    ,rep("Vocation",3)),
+  text = c(
+    "Bachelors of Arts in Psychology",
+    "Masters of Science in Psychology",
+    "Masters of Science in Information Technology Management",
+    "Research Assistant/Data Transfer Specialist",
+    "Research Area Intermediate",
+    "Assistant Director of Assessment"),
+  date = c("2013-04-01",
+           "2015-04-01",
+           "2020-04-01",
+           "2012-04-01",
+           "2016-01-28",
+           "2016-09-28")
+) %>%
+  group_by(section) %>%
+  mutate(y = 1:n())
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r cv_plot, echo=FALSE}
+
+ggplot(cv_df,aes(x=1,y=y)) +
+  geom_text(aes(label=text),hjust=0) +
+  geom_text(aes(label=date,x=200),hjust=0) +
+  facet_grid(section~.,switch = 'y') +
+  scale_y_continuous(breaks = seq(1:nrow(cv_df))) +
+  scale_x_continuous(limits = c(1,250))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

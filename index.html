@@ -220,10 +220,10 @@ $(document).ready(function () {
     <li class="divider"></li>
     <li class="dropdown-header">Dynamic</li>
     <li>
-      <a href="page-c.html">BI with Shiny</a>
+      <a href="shiny_bi.html">BI with Shiny</a>
     </li>
     <li>
-      <a href="page-d.html">Pick Your Pizza</a>
+      <a href="pizza.html">Pick Your Pizza</a>
     </li>
   </ul>
 </li>
@@ -271,9 +271,9 @@ $(document).ready(function () {
   waterfall_x = c(rep(72,3),rep(NA,997)),
   waterfall_y = c(rep(30,3),rep(NA,997))
 ) %&gt;%
-  mutate_all(abs) # remove any negative numbers</code></pre>
-<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.3</code></pre>
-<pre class="r"><code>ggplot(plot_df) +
+  mutate_all(abs) # remove any negative numbers
+
+ggplot(plot_df) +
   geom_area(aes(x=mountain_x,y=mountain_y),alpha=.7) +
   geom_point(aes(x=tree_x,y=tree_y),color=&quot;green&quot;,size=5,alpha = 1/15) +
   geom_line(aes(x=river_x,y=river_y),color=&quot;blue&quot;,size=4,alpha = .5) + 

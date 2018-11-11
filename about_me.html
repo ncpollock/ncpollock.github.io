@@ -198,29 +198,33 @@ $(document).ready(function () {
     About Me
   </a>
 </li>
+<li>
+  <a href="blog.html">
+    <span class="fa fa-street-view"></span>
+     
+    Blog
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-gear"></span>
      
-    Blog
+    Dashboards
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Dashboards</li>
+    <li class="dropdown-header">Static</li>
     <li>
-      <a href="flex_dash.html">Flex</a>
-    </li>
-    <li>
-      <a href="blog.html">Blog1</a>
+      <a href="flex_dash.html">Flex Example</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Heading 2</li>
+    <li class="dropdown-header">Dynamic</li>
     <li>
-      <a href="page-c.html">Page C</a>
+      <a href="shiny_bi.html">BI with Shiny</a>
     </li>
     <li>
-      <a href="page-d.html">Page D</a>
+      <a href="pizza.html">Pick Your Pizza</a>
     </li>
   </ul>
 </li>
@@ -247,23 +251,33 @@ $(document).ready(function () {
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
+<p>I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.1161996 years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV here. And just for fun, I recreated my CV below using ggplot!</p>
+<p>You can also find me on LinkedIn: <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="uri">https://www.linkedin.com/in/noah-pollock-5b5804157/</a></p>
+<pre class="r"><code>cv_df &lt;- data.frame(
+  section = c(
+    rep(&quot;Education&quot;,3)
+    ,rep(&quot;Vocation&quot;,3)),
+  text = c(
+    &quot;Bachelors of Arts in Psychology&quot;,
+    &quot;Masters of Science in Psychology&quot;,
+    &quot;Masters of Science in Information Technology Management&quot;,
+    &quot;Research Assistant/Data Transfer Specialist&quot;,
+    &quot;Research Area Intermediate&quot;,
+    &quot;Assistant Director of Assessment&quot;),
+  date = c(&quot;2013-04-01&quot;,
+           &quot;2015-04-01&quot;,
+           &quot;2020-04-01&quot;,
+           &quot;2012-04-01&quot;,
+           &quot;2016-01-28&quot;,
+           &quot;2016-09-28&quot;)
+) %&gt;%
+  group_by(section) %&gt;%
+  mutate(y = 1:n())</code></pre>
+<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.3</code></pre>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
 <p>You can also embed plots, for example:</p>
-<p><img src="about_me_files/figure-html/pressure-1.png" width="672" /></p>
+<p><img src="about_me_files/figure-html/cv_plot-1.png" width="672" /></p>
 <p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
 </div>
 
