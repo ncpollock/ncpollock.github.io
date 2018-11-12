@@ -1,7 +1,7 @@
 name: "np_site"
 navbar:
-  title: "MAADS"
-  type: inverse
+  title: "Noah C. Pollock"
+  type: default
   left:
     - text: "Home"
       icon: fa-home
@@ -29,10 +29,6 @@ navbar:
       href: https://google.com
 output:
   html_document:
-    theme: united
-    highlight: textmate
-    include:
-      after_body: 
-    css: 
+    theme: flatly
 exclude: ["flex_dash.html", "*.csv"]
 output_dir: "."
