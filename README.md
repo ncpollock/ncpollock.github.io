@@ -24,3 +24,11 @@ Steps to Launch
 
 1.  Open .Rproj file in RStudio.
 2.  Click something to launch in RStudio viewer pane.
+
+Lessons Learned
+---------------
+
+1.  Github Pages takes time to update. In some cases, more than 30
+    minutes after committing and pushing changes to github. This was
+    incredibly confusing for someone still learning git. I thought that
+    my changes were not being logged.

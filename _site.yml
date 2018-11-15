@@ -27,6 +27,10 @@ navbar:
   right:
     - icon: fa-question fa-lg
       href: https://google.com
+    - icon: fa-linkedin
+      href: https://www.linkedin.com/in/noah-pollock-5b5804157/
+    - icon: fa-github
+      href: https://github.com/ncpollock/
 output:
   html_document:
     theme: flatly

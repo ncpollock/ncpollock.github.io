@@ -8,7 +8,7 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 * <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
 * <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a>
-* <a href="https://github.com/ncpollock/" target="_blank"> LinkedIn </a>
+* <a href="https://github.com/ncpollock/" target="_blank"> GitHub </a>
 
 
 ```{r setup, include=FALSE}
