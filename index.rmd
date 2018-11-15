@@ -18,7 +18,7 @@ This is my attempt at contributing to data science, data visualization, business
 You may be familiar with the phrase "On the Shoulders of Giants". A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon requires the wheel, the modern computer requires the transistor, the light bulb requires electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It's amazing what we can accomplish with just a bit of internet research / giant-hunting.
 
 
-```{r pretty_ggplot}
+```{r pretty_ggplot, echo = FALSE}
 plot_df <- data.frame(
   # x = rep(1:100,10),
   # y = rep(1:100,10),
@@ -28,8 +28,8 @@ plot_df <- data.frame(
                  #on the way back down
                  85:75,75:77,69:58,58:64,65:52,52:50,
                  rep(NA,900)),
-  tree_x = c(rnorm(500,mean=40,sd=20),
-             rnorm(500,mean=70,sd=10)),
+  tree_x = c(rnorm(500,mean=20,sd=20),
+             rnorm(500,mean=80,sd=10)),
   tree_y = sample(1:30,1000,replace=TRUE),
   river_x = c(60,65,67,70,72,72,rep(NA,994)),
   river_y = c(0,10,15,21,30,40,rep(NA,994)),
@@ -39,8 +39,11 @@ plot_df <- data.frame(
   mutate_all(abs) # remove any negative numbers
 
 ggplot(plot_df) +
-  geom_area(aes(x=mountain_x,y=mountain_y),alpha=.7) +
-  geom_point(aes(x=tree_x,y=tree_y),color="green",size=5,alpha = 1/15) +
+  geom_area(aes(x=mountain_x,y=mountain_y),fill='#634d38',alpha=.7) +
+  geom_rect(aes(xmin=1, xmax = 100, ymin = 0, ymax = max(plot_df$tree_y)),fill="#4f3924") +
+  # geom_area() # frosted peaks
+  geom_point(aes(x=tree_x,y=tree_y),color="green",size=5,alpha = .1) +
+  geom_point(aes(x=72,y=40),size=5) + 
   geom_line(aes(x=river_x,y=river_y),color="blue",size=4,alpha = .5) + 
   geom_jitter(aes(x=waterfall_x,y=waterfall_y),color="white",alpha=.4,width = 1,size=3) +
   # geom_ribbon() # for shoreline?

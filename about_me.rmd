@@ -48,7 +48,7 @@ cv_df <- data.frame(
   mutate(y = 1:n())
 ```
 
-Now, I plot!
+Now, I plot my cv!
 
 ```{r cv_plot, echo=FALSE}
 
