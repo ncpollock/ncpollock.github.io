@@ -64,11 +64,7 @@ datatable(blog_df
                        'Post Size (bytes)')
           ,options=list(
             initComplete = col_format,
-            # searching=FALSE,
-            # ordering=FALSE,
             pageLength=25,
-            # bPaginate=FALSE,
-            # bFilter=FALSE,
             columnDefs = list(list(className = 'dt-center',targets=2:ncol(blog_df)-1)), #center all but first column
             dom = 'frtpB'
           )) %>%

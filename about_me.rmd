@@ -4,12 +4,11 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV below.
+I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and project types. You can learn more about me via the following resources:
 
-<a href="np_cv.pdf" target="_blank"> aka my fancy resume </a>
-
-[My Curriculum Vitae (aka my fancy resume)](np_cv.pdf)
-
+* <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
+* <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a>
+* <a href="https://github.com/ncpollock/" target="_blank"> LinkedIn </a>
 
 
 ```{r setup, include=FALSE}
@@ -17,8 +16,6 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(ggplot2)
 ```
-
-You can also find me on LinkedIn: https://www.linkedin.com/in/noah-pollock-5b5804157/
 
 Just for fun, I also recreated some of my CV using ggplot2.
 
@@ -29,23 +26,37 @@ First, I include some of my experiences in a dataframe. It would be more fun (an
 cv_df <- data.frame(
   section = c(
     rep("Education",3)
-    ,rep("Vocation",3)),
+    ,rep("Vocation",3)
+    ,rep("Acheivements",3)),
   text = c(
     "Bachelors of Arts in Psychology",
     "Masters of Science in Psychology",
     "Masters of Science in Information Technology Management",
+    
     "Research Assistant/Data Transfer Specialist",
     "Research Area Intermediate",
-    "Assistant Director of Assessment"),
+    "Assistant Director of Assessment",
+    
+    "Chair, Michigan Association for Institutional Research",
+    "Oakland University Advancement Core Value Award for Teamwork and Community",
+    "John Steele Grant, Midwest Association of Colleges and Employers"),
   date = c("2013-04-01",
            "2015-04-01",
            "2020-04-01",
+           
            "2012-04-01",
            "2016-01-28",
-           "2016-09-28")
+           "2016-09-28",
+           
+           "2020",
+           "2018",
+           "2018")
 ) %>%
+  # arrange section the order it appears in dataframe
+  mutate(section = factor(section, levels = unique(section))) %>% 
   group_by(section) %>%
   mutate(y = 1:n())
+
 ```
 
 Now, I plot my cv!
@@ -54,12 +65,18 @@ Now, I plot my cv!
 
 ggplot(cv_df,aes(x=1,y=y)) +
   geom_text(aes(label=text),hjust=0) +
-  geom_text(aes(label=date,x=200),hjust=0) +
+  geom_text(aes(label=date,x=250),hjust=1) +
   facet_grid(section~.,switch = 'y') +
-  scale_y_continuous(breaks = seq(1:nrow(cv_df))) +
+  scale_y_continuous(breaks = seq(0,nrow(cv_df)+1,by=.5)
+                     ,minor_breaks = seq(.25,nrow(cv_df)+1,by=1)
+                     # ,minor_breaks = seq(0,nrow(cv_df)+1,by=.1)
+                     ,limits = c(0.5,round((nrow(cv_df)+1)/length(unique(cv_df$section)),1)
+                                 )) +
   scale_x_continuous(limits = c(1,250)) +
   ggtitle("Noah c. Pollock") +
+  # expand_limits(x = 0.25, y = 0.25) +
   theme(panel.background = element_blank(),
+        panel.border = element_rect(color='black',fill=NA),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_line(color="gray"),
       # axis.line = element_line(colour="black"),
