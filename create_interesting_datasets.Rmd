@@ -1,0 +1,87 @@
+---
+title: "Create Interesting Datasets"
+author: "Noah Pollock"
+date: "November 14, 2018"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+## Sometimes we need create our own dataset. 
+
+Let's create a dataset with **interesting** qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.
+
+For this post, we'll create these datasets purely with base R functions.
+
+A few good reasons to create your own dataset:
+
+* Mocking up visualizations
+* Testing our understanding of statistics
+* Simulations (e.g., probabilities or algorithms)
+* Teaching
+
+A few bad reasons:
+
+* You didn't get enough responses to your survey
+* Your effects are too small and p-values to large to publish
+
+```{r init_data}
+
+set.seed(100) #specify number generator for 'random' numbers for reproducibility
+n_students <- 1000 #number of grads
+terms <- sort(rep(c(paste0(2014:2018,"10"),paste0(2013:2017,"40")),n_students))
+n_terms <- length(unique(terms)) #number of terms generate
+air_df <- data.frame(
+  student_id = 1:(n_students*n_terms),
+  term_code = terms,
+  school = sample(c("BA","AS","EG"),size=n_students*n_terms,replace=TRUE),
+  ATYP = rep(sample(c("F","T"),size=n_students,replace=TRUE),n_terms),
+  sex = rep(sample(c("M","F"),prob=c(.55,.45),size=n_students,replace=TRUE),n_terms),
+  residency = rep(sample(c("I","O"),size=n_students,replace=TRUE),n_terms),
+  career_use = round(runif(n_students*n_terms,0,10)),
+  post_grad_outcome = sample(c("Employed","Grad School","Still Seeking","Other"),prob=c(.64,.27,.07,.02),size=n_students*n_terms,replace=TRUE),
+  
+  # these vars are placeholders
+  gpa = 0,
+  salary = 0,
+  stringsAsFactors = FALSE
+)
+air_df$gpa <- ifelse(air_df$ATYP=="F",
+                     #intercept + slope*value + error/noise
+                     #different slopes for a nice interaction effect
+                     2.5 + .15*air_df$career_use + rnorm(n_students*n_terms,0,1),
+                     3.7 + .01*air_df$career_use + rnorm(n_students*n_terms,0,1))
+air_df$gpa = ifelse(air_df$gpa>4,runif(n_students*n_terms,3.2,4),air_df$gpa) # keep gpa under 4
+air_df$gpa = ifelse(air_df$gpa<0,runif(n_students*n_terms,0,1),air_df$gpa) # keep gpa above 0
+
+air_df$career_use <- ifelse(air_df$post_grad_outcome=="Employed",
+                            #intercept + slope*value + error/noise
+                            #different slopes for a nice interaction effect
+                            sample(0:10
+                                   ,prob=c(3:13)
+                                   ,replace=TRUE
+                                   ,size=length(
+                                     air_df$career_use[air_df$post_grad_outcome=="Employed"])),
+                            air_df$career_use)
+
+air_df$salary <- ifelse(air_df$school=="EG",
+                        #intercept + slope*value + error/noise
+                        #different slopes for a nice interaction effect
+                        64000 + 750*air_df$career_use + rnorm(n_students*n_terms,0,1000),
+                        ifelse(air_df$school=="AS",
+                               48000 + 10*air_df$career_use + rnorm(n_students*n_terms,0,4000),
+                               51000 + 400*air_df$career_use + rnorm(n_students*n_terms,0,2700)))
+air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

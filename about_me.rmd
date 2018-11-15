@@ -4,7 +4,12 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV here. And just for fun, I recreated my CV below using ggplot!
+I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV below.
+
+<a href="np_cv.pdf" target="_blank"> aka my fancy resume </a>
+
+[My Curriculum Vitae (aka my fancy resume)](np_cv.pdf)
+
 
 
 ```{r setup, include=FALSE}
@@ -14,6 +19,10 @@ library(ggplot2)
 ```
 
 You can also find me on LinkedIn: https://www.linkedin.com/in/noah-pollock-5b5804157/
+
+Just for fun, I also recreated some of my CV using ggplot2.
+
+First, I include some of my experiences in a dataframe. It would be more fun (and more efficient when it comes to updating) to scrape my actual CV, maybe I'll write about it as a blog post.
 
 ```{r cv_dataframe}
 
@@ -39,9 +48,7 @@ cv_df <- data.frame(
   mutate(y = 1:n())
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
+Now, I plot!
 
 ```{r cv_plot, echo=FALSE}
 
@@ -50,7 +57,18 @@ ggplot(cv_df,aes(x=1,y=y)) +
   geom_text(aes(label=date,x=200),hjust=0) +
   facet_grid(section~.,switch = 'y') +
   scale_y_continuous(breaks = seq(1:nrow(cv_df))) +
-  scale_x_continuous(limits = c(1,250))
+  scale_x_continuous(limits = c(1,250)) +
+  ggtitle("Noah c. Pollock") +
+  theme(panel.background = element_blank(),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_line(color="gray"),
+      # axis.line = element_line(colour="black"),
+      axis.line = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title = element_blank(),
+      strip.background = element_rect(colour="#323232", fill='#323232'),
+      strip.text = element_text(color="white"),
+      plot.title = element_text(hjust = 0.5))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

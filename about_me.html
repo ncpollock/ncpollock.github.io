@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2018-11-11" />
+<meta name="date" content="2018-11-14" />
 
 <title>I am Noah Pollock</title>
 
@@ -246,13 +246,17 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">I am Noah Pollock</h1>
-<h4 class="date"><em>2018-11-11</em></h4>
+<h4 class="date"><em>2018-11-14</em></h4>
 
 </div>
 
 
-<p>I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.1161996 years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV here. And just for fun, I recreated my CV below using ggplot!</p>
+<p>I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.12 years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and projects. You can read about my professional experience in my CV below.</p>
+<p><a href="np_cv.pdf" target="_blank"> aka my fancy resume </a></p>
+<p><a href="np_cv.pdf">My Curriculum Vitae (aka my fancy resume)</a></p>
 <p>You can also find me on LinkedIn: <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="uri">https://www.linkedin.com/in/noah-pollock-5b5804157/</a></p>
+<p>Just for fun, I also recreated some of my CV using ggplot2.</p>
+<p>First, I include some of my experiences in a dataframe. It would be more fun (and more efficient when it comes to updating) to scrape my actual CV, maybe I’ll write about it as a blog post.</p>
 <pre class="r"><code>cv_df &lt;- data.frame(
   section = c(
     rep(&quot;Education&quot;,3)
@@ -274,12 +278,8 @@ $(document).ready(function () {
   group_by(section) %&gt;%
   mutate(y = 1:n())</code></pre>
 <pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.3</code></pre>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
+<p>Now, I plot!</p>
 <p><img src="about_me_files/figure-html/cv_plot-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
-</div>
 
 
 
