@@ -20,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
@@ -71,6 +72,7 @@ h6 {
 }
 </style>
 
+<link rel="stylesheet" href="my_style.css" type="text/css" />
 
 </head>
 
@@ -165,6 +167,14 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 
@@ -255,6 +265,14 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Welcome</h1>
@@ -265,9 +283,19 @@ $(document).ready(function () {
 <p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"></p>
 <p>This is my attempt at contributing to data science, data visualization, business intelligence, dashboarding, and databases.</p>
 <p>You may be familiar with the phrase “On the Shoulders of Giants”. A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon requires the wheel, the modern computer requires the transistor, the light bulb requires electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It’s amazing what we can accomplish with just a bit of internet research / giant-hunting.</p>
-<p><img src="index_files/figure-html/pretty_ggplot-1.png" width="672" /></p>
-<p>Inspirations[^1] [^1]: <a href="https://guides.github.com/activities/hello-world/" class="uri">https://guides.github.com/activities/hello-world/</a></p>
+<p><img src="index_files/figure-html/pretty_ggplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Inspirations<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://guides.github.com/activities/hello-world/" class="uri">https://guides.github.com/activities/hello-world/</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
 
+<footer id="site-footer">
+<br>
+<p>Congratulations, you found a lightly hidden message!</p>
+</footer>
 
 
 

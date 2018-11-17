@@ -1,12 +1,12 @@
 ---
-title: "I am Noah Pollock"
+title: "Who am I?"
 output: html_document
 ---
 
-![Trying to get images to work!](diverge_and_me.JPG)
+![Trying to get images to work!]('diverge_and_me.JPG')
 
 
-I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and project types. You can learn more about me via the following resources:
+I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
 
 * <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
 * <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a>
@@ -23,13 +23,64 @@ library(ggplot2)
 # `r knitr::include_graphics('diverge_and_me.JPG')`
 ```
 
+
+## Fun ggploting
+
 Just for fun, I also recreated some of my CV using ggplot2.
 
-First, I include some of my experiences in a dataframe. It would be more fun (and more efficient when it comes to updating) to scrape my actual CV, maybe I'll write about it as a blog post.
+First, I include some of my experiences in a dataframe. It would be more fun (and perhaps more efficient when it comes to updating) to scrape my actual CV, maybe I'll write about it as a blog post.
 
 ```{r cv_dataframe, echo=FALSE, warning=FALSE}
 
-#could have built it in R instead ###########
+line_length <- 110
+
+cv_df <- read.csv('cv_df.csv',
+                  stringsAsFactors = FALSE,
+                  na.strings = "") %>%
+  # arrange section the order it appears in dataframe
+  mutate(section = factor(section, levels = unique(section)),
+         date_end = as.Date(date_end),
+         month = lubridate::month(date_end
+                                  ,label=TRUE
+                                  ,abbr=FALSE),
+         year = lubridate::year(date_end)) %>% 
+  mutate_at(.vars = vars(experience, point_1, point_2, point_3),
+           .funs = funs(stringr::str_wrap(.,width=line_length))) %>%
+    # gather(line_type,text,-section,-date_end,-month,-year) %>%
+    # mutate(line_type =  factor(line_type, levels = rev(c("experience","point_1","point_2","point_3")))) %>%
+    # slice(match(rev(c("experience","point_1","point_2","point_3")), line_type)) %>% # custome sort order
+  group_by(section)
+  # arrange(line_type) %>%
+  # mutate(y = 1:n()*10,
+  #        y = ifelse(is.na(text),NA,y)) %>%
+  # ungroup()
+  
+  #,-y,-y_point_1,-y_point_2,-y_point_3
+  
+cv_df <- cv_df %>%
+  #adjust for number of lines
+  inner_join(cv_df %>%
+      gather(line_type,text,-section,-date_start,-date_end,-month,-year) %>%
+      filter(!is.na(text)) %>%
+      summarise(wraps = sum(floor(nchar(text)/line_length)),
+        n = n()),
+    by = "section") %>%
+  #adjust for wrapped text adding new lines
+  #need to do this!
+  # y = 1:n()*(n+wraps)
+  mutate(y = 1:n()*10,
+         y_point_1 = ifelse(is.na(point_1),NA,y),
+         y_point_2 = ifelse(is.na(point_2),NA,y),
+         y_point_3 = ifelse(is.na(point_3),NA,y))
+
+
+# try lag/lead to adjust distances for text that wraps
+
+ #mutate case_when for dates on sections
+
+
+
+# or build cv points in R instead ###########
 # easier to put the essentials in a .csv file
 # cv_df <- data.frame(
 #   section = c(
@@ -82,58 +133,13 @@ First, I include some of my experiences in a dataframe. It would be more fun (an
 #               "Extracted, analyzed, and reported on student success and program review data",
 #               "Identify and report on key performance indicators within the department",
 #               rep(NA,3))
-# ) %>%
+# ) # continue rest of code here...
 ##########
 
-line_length <- 110
-
-cv_df <- read.csv('cv_df.csv',
-                  stringsAsFactors = FALSE,
-                  na.strings = "") %>%
-  # arrange section the order it appears in dataframe
-  mutate(section = factor(section, levels = unique(section)),
-         date_end = as.Date(date_end),
-         month = lubridate::month(date_end
-                                  ,label=TRUE
-                                  ,abbr=FALSE),
-         year = lubridate::year(date_end)) %>% 
-  mutate_at(.vars = vars(experience, point_1, point_2, point_3),
-           .funs = funs(stringr::str_wrap(.,width=line_length))) %>%
-    # gather(line_type,text,-section,-date_end,-month,-year) %>%
-    # mutate(line_type =  factor(line_type, levels = rev(c("experience","point_1","point_2","point_3")))) %>%
-    # slice(match(rev(c("experience","point_1","point_2","point_3")), line_type)) %>% # custome sort order
-  group_by(section)
-  # arrange(line_type) %>%
-  # mutate(y = 1:n()*10,
-  #        y = ifelse(is.na(text),NA,y)) %>%
-  # ungroup()
-  
-  #,-y,-y_point_1,-y_point_2,-y_point_3
-  
-cv_df <- cv_df %>%
-  #adjust for number of lines
-  inner_join(cv_df %>%
-      gather(line_type,text,-section,-date_start,-date_end,-month,-year) %>%
-      filter(!is.na(text)) %>%
-      summarise(wraps = sum(floor(nchar(text)/line_length)),
-        n = n()),
-    by = "section") %>%
-  #adjust for wrapped text adding new lines
-  #need to do this!
-  # y = 1:n()*(n+wraps)
-  mutate(y = 1:n()*10,
-         y_point_1 = ifelse(is.na(point_1),NA,y),
-         y_point_2 = ifelse(is.na(point_2),NA,y),
-         y_point_3 = ifelse(is.na(point_3),NA,y))
-
-
-# try lag/lead to collapse sections with few bullets
-
- #mutate case_when for dates on sections
 
 ```
 
-Now, I plot my cv!
+Now, I plot my CV!
 
 ```{r cv_plot, echo=FALSE, warning=FALSE, fig.width=8.5, fig.height=25,fig.align='center'}
 
@@ -161,7 +167,7 @@ ggplot(cv_df,aes(x=1,y=y)) +
   #                                )) +
   
   scale_x_continuous(limits = c(1,250)) +
-  ggtitle("Noah c. Pollock") +
+  ggtitle("Noah C. Pollock") +
   # expand_limits(x = 0.25, y = 0.25) +
   theme(panel.background = element_blank(),
         panel.border = element_rect(color='black',fill=NA),

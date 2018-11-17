@@ -13,13 +13,17 @@ This blog is my contribution to the fields of data science, business analytics, 
 
 
 ```{r blog_df, echo=FALSE}
+
+# instead I need to read all .rmd files in main dir
+  # and exclude non-blog posts!
 blog_df <- data.frame(
   filename = c("create_interesting_datasets"
-               ,"pizza")
+               ,"pizza"
+               ,"building_this_site")
 )
 
-blog_df$created_at <- file.info(paste0(blog_df$filename,".html"))$ctime
-blog_df$updated_at <- file.info(paste0(blog_df$filename,".html"))$mtime
+blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
+blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
 blog_df$size <- file.info(paste0(blog_df$filename,".Rmd"))$size
 
 #wrap filename in raw html

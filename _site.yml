@@ -35,5 +35,9 @@ navbar:
 output:
   html_document:
     theme: flatly
+    df_print: kable
+    include:
+      after_body: footer.html
+    css: my_style.css
 exclude: ["flex_dash.html", "*.csv"]
 output_dir: "."

@@ -1,9 +1,12 @@
 ---
 title: "Welcome"
+output: 
+  html_document:
+      code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE, fig.align='center')
 library(ggplot2)
 library(dplyr)
 ```
@@ -15,7 +18,7 @@ This is my attempt at contributing to data science, data visualization, business
 You may be familiar with the phrase "On the Shoulders of Giants". A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon requires the wheel, the modern computer requires the transistor, the light bulb requires electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It's amazing what we can accomplish with just a bit of internet research / giant-hunting.
 
 
-```{r pretty_ggplot, echo = FALSE}
+```{r pretty_ggplot}
 plot_df <- data.frame(
   # x = rep(1:100,10),
   # y = rep(1:100,10),
@@ -23,7 +26,7 @@ plot_df <- data.frame(
   mountain_x = c(1:100,rep(NA,900)),
   mountain_y = c(50:62,62:58,59:90,
                  #on the way back down
-                 85:75,75:77,69:58,58:64,65:52,52:50,
+                 90:80,80:70,70:72,69:58,58:64,65:60,
                  rep(NA,900)),
   tree_x = c(rnorm(500,mean=20,sd=20),
              rnorm(500,mean=80,sd=10)),
@@ -55,4 +58,5 @@ ggplot(plot_df) +
 
 
 Inspirations[^1]
+
 [^1]: https://guides.github.com/activities/hello-world/

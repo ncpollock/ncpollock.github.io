@@ -1,0 +1,72 @@
+---
+title: "Building This Site"
+author: "Noah Pollock"
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+---
+
+## Scope
+Learn to buid this site using R, RStudio, and GitHub. 
+
+## Introduction
+There are many ways to build and publish a website using R. Here, I chronicle only one method using pre-built functionality in RStudio.
+
+1. R (version R-3.4.2)
+2. RStudio IDE (version 1.1.383 )
+
+The above prerequisites will alow you to launch and test the application. In order to publish to the web, you need a few more pieces.
+
+1. Github Account
+2. Github Pages (a GitHub Repo configured in a specific way)
+
+## Step 1: Setup in GitHub
+
+Create a GitHub Repo configured for GitHub Pages
+
+## Step 2: Setup in RStudio
+
+Create an R Project and a __site.yml file.
+
+```{r example_site_yml, eval=FALSE,echo=TRUE}
+name: "awesome_site"  
+navbar:  
+  title: "Awesome Site!"  
+  type: default  
+  left:  
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "About"
+      icon: fa-info
+      href: about_me.html
+    - text: "Blog"
+      icon: fa-street-view
+      href: blog.html
+  right:
+    - text: "Need Help"
+      icon: fa-question
+      href: https://google.com
+output:
+  html_document:
+    df_print: kable
+output_dir: "."
+```
+
+## Step 3: Git Repo
+
+Connect to git
+
+## Step 4: Build Webpages from Rmarkdown
+
+New rmarkdown, save, knit as index.html, about_me.html, etc...
+
+## Step 5: Publish
+
+Stage, Commit, Push and preview
+
+## Step 6: Cusomize
+
+Customize
