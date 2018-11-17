@@ -52,3 +52,7 @@ ggplot(plot_df) +
         axis.text = element_blank(),
         axis.title = element_blank())
 ```
+
+
+Inspirations[^1]
+[^1]: https://guides.github.com/activities/hello-world/
