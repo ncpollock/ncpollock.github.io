@@ -10,7 +10,6 @@
 
 
 
-<meta name="date" content="2018-11-14" />
 
 <title>I am Noah Pollock</title>
 
@@ -232,8 +231,9 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://google.com">
-    <span class="fa fa-question fa-lg"></span>
+    <span class="fa fa-question"></span>
      
+    Need Help
   </a>
 </li>
 <li>
@@ -258,12 +258,15 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">I am Noah Pollock</h1>
-<h4 class="date"><em>2018-11-14</em></h4>
 
 </div>
 
 
-<p>I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.12 years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and project types. You can learn more about me via the following resources:</p>
+<div class="figure">
+<img src="diverge_and_me.jpg" alt="This is me with some serious helmet hair!" />
+<p class="caption">This is me with some serious helmet hair!</p>
+</div>
+<p>I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.13 years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and project types. You can learn more about me via the following resources:</p>
 <ul>
 <li><a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a></li>
 <li><a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a></li>
@@ -271,42 +274,8 @@ $(document).ready(function () {
 </ul>
 <p>Just for fun, I also recreated some of my CV using ggplot2.</p>
 <p>First, I include some of my experiences in a dataframe. It would be more fun (and more efficient when it comes to updating) to scrape my actual CV, maybe I’ll write about it as a blog post.</p>
-<pre class="r"><code>cv_df &lt;- data.frame(
-  section = c(
-    rep(&quot;Education&quot;,3)
-    ,rep(&quot;Vocation&quot;,3)
-    ,rep(&quot;Acheivements&quot;,3)),
-  text = c(
-    &quot;Bachelors of Arts in Psychology&quot;,
-    &quot;Masters of Science in Psychology&quot;,
-    &quot;Masters of Science in Information Technology Management&quot;,
-    
-    &quot;Research Assistant/Data Transfer Specialist&quot;,
-    &quot;Research Area Intermediate&quot;,
-    &quot;Assistant Director of Assessment&quot;,
-    
-    &quot;Chair, Michigan Association for Institutional Research&quot;,
-    &quot;Oakland University Advancement Core Value Award for Teamwork and Community&quot;,
-    &quot;John Steele Grant, Midwest Association of Colleges and Employers&quot;),
-  date = c(&quot;2013-04-01&quot;,
-           &quot;2015-04-01&quot;,
-           &quot;2020-04-01&quot;,
-           
-           &quot;2012-04-01&quot;,
-           &quot;2016-01-28&quot;,
-           &quot;2016-09-28&quot;,
-           
-           &quot;2020&quot;,
-           &quot;2018&quot;,
-           &quot;2018&quot;)
-) %&gt;%
-  # arrange section the order it appears in dataframe
-  mutate(section = factor(section, levels = unique(section))) %&gt;% 
-  group_by(section) %&gt;%
-  mutate(y = 1:n())</code></pre>
-<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.3</code></pre>
 <p>Now, I plot my cv!</p>
-<p><img src="about_me_files/figure-html/cv_plot-1.png" width="672" /></p>
+<p><img src="about_me_files/figure-html/cv_plot-1.png" width="816" /></p>
 
 
 

@@ -8,9 +8,7 @@ output:
     toc_float: true
 ---
 
-## Sometimes we need create our own dataset. 
-
-Let's create a dataset with **interesting** qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.
+Let's create a dataset with *interesting* qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.
 
 For this post, we'll create these datasets purely with base R functions.
 
@@ -25,6 +23,8 @@ A few bad reasons:
 
 * You didn't get enough responses to your survey
 * Your effects are too small and p-values to large to publish
+
+## Create the Dataset
 
 ```{r init_data}
 
@@ -76,12 +76,12 @@ air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
 
 ```
 
-## Including Plots
+## Show Interest
 
-You can also embed plots, for example:
+Let's discover how it's interesting.
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+

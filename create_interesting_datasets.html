@@ -331,8 +331,9 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://google.com">
-    <span class="fa fa-question fa-lg"></span>
+    <span class="fa fa-question"></span>
      
+    Need Help
   </a>
 </li>
 <li>
@@ -363,9 +364,7 @@ div.tocify {
 </div>
 
 
-<div id="sometimes-we-need-create-our-own-dataset." class="section level2">
-<h2>Sometimes we need create our own dataset.</h2>
-<p>Let’s create a dataset with <strong>interesting</strong> qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.</p>
+<p>Let’s create a dataset with <em>interesting</em> qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.</p>
 <p>For this post, we’ll create these datasets purely with base R functions.</p>
 <p>A few good reasons to create your own dataset:</p>
 <ul>
@@ -379,6 +378,8 @@ div.tocify {
 <li>You didn’t get enough responses to your survey</li>
 <li>Your effects are too small and p-values to large to publish</li>
 </ul>
+<div id="create-the-dataset" class="section level2">
+<h2>Create the Dataset</h2>
 <pre class="r"><code>set.seed(100) #specify number generator for &#39;random&#39; numbers for reproducibility
 n_students &lt;- 1000 #number of grads
 terms &lt;- sort(rep(c(paste0(2014:2018,&quot;10&quot;),paste0(2013:2017,&quot;40&quot;)),n_students))
@@ -425,11 +426,10 @@ air_df$salary &lt;- ifelse(air_df$school==&quot;EG&quot;,
                                51000 + 400*air_df$career_use + rnorm(n_students*n_terms,0,2700)))
 air_df$salary &lt;- ifelse(air_df$post_grad_outcome==&quot;Employed&quot;,air_df$salary,NA)</code></pre>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
+<div id="show-interest" class="section level2">
+<h2>Show Interest</h2>
+<p>Let’s discover how it’s interesting.</p>
 <p><img src="create_interesting_datasets_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
 </div>
 
 

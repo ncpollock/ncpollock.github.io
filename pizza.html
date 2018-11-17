@@ -233,8 +233,9 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://google.com">
-    <span class="fa fa-question fa-lg"></span>
+    <span class="fa fa-question"></span>
      
+    Need Help
   </a>
 </li>
 <li>
@@ -270,14 +271,60 @@ $(document).ready(function () {
 <p>Price per ounce, price per square foot, price per square inch.</p>
 <p>I should allow user input to ocreate a tool that will determine the price per square inch and determine which of two pizzas you should purchase.</p>
 <p>Would need digital calipers to determine thickness. But calories (e.g., high fat mozzarella vs low fat mozzarella).</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<pre class="r"><code># df &lt;- data.frame(
+#   variable = c(&quot;One Slice&quot;, &quot;Leftover&quot;,&quot;dummy&quot;),
+#   value = c(12.5, 87.5,0)
+# )
+#
+# bizarre pie charts!
+# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
+#   geom_col(width = 1) +
+#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
+#   coord_polar(&quot;y&quot;, start = pi / 3) +
+#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
+#   theme_void() + 
+#   theme(legend.position = &quot;none&quot;)
+# 
+# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
+#   geom_col(width = 1) +
+#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
+#   coord_polar(&quot;y&quot;, start = pi / 3) +
+#   geom_col(width = 1) +
+#   coord_polar(&quot;y&quot;, start = 2) +
+#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
+#   geom_vline(xintercept = 1.5) +
+#   theme_void() +
+#   theme(legend.position = &quot;none&quot;,
+#         panel.background = element_blank())
+# 
+# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
+#   geom_col(width = 1) +
+#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
+#   coord_polar(&quot;y&quot;, start = c(3,pi / 3)) +
+#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
+#   geom_vline(xintercept = 1.5) +
+#   theme_void() + 
+#   theme(legend.position = &quot;none&quot;)
+# 
+# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
+#   geom_col(width = 1) +
+#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
+#   coord_polar(&quot;y&quot;, start = c(3,9)) +
+#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
+#   # geom_vline(xintercept = 1.5) +
+#   theme_void() + 
+#   theme(legend.position = &quot;none&quot;,
+#         panel.background = element_blank())
+# 
+# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
+#     geom_col(width = 1) +
+#     scale_fill_manual(values = c(&#39;blue&#39;,&#39;blue&#39;, &quot;blue&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
+#     coord_polar( start = c(6,7.5)) +
+#     geom_point(aes(x=0,y=0),color=&quot;white&quot;,size=100,shape=&quot;☺&quot;) +
+#     geom_vline(xintercept = 1.5) +
+#     theme_void() + 
+#     theme(legend.position = &quot;none&quot;,
+#           panel.background = element_blank())</code></pre>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>

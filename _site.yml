@@ -25,7 +25,8 @@ navbar:
         - text: "Pick Your Pizza"
           href: pizza.html
   right:
-    - icon: fa-question fa-lg
+    - text: "Need Help"
+      icon: fa-question
       href: https://google.com
     - icon: fa-linkedin
       href: https://www.linkedin.com/in/noah-pollock-5b5804157/

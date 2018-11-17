@@ -1,8 +1,9 @@
 ---
 title: "I am Noah Pollock"
-date: "`r Sys.Date()`"
 output: html_document
 ---
+
+![This is me with some serious helmet hair!](diverge_and_me.jpg)   
 
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and project types. You can learn more about me via the following resources:
 
@@ -11,9 +12,10 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 * <a href="https://github.com/ncpollock/" target="_blank"> GitHub </a>
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 ```
 
@@ -21,64 +23,122 @@ Just for fun, I also recreated some of my CV using ggplot2.
 
 First, I include some of my experiences in a dataframe. It would be more fun (and more efficient when it comes to updating) to scrape my actual CV, maybe I'll write about it as a blog post.
 
-```{r cv_dataframe}
+```{r cv_dataframe, echo=FALSE, warning=FALSE}
 
+# easier to put the essentials in a .csv file
 cv_df <- data.frame(
   section = c(
     rep("Education",3)
-    ,rep("Vocation",3)
+    ,rep("Career",4)
     ,rep("Acheivements",3)),
-  text = c(
+  experience = c(
     "Bachelors of Arts in Psychology",
     "Masters of Science in Psychology",
     "Masters of Science in Information Technology Management",
     
-    "Research Assistant/Data Transfer Specialist",
-    "Research Area Intermediate",
+    "Research Assistant",
+    "Data Transfer Specialist",
+    "Research Area Specialist Intermediate",
     "Assistant Director of Assessment",
     
     "Chair, Michigan Association for Institutional Research",
     "Oakland University Advancement Core Value Award for Teamwork and Community",
     "John Steele Grant, Midwest Association of Colleges and Employers"),
-  date = c("2013-04-01",
+  date_end = c("2013-04-01",
            "2015-04-01",
            "2020-04-01",
            
-           "2012-04-01",
-           "2016-01-28",
-           "2016-09-28",
+           "2015-10-15",
+           "2016-02-15",
+           "2016-09-26",
+           NA,
            
-           "2020",
-           "2018",
-           "2018")
+           "2020-01-01",
+           "2018-01-01",
+           "2018-01-01"),
+  point_1 = c("Departmental Honors",
+              "Thesis: Is “Average” Feedback Threatening? Performance Feedback and the Stress-Buffering Model of High Self-Esteem",
+              "Concentration in Business Analytics",
+              "Programmed automated analytic processes using SPSS syntax and R",
+              "Developed user-friendly databases connected to Banner (Ellucian ERP System)",
+              "Coordinated with multiple departments to manage data definitions and integrity",
+              "Collect, clean, analyze, and report on post-graduation success data",
+              rep(NA,3)),
+  point_2 = c("Minor in Philosophy",
+              rep(NA,2),
+              "Drafted reports to summarize institutional data",
+              "Explored data relevant to transfer student success and articulation",
+              "Satisfied federal and state government reporting requirements",
+              "Supervise IT Interns and collaborate with departments across campus",
+              rep(NA,3)),
+  point_3 = c(rep(NA,3),
+              "Cleaned, organized, and analyzed datasets with over 1 million rows and 100 columns",
+              "Solved technical challenges using MS Access, SQL*Plus, VBA, and Batch scripting",
+              "Extracted, analyzed, and reported on student success and program review data",
+              "Identify and report on key performance indicators within the department",
+              rep(NA,3))
 ) %>%
   # arrange section the order it appears in dataframe
-  mutate(section = factor(section, levels = unique(section))) %>% 
+  mutate(section = factor(section, levels = unique(section)),
+         month = lubridate::month(date_end
+                                  ,label=TRUE
+                                  ,abbr=FALSE),
+         year = lubridate::year(date_end)) %>% 
+  mutate_at(.vars = vars(experience, point_1, point_2, point_3),
+           .funs = funs(stringr::str_wrap(.,width=225))) %>%
+    # gather(line_type,text,-section,-date_end,-month,-year) %>%
+    # mutate(line_type =  factor(line_type, levels = rev(c("experience","point_1","point_2","point_3")))) %>%
+    # slice(match(rev(c("experience","point_1","point_2","point_3")), line_type)) %>% # custome sort order
   group_by(section) %>%
-  mutate(y = 1:n())
+  # arrange(line_type) %>%
+  # mutate(y = 1:n()*10,
+  #        y = ifelse(is.na(text),NA,y)) %>%
+  # ungroup()
+
+  mutate(y = 1:n()*10,
+         y_point_1 = ifelse(is.na(point_1),NA,y),
+         y_point_2 = ifelse(is.na(point_2),NA,y),
+         y_point_3 = ifelse(is.na(point_3),NA,y))
+
+# try lag/lead to collapse sections with few bullets
+
+ #mutate case_when for dates on sections
 
 ```
 
 Now, I plot my cv!
 
-```{r cv_plot, echo=FALSE}
+```{r cv_plot, echo=FALSE, warning=FALSE, fig.width=8.5}
 
 ggplot(cv_df,aes(x=1,y=y)) +
-  geom_text(aes(label=text),hjust=0) +
-  geom_text(aes(label=date,x=250),hjust=1) +
-  facet_grid(section~.,switch = 'y') +
-  scale_y_continuous(breaks = seq(0,nrow(cv_df)+1,by=.5)
-                     ,minor_breaks = seq(.25,nrow(cv_df)+1,by=1)
-                     # ,minor_breaks = seq(0,nrow(cv_df)+1,by=.1)
-                     ,limits = c(0.5,round((nrow(cv_df)+1)/length(unique(cv_df$section)),1)
-                                 )) +
+  geom_text(aes(label=experience),hjust=0) +
+  geom_text(aes(label=date_end,x=250),hjust=1) +
+  
+  #bullets
+  geom_point(aes(x=5,y=y_point_1-2)) +
+    geom_text(aes(label=point_1,x=10,y=y-2),hjust=0,size=3) +
+  geom_point(aes(x=5,y=y_point_2-4)) +
+    geom_text(aes(label=point_2,x=10,y=y-4),hjust=0,size=3) +
+  geom_point(aes(x=5,y=y_point_3-6)) +
+    geom_text(aes(label=point_3,x=10,y=y-6),hjust=0,size=3) +
+  
+  facet_grid(section~.,switch = 'y',scales = 'free_y') + 
+  # facet_wrap(~section,ncol=1) + # more traditional section headers
+  
+  # scale_y_continuous(breaks = seq(0,nrow(cv_df)+1,by=.5)
+  #                    ,minor_breaks = seq(.25,nrow(cv_df)+1,by=1)
+  #                    # ,minor_breaks = seq(0,nrow(cv_df)+1,by=.1)
+  #                    ,limits = c(0.5,round((nrow(cv_df)+1)/length(unique(cv_df$section)),1)
+  #                                )) +
   scale_x_continuous(limits = c(1,250)) +
   ggtitle("Noah c. Pollock") +
   # expand_limits(x = 0.25, y = 0.25) +
   theme(panel.background = element_blank(),
         panel.border = element_rect(color='black',fill=NA),
       panel.grid.major.y = element_blank(),
-      panel.grid.minor.y = element_line(color="gray"),
+      # panel.grid.minor.y = element_line(color="gray"),
+      panel.grid.minor.y = element_blank(),
+      
       # axis.line = element_line(colour="black"),
       axis.line = element_blank(),
       axis.text = element_blank(),
@@ -87,5 +147,45 @@ ggplot(cv_df,aes(x=1,y=y)) +
       strip.background = element_rect(colour="#323232", fill='#323232'),
       strip.text = element_text(color="white"),
       plot.title = element_text(hjust = 0.5))
+
+# sandbox
+# 
+# ggplot(cv_df,aes(x=1,y=y)) +
+#   geom_text(data=cv_df %>%
+#               filter(line_type=="experience"),aes(label=text),hjust=0) +
+#   geom_text(data=cv_df %>%
+#               filter(line_type=="experience"),aes(label=date_end,x=250),hjust=1) +
+#   
+#   #bullets
+#   geom_point(data=cv_df %>%
+#               filter(line_type!="experience"),aes(x=5,color=line_type)) +
+#     geom_text(data=cv_df %>%
+#               filter(line_type!="experience"),aes(label=text,x=10,color=line_type),hjust=0,size=3) +
+#   # geom_point(aes(x=5,y=y_point_2-4)) +
+#   #   geom_text(aes(label=point_2,x=10,y=y-4),hjust=0,size=3) +
+#   # geom_point(aes(x=5,y=y_point_3-6)) +
+#   #   geom_text(aes(label=point_3,x=10,y=y-6),hjust=0,size=3) +
+#   
+#   facet_grid(section~.,switch = 'y',scales = 'free_y') + 
+#   # facet_wrap(~section,ncol=1) + # more traditional section headers
+# 
+#   scale_x_continuous(limits = c(1,250)) +
+#   ggtitle("Noah c. Pollock") +
+#   # expand_limits(x = 0.25, y = 0.25) +
+#   theme(panel.background = element_blank(),
+#         panel.border = element_rect(color='black',fill=NA),
+#       panel.grid.major.y = element_blank(),
+#       # panel.grid.minor.y = element_line(color="gray"),
+#       panel.grid.minor.y = element_blank(),
+#       
+#       # axis.line = element_line(colour="black"),
+#       axis.line = element_blank(),
+#       axis.text = element_blank(),
+#       axis.ticks = element_blank(),
+#       axis.title = element_blank(),
+#       strip.background = element_rect(colour="#323232", fill='#323232'),
+#       strip.text = element_text(color="white"),
+#       plot.title = element_text(hjust = 0.5))
+
 ```
 
