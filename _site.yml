@@ -38,6 +38,7 @@ output:
     df_print: kable
     include:
       after_body: footer.html
+      in_header: GA_Script.html
     css: my_style.css
 exclude: ["flex_dash.html", "*.csv"]
 output_dir: "."
