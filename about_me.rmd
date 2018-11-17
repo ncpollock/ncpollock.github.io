@@ -3,7 +3,8 @@ title: "I am Noah Pollock"
 output: html_document
 ---
 
-<img align="middle" src="diverge_and_me.jpg">
+![Trying to get images to work!](diverge_and_me.jpg)
+
 
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. However, I have experience with a variety of sowftware, languages, and project types. You can learn more about me via the following resources:
 
