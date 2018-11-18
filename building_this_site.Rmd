@@ -26,9 +26,14 @@ The above prerequisites will alow you to launch and test the application. In ord
 
 Create a GitHub Repo configured for GitHub Pages
 
+[GitHub Pages](https://pages.github.com/)
+
 ## Step 2: Setup in RStudio
 
 Create an R Project and a __site.yml file.
+
+[R Markdown Websites](https://rmarkdown.rstudio.com/rmarkdown_websites.htm)
+
 
 ```{r example_site_yml, eval=FALSE,echo=TRUE}
 name: "awesome_site"  
@@ -59,6 +64,8 @@ output_dir: "."
 
 Connect to git
 
+[Learn Git](https://guides.github.com/activities/hello-world/)
+
 ## Step 4: Build Webpages from Rmarkdown
 
 New rmarkdown, save, knit as index.html, about_me.html, etc...
@@ -69,4 +76,6 @@ Stage, Commit, Push and preview
 
 ## Step 6: Cusomize
 
-Customize
+* Choose a theme
+* Custom CSS
+* Google Analytics

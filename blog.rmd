@@ -56,21 +56,19 @@ datatable(blog_df
         backgroundRepeat = 'no-repeat',
         backgroundPosition = 'left') %>%
       formatStyle(columns = "filename", 
-              backgroundColor = 'black',
+              backgroundColor = '#252525',
               color = 'white')
+
+# Some blog post ideas
+# 
+# * Plot geometries on maps
+# * Tool to choose the cost effective pizza
+# * How to Kaggle: Huge disclaimer, this is my first competition
+# * Encouraging steps toward graduation: Proof of concept
+# * ifelse trap with NA values
 
 ```
 
 
-Some blog post ideas
 
-* How I created this site: https://pages.github.com/
-https://rmarkdown.rstudio.com/rmarkdown_websites.htm#publishing_websites
-
-* Plot geometries on maps
-* Tool to choose the cost effective pizza
-* How to Kaggle: Huge disclaimer, this is my first competition
-* Create your own test data that is actually interesting
-* Encouraging steps toward graduation: Proof of concept
-* ifelse trap with NA values
 

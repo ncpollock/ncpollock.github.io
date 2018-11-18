@@ -31,21 +31,23 @@ plot_df <- data.frame(
   tree_x = c(rnorm(500,mean=20,sd=20),
              rnorm(500,mean=80,sd=10)),
   tree_y = sample(1:30,1000,replace=TRUE),
-  river_x = c(60,65,67,70,72,72,rep(NA,994)),
-  river_y = c(0,10,15,21,30,40,rep(NA,994)),
-  waterfall_x = c(rep(72,3),rep(NA,997)),
-  waterfall_y = c(rep(30,3),rep(NA,997))
+  # river_x = c(60,65,67,70,72,72,rep(NA,994)),
+  # river_y = c(0,10,15,21,30,40,rep(NA,994)),
+  river_x = c(72,72,rep(NA,998)), # just the waterfall
+  river_y = c(30,40,rep(NA,998)), # just the waterfall
+  waterfall_x = c(rep(71:73,3),rep(NA,991)),
+  waterfall_y = c(rep(30:32,3),rep(NA,991))
 ) %>%
   mutate_all(abs) # remove any negative numbers
 
 ggplot(plot_df) +
-  geom_area(aes(x=mountain_x,y=mountain_y),fill='#634d38',alpha=.7) +
-  geom_rect(aes(xmin=1, xmax = 100, ymin = 0, ymax = max(plot_df$tree_y)),fill="#4f3924") +
+  geom_area(aes(x=mountain_x,y=mountain_y),fill='gray20',alpha=.7) +
+  geom_rect(aes(xmin=1, xmax = 100, ymin = 0, ymax = max(plot_df$tree_y)),fill="#252525") +
   # geom_area() # frosted peaks
-  geom_point(aes(x=tree_x,y=tree_y),color="green",size=5,alpha = .1) +
+  geom_point(aes(x=tree_x,y=tree_y),color="green",size=5,alpha = .3) +
   geom_point(aes(x=72,y=40),size=5) + 
-  geom_line(aes(x=river_x,y=river_y),color="blue",size=4,alpha = .5) + 
-  geom_jitter(aes(x=waterfall_x,y=waterfall_y),color="white",alpha=.4,width = 1,size=3) +
+  geom_line(aes(x=river_x,y=river_y),color="blue",size=4,alpha = .6) +
+  geom_jitter(aes(x=waterfall_x,y=waterfall_y),color="white",alpha=.5,width = 1,size=3) +
   # geom_ribbon() # for shoreline?
   scale_y_continuous(expand = c(0,0),
                    limits = c(0,100)) +
@@ -56,7 +58,3 @@ ggplot(plot_df) +
         axis.title = element_blank())
 ```
 
-
-Inspirations[^1]
-
-[^1]: https://guides.github.com/activities/hello-world/
