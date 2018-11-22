@@ -5,3 +5,6 @@ output: html_document
 
 <iframe src ="https://ncpolloc.shinyapps.io/first_shiny_app/" height=1000px width=1000px />
 
+
+Sparklines
+* https://leonawicz.github.io/HtmlWidgetExamples/ex_dt_sparkline.html

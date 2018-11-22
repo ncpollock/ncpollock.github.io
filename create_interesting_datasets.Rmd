@@ -80,8 +80,12 @@ air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
 
 Let's discover how it's interesting.
 
-```{r pressure, echo=FALSE}
+```{r plots, echo=FALSE}
 plot(pressure)
+
 ```
 
+```{r stats, echo=FALSE}
 
+
+```
