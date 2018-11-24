@@ -12,7 +12,6 @@ output:
 library(highcharter)
 library(dplyr)
 library(viridisLite)
-library(forecast)
 library(treemap)
 library(flexdashboard)
 
@@ -37,7 +36,6 @@ Column {data-width=600}
 
 ```{r}
 AirPassengers %>% 
-  forecast(level = 90) %>% 
   hchart() %>% 
   hc_add_theme(thm)
 ```

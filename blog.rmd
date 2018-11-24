@@ -24,6 +24,9 @@ blog_df <- data.frame(
 blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
 blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
 blog_df$size <- file.info(paste0(blog_df$filename,".Rmd"))$size
+blog_df$lines <- sapply(
+  paste0(blog_df$filename,".Rmd"),function(x) blog_df$filename = length(readLines(x)))
+
 
 #wrap filename in raw html
 blog_df$filename <- paste0("<a href='",blog_df$filename,".html' target='_blank'>",blog_df$filename,"</a>")
@@ -42,7 +45,8 @@ datatable(blog_df
           ,colnames = c('Blog Post Name',
                        'Created At',
                        'Updated At',
-                       'Post Size (bytes)')
+                       'Post Size (bytes)',
+                       'Post Length (lines)')
           ,options=list(
             initComplete = col_format,
             pageLength=25,
@@ -55,8 +59,14 @@ datatable(blog_df
         backgroundSize = '98% 75%',
         backgroundRepeat = 'no-repeat',
         backgroundPosition = 'left') %>%
+        formatStyle(
+        'lines',
+        background = styleColorBar(range(0,max(blog_df$lines)), 'gray'),
+        backgroundSize = '98% 75%',
+        backgroundRepeat = 'no-repeat',
+        backgroundPosition = 'left') %>%
       formatStyle(columns = "filename", 
-              backgroundColor = '#252525',
+              backgroundColor = 'gray',
               color = 'white')
 
 # Some blog post ideas
@@ -66,6 +76,7 @@ datatable(blog_df
 # * How to Kaggle: Huge disclaimer, this is my first competition
 # * Encouraging steps toward graduation: Proof of concept
 # * ifelse trap with NA values
+# * print rmarkdown from html without latex
 
 ```
 

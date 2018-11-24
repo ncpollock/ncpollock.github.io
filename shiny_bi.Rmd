@@ -3,8 +3,10 @@ title: "Shiny BI"
 output: html_document
 ---
 
-<iframe src ="https://ncpolloc.shinyapps.io/first_shiny_app/" height=1000px width=1000px />
+Here's a proof of concept Business Intelligence tool built with R via Shiny and related packages. You can also go to the [Shiny BI Dashboard](https://ncpolloc.shinyapps.io/first_shiny_app/) instead of using it embedded on this page.
+
+<iframe src ="https://ncpolloc.shinyapps.io/shiny_bi/" height=1000px width=1000px />
 
 
-Sparklines
-* https://leonawicz.github.io/HtmlWidgetExamples/ex_dt_sparkline.html
+Look at first shiny app for selecting colums from datatables:
+https://ncpolloc.shinyapps.io/first_shiny_app/
