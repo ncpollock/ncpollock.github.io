@@ -60,7 +60,7 @@ output:
 output_dir: "."
 ```
 
-## Step 3: Git Repo
+## Step 3: Github Repo
 
 Connect to git
 
@@ -74,7 +74,7 @@ New rmarkdown, save, knit as index.html, about_me.html, etc...
 
 Stage, Commit, Push and preview
 
-## Step 6: Cusomize
+## Step 6: Customize
 
 * Choose a theme
 * Custom CSS

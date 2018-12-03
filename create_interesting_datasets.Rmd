@@ -6,6 +6,8 @@ output:
   html_document:
     toc: true
     toc_float: true
+    code_folding: show
+
 ---
 
 Let's create a dataset with *interesting* qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.

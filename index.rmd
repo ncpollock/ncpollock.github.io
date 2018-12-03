@@ -1,24 +1,131 @@
 ---
 title: "Welcome"
-output: 
-  html_document:
-      code_folding: hide
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE, fig.align='center')
 library(ggplot2)
 library(dplyr)
+library(DT)
 ```
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-This is my attempt at contributing to data science, data visualization, business intelligence, dashboarding, and databases. 
+This site is meant to be a resource for those interested in data science, data visualization, business intelligence, dashboarding, and databases. The site is primarily built using rmarkdown. You can check out the blog section for details on how you can build your own!
 
-You may be familiar with the phrase "On the Shoulders of Giants". A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon requires the wheel, the modern computer requires the transistor, the light bulb requires electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It's amazing what we can accomplish with just a bit of internet research / giant-hunting.
+You may be familiar with the phrase "On the Shoulders of Giants". A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon required the wheel, the modern computer required the transistor, the light bulb required electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It's amazing what we can accomplish with just a bit of giant-hunting (e.g., research).
 
 
-```{r pretty_ggplot}
+### Site Metrics
+
+Just for fun, check out the table bar chart hybrid below to learn a bit about this website.
+
+
+```{r about_this_site_table}
+
+# identify all site files and directories
+site_df <- data.frame(
+  file.info(list.files(include.dirs = TRUE,recursive = TRUE))
+  ) %>%
+  tibble::rownames_to_column("filename")
+
+# calculate # of lines and file type / extension
+site_df <- bind_rows(
+  site_df %>% filter(isdir == TRUE),
+  site_df %>%
+  filter(isdir == FALSE) %>%
+  mutate(lines = sapply(
+    filename,function(x) filename = length(readLines(x))),
+    file_ext = toupper(tools::file_ext(filename))
+    )
+) %>%
+  mutate(size_mb = size * 0.000001) %>%
+  filter(file_ext != "" & !is.na(file_ext)) %>%
+  group_by(file_ext) %>%
+  summarise(Count = n(),
+            size_mb = sum(size * 0.000001),
+            lines = sum(lines)) %>%
+  arrange(desc(Count))
+
+
+# define formate for header
+col_format <- JS(
+  "function(settings, json) {",
+  "$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});",
+  "}")
+
+datatable(site_df
+          ,rownames = FALSE
+          ,colnames = c('Filetype',
+                        'Count of Files',
+                        'Filesize (MB)',
+                        'Lines of Code')
+          ,options=list(
+            initComplete = col_format,
+            pageLength=25,
+            columnDefs = list(list(className = 'dt-center',targets=2:ncol(site_df)-1)), #center all but first column
+            dom = 't'
+          )) %>%
+      formatStyle(
+        'size_mb',
+        background = styleColorBar(range(0,max(site_df$size_mb)), 'orange'),
+        backgroundSize = '98% 75%',
+        backgroundRepeat = 'no-repeat',
+        backgroundPosition = 'center') %>%
+        formatStyle(
+        'lines',
+        background = styleColorBar(range(0,max(site_df$lines)), 'orange'),
+        backgroundSize = '98% 75%',
+        backgroundRepeat = 'no-repeat',
+        backgroundPosition = 'center') %>%
+        formatStyle(
+        'Count',
+        background = styleColorBar(range(0,max(site_df$Count)), 'orange'),
+        backgroundSize = '98% 75%',
+        backgroundRepeat = 'no-repeat',
+        backgroundPosition = 'center')
+
+```
+
+```{r about_this_site_plot,include=FALSE}
+
+# identify all site files and directories
+site_df <- data.frame(
+  file.info(list.files(include.dirs = TRUE,recursive = TRUE))
+  ) %>%
+  tibble::rownames_to_column("filename")
+
+# calculate # of lines and file type / extension
+site_df <- bind_rows(
+  site_df %>% filter(isdir == TRUE),
+  site_df %>%
+  filter(isdir == FALSE) %>%
+  mutate(lines = sapply(
+    filename,function(x) filename = length(readLines(x))),
+    file_ext = toupper(tools::file_ext(filename))
+    )
+) %>%
+  mutate(size_mb = size * 0.000001) %>%
+  filter(file_ext != "" & !is.na(file_ext)) %>%
+  group_by(file_ext) %>%
+  summarise(size_mb = sum(size * 0.000001),
+            lines = sum(lines),
+            Count = n()) %>%
+  tidyr::gather(property,value,-file_ext) %>%
+  group_by(property) %>%
+  mutate(file_ext = reorder(file_ext,value))
+
+ggplot(site_df,aes(x = file_ext,y=value)) +
+  facet_grid(~property, scales = "free_x") +
+  geom_col() +
+  geom_text(aes(label=round(value,2),y=value),hjust=-.5) +
+  coord_flip()
+
+```
+
+
+```{r pretty_ggplot,include = FALSE}
 plot_df <- data.frame(
   # x = rep(1:100,10),
   # y = rep(1:100,10),

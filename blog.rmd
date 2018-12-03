@@ -55,19 +55,20 @@ datatable(blog_df
           )) %>%
       formatStyle(
         'size',
-        background = styleColorBar(range(0,max(blog_df$size)), 'gray'),
+        background = styleColorBar(range(0,max(blog_df$size)), 'orange'),
         backgroundSize = '98% 75%',
         backgroundRepeat = 'no-repeat',
         backgroundPosition = 'left') %>%
         formatStyle(
         'lines',
-        background = styleColorBar(range(0,max(blog_df$lines)), 'gray'),
+        background = styleColorBar(range(0,max(blog_df$lines)), 'orange'),
         backgroundSize = '98% 75%',
         backgroundRepeat = 'no-repeat',
         backgroundPosition = 'left') %>%
       formatStyle(columns = "filename", 
-              backgroundColor = 'gray',
-              color = 'white')
+              # backgroundColor = 'gray',
+              color = 'black',
+              fontWeight = 'bold')
 
 # Some blog post ideas
 # 
