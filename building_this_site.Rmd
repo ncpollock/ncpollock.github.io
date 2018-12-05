@@ -3,37 +3,29 @@ title: "Building This Site"
 author: "Noah Pollock"
 output: 
   html_document:
-    code_folding: hide
+    code_folding: show
     toc: true
     toc_float: true
 ---
 
 ## Scope
-Learn to buid this site using R, RStudio, and GitHub. 
+Learn to buid a website like this one using R, RStudio, and GitHub.
 
-## Introduction
-There are many ways to build and publish a website using R. Here, I chronicle only one method using pre-built functionality in RStudio.
+## Introduction and Prerequisites
+There are many ways to build and publish a website using R. Here, I chronicle only one method using pre-built functionality in RStudio. Here are some things you'll need before we get started:
 
-1. R (version R-3.4.2)
-2. RStudio IDE (version 1.1.383 )
+1. R (I used version R-3.4.2)
+2. RStudio IDE (I used version 1.1.383)
+3. Familiarity with rmarkdown and knitr
 
-The above prerequisites will alow you to launch and test the application. In order to publish to the web, you need a few more pieces.
+The above prerequisites will allow you to launch and test the application. In order to publish to the web, you need a few more pieces.
 
 1. Github Account
 2. Github Pages (a GitHub Repo configured in a specific way)
 
-## Step 1: Setup in GitHub
+## Step 1: Setup in RStudio
 
-Create a GitHub Repo configured for GitHub Pages
-
-[GitHub Pages](https://pages.github.com/)
-
-## Step 2: Setup in RStudio
-
-Create an R Project and a __site.yml file.
-
-[R Markdown Websites](https://rmarkdown.rstudio.com/rmarkdown_websites.htm)
-
+Open RStudio and create an R Project (File -> New Project). Then create a new R Script (File -> New File -> R Script), copy and paste the code below into it, and save it within your R Project directory with the name _site.yml.
 
 ```{r example_site_yml, eval=FALSE,echo=TRUE}
 name: "awesome_site"  
@@ -60,22 +52,44 @@ output:
 output_dir: "."
 ```
 
-## Step 3: Github Repo
+The _site.yml file is your website configuration file, it will define some the elements that persist across your site such as the navigation bar, headers or footers, or the global theme. For the most part you have a lot of customization here. However, one piece that is extremely important not to change is the `output_dir: "."` line. This tells RStudio to keep important files in the root directory of the R Project folder which is how Github Pages will expect it to be.
 
-Connect to git
+You can read more about [R Markdown Websites and _site.yml here.](https://rmarkdown.rstudio.com/rmarkdown_websites.html)
 
-[Learn Git](https://guides.github.com/activities/hello-world/)
+## Step 2: Build Webpages from Rmarkdown
 
-## Step 4: Build Webpages from Rmarkdown
+There's one more piece we need for RStudio to completely handle our new website, a main/landing page! Create a new R Markdown file (File -> New File -> R Markdown, choose HTML and give it a title like "Welcome!"). Make some simple changes to the R Markdown template RStudio provides so you know that the site you render is truly yours. For example, write yourself a congratulatory message as the first paragraph. Now save this file as index.Rmd.
 
-New rmarkdown, save, knit as index.html, about_me.html, etc...
+Confirm that your _site.yml and your index.Rmd files exist in your R Project folder. Close and reopen RStudio. Now you should see a new tab near the Environment pane called "Build". Navigate to that tab and click "Build Website". The Build Website button knits every .Rmd file in your R Project root directory. Voila! Your site should open in the viewer pane or in a new window.
 
-## Step 5: Publish
+Now, create more pages (e.g., about_me.Rmd, blog.Rmd, any page you like!).
 
-Stage, Commit, Push and preview
+`r knitr::include_graphics("images/build_window.JPG") `
 
-## Step 6: Customize
+## Step 3: Setup GitHub
 
-* Choose a theme
-* Custom CSS
-* Google Analytics
+Create a GitHub Repo configured for GitHub Pages
+
+[GitHub Pages](https://pages.github.com/)
+
+## Step 4: Publish
+
+You can either use Git if you already know how, [learn Git](https://guides.github.com/activities/hello-world/), or manually upload all of your files to your Github Repo
+
+## Step 5: Customize and New Content
+
+Research and consider the following upgrades, additions, or customizations to your site!
+
+##### Choose a theme: 
+In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output
+
+```{r theme, eval=FALSE,echo=TRUE}
+output:
+  html_document:
+    theme: flatly
+```
+##### Custom CSS: 
+To further style your theme or individual pages
+
+##### Google Analytics
+To track and understand who visits your website, how often, and what they do there.

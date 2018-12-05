@@ -11,9 +11,8 @@
 
 <meta name="author" content="Noah Pollock" />
 
-<meta name="date" content="2018-11-14" />
 
-<title>Create Interesting Datasets</title>
+<title>Be Careful with ifelse() and NA Values</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -414,79 +413,79 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Create Interesting Datasets</h1>
+<h1 class="title toc-ignore">Be Careful with ifelse() and NA Values</h1>
 <h4 class="author"><em>Noah Pollock</em></h4>
-<h4 class="date"><em>November 14, 2018</em></h4>
+<h4 class="date"><em>December 4, 2018</em></h4>
 
 </div>
 
 
-<p>Let’s create a dataset with <em>interesting</em> qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.</p>
-<p>For this post, we’ll create these datasets purely with base R functions.</p>
-<p>A few good reasons to create your own dataset:</p>
-<ul>
-<li>Mocking up visualizations</li>
-<li>Testing our understanding of statistics</li>
-<li>Simulations (e.g., probabilities or algorithms)</li>
-<li>Teaching</li>
-</ul>
-<p>A few bad reasons:</p>
-<ul>
-<li>You didn’t get enough responses to your survey</li>
-<li>Your effects are too small and p-values to large to publish</li>
-</ul>
-<div id="create-the-dataset" class="section level2">
-<h2>Create the Dataset</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">100</span>) <span class="co">#specify number generator for &#39;random&#39; numbers for reproducibility</span>
-n_students &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co">#number of grads</span>
-terms &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">paste0</span>(<span class="dv">2014</span><span class="op">:</span><span class="dv">2018</span>,<span class="st">&quot;10&quot;</span>),<span class="kw">paste0</span>(<span class="dv">2013</span><span class="op">:</span><span class="dv">2017</span>,<span class="st">&quot;40&quot;</span>)),n_students))
-n_terms &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(terms)) <span class="co">#number of terms generate</span>
-air_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">student_id =</span> <span class="dv">1</span><span class="op">:</span>(n_students<span class="op">*</span>n_terms),
-  <span class="dt">term_code =</span> terms,
-  <span class="dt">school =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;BA&quot;</span>,<span class="st">&quot;AS&quot;</span>,<span class="st">&quot;EG&quot;</span>),<span class="dt">size=</span>n_students<span class="op">*</span>n_terms,<span class="dt">replace=</span><span class="ot">TRUE</span>),
-  <span class="dt">ATYP =</span> <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;F&quot;</span>,<span class="st">&quot;T&quot;</span>),<span class="dt">size=</span>n_students,<span class="dt">replace=</span><span class="ot">TRUE</span>),n_terms),
-  <span class="dt">sex =</span> <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">55</span>,.<span class="dv">45</span>),<span class="dt">size=</span>n_students,<span class="dt">replace=</span><span class="ot">TRUE</span>),n_terms),
-  <span class="dt">residency =</span> <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;I&quot;</span>,<span class="st">&quot;O&quot;</span>),<span class="dt">size=</span>n_students,<span class="dt">replace=</span><span class="ot">TRUE</span>),n_terms),
-  <span class="dt">career_use =</span> <span class="kw">round</span>(<span class="kw">runif</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">10</span>)),
-  <span class="dt">post_grad_outcome =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Employed&quot;</span>,<span class="st">&quot;Grad School&quot;</span>,<span class="st">&quot;Still Seeking&quot;</span>,<span class="st">&quot;Other&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">64</span>,.<span class="dv">27</span>,.<span class="dv">07</span>,.<span class="dv">02</span>),<span class="dt">size=</span>n_students<span class="op">*</span>n_terms,<span class="dt">replace=</span><span class="ot">TRUE</span>),
-  
-  <span class="co"># these vars are placeholders</span>
-  <span class="dt">gpa =</span> <span class="dv">0</span>,
-  <span class="dt">salary =</span> <span class="dv">0</span>,
-  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>
+<div id="scope" class="section level2">
+<h2>Scope</h2>
+<p>Do you know how ifelse() operates when faced with missing data? Are you sure you know? Read more to avoid catastrophic data errors when using ifelse().</p>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Consider this plain english if then logic:</p>
+<p><strong>If</strong> my Kaggle score is in the top 10%, <strong>then</strong> I am treating myself to a new laptop, <strong>else</strong> I’m taking away my Netflix privileges.</p>
+<p>In short: Top 10% = New Laptop, Anything Else = No Netflix.</p>
+<p>Obviously, if I don’t enter a submission into Kaggle, my score cannot possibly be in the top 10%, therefore I should revoke my Netflix privileges! However, this is not how ifelse() evaluates this situation. Specifically, ifelse() only operates on non-missing values unless explicitly told to do otherwise!</p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>Imagine I’m one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment[^1]. The others all at least put forth an effort and submitted. My <code>kaggle_score_percentile</code> is <code>NA</code> because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.</p>
+<p>[^1] Can you tell I studied Psychology?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build a dataframe</span>
+test_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">kaggle_score_percentile =</span> <span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">29</span>,<span class="dv">5</span>),<span class="ot">NA</span>)
 )
-air_df<span class="op">$</span>gpa &lt;-<span class="st"> </span><span class="kw">ifelse</span>(air_df<span class="op">$</span>ATYP<span class="op">==</span><span class="st">&quot;F&quot;</span>,
-                     <span class="co">#intercept + slope*value + error/noise</span>
-                     <span class="co">#different slopes for a nice interaction effect</span>
-                     <span class="fl">2.5</span> <span class="op">+</span><span class="st"> </span>.<span class="dv">15</span><span class="op">*</span>air_df<span class="op">$</span>career_use <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">1</span>),
-                     <span class="fl">3.7</span> <span class="op">+</span><span class="st"> </span>.<span class="dv">01</span><span class="op">*</span>air_df<span class="op">$</span>career_use <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">1</span>))
-air_df<span class="op">$</span>gpa =<span class="st"> </span><span class="kw">ifelse</span>(air_df<span class="op">$</span>gpa<span class="op">&gt;</span><span class="dv">4</span>,<span class="kw">runif</span>(n_students<span class="op">*</span>n_terms,<span class="fl">3.2</span>,<span class="dv">4</span>),air_df<span class="op">$</span>gpa) <span class="co"># keep gpa under 4</span>
-air_df<span class="op">$</span>gpa =<span class="st"> </span><span class="kw">ifelse</span>(air_df<span class="op">$</span>gpa<span class="op">&lt;</span><span class="dv">0</span>,<span class="kw">runif</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">1</span>),air_df<span class="op">$</span>gpa) <span class="co"># keep gpa above 0</span>
 
-air_df<span class="op">$</span>career_use &lt;-<span class="st"> </span><span class="kw">ifelse</span>(air_df<span class="op">$</span>post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>,
-                            <span class="co">#intercept + slope*value + error/noise</span>
-                            <span class="co">#different slopes for a nice interaction effect</span>
-                            <span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>
-                                   ,<span class="dt">prob=</span><span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">13</span>)
-                                   ,<span class="dt">replace=</span><span class="ot">TRUE</span>
-                                   ,<span class="dt">size=</span><span class="kw">length</span>(
-                                     air_df<span class="op">$</span>career_use[air_df<span class="op">$</span>post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>])),
-                            air_df<span class="op">$</span>career_use)
+knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see it</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">kaggle_score_percentile</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+</tr>
+<tr class="odd">
+<td align="left">25</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># apply conditional logic</span>
 
-air_df<span class="op">$</span>salary &lt;-<span class="st"> </span><span class="kw">ifelse</span>(air_df<span class="op">$</span>school<span class="op">==</span><span class="st">&quot;EG&quot;</span>,
-                        <span class="co">#intercept + slope*value + error/noise</span>
-                        <span class="co">#different slopes for a nice interaction effect</span>
-                        <span class="dv">64000</span> <span class="op">+</span><span class="st"> </span><span class="dv">750</span><span class="op">*</span>air_df<span class="op">$</span>career_use <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">1000</span>),
-                        <span class="kw">ifelse</span>(air_df<span class="op">$</span>school<span class="op">==</span><span class="st">&quot;AS&quot;</span>,
-                               <span class="dv">48000</span> <span class="op">+</span><span class="st"> </span><span class="dv">10</span><span class="op">*</span>air_df<span class="op">$</span>career_use <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">4000</span>),
-                               <span class="dv">51000</span> <span class="op">+</span><span class="st"> </span><span class="dv">400</span><span class="op">*</span>air_df<span class="op">$</span>career_use <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n_students<span class="op">*</span>n_terms,<span class="dv">0</span>,<span class="dv">2700</span>)))
-air_df<span class="op">$</span>salary &lt;-<span class="st"> </span><span class="kw">ifelse</span>(air_df<span class="op">$</span>post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>,air_df<span class="op">$</span>salary,<span class="ot">NA</span>)</code></pre></div>
-</div>
-<div id="show-interest" class="section level2">
-<h2>Show Interest</h2>
-<p>Let’s discover how it’s interesting.</p>
-<p><img src="create_interesting_datasets_files/figure-html/plots-1.png" width="672" /></p>
+<span class="kw">ifelse</span>(
+  test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&gt;=</span><span class="dv">10</span>, <span class="co"># conditional logic</span>
+  <span class="st">&quot;New Laptop&quot;</span>, <span class="co"># if true</span>
+  <span class="st">&quot;No Netflix&quot;</span> <span class="co"># else (if false)</span>
+  ) </code></pre></div>
+<pre><code>## [1] &quot;No Netflix&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot;
+## [6] NA</code></pre>
+<p>Is that what you expected? <code>ifelse()</code> did not evaluate the way we might expect in natural langauge. My score did not meet the condition <code>kaggle_score_percentile &gt;= 10</code>, but instead of receiving the else condition, I received an <code>NA</code>. In the same vein as NA is not TRUE nor is it FALSE (it’s <code>NA</code>) or for the MS Access users, you cannot join by missing values.</p>
+<p>Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here’s a workaround.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(
+  test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&gt;=</span><span class="dv">10</span> <span class="co"># our logic from before</span>
+  <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(test_df<span class="op">$</span>kaggle_score_percentile), <span class="co"># explicit evaluation of na values</span>
+  <span class="st">&quot;New Laptop&quot;</span>,
+  <span class="st">&quot;No Netflix&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;No Netflix&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot;
+## [6] &quot;No Netflix&quot;</code></pre>
 </div>
 
 <footer id="site-footer">

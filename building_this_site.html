@@ -25,8 +25,6 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
@@ -40,22 +38,54 @@
   gtag('config', 'UA-122098274-2');
 </script>
 
+
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
-
 
 
 <style type="text/css">
@@ -185,7 +215,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -351,7 +381,7 @@ div.tocify {
   <a href="https://google.com">
     <span class="fa fa-question"></span>
      
-    Need Help
+    Help
   </a>
 </li>
 <li>
@@ -391,73 +421,84 @@ div.tocify {
 
 <div id="scope" class="section level2">
 <h2>Scope</h2>
-<p>Learn to buid this site using R, RStudio, and GitHub.</p>
+<p>Learn to buid a website like this one using R, RStudio, and GitHub.</p>
 </div>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>There are many ways to build and publish a website using R. Here, I chronicle only one method using pre-built functionality in RStudio.</p>
+<div id="introduction-and-prerequisites" class="section level2">
+<h2>Introduction and Prerequisites</h2>
+<p>There are many ways to build and publish a website using R. Here, I chronicle only one method using pre-built functionality in RStudio. Here are some things you’ll need before we get started:</p>
 <ol style="list-style-type: decimal">
-<li>R (version R-3.4.2)</li>
-<li>RStudio IDE (version 1.1.383 )</li>
+<li>R (I used version R-3.4.2)</li>
+<li>RStudio IDE (I used version 1.1.383)</li>
+<li>Familiarity with rmarkdown and knitr</li>
 </ol>
-<p>The above prerequisites will alow you to launch and test the application. In order to publish to the web, you need a few more pieces.</p>
+<p>The above prerequisites will allow you to launch and test the application. In order to publish to the web, you need a few more pieces.</p>
 <ol style="list-style-type: decimal">
 <li>Github Account</li>
 <li>Github Pages (a GitHub Repo configured in a specific way)</li>
 </ol>
 </div>
-<div id="step-1-setup-in-github" class="section level2">
-<h2>Step 1: Setup in GitHub</h2>
+<div id="step-1-setup-in-rstudio" class="section level2">
+<h2>Step 1: Setup in RStudio</h2>
+<p>Open RStudio and create an R Project (File -&gt; New Project). Then create a new R Script (File -&gt; New File -&gt; R Script), copy and paste the code below into it, and save it within your R Project directory with the name _site.yml.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name<span class="op">:</span><span class="st"> &quot;awesome_site&quot;</span>  
+navbar<span class="op">:</span><span class="st">  </span>
+<span class="st">  </span>title<span class="op">:</span><span class="st"> &quot;Awesome Site!&quot;</span>  
+  type<span class="op">:</span><span class="st"> </span>default  
+  left<span class="op">:</span><span class="st">  </span>
+<span class="st">    </span><span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;Home&quot;</span>
+      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>home
+      href<span class="op">:</span><span class="st"> </span>index.html
+    <span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;About&quot;</span>
+      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>info
+      href<span class="op">:</span><span class="st"> </span>about_me.html
+    <span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;Blog&quot;</span>
+      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>street<span class="op">-</span>view
+      href<span class="op">:</span><span class="st"> </span>blog.html
+  right<span class="op">:</span>
+<span class="st">    </span><span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;Need Help&quot;</span>
+      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>question
+      href<span class="op">:</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>google.com
+output<span class="op">:</span>
+<span class="st">  </span>html_document<span class="op">:</span>
+<span class="st">    </span>df_print<span class="op">:</span><span class="st"> </span>kable
+output_dir<span class="op">:</span><span class="st"> &quot;.&quot;</span></code></pre></div>
+<p>The _site.yml file is your website configuration file, it will define some the elements that persist across your site such as the navigation bar, headers or footers, or the global theme. For the most part you have a lot of customization here. However, one piece that is extremely important not to change is the <code>output_dir: &quot;.&quot;</code> line. This tells RStudio to keep important files in the root directory of the R Project folder which is how Github Pages will expect it to be.</p>
+<p>You can read more about <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">R Markdown Websites and _site.yml here.</a></p>
+</div>
+<div id="step-2-build-webpages-from-rmarkdown" class="section level2">
+<h2>Step 2: Build Webpages from Rmarkdown</h2>
+<p>There’s one more piece we need for RStudio to completely handle our new website, a main/landing page! Create a new R Markdown file (File -&gt; New File -&gt; R Markdown, choose HTML and give it a title like “Welcome!”). Make some simple changes to the R Markdown template RStudio provides so you know that the site you render is truly yours. For example, write yourself a congratulatory message as the first paragraph. Now save this file as index.Rmd.</p>
+<p>Confirm that your _site.yml and your index.Rmd files exist in your R Project folder. Close and reopen RStudio. Now you should see a new tab near the Environment pane called “Build”. Navigate to that tab and click “Build Website”. The Build Website button knits every .Rmd file in your R Project root directory. Voila! Your site should open in the viewer pane or in a new window.</p>
+<p>Now, create more pages (e.g., about_me.Rmd, blog.Rmd, any page you like!).</p>
+<p><img src="images/build_window.JPG" /><!-- --></p>
+</div>
+<div id="step-3-setup-github" class="section level2">
+<h2>Step 3: Setup GitHub</h2>
 <p>Create a GitHub Repo configured for GitHub Pages</p>
 <p><a href="https://pages.github.com/">GitHub Pages</a></p>
 </div>
-<div id="step-2-setup-in-rstudio" class="section level2">
-<h2>Step 2: Setup in RStudio</h2>
-<p>Create an R Project and a __site.yml file.</p>
-<p><a href="https://rmarkdown.rstudio.com/rmarkdown_websites.htm">R Markdown Websites</a></p>
-<pre class="r"><code>name: &quot;awesome_site&quot;  
-navbar:  
-  title: &quot;Awesome Site!&quot;  
-  type: default  
-  left:  
-    - text: &quot;Home&quot;
-      icon: fa-home
-      href: index.html
-    - text: &quot;About&quot;
-      icon: fa-info
-      href: about_me.html
-    - text: &quot;Blog&quot;
-      icon: fa-street-view
-      href: blog.html
-  right:
-    - text: &quot;Need Help&quot;
-      icon: fa-question
-      href: https://google.com
-output:
-  html_document:
-    df_print: kable
-output_dir: &quot;.&quot;</code></pre>
+<div id="step-4-publish" class="section level2">
+<h2>Step 4: Publish</h2>
+<p>You can either use Git if you already know how, <a href="https://guides.github.com/activities/hello-world/">learn Git</a>, or manually upload all of your files to your Github Repo</p>
 </div>
-<div id="step-3-git-repo" class="section level2">
-<h2>Step 3: Git Repo</h2>
-<p>Connect to git</p>
-<p><a href="https://guides.github.com/activities/hello-world/">Learn Git</a></p>
+<div id="step-5-customize-and-new-content" class="section level2">
+<h2>Step 5: Customize and New Content</h2>
+<p>Research and consider the following upgrades, additions, or customizations to your site!</p>
+<div id="choose-a-theme" class="section level5">
+<h5>Choose a theme:</h5>
+<p>In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output<span class="op">:</span>
+<span class="st">  </span>html_document<span class="op">:</span>
+<span class="st">    </span>theme<span class="op">:</span><span class="st"> </span>flatly</code></pre></div>
 </div>
-<div id="step-4-build-webpages-from-rmarkdown" class="section level2">
-<h2>Step 4: Build Webpages from Rmarkdown</h2>
-<p>New rmarkdown, save, knit as index.html, about_me.html, etc…</p>
+<div id="custom-css" class="section level5">
+<h5>Custom CSS:</h5>
+<p>To further style your theme or individual pages</p>
 </div>
-<div id="step-5-publish" class="section level2">
-<h2>Step 5: Publish</h2>
-<p>Stage, Commit, Push and preview</p>
+<div id="google-analytics" class="section level5">
+<h5>Google Analytics</h5>
+<p>To track and understand who visits your website, how often, and what they do there.</p>
 </div>
-<div id="step-6-cusomize" class="section level2">
-<h2>Step 6: Cusomize</h2>
-<ul>
-<li>Choose a theme</li>
-<li>Custom CSS</li>
-<li>Google Analytics</li>
-</ul>
 </div>
 
 <footer id="site-footer">

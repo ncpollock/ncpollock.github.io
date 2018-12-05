@@ -3,7 +3,17 @@ title: "Who am I?"
 output: html_document
 ---
 
-`r knitr::include_graphics('diverge_and_me.JPG')`
+<style>
+#header {
+  background: black url('diverge_and_me.JPG') center no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  height: 700px;
+  width: 100%;
+}
+</style>
 
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
 
@@ -18,8 +28,8 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-# this worked, it rendered two images
-# `r knitr::include_graphics('diverge_and_me.JPG')`
+# or this instead of #header css
+#`r knitr::include_graphics('diverge_and_me.JPG')`
 ```
 
 

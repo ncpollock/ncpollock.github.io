@@ -25,7 +25,7 @@ navbar:
         - text: "Pick Your Pizza"
           href: pizza.html
   right:
-    - text: "Need Help"
+    - text: "Help"
       icon: fa-question
       href: https://google.com
     - icon: fa-linkedin
@@ -36,6 +36,7 @@ output:
   html_document:
     theme: flatly
     df_print: kable
+    highlight: zenburn
     include:
       after_body: footer.html
       in_header: GA_Script.html

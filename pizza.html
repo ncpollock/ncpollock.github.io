@@ -22,8 +22,6 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
@@ -37,22 +35,51 @@
   gtag('config', 'UA-122098274-2');
 </script>
 
+
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+</style>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
-
 
 
 <style type="text/css">
@@ -245,7 +272,7 @@ $(document).ready(function () {
   <a href="https://google.com">
     <span class="fa fa-question"></span>
      
-    Need Help
+    Help
   </a>
 </li>
 <li>
@@ -281,60 +308,60 @@ $(document).ready(function () {
 <p>Price per ounce, price per square foot, price per square inch.</p>
 <p>I should allow user input to ocreate a tool that will determine the price per square inch and determine which of two pizzas you should purchase.</p>
 <p>Would need digital calipers to determine thickness. But calories (e.g., high fat mozzarella vs low fat mozzarella).</p>
-<pre class="r"><code># df &lt;- data.frame(
-#   variable = c(&quot;One Slice&quot;, &quot;Leftover&quot;,&quot;dummy&quot;),
-#   value = c(12.5, 87.5,0)
-# )
-#
-# bizarre pie charts!
-# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
-#   geom_col(width = 1) +
-#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
-#   coord_polar(&quot;y&quot;, start = pi / 3) +
-#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
-#   theme_void() + 
-#   theme(legend.position = &quot;none&quot;)
-# 
-# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
-#   geom_col(width = 1) +
-#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
-#   coord_polar(&quot;y&quot;, start = pi / 3) +
-#   geom_col(width = 1) +
-#   coord_polar(&quot;y&quot;, start = 2) +
-#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
-#   geom_vline(xintercept = 1.5) +
-#   theme_void() +
-#   theme(legend.position = &quot;none&quot;,
-#         panel.background = element_blank())
-# 
-# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
-#   geom_col(width = 1) +
-#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
-#   coord_polar(&quot;y&quot;, start = c(3,pi / 3)) +
-#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
-#   geom_vline(xintercept = 1.5) +
-#   theme_void() + 
-#   theme(legend.position = &quot;none&quot;)
-# 
-# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
-#   geom_col(width = 1) +
-#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
-#   coord_polar(&quot;y&quot;, start = c(3,9)) +
-#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +
-#   # geom_vline(xintercept = 1.5) +
-#   theme_void() + 
-#   theme(legend.position = &quot;none&quot;,
-#         panel.background = element_blank())
-# 
-# ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +
-#     geom_col(width = 1) +
-#     scale_fill_manual(values = c(&#39;blue&#39;,&#39;blue&#39;, &quot;blue&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;
-#     coord_polar( start = c(6,7.5)) +
-#     geom_point(aes(x=0,y=0),color=&quot;white&quot;,size=100,shape=&quot;☺&quot;) +
-#     geom_vline(xintercept = 1.5) +
-#     theme_void() + 
-#     theme(legend.position = &quot;none&quot;,
-#           panel.background = element_blank())</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># df &lt;- data.frame(</span>
+<span class="co">#   variable = c(&quot;One Slice&quot;, &quot;Leftover&quot;,&quot;dummy&quot;),</span>
+<span class="co">#   value = c(12.5, 87.5,0)</span>
+<span class="co"># )</span>
+<span class="co">#</span>
+<span class="co"># bizarre pie charts!</span>
+<span class="co"># ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +</span>
+<span class="co">#   geom_col(width = 1) +</span>
+<span class="co">#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;</span>
+<span class="co">#   coord_polar(&quot;y&quot;, start = pi / 3) +</span>
+<span class="co">#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +</span>
+<span class="co">#   theme_void() + </span>
+<span class="co">#   theme(legend.position = &quot;none&quot;)</span>
+<span class="co"># </span>
+<span class="co"># ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +</span>
+<span class="co">#   geom_col(width = 1) +</span>
+<span class="co">#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;</span>
+<span class="co">#   coord_polar(&quot;y&quot;, start = pi / 3) +</span>
+<span class="co">#   geom_col(width = 1) +</span>
+<span class="co">#   coord_polar(&quot;y&quot;, start = 2) +</span>
+<span class="co">#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +</span>
+<span class="co">#   geom_vline(xintercept = 1.5) +</span>
+<span class="co">#   theme_void() +</span>
+<span class="co">#   theme(legend.position = &quot;none&quot;,</span>
+<span class="co">#         panel.background = element_blank())</span>
+<span class="co"># </span>
+<span class="co"># ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +</span>
+<span class="co">#   geom_col(width = 1) +</span>
+<span class="co">#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;</span>
+<span class="co">#   coord_polar(&quot;y&quot;, start = c(3,pi / 3)) +</span>
+<span class="co">#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +</span>
+<span class="co">#   geom_vline(xintercept = 1.5) +</span>
+<span class="co">#   theme_void() + </span>
+<span class="co">#   theme(legend.position = &quot;none&quot;)</span>
+<span class="co"># </span>
+<span class="co"># ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +</span>
+<span class="co">#   geom_col(width = 1) +</span>
+<span class="co">#   scale_fill_manual(values = c(NA,NA, &quot;#d7b27c&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;</span>
+<span class="co">#   coord_polar(&quot;y&quot;, start = c(3,9)) +</span>
+<span class="co">#   geom_point(aes(x=c(.8,1.2,1.3),y=c(7,10,5)),color=&quot;#752218&quot;,size=5) +</span>
+<span class="co">#   # geom_vline(xintercept = 1.5) +</span>
+<span class="co">#   theme_void() + </span>
+<span class="co">#   theme(legend.position = &quot;none&quot;,</span>
+<span class="co">#         panel.background = element_blank())</span>
+<span class="co"># </span>
+<span class="co"># ggplot(df, aes(x = &quot;&quot;, y = value, fill = variable)) +</span>
+<span class="co">#     geom_col(width = 1) +</span>
+<span class="co">#     scale_fill_manual(values = c(&#39;blue&#39;,&#39;blue&#39;, &quot;blue&quot;)) + #&quot;#d7b27c&quot; &quot;#752218&quot;</span>
+<span class="co">#     coord_polar( start = c(6,7.5)) +</span>
+<span class="co">#     geom_point(aes(x=0,y=0),color=&quot;white&quot;,size=100,shape=&quot;☺&quot;) +</span>
+<span class="co">#     geom_vline(xintercept = 1.5) +</span>
+<span class="co">#     theme_void() + </span>
+<span class="co">#     theme(legend.position = &quot;none&quot;,</span>
+<span class="co">#           panel.background = element_blank())</span></code></pre></div>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>

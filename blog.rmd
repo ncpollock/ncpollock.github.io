@@ -17,7 +17,7 @@ This blog is my contribution to the fields of data science, business analytics, 
   # and exclude non-blog posts!
 blog_df <- data.frame(
   filename = c("create_interesting_datasets"
-               ,"pizza"
+               ,"ifelse_NA_trap"
                ,"building_this_site")
 )
 
