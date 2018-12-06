@@ -19,7 +19,11 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="site_libs/datatables-binding-0.5/datatables.js"></script>
@@ -42,6 +46,53 @@
 </script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -166,8 +217,111 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -256,6 +410,14 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Welcome</h1>
@@ -269,8 +431,69 @@ $(document).ready(function () {
 <div id="site-metrics" class="section level3">
 <h3>Site Metrics</h3>
 <p>Just for fun, check out the table bar chart hybrid below to learn a bit about this website.</p>
-<div id="htmlwidget-ae8266d38ea405e0463c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ae8266d38ea405e0463c">{"x":{"filter":"none","data":[["JS","CSS","TTF","PNG","HTML","RMD","EOT","SVG","WOFF","WOFF2","MAP","JPG","CSV","MD","OTF","PDF","RPROJ","TXT","YML"],[57,40,30,20,13,10,5,5,5,5,4,2,1,1,1,1,1,1,1],[2.908181,2.214901,1.778108,0.827439,0.303504,0.036017,0.43079,1.94605,0.2884,0.232236,0.542745,5.944675,0.00685,0.000922,0.109688,0.106215,0.00024,0.001617,0.001111],[26813,17010,141,20,6915,988,18,5008,16,13,40,3,30,34,8,18,15,37,45]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Filetype<\/th>\n      <th>Count of Files<\/th>\n      <th>Filesize (MB)<\/th>\n      <th>Lines of Code<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[1,2,3]}],"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (5.944675 - value)/5.944675 * 100 + '%, orange ' + (5.944675 - value)/5.944675 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (26813.000000 - value)/26813.000000 * 100 + '%, orange ' + (26813.000000 - value)/26813.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (57.000000 - value)/57.000000 * 100 + '%, orange ' + (57.000000 - value)/57.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># identify all site files and directories</span>
+site_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="kw">file.info</span>(<span class="kw">list.files</span>(<span class="dt">include.dirs =</span> <span class="ot">TRUE</span>,<span class="dt">recursive =</span> <span class="ot">TRUE</span>))
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;filename&quot;</span>)
+
+<span class="co"># calculate # of lines and file type / extension</span>
+site_df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+  site_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(isdir <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>),
+  site_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(isdir <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lines =</span> <span class="kw">sapply</span>(
+    filename,<span class="cf">function</span>(x) <span class="dt">filename =</span> <span class="kw">length</span>(<span class="kw">readLines</span>(x))),
+    <span class="dt">file_ext =</span> <span class="kw">toupper</span>(tools<span class="op">::</span><span class="kw">file_ext</span>(filename))
+    )
+) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">size_mb =</span> size <span class="op">*</span><span class="st"> </span><span class="fl">0.000001</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(file_ext <span class="op">!=</span><span class="st"> &quot;&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(file_ext)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(file_ext) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>(),
+            <span class="dt">size_mb =</span> <span class="kw">sum</span>(size <span class="op">*</span><span class="st"> </span><span class="fl">0.000001</span>),
+            <span class="dt">lines =</span> <span class="kw">sum</span>(lines)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Count))
+
+
+<span class="co"># define formate for header</span>
+col_format &lt;-<span class="st"> </span><span class="kw">JS</span>(
+  <span class="st">&quot;function(settings, json) {&quot;</span>,
+  <span class="st">&quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#252525&#39;, &#39;color&#39;: &#39;#FFFFFF&#39;});&quot;</span>,
+  <span class="st">&quot;}&quot;</span>)
+
+<span class="kw">datatable</span>(site_df
+          ,<span class="dt">rownames =</span> <span class="ot">FALSE</span>
+          ,<span class="dt">colnames =</span> <span class="kw">c</span>(<span class="st">&#39;Filetype&#39;</span>,
+                        <span class="st">&#39;Count of Files&#39;</span>,
+                        <span class="st">&#39;Filesize (MB)&#39;</span>,
+                        <span class="st">&#39;Lines of Code&#39;</span>)
+          ,<span class="dt">options=</span><span class="kw">list</span>(
+            <span class="dt">initComplete =</span> col_format,
+            <span class="dt">pageLength=</span><span class="dv">25</span>,
+            <span class="dt">columnDefs =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-center&#39;</span>,<span class="dt">targets=</span><span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(site_df)<span class="op">-</span><span class="dv">1</span>)), <span class="co">#center all but first column</span>
+            <span class="dt">dom =</span> <span class="st">&#39;t&#39;</span>
+          )) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">formatStyle</span>(
+        <span class="st">&#39;size_mb&#39;</span>,
+        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(site_df<span class="op">$</span>size_mb)), <span class="st">&#39;orange&#39;</span>),
+        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
+        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
+        <span class="dt">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">formatStyle</span>(
+        <span class="st">&#39;lines&#39;</span>,
+        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(site_df<span class="op">$</span>lines)), <span class="st">&#39;orange&#39;</span>),
+        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
+        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
+        <span class="dt">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">formatStyle</span>(
+        <span class="st">&#39;Count&#39;</span>,
+        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(site_df<span class="op">$</span>Count)), <span class="st">&#39;orange&#39;</span>),
+        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
+        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
+        <span class="dt">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>)</code></pre></div>
+<div id="htmlwidget-3281c0b7ea49ef2e5379" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3281c0b7ea49ef2e5379">{"x":{"filter":"none","data":[["JS","CSS","TTF","PNG","HTML","RMD","EOT","SVG","WOFF","WOFF2","MAP","JPG","CSV","MD","OTF","PDF","RPROJ","TXT","YML"],[57,40,30,20,13,10,5,5,5,5,4,2,1,1,1,1,1,1,1],[2.908181,2.214901,1.778108,0.827769,0.304716,0.036016,0.43079,1.94605,0.2884,0.232236,0.542745,5.944675,0.00685,0.000922,0.109688,0.106215,0.00024,0.001617,0.001171],[26813,17010,141,20,6891,988,18,5008,16,13,40,3,30,34,8,18,15,37,48]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Filetype<\/th>\n      <th>Count of Files<\/th>\n      <th>Filesize (MB)<\/th>\n      <th>Lines of Code<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[1,2,3]}],"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (5.944675 - value)/5.944675 * 100 + '%, orange ' + (5.944675 - value)/5.944675 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (26813.000000 - value)/26813.000000 * 100 + '%, orange ' + (26813.000000 - value)/26813.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (57.000000 - value)/57.000000 * 100 + '%, orange ' + (57.000000 - value)/57.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
 </div>
 
 <footer id="site-footer">
@@ -279,6 +502,8 @@ $(document).ready(function () {
 </footer>
 
 
+</div>
+</div>
 
 </div>
 

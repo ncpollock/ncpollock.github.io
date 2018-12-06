@@ -37,6 +37,9 @@ output:
     theme: flatly
     df_print: kable
     highlight: zenburn
+    code_folding: show
+    toc: true
+    toc_float: true
     include:
       after_body: footer.html
       in_header: GA_Script.html

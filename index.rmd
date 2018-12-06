@@ -1,10 +1,12 @@
 ---
 title: "Welcome"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE, fig.align='center')
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE, fig.align='center')
 library(ggplot2)
 library(dplyr)
 library(DT)
