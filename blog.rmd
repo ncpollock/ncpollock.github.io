@@ -22,20 +22,32 @@ blog_df <- data.frame(
                ,"building_this_site")
 )
 
+# pull some text from each file for a sample
+blog_df$intros <- sapply(
+  paste0(blog_df$filename,".Rmd"),function(x){
+    gsub(".*##",
+     "",
+     paste(readLines(x)[1:30],collapse = " "),
+     perl = TRUE
+    )
+    }
+  )
+
 blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
 blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
 blog_df$size <- file.info(paste0(blog_df$filename,".Rmd"))$size
 blog_df$lines <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x) blog_df$filename = length(readLines(x)))
 
-blog_df$intros <- sapply(
-  paste0(blog_df$filename,".Rmd"),function(x){
-    gsub(".*\\n*.*\\n*.*##",
-     "",
-     readLines(x)
-    )[1:3]
-    }
-  )
+# blog_df$intros <- sapply(
+#   paste0(blog_df$filename,".Rmd"),function(x){
+#     gsub("(\\n*|.*)*##",
+#      "",
+#      readLines(x),
+#      perl = TRUE
+#     )[1:3]
+#     }
+#   )
 
 blog_df$titles <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
@@ -46,13 +58,10 @@ blog_df$titles <- sapply(
     }
   )
 
-
-
-
 #wrap filename in raw html
-blog_df$filename <- paste0("<a href='",blog_df$filename,".html' target='_blank'>",blog_df$filename,"</a>")
+#give it the actual post title
+blog_df$filename <- paste0("<a href='",blog_df$filename,".html' target='_blank'>",blog_df$titles,"</a>")
 
-# knitr::kable(blog_df)
 
 # define formate for header
 col_format <- JS(
@@ -63,7 +72,8 @@ col_format <- JS(
 datatable(blog_df
           ,escape = FALSE
           ,rownames=FALSE
-          ,colnames = c('Blog Post Name',
+          ,colnames = c('Title',
+                        'Content Snippet',
                        'Created At',
                        'Updated At',
                        'Post Size (bytes)',
