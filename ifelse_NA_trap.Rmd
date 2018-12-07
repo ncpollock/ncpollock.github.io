@@ -1,12 +1,8 @@
 ---
-title: "Be Careful with ifelse() and NA Values"
+title: "NA Values in ifelse(): It's Not What You Think"
 author: "Noah Pollock"
 date: "December 4, 2018"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    code_folding: show
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -23,12 +19,12 @@ Consider this plain english if then logic:
 
 In short: Top 10% = New Laptop, Anything Else = No Netflix.
 
-Obviously, if I don't enter a submission into Kaggle, my score cannot possibly be in the top 10%, therefore I should revoke my Netflix privileges! However, this is not how ifelse() evaluates this situation. Specifically, ifelse() only operates on non-missing values unless explicitly told to do otherwise!
+Obviously, if I don't enter a submission into Kaggle, my score cannot possibly be in the top 10%, therefore I should revoke my Netflix privileges! However, this is not how ifelse() evaluates this situation. Specifically, ifelse() only operates on non-missing values unless explicitly told to do otherwise.
 
 ## Example
-Imagine I'm one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment[^1]. The others all at least put forth an effort and submitted. My `kaggle_score_percentile` is `NA` because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.
+Imagine I'm one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment [^1]. The others all at least put forth an effort and submitted. My `kaggle_score_percentile` is `NA` because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.
 
-[^1] Can you tell I studied Psychology?
+[^1]: Can you tell I studied Psychology?
 
 
 ```{r ifelse_fail}
@@ -49,7 +45,7 @@ ifelse(
 
 ```
 
-Is that what you expected? `ifelse()` did not evaluate the way we might expect in natural langauge. My score did not meet the condition `kaggle_score_percentile >= 10`, but instead of receiving the else condition, I received an `NA`. In the same vein as `r NA == NA` is not TRUE nor is it FALSE (it's `NA`) or for the MS Access users, you cannot join by missing values. 
+Is that what you expected? `ifelse()` did not evaluate the way we might expect in natural langauge. My score did not meet the condition `kaggle_score_percentile >= 10`, but instead of receiving the else condition, I received an `NA`. In the same vein as `NA == NA` is not TRUE nor is it FALSE (it's `NA`) or for the MS Access users, you cannot join by missing values. 
 
 Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here's a workaround.
 

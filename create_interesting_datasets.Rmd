@@ -10,9 +10,19 @@ output:
 
 ---
 
-Let's create a dataset with *interesting* qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(ggplot2)
+```
 
-For this post, we'll create these datasets purely with base R functions.
+## Scope
+I needed a dataset, so I created one!
+
+## Introduction and Prerequisites
+
+I co-taught then solo-taught the pre-conference workshop at the Michigan Association for Institutional Research in 2017 and 2018. The topic was an introduction to R. I knew I needed a dataset that would engage my audience. It had to be relevent to their work as professionals in higher education. I could have dumped some data from our database and deidentified it, but instead I thought I would cease the opportunity as a learning tool. I created my own dataset with *interesting* qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.
+
+For this post, we'll create these datasets purely with base R functions. However, I use `ggplot2` to show how the dataset is interesting with plots.
 
 A few good reasons to create your own dataset:
 
@@ -82,12 +92,125 @@ air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
 
 Let's discover how it's interesting.
 
-```{r plots, echo=FALSE}
-plot(pressure)
+```{r main_effects, echo=FALSE}
+ggplot(air_df,aes(x=career_use,y=mean(gpa))) +
+  geom_col()
 
 ```
 
-```{r stats, echo=FALSE}
+## Go Further
+Let's perform some feature engineering and data cleaning on this dataset and use that cleaned dataset in better plots.
+
+```{r prep-data, echo=FALSE}
+library(dplyr)
+library(tidyr)
+library(scales)
+library(stringr)
+
+air_df <- air_df %>%
+  rename(admit_type = ATYP) %>%
+  mutate(
+    school_recode = recode(school,
+           "AS" = "Arts and Sciences",
+           "BA" = "Business",
+           "EG" = "Engineering and Computer Science"),
+    year = substr(term_code,1,4),
+    term_type = 
+      ifelse(
+        substr(term_code,5,6)=="10",
+        "Winter",
+        "Fall"),
+    term_desc = 
+      ifelse(
+        substr(term_code,5,6)=="10",
+        paste("Winter",substr(term_code,1,4),sep=" "),
+        paste("Fall",substr(term_code,1,4),sep=" ")),
+    career_use_bin = ifelse(career_use>0,"Engaged","Did Not Engage"), #use case_when instead?
+    pg_outcome_bin = case_when(post_grad_outcome %in% 
+                                 c("Employed","Grad School") ~ TRUE
+                               ,post_grad_outcome %in% 
+                                 c("Still Seeking","Other") ~ FALSE
+                               )
+    )
+
+```
+
+```{r better_plots}
+cu_x_school_to_co_df <- air_df %>% 
+  group_by(career_use_bin,school) %>%
+  count(post_grad_outcome) %>%
+  mutate(pct = n/sum(n)) %>%
+  bind_rows(air_df %>% 
+  group_by(career_use_bin) %>%
+  count(post_grad_outcome) %>%
+  mutate(pct = n/sum(n),
+         school="All")) %>%
+  filter(post_grad_outcome=="Employed")
+
+ggplot(cu_x_school_to_co_df,
+       aes(x=school,y=pct,fill=career_use_bin)) +
+  geom_col(position="dodge") +
+  geom_text(position = position_dodge(1), 
+            vjust=-1.75,
+            size = 2.5,
+            aes(x = school,
+                y = pct,
+                group = career_use_bin,
+                label=scales::percent(pct))) +
+  labs(title = "Effect of Career Services Engagement on Employment",
+       x="School",
+       y="Employment Rate",
+       fill = "Engaged with CS") + 
+  scale_y_continuous(breaks=seq(0,1,0.1),limits = 0:1,
+                     labels=scales::percent) +
+  scale_fill_manual(values=c('black',"#B69A5B")) + 
+  theme(panel.background = element_blank(),
+        legend.position = "top",
+        panel.grid.major.y = element_line(color="gray"),
+        panel.grid.minor.y=element_line(color="gray"),
+        axis.line   = element_line(colour="black"),
+        plot.title = element_text(hjust = 0.5))
+
+cu_x_school_to_sal_df <- air_df %>% 
+  group_by(career_use,school) %>% 
+  summarise(gpa_mean = mean(gpa),
+            salary_median = median(salary,na.rm = TRUE))
+
+ggplot(cu_x_school_to_sal_df,
+       aes(x=career_use,y=salary_median)) +
+  facet_grid(~school) +
+  geom_col(fill="#cdcdcd") +
+  geom_line(size=2,colour="#877148") +
+  geom_point(size=3,color="black",fill = "#877148",stroke=2,shape=21) +
+  geom_text(position = position_dodge(width = .7),
+            vjust=2.25,
+            size = 2.5,
+            aes(x = career_use,
+                y = salary_median,
+                # group = p_outcome,
+                label=paste0(substr(salary_median,1,2),"k"))) +
+  labs(title = "Effect of Career Services on FDS Salary",
+       x="Engagements with Career Services",
+       y="FDS Salary ($)",
+       fill = NULL) + 
+  scale_y_continuous(breaks=seq(0,max(cu_x_school_to_sal_df$salary_median),10000),
+                     labels=format(
+                       seq(0,max(cu_x_school_to_sal_df$salary_median),10000),big.mark = ","),
+                     minor_breaks = seq(0, max(cu_x_school_to_sal_df$salary_median),5000)) +
+  scale_x_continuous(breaks=0:max(cu_x_school_to_sal_df$career_use)) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color="gray"),
+        panel.grid.minor.y=element_line(color="gray"),
+        axis.line   = element_line(colour="black"),
+        strip.background = element_rect(colour="#323232", fill='#323232'),
+        strip.text = element_text(color="white"),
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+
+
+```{r interaction_effects, echo=FALSE}
 
 
 ```

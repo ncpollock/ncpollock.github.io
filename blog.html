@@ -20,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="site_libs/datatables-binding-0.5/datatables.js"></script>
@@ -166,6 +167,14 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 
 
@@ -256,6 +265,14 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Blog</h1>
@@ -263,9 +280,12 @@ $(document).ready(function () {
 </div>
 
 
-<p>This blog is my contribution to the fields of data science, business analytics, information technology, and variations on those themes.</p>
-<div id="htmlwidget-3ce3bdce0164502f3ee4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3ce3bdce0164502f3ee4">{"x":{"filter":"none","data":[["<a href='create_interesting_datasets.html' target='_blank'>create_interesting_datasets<\/a>","<a href='ifelse_NA_trap.html' target='_blank'>ifelse_NA_trap<\/a>","<a href='building_this_site.html' target='_blank'>building_this_site<\/a>"],["2018-11-15","2018-12-05","2018-11-17"],["2018-12-03","2018-12-05","2018-12-05"],[3721,2520,4045],[93,62,95]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Blog Post Name<\/th>\n      <th>Created At<\/th>\n      <th>Updated At<\/th>\n      <th>Post Size (bytes)<\/th>\n      <th>Post Length (lines)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[1,2,3,4]}],"dom":"frtpB","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (4045.000000 - value)/4045.000000 * 100 + '%, orange ' + (4045.000000 - value)/4045.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (95.000000 - value)/95.000000 * 100 + '%, orange ' + (95.000000 - value)/95.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':'bold','color':'black'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+<div id="this-blog" class="section level2">
+<h2>This Blog</h2>
+<p>This my contribution to the fields of data science, business analytics, information technology, and variations on those themes.</p>
+<div id="htmlwidget-dc01795bb6a2c399fe7f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dc01795bb6a2c399fe7f">{"x":{"filter":"none","data":[["<a href='create_interesting_datasets.html' target='_blank'>Create Interesting Datasets<\/a>","<a href='ifelse_NA_trap.html' target='_blank'>NA Values in ifelse(): It's Not What You Think<\/a>","<a href='building_this_site.html' target='_blank'>Building This Site<\/a>"],[" Create the Dataset  ```{r init_data}  set.seed(100) #specify number g"," Example Imagine I'm one of six people who all follow this same condit"," Step 1: Setup in RStudio  Open RStudio and create an R Project (File "],["2018-11-15","2018-12-05","2018-11-17"],["2018-12-07","2018-12-07","2018-12-07"],[8631,2464,4334],[216,58,97]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Title<\/th>\n      <th>Content Snippet<\/th>\n      <th>Created At<\/th>\n      <th>Updated At<\/th>\n      <th>Post Size (bytes)<\/th>\n      <th>Post Length (lines)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[2,3,4,5]}],"dom":"frtpB","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (8631.000000 - value)/8631.000000 * 100 + '%, orange ' + (8631.000000 - value)/8631.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (216.000000 - value)/216.000000 * 100 + '%, orange ' + (216.000000 - value)/216.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':'bold','color':'black'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+</div>
 
 <footer id="site-footer">
 <br>

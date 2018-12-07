@@ -12,7 +12,7 @@
 <meta name="author" content="Noah Pollock" />
 
 
-<title>Be Careful with ifelse() and NA Values</title>
+<title>NA Values in ifelse(): It’s Not What You Think</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -413,7 +413,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Be Careful with ifelse() and NA Values</h1>
+<h1 class="title toc-ignore">NA Values in ifelse(): It’s Not What You Think</h1>
 <h4 class="author"><em>Noah Pollock</em></h4>
 <h4 class="date"><em>December 4, 2018</em></h4>
 
@@ -429,12 +429,11 @@ div.tocify {
 <p>Consider this plain english if then logic:</p>
 <p><strong>If</strong> my Kaggle score is in the top 10%, <strong>then</strong> I am treating myself to a new laptop, <strong>else</strong> I’m taking away my Netflix privileges.</p>
 <p>In short: Top 10% = New Laptop, Anything Else = No Netflix.</p>
-<p>Obviously, if I don’t enter a submission into Kaggle, my score cannot possibly be in the top 10%, therefore I should revoke my Netflix privileges! However, this is not how ifelse() evaluates this situation. Specifically, ifelse() only operates on non-missing values unless explicitly told to do otherwise!</p>
+<p>Obviously, if I don’t enter a submission into Kaggle, my score cannot possibly be in the top 10%, therefore I should revoke my Netflix privileges! However, this is not how ifelse() evaluates this situation. Specifically, ifelse() only operates on non-missing values unless explicitly told to do otherwise.</p>
 </div>
 <div id="example" class="section level2">
 <h2>Example</h2>
-<p>Imagine I’m one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment[^1]. The others all at least put forth an effort and submitted. My <code>kaggle_score_percentile</code> is <code>NA</code> because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.</p>
-<p>[^1] Can you tell I studied Psychology?</p>
+<p>Imagine I’m one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The others all at least put forth an effort and submitted. My <code>kaggle_score_percentile</code> is <code>NA</code> because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build a dataframe</span>
 test_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">kaggle_score_percentile =</span> <span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">29</span>,<span class="dv">5</span>),<span class="ot">NA</span>)
@@ -477,7 +476,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class
   ) </code></pre></div>
 <pre><code>## [1] &quot;No Netflix&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot;
 ## [6] NA</code></pre>
-<p>Is that what you expected? <code>ifelse()</code> did not evaluate the way we might expect in natural langauge. My score did not meet the condition <code>kaggle_score_percentile &gt;= 10</code>, but instead of receiving the else condition, I received an <code>NA</code>. In the same vein as NA is not TRUE nor is it FALSE (it’s <code>NA</code>) or for the MS Access users, you cannot join by missing values.</p>
+<p>Is that what you expected? <code>ifelse()</code> did not evaluate the way we might expect in natural langauge. My score did not meet the condition <code>kaggle_score_percentile &gt;= 10</code>, but instead of receiving the else condition, I received an <code>NA</code>. In the same vein as <code>NA == NA</code> is not TRUE nor is it FALSE (it’s <code>NA</code>) or for the MS Access users, you cannot join by missing values.</p>
 <p>Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here’s a workaround.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(
   test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&gt;=</span><span class="dv">10</span> <span class="co"># our logic from before</span>
@@ -486,6 +485,12 @@ knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class
   <span class="st">&quot;No Netflix&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;No Netflix&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot;
 ## [6] &quot;No Netflix&quot;</code></pre>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Can you tell I studied Psychology?<a href="#fnref1">↩</a></p></li>
+</ol>
 </div>
 
 <footer id="site-footer">

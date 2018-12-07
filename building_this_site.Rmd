@@ -74,7 +74,9 @@ Create a GitHub Repo configured for GitHub Pages
 
 ## Step 4: Publish
 
-You can either use Git if you already know how, [learn Git](https://guides.github.com/activities/hello-world/), or manually upload all of your files to your Github Repo
+Before sending all of your files to your GitHub repo, you'll need an empty file titled .nojekyll within your R Project directory. When this file is pushed or uploaded to your GitHub repo, it tells GitHub not to publish your website using Jekyll.
+
+To get your website files onto GitHub, you can either use Git if you already know how, [learn Git](https://guides.github.com/activities/hello-world/), or manually upload all of your files to your Github repo.
 
 ## Step 5: Customize and New Content
 

@@ -421,8 +421,14 @@ div.tocify {
 </div>
 
 
-<p>Let’s create a dataset with <em>interesting</em> qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.</p>
-<p>For this post, we’ll create these datasets purely with base R functions.</p>
+<div id="scope" class="section level2">
+<h2>Scope</h2>
+<p>I needed a dataset, so I created one!</p>
+</div>
+<div id="introduction-and-prerequisites" class="section level2">
+<h2>Introduction and Prerequisites</h2>
+<p>I co-taught then solo-taught the pre-conference workshop at the Michigan Association for Institutional Research in 2017 and 2018. The topic was an introduction to R. I knew I needed a dataset that would engage my audience. It had to be relevent to their work as professionals in higher education. I could have dumped some data from our database and deidentified it, but instead I thought I would cease the opportunity as a learning tool. I created my own dataset with <em>interesting</em> qualities. By interesting, I mean statistical effects such as mean differences between groups, variables that explain variability in other variables (and perhaps at variable levels!), and the ability to be charted and graphed in fun or useful ways.</p>
+<p>For this post, we’ll create these datasets purely with base R functions. However, I use <code>ggplot2</code> to show how the dataset is interesting with plots.</p>
 <p>A few good reasons to create your own dataset:</p>
 <ul>
 <li>Mocking up visualizations</li>
@@ -435,6 +441,7 @@ div.tocify {
 <li>You didn’t get enough responses to your survey</li>
 <li>Your effects are too small and p-values to large to publish</li>
 </ul>
+</div>
 <div id="create-the-dataset" class="section level2">
 <h2>Create the Dataset</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">100</span>) <span class="co">#specify number generator for &#39;random&#39; numbers for reproducibility</span>
@@ -486,7 +493,81 @@ air_df<span class="op">$</span>salary &lt;-<span class="st"> </span><span class=
 <div id="show-interest" class="section level2">
 <h2>Show Interest</h2>
 <p>Let’s discover how it’s interesting.</p>
-<p><img src="create_interesting_datasets_files/figure-html/plots-1.png" width="672" /></p>
+<p><img src="create_interesting_datasets_files/figure-html/main_effects-1.png" width="672" /></p>
+</div>
+<div id="go-further" class="section level2">
+<h2>Go Further</h2>
+<p>Let’s perform some feature engineering and data cleaning on this dataset and use that cleaned dataset in better plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cu_x_school_to_co_df &lt;-<span class="st"> </span>air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(career_use_bin,school) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> n<span class="op">/</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>(air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(career_use_bin) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> n<span class="op">/</span><span class="kw">sum</span>(n),
+         <span class="dt">school=</span><span class="st">&quot;All&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>)
+
+<span class="kw">ggplot</span>(cu_x_school_to_co_df,
+       <span class="kw">aes</span>(<span class="dt">x=</span>school,<span class="dt">y=</span>pct,<span class="dt">fill=</span>career_use_bin)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dv">1</span>), 
+            <span class="dt">vjust=</span><span class="op">-</span><span class="fl">1.75</span>,
+            <span class="dt">size =</span> <span class="fl">2.5</span>,
+            <span class="kw">aes</span>(<span class="dt">x =</span> school,
+                <span class="dt">y =</span> pct,
+                <span class="dt">group =</span> career_use_bin,
+                <span class="dt">label=</span>scales<span class="op">::</span><span class="kw">percent</span>(pct))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Effect of Career Services Engagement on Employment&quot;</span>,
+       <span class="dt">x=</span><span class="st">&quot;School&quot;</span>,
+       <span class="dt">y=</span><span class="st">&quot;Employment Rate&quot;</span>,
+       <span class="dt">fill =</span> <span class="st">&quot;Engaged with CS&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>),<span class="dt">limits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,
+                     <span class="dt">labels=</span>scales<span class="op">::</span>percent) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>,<span class="st">&quot;#B69A5B&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">panel.grid.minor.y=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">axis.line   =</span> <span class="kw">element_line</span>(<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>),
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="create_interesting_datasets_files/figure-html/better_plots-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cu_x_school_to_sal_df &lt;-<span class="st"> </span>air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(career_use,school) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">gpa_mean =</span> <span class="kw">mean</span>(gpa),
+            <span class="dt">salary_median =</span> <span class="kw">median</span>(salary,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+
+<span class="kw">ggplot</span>(cu_x_school_to_sal_df,
+       <span class="kw">aes</span>(<span class="dt">x=</span>career_use,<span class="dt">y=</span>salary_median)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>school) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">fill=</span><span class="st">&quot;#cdcdcd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">2</span>,<span class="dt">colour=</span><span class="st">&quot;#877148&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">fill =</span> <span class="st">&quot;#877148&quot;</span>,<span class="dt">stroke=</span><span class="dv">2</span>,<span class="dt">shape=</span><span class="dv">21</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> .<span class="dv">7</span>),
+            <span class="dt">vjust=</span><span class="fl">2.25</span>,
+            <span class="dt">size =</span> <span class="fl">2.5</span>,
+            <span class="kw">aes</span>(<span class="dt">x =</span> career_use,
+                <span class="dt">y =</span> salary_median,
+                <span class="co"># group = p_outcome,</span>
+                <span class="dt">label=</span><span class="kw">paste0</span>(<span class="kw">substr</span>(salary_median,<span class="dv">1</span>,<span class="dv">2</span>),<span class="st">&quot;k&quot;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Effect of Career Services on FDS Salary&quot;</span>,
+       <span class="dt">x=</span><span class="st">&quot;Engagements with Career Services&quot;</span>,
+       <span class="dt">y=</span><span class="st">&quot;FDS Salary ($)&quot;</span>,
+       <span class="dt">fill =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>salary_median),<span class="dv">10000</span>),
+                     <span class="dt">labels=</span><span class="kw">format</span>(
+                       <span class="kw">seq</span>(<span class="dv">0</span>,<span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>salary_median),<span class="dv">10000</span>),<span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>),
+                     <span class="dt">minor_breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>salary_median),<span class="dv">5000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="dv">0</span><span class="op">:</span><span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>career_use)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">panel.grid.minor.y=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">axis.line   =</span> <span class="kw">element_line</span>(<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>),
+        <span class="dt">strip.background =</span> <span class="kw">element_rect</span>(<span class="dt">colour=</span><span class="st">&quot;#323232&quot;</span>, <span class="dt">fill=</span><span class="st">&#39;#323232&#39;</span>),
+        <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>),
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="create_interesting_datasets_files/figure-html/better_plots-2.png" width="672" /></p>
 </div>
 
 <footer id="site-footer">
