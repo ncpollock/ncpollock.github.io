@@ -7,7 +7,7 @@ output:
 
 <style>
 #header {
-  background: black url('diverge_and_me.JPG') center no-repeat;
+  background: black url('images/diverge_and_me.JPG') center no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -17,6 +17,7 @@ output:
 }
 </style>
 
+  
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
 
 * <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
@@ -35,11 +36,9 @@ library(ggplot2)
 ```
 
 
-## Fun ggploting
+## My CV with ggplot2
 
-Just for fun, I also recreated some of my CV using ggplot2.
-
-First, I include some of my experiences in a dataframe. It would be more fun (and perhaps more efficient when it comes to updating) to scrape my actual CV, maybe I'll write about it as a blog post.
+Just for fun, I also recreated some of my CV using ggplot2. Obviously, it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
 
 ```{r cv_dataframe, echo=FALSE, warning=FALSE}
 

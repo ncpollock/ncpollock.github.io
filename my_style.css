@@ -9,4 +9,8 @@
 	background: #2c3e50;
 	text-align: center;
 	vertical-align: middle;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }

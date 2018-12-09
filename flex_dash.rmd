@@ -1,19 +1,25 @@
 ---
-title: "Sales Report with Highcharter"
-author: "Joshua Kunst"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    social: menu
-    source_code: embed
+title: "U.S. Colleges"
+author: "Noah Pollock"
+output:
+  html_document:
+    toc: no
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
 library(highcharter)
 library(dplyr)
+library(leaflet)
 library(viridisLite)
 library(treemap)
 library(flexdashboard)
+
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+
+ed_df <- read.csv("ed_api.csv",
+                  stringsAsFactors = FALSE) %>% 
+  rename_all(substring,first=9) # remove dev-category prefix
 
 thm <- 
   hc_theme(
@@ -27,88 +33,144 @@ thm <-
     )
   )
 
+# would like to directly call api
+  # though not feasible with mapping...
+# use method to ask for API key
+# is it still embedded somewhere in code?
+
 ```
 
-Column {data-width=600}
------------------------------------------------------------------------
+## Enrollment: {.tabset data-width=400}
 
-### Sales Forecast
+### Latitude
+```{r lat}
 
-```{r}
-AirPassengers %>% 
-  hchart() %>% 
+pdata <- ed_df %>%
+  mutate(lat_round = round(location.lat,0)) %>%
+  select(lat_round,latest.student.enrollment.all) %>%
+  filter(!is.na(latest.student.enrollment.all)) %>%
+  group_by(lat_round) %>%
+  summarise(students = sum(latest.student.enrollment.all)) %>%
+  arrange(lat_round)
+
+pdata %>% 
+  hchart("line",hcaes(x="lat_round",y="students")) %>% 
   hc_add_theme(thm)
 ```
 
-### Sales by State
+### Longitude
+```{r lon}
 
-```{r}
-data("USArrests", package = "datasets")
-data("usgeojson")
+pdata <- ed_df %>%
+  mutate(lon_round = round(location.lon,0)) %>%
+  select(lon_round,latest.student.enrollment.all) %>%
+  filter(!is.na(latest.student.enrollment.all)) %>%
+  group_by(lon_round) %>%
+  summarise(students = sum(latest.student.enrollment.all)) %>%
+  arrange(lon_round)
 
-USArrests <- USArrests %>%
-  mutate(state = rownames(.))
-
-n <- 4
-colstops <- data.frame(
-  q = 0:n/n,
-  c = substring(viridis(n + 1), 0, 7)) %>%
-  list.parse2()
-
-highchart() %>%
-  hc_add_series_map(usgeojson, USArrests, name = "Sales",
-                    value = "Murder", joinBy = c("woename", "state"),
-                    dataLabels = list(enabled = TRUE,
-                                      format = '{point.properties.postalcode}')) %>%
-  hc_colorAxis(stops = colstops) %>%
-  hc_legend(valueDecimals = 0, valueSuffix = "%") %>%
-  hc_mapNavigation(enabled = TRUE) %>%
+pdata %>% 
+  hchart("line",hcaes(x="lon_round",y="students")) %>% 
   hc_add_theme(thm)
 ```
 
-Column {.tabset data-width=400}
------------------------------------------------------------------------
+### Mapped (Lat and Lon)
 
-### Sales by Category
+```{r map}
 
-```{r, fig.keep='none'}
-data("Groceries", package = "arules")
-dfitems <- tbl_df(Groceries@itemInfo)
+leaflet() %>% addTiles() %>%
+  addCircles(data = ed_df,
+                   lat = ~location.lat, lng = ~location.lon,
+                   color = "blue",
+                    weight = ~(latest.student.enrollment.all / 1500),
+                   radius = 1,
+                   popup = ~paste0(school.name,"<br>",
+                                   "Enrollment: ",latest.student.enrollment.all),
+                    labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "15px",
+    direction = "auto"))
 
-set.seed(10)
-
-dfitemsg <- dfitems %>%
-  mutate(category = gsub(" ", "-", level1),
-         subcategory = gsub(" ", "-", level2)) %>%
-  group_by(category, subcategory) %>% 
-  summarise(sales = n() ^ 3 ) %>% 
-  ungroup() %>% 
-  sample_n(31)
-
-tm <- treemap(dfitemsg, index = c("category", "subcategory"),
-              vSize = "sales", vColor = "sales",
-              type = "value", palette = rev(viridis(6)))
-
-highchart() %>% 
-  hc_add_series_treemap(tm, allowDrillToNode = TRUE,
-                        layoutAlgorithm = "squarified") %>% 
-  hc_add_theme(thm)
 ```
 
-### Best Sellers
 
-```{r}
-set.seed(2)
 
-nprods <- 10
+```{r treemap}
+## Earnings by Institution Type
 
-dfitems %>% 
-  sample_n(nprods) %>% 
-  .$labels %>% 
-  rep(times = sort(sample( 1e4:2e4, size = nprods), decreasing = TRUE)) %>% 
-  factor(levels = unique(.)) %>% 
-  hchart(showInLegend = FALSE, name = "Sales", pointWidth = 10) %>% 
-  hc_add_theme(thm) %>% 
-  hc_chart(type = "bar")
+#, fig.keep='none'
+# tdata <- ed_df %>%
+#   group_by(school.online_only
+#            ,school.under_investigation) %>%
+#   summarise(Median = median(latest.earnings.10_yrs_after_entry.median,na.rm=TRUE)) %>%
+#   filter(!is.na(Median)) %>%
+#   mutate(online_only = ifelse(school.online_only==0,"No","Yes"),
+#          under_HCM_investigation = ifelse(school.under_investigation==1,"Yes","No")) %>%
+#   ungroup() %>%
+#   select(online_only
+#          ,under_HCM_investigation
+#          ,Median)
+#   
+# tm <- treemap(tdata, index = c("online_only", "under_HCM_investigation"),
+#               vSize = "Median", vColor = "Median",
+#               type = "value", palette = rev(viridis(6)))
+# 
+# highchart() %>% 
+#   hc_add_series_treemap(tm, allowDrillToNode = TRUE,
+#                         layoutAlgorithm = "squarified") %>% 
+#   hc_add_theme(thm)
+
+# Heightened Cash Monitoring 2
+# 
+# data("Groceries", package = "arules")
+# dfitems <- tbl_df(Groceries@itemInfo)
+# 
+# set.seed(10)
+# 
+# dfitemsg <- dfitems %>%
+#   mutate(category = gsub(" ", "-", level1),
+#          subcategory = gsub(" ", "-", level2)) %>%
+#   group_by(category, subcategory) %>%
+#   summarise(sales = n() ^ 3 ) %>%
+#   ungroup() %>%
+#   sample_n(31)
+# 
+# tm <- treemap(dfitemsg, index = c("category", "subcategory"),
+#               vSize = "sales", vColor = "sales",
+#               type = "value", palette = rev(viridis(6)))
+# 
+# highchart() %>% 
+#   hc_add_series_treemap(tm, allowDrillToNode = TRUE,
+#                         layoutAlgorithm = "squarified") %>% 
+#   hc_add_theme(thm)
+```
+
+## Top 10 Earners
+
+```{r top_10_earners}
+
+
+ed_df %>%
+  group_by(school.name) %>%
+  summarise(Median = median(latest.earnings.10_yrs_after_entry.median,na.rm=TRUE)) %>%
+  arrange(desc(Median)) %>%
+  slice(1:10) %>%
+  # hchart(showInLegend = FALSE, name = "school.name", pointWidth = 10) %>%
+  hchart("bar",hcaes(x="school.name",y="Median")) %>%
+  hc_add_theme(thm)
+
+# set.seed(2)
+# 
+# nprods <- 10
+# 
+# dfitems %>% 
+#   sample_n(nprods) %>% 
+#   .$labels %>% 
+#   rep(times = sort(sample( 1e4:2e4, size = nprods), decreasing = TRUE)) %>% 
+#   factor(levels = unique(.)) %>% 
+#   hchart(showInLegend = FALSE, name = "Sales", pointWidth = 10) %>% 
+#   hc_add_theme(thm) %>% 
+#   hc_chart(type = "bar")
+  
   
 ```

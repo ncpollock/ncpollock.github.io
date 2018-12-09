@@ -340,7 +340,7 @@ div.tocify {
 </li>
 <li>
   <a href="about_me.html">
-    <span class="fa fa-info"></span>
+    <span class="fa fa-info-circle"></span>
      
     About Me
   </a>
@@ -363,17 +363,21 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Static</li>
     <li>
-      <a href="flex_dash.html">Flex Example</a>
+      <a href="flex_dash.html">R Markdown</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Dynamic</li>
     <li>
       <a href="shiny_bi.html">BI with Shiny</a>
     </li>
-    <li>
-      <a href="pizza.html">Pick Your Pizza</a>
-    </li>
   </ul>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-key"></span>
+     
+    Resources
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,10 +440,10 @@ div.tocify {
 <p>Imagine I’m one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The others all at least put forth an effort and submitted. My <code>kaggle_score_percentile</code> is <code>NA</code> because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build a dataframe</span>
 test_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">kaggle_score_percentile =</span> <span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">29</span>,<span class="dv">5</span>),<span class="ot">NA</span>)
+  <span class="dt">kaggle_score_percentile =</span> <span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">25</span>,<span class="dv">5</span>),<span class="ot">NA</span>)
 )
 
-knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see it</span></code></pre></div>
+knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see results</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -469,22 +473,90 @@ knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># apply conditional logic</span>
 
-<span class="kw">ifelse</span>(
-  test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&gt;=</span><span class="dv">10</span>, <span class="co"># conditional logic</span>
+test_df<span class="op">$</span>result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
+  test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>, <span class="co"># conditional logic</span>
   <span class="st">&quot;New Laptop&quot;</span>, <span class="co"># if true</span>
   <span class="st">&quot;No Netflix&quot;</span> <span class="co"># else (if false)</span>
-  ) </code></pre></div>
-<pre><code>## [1] &quot;No Netflix&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot;
-## [6] NA</code></pre>
+  ) 
+
+knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see results</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">kaggle_score_percentile</th>
+<th align="left">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">No Netflix</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="odd">
+<td align="left">25</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
 <p>Is that what you expected? <code>ifelse()</code> did not evaluate the way we might expect in natural langauge. My score did not meet the condition <code>kaggle_score_percentile &gt;= 10</code>, but instead of receiving the else condition, I received an <code>NA</code>. In the same vein as <code>NA == NA</code> is not TRUE nor is it FALSE (it’s <code>NA</code>) or for the MS Access users, you cannot join by missing values.</p>
 <p>Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here’s a workaround.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_df<span class="op">$</span>result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
   test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&gt;=</span><span class="dv">10</span> <span class="co"># our logic from before</span>
   <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(test_df<span class="op">$</span>kaggle_score_percentile), <span class="co"># explicit evaluation of na values</span>
   <span class="st">&quot;New Laptop&quot;</span>,
-  <span class="st">&quot;No Netflix&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;No Netflix&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot; &quot;New Laptop&quot;
-## [6] &quot;No Netflix&quot;</code></pre>
+  <span class="st">&quot;No Netflix&quot;</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see results</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">kaggle_score_percentile</th>
+<th align="left">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">No Netflix</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="odd">
+<td align="left">25</td>
+<td align="left">New Laptop</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">No Netflix</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="footnotes">
 <hr />
@@ -495,7 +567,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class
 
 <footer id="site-footer">
 <br>
-<p>Congratulations, you found a lightly hidden message!</p>
+<p>---</p>
 </footer>
 
 

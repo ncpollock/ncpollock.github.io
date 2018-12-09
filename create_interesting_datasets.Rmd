@@ -12,7 +12,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
-library(ggplot2)
 ```
 
 ## Scope
@@ -88,24 +87,16 @@ air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
 
 ```
 
-## Show Interest
-
-Let's discover how it's interesting.
-
-```{r main_effects, echo=FALSE}
-ggplot(air_df,aes(x=career_use,y=mean(gpa))) +
-  geom_col()
-
+```{r basic_plot}
+barplot(table(air_df$post_grad_outcome))
 ```
 
-## Go Further
-Let's perform some feature engineering and data cleaning on this dataset and use that cleaned dataset in better plots.
+## Show Interest
 
-```{r prep-data, echo=FALSE}
+Let's visualize how this dataset is interesting. Below, I included a report that I built with this dataset as a teaching tool at the 2018 Pre-conference for the Michigan Association for Institutional Research. Note that a few of the plots and tables below use recoded variables and two other datasets that I created as well. I included the data tidying we performed and one of the other datasets. The other dataset was a simple two column csv file with industries and counts. Eventually, I will create a blog post detailing this report.
+
+```{r main_effects, echo=FALSE, out.width = "100%",out.height="100%"}
 library(dplyr)
-library(tidyr)
-library(scales)
-library(stringr)
 
 air_df <- air_df %>%
   rename(admit_type = ATYP) %>%
@@ -133,84 +124,20 @@ air_df <- air_df %>%
                                )
     )
 
-```
-
-```{r better_plots}
-cu_x_school_to_co_df <- air_df %>% 
-  group_by(career_use_bin,school) %>%
-  count(post_grad_outcome) %>%
-  mutate(pct = n/sum(n)) %>%
-  bind_rows(air_df %>% 
-  group_by(career_use_bin) %>%
-  count(post_grad_outcome) %>%
-  mutate(pct = n/sum(n),
-         school="All")) %>%
-  filter(post_grad_outcome=="Employed")
-
-ggplot(cu_x_school_to_co_df,
-       aes(x=school,y=pct,fill=career_use_bin)) +
-  geom_col(position="dodge") +
-  geom_text(position = position_dodge(1), 
-            vjust=-1.75,
-            size = 2.5,
-            aes(x = school,
-                y = pct,
-                group = career_use_bin,
-                label=scales::percent(pct))) +
-  labs(title = "Effect of Career Services Engagement on Employment",
-       x="School",
-       y="Employment Rate",
-       fill = "Engaged with CS") + 
-  scale_y_continuous(breaks=seq(0,1,0.1),limits = 0:1,
-                     labels=scales::percent) +
-  scale_fill_manual(values=c('black',"#B69A5B")) + 
-  theme(panel.background = element_blank(),
-        legend.position = "top",
-        panel.grid.major.y = element_line(color="gray"),
-        panel.grid.minor.y=element_line(color="gray"),
-        axis.line   = element_line(colour="black"),
-        plot.title = element_text(hjust = 0.5))
-
-cu_x_school_to_sal_df <- air_df %>% 
-  group_by(career_use,school) %>% 
-  summarise(gpa_mean = mean(gpa),
-            salary_median = median(salary,na.rm = TRUE))
-
-ggplot(cu_x_school_to_sal_df,
-       aes(x=career_use,y=salary_median)) +
-  facet_grid(~school) +
-  geom_col(fill="#cdcdcd") +
-  geom_line(size=2,colour="#877148") +
-  geom_point(size=3,color="black",fill = "#877148",stroke=2,shape=21) +
-  geom_text(position = position_dodge(width = .7),
-            vjust=2.25,
-            size = 2.5,
-            aes(x = career_use,
-                y = salary_median,
-                # group = p_outcome,
-                label=paste0(substr(salary_median,1,2),"k"))) +
-  labs(title = "Effect of Career Services on FDS Salary",
-       x="Engagements with Career Services",
-       y="FDS Salary ($)",
-       fill = NULL) + 
-  scale_y_continuous(breaks=seq(0,max(cu_x_school_to_sal_df$salary_median),10000),
-                     labels=format(
-                       seq(0,max(cu_x_school_to_sal_df$salary_median),10000),big.mark = ","),
-                     minor_breaks = seq(0, max(cu_x_school_to_sal_df$salary_median),5000)) +
-  scale_x_continuous(breaks=0:max(cu_x_school_to_sal_df$career_use)) +
-  theme(panel.background = element_blank(),
-        panel.grid.major.y = element_line(color="gray"),
-        panel.grid.minor.y=element_line(color="gray"),
-        axis.line   = element_line(colour="black"),
-        strip.background = element_rect(colour="#323232", fill='#323232'),
-        strip.text = element_text(color="white"),
-        plot.title = element_text(hjust = 0.5))
+roi_df <- data.frame(
+  income_source = c("Minimum Wage",
+                    "High School Diploma",
+                    "Some College",
+                    "10 Years after Attending OI",
+                    "Bachelors"),
+  amount = c(8.15*40*52, # source: Department of Labor Statistics
+             26762, # source: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF
+             31801, # source: Census.gov ^
+             43100, # source: college scorecard
+             49711) # source: Census.gov ^
+,stringsAsFactors = FALSE)
 
 ```
 
+<iframe src ="images/oi_report.pdf" height=800px width=600px />
 
-
-```{r interaction_effects, echo=FALSE}
-
-
-```

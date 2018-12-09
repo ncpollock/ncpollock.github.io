@@ -11,16 +11,26 @@
 
 
 
-<title>Shiny BI</title>
+<title>Resources</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
@@ -159,16 +169,103 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
+
+
+
+
 <script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
 
+<style type="text/css">
 
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -261,23 +358,26 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+
+
+<h1 class="title toc-ignore">Resources</h1>
+
+</div>
+
+
+<div id="public-datasets" class="section level2">
+<h2>Public Datasets</h2>
+<p>A list of publicly available data.</p>
+<div id="htmlwidget-b6b98dbc9b13db890141" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b6b98dbc9b13db890141">{"x":{"filter":"none","data":[["<a href='http://opendata.cern.ch/?ln=en' target='_blank'>CERN LHC Open Data Portal<\/a>","<a href='http://www.icpsr.umich.edu/icpsrweb/landing.jsp' target='_blank'>ICPSR<\/a>","<a href='https://community.isr.umich.edu/public/mcrdc/DataProducts.aspx' target='_blank'>MCRDC<\/a>","<a href='https://www.irs.gov/uac/soi-tax-stats-individual-income-tax-statistics-zip-code-data-soi' target='_blank'>IRS (SOI)<\/a>","<a href='http://partner.monster.com/job-search-specification' target='_blank'>Monster API<\/a>","<a href='https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html' target='_blank'>US Census Bureau<\/a>","<a href='http://milmi.org/datasearch' target='_blank'>MI LMISI<\/a>","<a href='https://collegescorecard.ed.gov/data/documentation/' target='_blank'>ED API<\/a>","<a href='https://api.data.gov/docs/' target='_blank'>Gov API<\/a>","<a href='https://www.bls.gov/data/' target='_blank'>BLS API<\/a>","<a href='http://www.michigan.gov/treasury/0,1607,7-121-1751_2228_21957_45818---,00.html' target='_blank'>MI Dept Treasury<\/a>","<a href='http://carnegieclassifications.iu.edu/downloads.php' target='_blank'>Carnegie Classification<\/a>","<a href='https://library.oakland.edu/services/research-data/data-rep.html' target='_blank'>Kresge Library Repositories<\/a>"],["Particle Physics","Social, Political, Census, Education, Misc","Census and Industry","ZIP Code level income data","API for job postings on Monster.com","Shape Files","Labor Statistics","College Scorecard","Collection of U.S. Government agency APIs","Salaries, Unemployment, and more!","Property Value","IHE data on classification, enrollment, and more","Huge Repository of Other Datasets"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Dataset<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"dom":"frtpB","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="learning-opportunities" class="section level2">
+<h2>Learning Opportunities</h2>
+<p>A list of places to learn more about R, data science, programming, and other fun stuff.</p>
+<ul>
+<li><a href="http://www.sba.oakland.edu/faculty/isken/">Professor Mark Isken’s Website</a></li>
 </ul>
 </div>
-
-
-
-<h1 class="title toc-ignore">Shiny BI</h1>
-
-</div>
-
-
-<p>Here’s a proof of concept Business Intelligence tool built with R via Shiny and related packages. You can also open my <a href="https://ncpolloc.shinyapps.io/shiny_bi/">Shiny BI Dashboard in fullscreen</a> instead of using it embedded on this page.</p>
-<iframe src ="https://ncpolloc.shinyapps.io/shiny_bi/" height=1000px width=1000px />
 
 <footer id="site-footer">
 <br>
@@ -285,6 +385,8 @@ $(document).ready(function () {
 </footer>
 
 
+</div>
+</div>
 
 </div>
 

@@ -7,7 +7,7 @@ navbar:
       icon: fa-home
       href: index.html
     - text: "About Me"
-      icon: fa-info
+      icon: fa-info-circle
       href: about_me.html
     - text: "Blog"
       icon: fa-street-view
@@ -16,14 +16,15 @@ navbar:
       icon: fa-gear
       menu:
         - text: "Static"
-        - text: "Flex Example"
+        - text: "R Markdown"
           href: flex_dash.html
         - text: "---------"
         - text: "Dynamic"
         - text: "BI with Shiny"
           href: shiny_bi.html
-        - text: "Pick Your Pizza"
-          href: pizza.html
+    - text: "Resources"
+      icon: fa-key
+      href: resources.html
   right:
     - text: "Help"
       icon: fa-question

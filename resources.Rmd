@@ -1,0 +1,56 @@
+---
+title: "Resources"
+output: 
+  html_document:
+    code_folding: none
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(ggplot2)
+library(DT)
+```
+
+##Public Datasets
+A list of publicly available data.
+
+```{r public_data, echo=FALSE}
+
+# read in public dataset file
+public_data_df <- read.csv("public_datasets.csv",
+                    stringsAsFactors = FALSE)
+
+#wrap filename in raw html
+#give it the actual post title
+public_data_df$Link <- paste0(
+  "<a href='",public_data_df$Link,"' target='_blank'>",
+  public_data_df$Name,"</a>")
+
+# no longer need plain text titles
+public_data_df$Name <- NULL
+
+# define formate for header
+col_format <- JS(
+  "function(settings, json) {",
+  "$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});",
+  "}")
+
+datatable(public_data_df
+          ,escape = FALSE
+          ,rownames=FALSE
+          ,colnames = c('Dataset',
+                        'Description')
+          ,options=list(
+            initComplete = col_format,
+            pageLength=25,
+            dom = 'frtpB'
+          ))
+```
+
+
+##Learning Opportunities
+A list of places to learn more about R, data science, programming, and other fun stuff.
+
+* [Professor Mark Isken's Website](http://www.sba.oakland.edu/faculty/isken/)
+
+

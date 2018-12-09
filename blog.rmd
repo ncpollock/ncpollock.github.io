@@ -27,12 +27,12 @@ blog_df <- data.frame(
 # pull some text from each file for a sample
 blog_df$intros <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
-    substr(gsub(".*##",
+    paste0(substr(gsub(".*##",
      "",
      paste(readLines(x)[1:50],collapse = " "),
      perl = TRUE
     ),
-    1,70)
+    1,70)," ...")
     }
   )
 

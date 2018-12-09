@@ -30,18 +30,20 @@ Imagine I'm one of six people who all follow this same conditional logic, perfor
 ```{r ifelse_fail}
 # build a dataframe
 test_df <- data.frame(
-  kaggle_score_percentile = c(seq(5,29,5),NA)
+  kaggle_score_percentile = c(seq(5,25,5),NA)
 )
 
-knitr::kable(test_df,align = 'l') # see it
+knitr::kable(test_df,align = 'l') # see results
 
 # apply conditional logic
 
-ifelse(
-  test_df$kaggle_score_percentile >=10, # conditional logic
+test_df$result <- ifelse(
+  test_df$kaggle_score_percentile >= 10, # conditional logic
   "New Laptop", # if true
   "No Netflix" # else (if false)
   ) 
+
+knitr::kable(test_df,align = 'l') # see results
 
 ```
 
@@ -50,9 +52,13 @@ Is that what you expected? `ifelse()` did not evaluate the way we might expect i
 Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here's a workaround.
 
 ```{r ifelse_fix}
-ifelse(
+
+test_df$result <- ifelse(
   test_df$kaggle_score_percentile >=10 # our logic from before
   & !is.na(test_df$kaggle_score_percentile), # explicit evaluation of na values
   "New Laptop",
   "No Netflix")
+
+knitr::kable(test_df,align = 'l') # see results
+
 ```
