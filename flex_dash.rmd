@@ -78,13 +78,22 @@ pdata %>%
 
 ```{r map}
 
+pal <- colorNumeric(
+  palette = c("orange","red"),
+  domain = ed_df$latest.student.enrollment.all)
+
+# discretify continuous variables
+# qpal <- colorQuantile("Blues", countries$gdp_md_est, n = 7)
+
 leaflet() %>% addTiles() %>%
-  addCircles(data = ed_df,
+  addCircleMarkers(data = ed_df,
                    lat = ~location.lat, lng = ~location.lon,
-                   color = "blue",
-                    weight = ~(latest.student.enrollment.all / 1500),
-                   radius = 1,
-                   popup = ~paste0(school.name,"<br>",
+                   color = ~pal(latest.student.enrollment.all),
+                    weight = 1,
+                   fillOpacity = .6,
+                   radius = ~(latest.student.enrollment.all / 1500),
+                   stroke = FALSE,
+                   popup = ~paste0("<strong>",school.name,"</strong><br>",
                                    "Enrollment: ",latest.student.enrollment.all),
                     labelOptions = labelOptions(
     style = list("font-weight" = "normal", padding = "3px 8px"),
