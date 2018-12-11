@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 library(DT)
 ```
 
-##This Blog 
 This my contribution to the fields of data science, business analytics, information technology, and variations on those themes.
 
 ```{r blog_df, echo=TRUE}
@@ -84,7 +83,8 @@ datatable(blog_df
           ,options=list(
             initComplete = col_format,
             pageLength=25,
-            columnDefs = list(list(className = 'dt-center',targets=3:ncol(blog_df)-1)), #center all but first column
+            columnDefs = list( # center all but first column
+              list(className = 'dt-center',targets=3:ncol(blog_df)-1)), 
             dom = 'frtpB'
           )) %>%
       formatStyle(
@@ -100,7 +100,6 @@ datatable(blog_df
         backgroundRepeat = 'no-repeat',
         backgroundPosition = 'left') %>%
       formatStyle(columns = "filename", 
-              # backgroundColor = 'gray',
               color = 'black',
               fontWeight = 'bold')
 
