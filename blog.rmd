@@ -3,6 +3,7 @@ title: "Blog"
 output: 
   html_document:
     toc: no
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -14,14 +15,16 @@ library(DT)
 ##This Blog 
 This my contribution to the fields of data science, business analytics, information technology, and variations on those themes.
 
-```{r blog_df, echo=FALSE}
+```{r blog_df, echo=TRUE}
 
-# instead I need to read all .rmd files in main dir
+# instead I should read all .rmd files in main dir
   # and exclude non-blog posts!
+  # because blog posts will quickly outweigh non-blog posts
 blog_df <- data.frame(
   filename = c("create_interesting_datasets"
                ,"ifelse_NA_trap"
-               ,"building_this_site")
+               ,"building_this_site"
+               ,"ed_api")
 )
 
 # pull some text from each file for a sample
@@ -100,17 +103,7 @@ datatable(blog_df
               color = 'black',
               fontWeight = 'bold')
 
-# Some blog post ideas
-# 
-# * Plot geometries on maps
-# * Tool to choose the cost effective pizza
-# * How to Kaggle: Huge disclaimer, this is my first competition
-# * Encouraging steps toward graduation: Proof of concept
-# * ifelse trap with NA values
-# * print rmarkdown from html without latex
-
 ```
-
 
 
 

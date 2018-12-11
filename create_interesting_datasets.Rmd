@@ -89,9 +89,11 @@ rep(sample(c("Yes","No"),prob=c(.80,.20),size = 10,replace = TRUE),2)
 
 ## Create the Dataset
 
+Once you understand the basics of `rep()` and `sample()` creating a full on dataset is fairly straightforward.
+
 ```{r init_data}
 
-set.seed(100) # number generator for 'random' numbers for reproducibility
+set.seed(100) # number generator so 'random' numbers are reproducibile
 n_students <- 1000 # the number of number of grads per cohort
 
 # five years of grads where:

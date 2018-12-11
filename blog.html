@@ -43,6 +43,53 @@
 </script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -172,7 +219,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
 
@@ -287,8 +334,93 @@ $(document).ready(function () {
 <div id="this-blog" class="section level2">
 <h2>This Blog</h2>
 <p>This my contribution to the fields of data science, business analytics, information technology, and variations on those themes.</p>
-<div id="htmlwidget-f488b4b6c56d48706c4b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f488b4b6c56d48706c4b">{"x":{"filter":"none","data":[["<a href='create_interesting_datasets.html' target='_blank'>Create Interesting Datasets<\/a>","<a href='ifelse_NA_trap.html' target='_blank'>NA Values in ifelse(): It's Not What You Think<\/a>","<a href='building_this_site.html' target='_blank'>Building This Site<\/a>"],[" Create the Dataset  ```{r init_data}  set.seed(100) #specify number g ..."," Example Imagine I'm one of six people who all follow this same condit ..."," Step 1: Setup in RStudio  Open RStudio and create an R Project (File  ..."],["2018-11-15","2018-12-05","2018-11-17"],["2018-12-09","2018-12-09","2018-12-09"],[6591,2612,4334],[143,64,97]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Title<\/th>\n      <th>Content Snippet<\/th>\n      <th>Created At<\/th>\n      <th>Updated At<\/th>\n      <th>Post Size (bytes)<\/th>\n      <th>Post Length (lines)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[2,3,4,5]}],"dom":"frtpB","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (6591.000000 - value)/6591.000000 * 100 + '%, orange ' + (6591.000000 - value)/6591.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (143.000000 - value)/143.000000 * 100 + '%, orange ' + (143.000000 - value)/143.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':'bold','color':'black'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># instead I should read all .rmd files in main dir</span>
+  <span class="co"># and exclude non-blog posts!</span>
+  <span class="co"># because blog posts will quickly outweigh non-blog posts</span>
+blog_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">filename =</span> <span class="kw">c</span>(<span class="st">&quot;create_interesting_datasets&quot;</span>
+               ,<span class="st">&quot;ifelse_NA_trap&quot;</span>
+               ,<span class="st">&quot;building_this_site&quot;</span>
+               ,<span class="st">&quot;ed_api&quot;</span>)
+)
+
+<span class="co"># pull some text from each file for a sample</span>
+blog_df<span class="op">$</span>intros &lt;-<span class="st"> </span><span class="kw">sapply</span>(
+  <span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.Rmd&quot;</span>),<span class="cf">function</span>(x){
+    <span class="kw">paste0</span>(<span class="kw">substr</span>(<span class="kw">gsub</span>(<span class="st">&quot;.*##&quot;</span>,
+     <span class="st">&quot;&quot;</span>,
+     <span class="kw">paste</span>(<span class="kw">readLines</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>],<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>),
+     <span class="dt">perl =</span> <span class="ot">TRUE</span>
+    ),
+    <span class="dv">1</span>,<span class="dv">70</span>),<span class="st">&quot; ...&quot;</span>)
+    }
+  )
+
+blog_df<span class="op">$</span>created_at &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">file.info</span>(<span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.html&quot;</span>))<span class="op">$</span>ctime)
+blog_df<span class="op">$</span>updated_at &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">file.info</span>(<span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.html&quot;</span>))<span class="op">$</span>mtime)
+blog_df<span class="op">$</span>size &lt;-<span class="st"> </span><span class="kw">file.info</span>(<span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.Rmd&quot;</span>))<span class="op">$</span>size
+blog_df<span class="op">$</span>lines &lt;-<span class="st"> </span><span class="kw">sapply</span>(
+  <span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.Rmd&quot;</span>),<span class="cf">function</span>(x) blog_df<span class="op">$</span><span class="dt">filename =</span> <span class="kw">length</span>(<span class="kw">readLines</span>(x)))
+
+
+blog_df<span class="op">$</span>titles &lt;-<span class="st"> </span><span class="kw">sapply</span>(
+  <span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.Rmd&quot;</span>),<span class="cf">function</span>(x){
+    <span class="kw">gsub</span>(<span class="st">&#39;&quot;&#39;</span>,
+         <span class="st">&quot;&quot;</span>,
+         <span class="kw">gsub</span>(<span class="st">&quot;title: &quot;</span>,
+           <span class="st">&quot;&quot;</span>,
+           <span class="kw">readLines</span>(x)[<span class="dv">2</span>]
+          )
+    )
+    }
+  )
+
+<span class="co">#wrap filename in raw html</span>
+<span class="co">#give it the actual post title</span>
+blog_df<span class="op">$</span>filename &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;&lt;a href=&#39;&quot;</span>,blog_df<span class="op">$</span>filename,<span class="st">&quot;.html&#39; target=&#39;_blank&#39;&gt;&quot;</span>,blog_df<span class="op">$</span>titles,<span class="st">&quot;&lt;/a&gt;&quot;</span>)
+
+<span class="co"># no longer need plain text titles</span>
+blog_df<span class="op">$</span>titles &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="co"># define formate for header</span>
+col_format &lt;-<span class="st"> </span><span class="kw">JS</span>(
+  <span class="st">&quot;function(settings, json) {&quot;</span>,
+  <span class="st">&quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#252525&#39;, &#39;color&#39;: &#39;#FFFFFF&#39;});&quot;</span>,
+  <span class="st">&quot;}&quot;</span>)
+
+<span class="kw">datatable</span>(blog_df
+          ,<span class="dt">escape =</span> <span class="ot">FALSE</span>
+          ,<span class="dt">rownames=</span><span class="ot">FALSE</span>
+          ,<span class="dt">colnames =</span> <span class="kw">c</span>(<span class="st">&#39;Title&#39;</span>,
+                        <span class="st">&#39;Content Snippet&#39;</span>,
+                       <span class="st">&#39;Created At&#39;</span>,
+                       <span class="st">&#39;Updated At&#39;</span>,
+                       <span class="st">&#39;Post Size (bytes)&#39;</span>,
+                       <span class="st">&#39;Post Length (lines)&#39;</span>)
+          ,<span class="dt">options=</span><span class="kw">list</span>(
+            <span class="dt">initComplete =</span> col_format,
+            <span class="dt">pageLength=</span><span class="dv">25</span>,
+            <span class="dt">columnDefs =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-center&#39;</span>,<span class="dt">targets=</span><span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(blog_df)<span class="op">-</span><span class="dv">1</span>)), <span class="co">#center all but first column</span>
+            <span class="dt">dom =</span> <span class="st">&#39;frtpB&#39;</span>
+          )) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">formatStyle</span>(
+        <span class="st">&#39;size&#39;</span>,
+        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(blog_df<span class="op">$</span>size)), <span class="st">&#39;orange&#39;</span>),
+        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
+        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
+        <span class="dt">backgroundPosition =</span> <span class="st">&#39;left&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">formatStyle</span>(
+        <span class="st">&#39;lines&#39;</span>,
+        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(blog_df<span class="op">$</span>lines)), <span class="st">&#39;orange&#39;</span>),
+        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
+        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
+        <span class="dt">backgroundPosition =</span> <span class="st">&#39;left&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">formatStyle</span>(<span class="dt">columns =</span> <span class="st">&quot;filename&quot;</span>, 
+              <span class="co"># backgroundColor = &#39;gray&#39;,</span>
+              <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>,
+              <span class="dt">fontWeight =</span> <span class="st">&#39;bold&#39;</span>)</code></pre></div>
+<div id="htmlwidget-eedc972c3dd4b4ce1cf0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eedc972c3dd4b4ce1cf0">{"x":{"filter":"none","data":[["<a href='create_interesting_datasets.html' target='_blank'>Create Interesting Datasets<\/a>","<a href='ifelse_NA_trap.html' target='_blank'>NA Values in ifelse(): It's Not What You Think<\/a>","<a href='building_this_site.html' target='_blank'>Building This Site<\/a>","<a href='ed_api.html' target='_blank'>Department of Ed API<\/a>"],[" The Basics  We'll need to learn to use a few base R functions such as ..."," Example Imagine I'm one of six people who all follow this same condit ..."," Step 1: Setup in RStudio  Open RStudio and create an R Project (File  ..."," API Basics In the way we're using it, an API is a set of tools and pr ..."],["2018-11-15","2018-12-05","2018-11-17","2018-12-11"],["2018-12-11","2018-12-09","2018-12-09","2018-12-11"],[10126,2612,4334,7028],[229,64,97,163]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Title<\/th>\n      <th>Content Snippet<\/th>\n      <th>Created At<\/th>\n      <th>Updated At<\/th>\n      <th>Post Size (bytes)<\/th>\n      <th>Post Length (lines)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[2,3,4,5]}],"dom":"frtpB","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (10126.000000 - value)/10126.000000 * 100 + '%, orange ' + (10126.000000 - value)/10126.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (229.000000 - value)/229.000000 * 100 + '%, orange ' + (229.000000 - value)/229.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':'bold','color':'black'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
 </div>
 
 <footer id="site-footer">
