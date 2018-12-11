@@ -8,7 +8,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
-library(ggplot2)
 library(DT)
 ```
 
@@ -64,6 +63,8 @@ blog_df$filename <- paste0("<a href='",blog_df$filename,".html' target='_blank'>
 
 # no longer need plain text titles
 blog_df$titles <- NULL
+
+blog_df <- dplyr::arrange(blog_df,dplyr::desc(created_at))
 
 # define formate for header
 col_format <- JS(
