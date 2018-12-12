@@ -3,6 +3,7 @@ title: "Who am I?"
 output: 
   html_document:
     toc: no
+    code_folding: hide
 ---
 
 <style>
@@ -17,7 +18,7 @@ output:
 }
 </style>
 
-  
+<br>
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
 
 * <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
@@ -41,6 +42,83 @@ library(ggplot2)
 Just for fun, I also recreated some of my CV using ggplot2. Obviously, it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
 
 ```{r cv_dataframe, echo=FALSE, warning=FALSE}
+
+line_length <- 110
+
+cv_df <- read.csv('cv_df.csv',
+                  stringsAsFactors = FALSE,
+                  na.strings = "") %>%
+  # arrange section the order it appears in dataframe
+  mutate(section = factor(section, levels = unique(section)),
+         date_end = as.Date(date_end),
+         month = lubridate::month(date_end
+                                  ,label=TRUE
+                                  ,abbr=FALSE),
+         year = lubridate::year(date_end)) %>% 
+  mutate_at(.vars = vars(experience, point_1, point_2, point_3),
+           .funs = funs(stringr::str_wrap(.,width=line_length))) %>%
+  group_by(section)
+  
+cv_df <- cv_df %>%
+  #adjust for number of lines
+  inner_join(cv_df %>%
+      gather(line_type,text,-section,-date_start,-date_end,-month,-year) %>%
+      filter(!is.na(text)) %>%
+      summarise(wraps = sum(floor(nchar(text)/line_length)),
+        n = n()),
+    by = "section") %>%
+  # adjust for wrapped text adding new lines
+    # need to do better and evenly space each cluster of lines
+  mutate(y = 1:n()*10+wraps,
+         y_point_1 = ifelse(is.na(point_1),NA,y),
+         y_point_2 = ifelse(is.na(point_2),NA,y),
+         y_point_3 = ifelse(is.na(point_3),NA,y))
+
+```
+
+Now, I plot my CV!
+
+```{r cv_plot, echo=TRUE, warning=FALSE, fig.width=8.5, fig.height=25,fig.align='center'}
+
+ggplot(cv_df,aes(x=1,y=y)) +
+  geom_text(aes(label=experience),hjust=0) +
+  geom_text(aes(label=date_end,x=250),hjust=1) +
+  
+  #bullets
+  geom_point(aes(x=5,y=y_point_1-2.5)) +
+    geom_text(aes(label=point_1,x=10,y=y-2.5),hjust=0,size=3) +
+  geom_point(aes(x=5,y=y_point_2-5)) +
+    geom_text(aes(label=point_2,x=10,y=y-5),hjust=0,size=3) +
+  geom_point(aes(x=5,y=y_point_3-7.5)) +
+    geom_text(aes(label=point_3,x=10,y=y-7.5),hjust=0,size=3) +
+  
+  # to stretch canvas
+  geom_point(aes(y=y+(line_length/10/n)),color="transparent") +
+  
+  # sections
+  facet_grid(section~.,switch = 'y',scales = 'free_y',space = "free_y") + 
+  
+  scale_x_continuous(limits = c(1,250)) +
+  
+  ggtitle("Noah C. Pollock") +
+  
+  theme(panel.background = element_blank(),
+        panel.border = element_rect(color='black',fill=NA),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        strip.background = element_rect(colour="#323232", fill='#323232'),
+        strip.text = element_text(color="white"),
+        plot.title = element_text(hjust = 0.5))
+
+
+```
+
+
+```{r sandbox, echo=FALSE, warning=FALSE, include=FALSE}
 
 line_length <- 110
 
@@ -147,50 +225,44 @@ cv_df <- cv_df %>%
 ##########
 
 
-```
-
-Now, I plot my CV!
-
-```{r cv_plot, echo=FALSE, warning=FALSE, fig.width=8.5, fig.height=25,fig.align='center'}
-
-ggplot(cv_df,aes(x=1,y=y)) +
-  geom_text(aes(label=experience),hjust=0) +
-  geom_text(aes(label=date_end,x=250),hjust=1) +
-  
-  #bullets
-  geom_point(aes(x=5,y=y_point_1-2.5)) +
-    geom_text(aes(label=point_1,x=10,y=y-2.5),hjust=0,size=3) +
-  geom_point(aes(x=5,y=y_point_2-5)) +
-    geom_text(aes(label=point_2,x=10,y=y-5),hjust=0,size=3) +
-  geom_point(aes(x=5,y=y_point_3-7.5)) +
-    geom_text(aes(label=point_3,x=10,y=y-7.5),hjust=0,size=3) +
-  
-  geom_point(aes(y=y+(line_length/10/n)),color="transparent") +
-  
-  facet_grid(section~.,switch = 'y',scales = 'free_y',space = "free_y") + 
-  # facet_wrap(~section,ncol=1) + # more traditional section headers
-  
-  # scale_y_continuous(breaks = seq(0,nrow(cv_df)+1,by=.5)
-  #                    ,minor_breaks = seq(.25,nrow(cv_df)+1,by=1)
-  #                    # ,minor_breaks = seq(0,nrow(cv_df)+1,by=.1)
-  #                    ,limits = c(0.5,round((nrow(cv_df)+1)/length(unique(cv_df$section)),1)
-  #                                )) +
-  
-  scale_x_continuous(limits = c(1,250)) +
-  ggtitle("Noah C. Pollock") +
-  # expand_limits(x = 0.25, y = 0.25) +
-  theme(panel.background = element_blank(),
-        panel.border = element_rect(color='black',fill=NA),
-        panel.grid.major.y = element_blank(),
-        # panel.grid.minor.y = element_line(color="gray"),
-        panel.grid.minor.y = element_blank(),
-        axis.line = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        strip.background = element_rect(colour="#323232", fill='#323232'),
-        strip.text = element_text(color="white"),
-        plot.title = element_text(hjust = 0.5))
+# ggplot(cv_df,aes(x=1,y=y)) +
+#   geom_text(aes(label=experience),hjust=0) +
+#   geom_text(aes(label=date_end,x=250),hjust=1) +
+#   
+#   #bullets
+#   geom_point(aes(x=5,y=y_point_1-2.5)) +
+#     geom_text(aes(label=point_1,x=10,y=y-2.5),hjust=0,size=3) +
+#   geom_point(aes(x=5,y=y_point_2-5)) +
+#     geom_text(aes(label=point_2,x=10,y=y-5),hjust=0,size=3) +
+#   geom_point(aes(x=5,y=y_point_3-7.5)) +
+#     geom_text(aes(label=point_3,x=10,y=y-7.5),hjust=0,size=3) +
+#   
+#   geom_point(aes(y=y+(line_length/10/n)),color="transparent") +
+#   
+#   facet_grid(section~.,switch = 'y',scales = 'free_y',space = "free_y") + 
+#   # facet_wrap(~section,ncol=1) + # more traditional section headers
+#   
+#   # scale_y_continuous(breaks = seq(0,nrow(cv_df)+1,by=.5)
+#   #                    ,minor_breaks = seq(.25,nrow(cv_df)+1,by=1)
+#   #                    # ,minor_breaks = seq(0,nrow(cv_df)+1,by=.1)
+#   #                    ,limits = c(0.5,round((nrow(cv_df)+1)/length(unique(cv_df$section)),1)
+#   #                                )) +
+#   
+#   scale_x_continuous(limits = c(1,250)) +
+#   ggtitle("Noah C. Pollock") +
+#   # expand_limits(x = 0.25, y = 0.25) +
+#   theme(panel.background = element_blank(),
+#         panel.border = element_rect(color='black',fill=NA),
+#         panel.grid.major.y = element_blank(),
+#         # panel.grid.minor.y = element_line(color="gray"),
+#         panel.grid.minor.y = element_blank(),
+#         axis.line = element_blank(),
+#         axis.text = element_blank(),
+#         axis.ticks = element_blank(),
+#         axis.title = element_blank(),
+#         strip.background = element_rect(colour="#323232", fill='#323232'),
+#         strip.text = element_text(color="white"),
+#         plot.title = element_text(hjust = 0.5))
 
 # sandbox
 # 

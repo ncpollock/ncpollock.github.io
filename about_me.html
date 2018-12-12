@@ -35,6 +35,53 @@
 </script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -164,7 +211,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
 
@@ -287,7 +334,7 @@ $(document).ready(function () {
   width: 100%;
 }
 </style>
-<p>I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.2 years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:</p>
+<p><br> I’m excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past 2.2 years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:</p>
 <ul>
 <li><a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a></li>
 <li><a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a></li>
@@ -297,6 +344,39 @@ $(document).ready(function () {
 <h2>My CV with ggplot2</h2>
 <p>Just for fun, I also recreated some of my CV using ggplot2. Obviously, it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.</p>
 <p>Now, I plot my CV!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(cv_df,<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1</span>,<span class="dt">y=</span>y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>experience),<span class="dt">hjust=</span><span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>date_end,<span class="dt">x=</span><span class="dv">250</span>),<span class="dt">hjust=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co">#bullets</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">5</span>,<span class="dt">y=</span>y_point_<span class="dv">1</span><span class="op">-</span><span class="fl">2.5</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>point_<span class="dv">1</span>,<span class="dt">x=</span><span class="dv">10</span>,<span class="dt">y=</span>y<span class="op">-</span><span class="fl">2.5</span>),<span class="dt">hjust=</span><span class="dv">0</span>,<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">5</span>,<span class="dt">y=</span>y_point_<span class="dv">2</span><span class="op">-</span><span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>point_<span class="dv">2</span>,<span class="dt">x=</span><span class="dv">10</span>,<span class="dt">y=</span>y<span class="op">-</span><span class="dv">5</span>),<span class="dt">hjust=</span><span class="dv">0</span>,<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">5</span>,<span class="dt">y=</span>y_point_<span class="dv">3</span><span class="op">-</span><span class="fl">7.5</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>point_<span class="dv">3</span>,<span class="dt">x=</span><span class="dv">10</span>,<span class="dt">y=</span>y<span class="op">-</span><span class="fl">7.5</span>),<span class="dt">hjust=</span><span class="dv">0</span>,<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># to stretch canvas</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>y<span class="op">+</span>(line_length<span class="op">/</span><span class="dv">10</span><span class="op">/</span>n)),<span class="dt">color=</span><span class="st">&quot;transparent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># sections</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(section<span class="op">~</span>.,<span class="dt">switch =</span> <span class="st">&#39;y&#39;</span>,<span class="dt">scales =</span> <span class="st">&#39;free_y&#39;</span>,<span class="dt">space =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">250</span>)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Noah C. Pollock&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>,<span class="dt">fill=</span><span class="ot">NA</span>),
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid.minor.y =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.line =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">strip.background =</span> <span class="kw">element_rect</span>(<span class="dt">colour=</span><span class="st">&quot;#323232&quot;</span>, <span class="dt">fill=</span><span class="st">&#39;#323232&#39;</span>),
+        <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>),
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <p><img src="about_me_files/figure-html/cv_plot-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 
