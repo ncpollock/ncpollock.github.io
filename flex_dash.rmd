@@ -1,5 +1,5 @@
 ---
-title: "U.S. Colleges"
+title: "Higher Education Data"
 author: "Noah Pollock"
 output:
   html_document:
@@ -11,19 +11,29 @@ output:
 library(highcharter)
 library(dplyr)
 library(leaflet)
-library(viridisLite)
-library(treemap)
 library(flexdashboard)
+library(gridExtra)
+library(scales)
 
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 
-ed_df <- read.csv("ed_api.csv",
+ed_df <- read.csv("ed_api_more.csv",
                   stringsAsFactors = FALSE) %>% 
-  rename_all(substring,first=9) # remove dev-category prefix
+  rename_all(substring,first=9) %>% # remove dev-category prefix
+  mutate(pred_award = recode(
+    school.degrees_awarded.predominant,
+    "0" = "Not classified",
+    "1" = "Predominantly certificate",
+    "2" = "Predominantly associate",
+    "3" = "Predominantly bachelor",
+    "4" = "Entirely graduate"
+))
+  
+color_temp <- c("#ffa500","#1a6ecc", "#434348", "#90ed7d","#323232","#000000")
 
 thm <- 
   hc_theme(
-    colors = c("#1a6ecc", "#434348", "#90ed7d"),
+    colors = color_temp,
     chart = list(
       backgroundColor = "transparent",
       style = list(fontFamily = "Source Sans Pro")
@@ -40,66 +50,102 @@ thm <-
 
 ```
 
-## Enrollment: {.tabset data-width=400}
+## Mapping: {.tabset data-width=400}
 
-### Latitude
+### Cost x Earnings
 ```{r lat}
 
 pdata <- ed_df %>%
-  mutate(lat_round = round(location.lat,0)) %>%
-  select(lat_round,latest.student.enrollment.all) %>%
-  filter(!is.na(latest.student.enrollment.all)) %>%
-  group_by(lat_round) %>%
-  summarise(students = sum(latest.student.enrollment.all)) %>%
-  arrange(lat_round)
+  rename(
+    cost = latest.cost.attendance.academic_year,
+    earnings =latest.earnings.10_yrs_after_entry.median) %>%
+  select(cost,earnings) %>%
+  filter(!is.na(cost) & !is.na(earnings)) %>%
+  mutate(bin = ntile(cost,10)) %>%
+  arrange(bin) %>%
+  group_by(bin) %>%
+  mutate(min_cost = min(cost),
+         max_cost = max(cost)) %>%
+  mutate(bin_name = paste0(dollar(min_cost,scale = .001,suffix = "k",decimal.mark = ",")
+                           ,"-"
+                           ,dollar(max_cost,scale = .001,suffix = "k",decimal.mark = ",")))
+# fict factor order
+pdata <- pdata %>%
+  mutate(bin_name = factor(bin_name,levels = unique(pdata$bin_name)))
+  
+hcboxplot(x = pdata$earnings, var = pdata$bin_name,
+          outliers = FALSE,color="black") %>% 
+  hc_chart(type = "column") # to put box vertical
 
-pdata %>% 
-  hchart("line",hcaes(x="lat_round",y="students")) %>% 
-  hc_add_theme(thm)
+summary(lm(earnings ~ cost,data = pdata))
+
+# wanted to plot points, but too many for highcharter to handle in browser
+# pdata %>% 
+#   hchart("point",hcaes(x="cost",y="earnings")) %>% 
+#   hc_add_theme(thm)
 ```
 
-### Longitude
+### Size x Earnings
 ```{r lon}
 
 pdata <- ed_df %>%
-  mutate(lon_round = round(location.lon,0)) %>%
-  select(lon_round,latest.student.enrollment.all) %>%
-  filter(!is.na(latest.student.enrollment.all)) %>%
-  group_by(lon_round) %>%
-  summarise(students = sum(latest.student.enrollment.all)) %>%
-  arrange(lon_round)
+  rename(
+    size = latest.student.size,
+    earnings =latest.earnings.10_yrs_after_entry.median) %>%
+  select(size,earnings) %>%
+  filter(!is.na(size) & !is.na(earnings)) %>%
+  mutate(bin = ntile(size,10)) %>%
+  arrange(bin) %>%
+  group_by(bin) %>%
+  mutate(min_size = min(size),
+         max_size = max(size)) %>%
+  mutate(bin_name = ifelse(max_size<1000,
+                           paste0(min_size,"-",max_size),
+                           paste0(number(min_size,scale = .001,suffix = "k")
+                              ,"-"
+                              ,number(max_size,scale = .001,suffix = "k"))))
+# fict factor order
+pdata <- pdata %>%
+  mutate(bin_name = factor(bin_name,levels = unique(pdata$bin_name)))
 
-pdata %>% 
-  hchart("line",hcaes(x="lon_round",y="students")) %>% 
-  hc_add_theme(thm)
+hcboxplot(x = pdata$earnings, var = pdata$bin_name,
+          outliers = FALSE,color="black") %>% 
+  hc_chart(type = "column") # to put box vertical
+summary(lm(earnings ~ size,data = pdata))
+
+# wanted to plot points, but too many for highcharter to handle in browser
+# pdata %>% 
+#   hchart("point",hcaes(x="size",y="earnings")) %>% 
+#   hc_add_theme(thm)
 ```
 
-### Mapped (Lat and Lon)
+### UG Enrollment Size
 
-```{r map}
+This data represents undergraduate enrollment size by institution.
+```{r enroll_map}
 
 pal <- colorNumeric(
   palette = c("orange","red"),
-  domain = ed_df$latest.student.enrollment.all)
+  domain = ed_df$latest.student.size)
 
 # discretify continuous variables
 # qpal <- colorQuantile("Blues", ed_df$latest.student.enrollment.all, n = 7)
 
 pdata <- ed_df %>%
-  filter(!is.na(latest.student.enrollment.all))
+  filter(!is.na(latest.student.size))
   
 leaflet() %>% 
   addTiles() %>%
   addCircleMarkers(
     data = pdata,
     lat = ~location.lat, lng = ~location.lon,
-    color = ~pal(latest.student.enrollment.all),
+    color = ~pal(latest.student.size),
     weight = 1,
     fillOpacity = .6,
-    radius = ~(latest.student.enrollment.all / 1500),
+    radius = ~(latest.student.size / 2500),
     stroke = FALSE,
     popup = ~paste0("<strong>",school.name,"</strong><br>",
-                   "UG Enrollment: ",latest.student.enrollment.all),
+                   "UG Enrollment: ",latest.student.size),
     labelOptions = labelOptions(
     style = list("font-weight" = "normal", padding = "3px 8px"),
     textsize = "15px",
@@ -107,84 +153,90 @@ leaflet() %>%
 
 ```
 
+```{r top_10_size}
 
-
-```{r treemap}
-## Earnings by Institution Type
-
-#, fig.keep='none'
-# tdata <- ed_df %>%
-#   group_by(school.online_only
-#            ,school.under_investigation) %>%
-#   summarise(Median = median(latest.earnings.10_yrs_after_entry.median,na.rm=TRUE)) %>%
-#   filter(!is.na(Median)) %>%
-#   mutate(online_only = ifelse(school.online_only==0,"No","Yes"),
-#          under_HCM_investigation = ifelse(school.under_investigation==1,"Yes","No")) %>%
-#   ungroup() %>%
-#   select(online_only
-#          ,under_HCM_investigation
-#          ,Median)
-#   
-# tm <- treemap(tdata, index = c("online_only", "under_HCM_investigation"),
-#               vSize = "Median", vColor = "Median",
-#               type = "value", palette = rev(viridis(6)))
-# 
-# highchart() %>% 
-#   hc_add_series_treemap(tm, allowDrillToNode = TRUE,
-#                         layoutAlgorithm = "squarified") %>% 
-#   hc_add_theme(thm)
-
-# Heightened Cash Monitoring 2
-# 
-# data("Groceries", package = "arules")
-# dfitems <- tbl_df(Groceries@itemInfo)
-# 
-# set.seed(10)
-# 
-# dfitemsg <- dfitems %>%
-#   mutate(category = gsub(" ", "-", level1),
-#          subcategory = gsub(" ", "-", level2)) %>%
-#   group_by(category, subcategory) %>%
-#   summarise(sales = n() ^ 3 ) %>%
-#   ungroup() %>%
-#   sample_n(31)
-# 
-# tm <- treemap(dfitemsg, index = c("category", "subcategory"),
-#               vSize = "sales", vColor = "sales",
-#               type = "value", palette = rev(viridis(6)))
-# 
-# highchart() %>% 
-#   hc_add_series_treemap(tm, allowDrillToNode = TRUE,
-#                         layoutAlgorithm = "squarified") %>% 
-#   hc_add_theme(thm)
+# create side-by-side bar charts for each institution type
+lapply(unique(ed_df$pred_award),function(pred_award_level){
+  
+  # set each  chart with different color bars
+  color_select = color_temp[
+    (ed_df %>% filter(pred_award==pred_award_level) %>% distinct(school.degrees_awarded.predominant))$school.degrees_awarded.predominant+1
+  ]
+  
+  ed_df %>%
+    group_by(pred_award,school.name) %>%
+    # shorthand to rename(), filter(), select(), then arrange...
+    summarise(Enrollment = median(latest.student.size,na.rm=TRUE)) %>%
+    arrange(desc(Enrollment)) %>%
+    slice(1:10) %>%
+    filter(pred_award == pred_award_level) %>%
+    hchart("bar",hcaes(x="school.name",y="Enrollment"),color=color_select) %>%
+    hc_add_theme(thm) %>%
+    hc_title(text = pred_award_level) %>%
+    hc_xAxis(title = NA)
+}) %>%
+  hw_grid(rowheight = 500,
+          ncol = ceiling(length(unique(ed_df$pred_award))/2))
 ```
 
-## Top 10 Earners
+### Median Earnings 10 Year Post-Entry
+
+This data should be interpreted with extreme caustion as is. Important differences exist between institutions such as the highest degree awarded (e.g., associates vs PHD), the types of programs offered (e.g., Medicine vs Liberal Arts), and cost of attendance to name a few. This is to say that this map is not a tool to choose where one should go to college to earn top dollar.
+
+```{r income_map}
+
+pal <- colorNumeric(
+  palette = c("orange","red"),
+  domain = ed_df$latest.earnings.10_yrs_after_entry.median)
+
+# discretify continuous variables
+# qpal <- colorQuantile("Blues", ed_df$latest.student.enrollment.all, n = 7)
+
+pdata <- ed_df %>%
+  filter(!is.na(latest.earnings.10_yrs_after_entry.median))
+  
+leaflet() %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    data = pdata,
+    lat = ~location.lat, lng = ~location.lon,
+    color = ~pal(latest.earnings.10_yrs_after_entry.median),
+    weight = 1,
+    fillOpacity = .6,
+    radius = ~(latest.earnings.10_yrs_after_entry.median / 4500),
+    stroke = FALSE,
+    popup = ~paste0("<strong>",school.name,"</strong><br>",
+                   "10 Year Post-Enroll Income ($): ",latest.earnings.10_yrs_after_entry.median),
+    labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "15px",
+    direction = "auto"))
+
+```
 
 ```{r top_10_earners}
 
-
-ed_df %>%
-  group_by(school.name) %>%
-  summarise(Median = median(latest.earnings.10_yrs_after_entry.median,na.rm=TRUE)) %>%
-  arrange(desc(Median)) %>%
-  slice(1:10) %>%
-  # hchart(showInLegend = FALSE, name = "school.name", pointWidth = 10) %>%
-  hchart("bar",hcaes(x="school.name",y="Median")) %>%
-  hc_add_theme(thm)
-
-# set.seed(2)
-# 
-# nprods <- 10
-# 
-# dfitems %>% 
-#   sample_n(nprods) %>% 
-#   .$labels %>% 
-#   rep(times = sort(sample( 1e4:2e4, size = nprods), decreasing = TRUE)) %>% 
-#   factor(levels = unique(.)) %>% 
-#   hchart(showInLegend = FALSE, name = "Sales", pointWidth = 10) %>% 
-#   hc_add_theme(thm) %>% 
-#   hc_chart(type = "bar")
+# create side-by-side bar charts for each institution type
+lapply(unique(ed_df$pred_award),function(pred_award_level){
   
+  # set each  chart with different color bars
+  color_select = color_temp[
+    (ed_df %>% filter(pred_award==pred_award_level) %>% distinct(school.degrees_awarded.predominant))$school.degrees_awarded.predominant+1
+  ]
   
+  ed_df %>%
+    group_by(pred_award,school.name) %>%
+    # shorthand to select, rename, and remove NAs
+    # more naturally rename(), filter(), select(), then arrange...
+    summarise(Median = median(latest.earnings.10_yrs_after_entry.median,na.rm=TRUE)) %>%
+    arrange(desc(Median)) %>%
+    slice(1:10) %>%
+    filter(pred_award == pred_award_level) %>%
+    hchart("bar",hcaes(x="school.name",y="Median"),color=color_select) %>%
+    hc_add_theme(thm) %>%
+    hc_title(text = pred_award_level) %>%
+    hc_xAxis(title = NA)
+}) %>%
+  hw_grid(rowheight = 500,
+          ncol = ceiling(length(unique(ed_df$pred_award))/2))
 ```
