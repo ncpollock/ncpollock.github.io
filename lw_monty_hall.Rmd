@@ -1,0 +1,220 @@
+---
+title: "Language Wars One: Monty Hall"
+author: "Noah Pollock"
+date: "December 5, 2018"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Scope
+Pit Python and R against one another on simulating the Monty Hall problem.
+
+## Introduction and Prerequisites
+This is the first post in a series of posts that will pit R against Python. I hope to intentionally ad fuel to the fire of the language wars! Of course, In reality, I understand that there's no one language to rule them all. Specific use-cases, personal tastes, and performance differences wax and wane within and between languages, but the R vs Python debate is a lot of fun to ignite.
+
+For this first post, we will compare the two languages on how they handle simulating the classic Monty Hall problem. In case you're unfamiliar with the problem, you are given the choice between three doors and behind one of them is a prize. One of the doors you didn't pick is opened and you are asked whether you would like to keep your selection or choose the other unopened door. Does it matter whether your switch or stay? What is the probability that the prize is behind your door vs the other door?
+
+**Disclaimer:** I hardly know Python, in fact, we just recently became acquainted. So, I'll rely almost exclusively on other people's Python solution(s) to a problem. I'll then try to do better, or at least as good, in R.
+
+## Python Solution
+
+```{python setup_python}
+import numpy as np
+```
+
+If all the chunks below are python chunks, we can set the engine globally:
+
+Function
+
+simulate_prizedoor
+
+Generate a random array of 0s, 1s, and 2s, representing
+hiding a prize between door 0, door 1, and door 2
+
+Parameters
+
+nsim : int
+    The number of simulations to run
+
+Returns
+
+sims : array
+    Random array of 0s, 1s, and 2s
+
+Example
+
+print simulate_prizedoor(3)
+[0 0 2]
+
+Note that when you print a numpy array, by default, it displays it as above.
+If you do
+
+prize_doors = simulate_prizedoor(3)
+type(prize_doors)
+
+you'll see that prize_doors is a numpy ndarray.
+    
+```{python p_sim_prizedoor}
+
+def simulate_prizedoor(nsim):
+    #compute here
+    answer = np.random.randint(3,size=nsim)
+    return answer
+```
+
+Function
+simulate_guess
+
+Return any strategy for guessing which door a prize is behind. This
+could be a random strategy, one that always guesses 2, whatever.
+
+Parameters
+nsim : int
+    The number of simulations to generate guesses for
+
+Returns
+guesses : array
+    An array of guesses. Each guess is a 0, 1, or 2
+
+Example
+# Here's output from strategy of always guessing door 0
+print simulate_guess(5)
+[0 0 0 0 0]
+
+```{python p_sim_guess}
+def simulate_guess(nsim):
+
+    #compute here
+    guess = np.random.randint(3,size=nsim)
+    return guess
+    
+
+def goat_door(prizedoors,guesses):
+
+    # Here's a shorter way
+    nsims = len(prizedoors)
+    goat = np.zeros(nsims, dtype=np.int)
+    for i in range(nsims):
+        possible_goats = [d for d in [0,1,2] if prizedoors[i] != d and guesses[i] != d]
+        goat[i] = np.random.choice(possible_goats)
+    return goat
+    
+prizes = simulate_prizedoor(10)
+guesses = simulate_guess(10)
+goats = goat_door(prizes,guesses)
+print ("prizes  = ", prizes)
+print ("guesses = ", guesses)
+print ("goats1  = ", goats)
+print ("goats2  = ", goat_door(prizes,guesses))
+```
+
+Function
+switch_guess
+
+The strategy that always switches a guess after the goat door is opened
+
+Parameters
+guesses : array
+     Array of original guesses, for each simulation
+goatdoors : array
+     Array of revealed goat doors for each simulation
+
+Returns
+The new door after switching. Should be different from both guesses and goatdoors
+
+Examples
+print(switch_guess(np.array([0, 1, 2]), np.array([1, 2, 1])))
+array([2, 0, 0])
+
+```{python p_switch}
+
+def switch_guess(guesses, goatdoors):
+  
+    nsims = len(guesses)
+    choice = np.zeros(nsims, dtype=np.int)
+    for i in range(nsims):
+        choice[i] = 3 - (guesses[i] + goatdoors[i])
+    
+    return choice
+```
+
+Function
+win_percentage
+
+Calculate the percent of times that a simulation of guesses is correct
+
+Parameters
+guesses : array
+    Guesses for each simulation
+prizedoors : array
+    Location of prize for each simulation
+
+Returns
+percentage : number between 0 and 100
+    The win percentage
+
+Examples
+print(win_percentage(np.array([0, 1, 2]), np.array([0, 0, 0])))
+33.333
+
+```{python p_win_pct}
+
+#your code here
+def win_percentage(guesses, prizedoors):
+    nsim = len(prizedoors)
+    nwin = 0
+    
+    # Pythonic way
+    nwin = sum(guesses == prizedoors)
+            
+    return 100.0 * (nwin/nsim)
+```  
+
+Function
+switch_vs_stay
+
+Calculate the percent of times that the switching strategy wins and pct
+of time that the stay strategy (don't switch) wins
+
+Parameters
+nsim : int
+    Number of simulations
+
+
+Returns
+wint_pct : List containing the two win percentages
+    The win percentage for switch and for not switch
+
+Examples
+print switch_vs_stay(1000)
+[66.2, 33.8]
+
+```{python p_switch_vs_stay}
+def switch_vs_stay(nsim):
+    
+    prizes = simulate_prizedoor(nsim)
+    guesses = simulate_guess(nsim)
+    goats = goat_door(prizes, guesses)    
+    switch_choice = switch_guess(guesses,goats)
+    
+    winpct_switch = win_percentage(switch_choice, prizes)
+    winpct_stay = win_percentage(guesses, prizes)
+    
+    return [winpct_switch, winpct_stay]
+    
+results = switch_vs_stay(1000)
+print(results)
+```
+
+## R Solution
+
+```{r setup_r}
+library(dplyr)
+```
+
+```{r r_full_script}
+
+
+```
