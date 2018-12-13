@@ -57,11 +57,11 @@ sample(1:10,size = 11,replace = TRUE)
 # bonus, I won't run these, but try them at home!
 
 # choose 1 to 10 random numbers from an integer vector of 1 to 10
-# lapply(1:3,function(x) sample(x,size=x))
+# lapply(1:10,function(x) sample(x,size=x))
 
 # same as above except that every time a number is sampled, 
   # it's then put back into the pool and could be randomly selected again.
-# lapply(1:3,function(x) sample(x,size=x,replace=TRUE))
+# lapply(1:10,function(x) sample(x,size=x,replace=TRUE))
 
 ```
 
@@ -173,7 +173,7 @@ air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
 
 ## Show Interest
 
-Here's a basic plot showing the number of graduates with each post-graduation outcome.
+Here's a basic plot showing the number of graduates with each post-graduation outcome and how we forced each level to exist in a specific proportion by specifying `post_grad_outcome = sample(c("Employed","Grad School","Still Seeking","Other"),prob=c(.64,.27,.07,.02),size=n_students*n_terms,replace=TRUE)`.
 
 ```{r basic_plot}
 barplot(table(air_df$post_grad_outcome))
