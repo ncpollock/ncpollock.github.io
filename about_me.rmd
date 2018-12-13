@@ -10,12 +10,16 @@ output:
 <style>
 #header {
   background: black url('images/diverge_and_me.JPG') center no-repeat;
-  background-size: auto;
-  height: 600px;
+  background-size: 1% auto;
+  height: 200px;
   position: relative; /* child absolute */
   margin: 0 -9999rem;
   /* add back section padding value */
   padding: .25rem 9999rem;
+}
+#header.centered {
+position: absolute;
+bottom: 0px;
 }
 </style>
 <div class="head-bar"></div>
@@ -43,7 +47,9 @@ library(ggplot2)
 
 Just for fun, I also recreated some of my CV using ggplot2. Obviously, it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
 
-```{r cv_dataframe, echo=FALSE, warning=FALSE}
+First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I add line breaks via `str_wrap()` and then I adjust the vertical width of points depending on the number of lines wrapped.
+
+```{r cv_df_plot, echo=TRUE, warning=FALSE, fig.width=8.5, fig.height=25,fig.align='center'}
 
 line_length <- 110
 
@@ -75,12 +81,6 @@ cv_df <- cv_df %>%
          y_point_1 = ifelse(is.na(point_1),NA,y),
          y_point_2 = ifelse(is.na(point_2),NA,y),
          y_point_3 = ifelse(is.na(point_3),NA,y))
-
-```
-
-Now, I plot my CV!
-
-```{r cv_plot, echo=TRUE, warning=FALSE, fig.width=8.5, fig.height=25,fig.align='center'}
 
 ggplot(cv_df,aes(x=1,y=y)) +
   geom_text(aes(label=experience),hjust=0) +
