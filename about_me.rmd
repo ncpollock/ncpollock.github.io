@@ -6,17 +6,19 @@ output:
     code_folding: hide
 ---
 
+
 <style>
 #header {
   background: black url('images/diverge_and_me.JPG') center no-repeat;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  height: 700px;
-  width: 100%;
+  background-size: auto;
+  height: 600px;
+  position: relative; /* child absolute */
+  margin: 0 -9999rem;
+  /* add back section padding value */
+  padding: .25rem 9999rem;
 }
 </style>
+<div class="head-bar"></div>
 
 <br>
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
