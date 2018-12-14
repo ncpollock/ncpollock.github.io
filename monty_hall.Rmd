@@ -1,0 +1,163 @@
+---
+title: "Language Wars One: Monty Hall"
+author: "Noah Pollock"
+date: "December 5, 2018"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Scope
+Use Python and R separately to solve the same problem.
+
+## Introduction and Prerequisites
+This is the first post in a series of posts that will pit R against Python. I hope that this series will eventually add fuel to the fire of the language wars. Of course, In reality, I understand that there's no one language to rule them all. Specific use-cases, personal tastes, and performance differences wax and wane within and between languages, but the R vs Python debate is a lot of fun to ignite.
+
+For this first post, we will compare the two languages on how they handle simulating the classic Monty Hall problem. In case you're unfamiliar with the problem, you are given the choice between three doors and behind one of them is a prize. One of the doors you didn't pick is opened and you are asked whether you would like to keep your selection or choose the other unopened door. Does it matter whether your switch or stay? What is the probability that the prize is behind your door vs the other door?
+
+**Disclaimer:** I hardly know Python, in fact, we just recently became acquainted. So, I'll rely almost exclusively on other people's Python solution(s) to a problem. I'll then try to do better, or at least as good, in R. Naturally, my python selections may reflect poorly written Python, but surely it's better than me writing the Python myself?
+
+## Python Solution
+
+```{python setup_python}
+import numpy as np
+import timeit, functools
+simulations = 10000
+```
+    
+```{python p_full_script}
+
+def simulate_prizedoor(nsim):
+    #compute here
+    answer = np.random.randint(3,size=nsim)
+    return answer
+
+def simulate_guess(nsim):
+
+    #compute here
+    guess = np.random.randint(3,size=nsim)
+    return guess
+    
+def goat_door(prizedoors,guesses):
+
+    nsims = len(prizedoors)
+    goat = np.zeros(nsims, dtype=np.int)
+    for i in range(nsims):
+        possible_goats = [d for d in [0,1,2] if prizedoors[i] != d and guesses[i] != d]
+        goat[i] = np.random.choice(possible_goats)
+    return goat
+
+def switch_guess(guesses, goatdoors):
+  
+    nsims = len(guesses)
+    choice = np.zeros(nsims, dtype=np.int)
+    for i in range(nsims):
+        choice[i] = 3 - (guesses[i] + goatdoors[i])
+    
+    return choice
+
+#your code here
+def win_percentage(guesses, prizedoors):
+    nsim = len(prizedoors)
+    nwin = 0
+    
+    # Pythonic way
+    nwin = sum(guesses == prizedoors)
+            
+    return 100.0 * (nwin/nsim)
+
+def switch_vs_stay(nsim):
+    
+    prizes = simulate_prizedoor(nsim)
+    guesses = simulate_guess(nsim)
+    goats = goat_door(prizes, guesses)    
+    switch_choice = switch_guess(guesses,goats)
+    
+    winpct_switch = win_percentage(switch_choice, prizes)
+    winpct_stay = win_percentage(guesses, prizes)
+    
+    return [winpct_switch, winpct_stay]
+    
+results = switch_vs_stay(simulations)
+print(results)
+
+```
+
+## Inspect Python Functions
+
+See below whether the output is as expected from select functions.
+
+```{python p_inspect}
+prizes = simulate_prizedoor(10)
+guesses = simulate_guess(10)
+goats = goat_door(prizes,guesses)
+switch = switch_guess(prizes,goats)
+print ("prizes  = ", prizes)
+print ("guesses = ", guesses)
+print ("goats  = ", goats)
+print ("switch  = ", switch)
+
+```
+
+## R Solution
+
+```{r r_full_script}
+simulations <- 10000
+
+sim_prizedoor <- function(nsim = 3) sample(1:3,size = nsim,replace = TRUE)
+sim_guess <- function(nsim = 3) sim_prizedoor(nsim)
+bad_door <- function(prize,guess){
+  sapply(1:length(prize),function(i) {
+    sample(
+      rep(c(1:3)[!(1:3 %in% c(prize[i],guess[i]))],2) # because 1:x when length(x) = 1
+      ,1)
+  })
+}
+
+switch_guess <- function(guess,bad_door){
+  sapply(1:length(guess),function(i) {
+    sample(
+      rep(c(1:3)[!(1:3 %in% c(guess[i],bad_door[i]))],2) # because 1:x when length(x) = 1
+      ,1)
+  })
+}
+
+win_pct <- function(guess, prize_door){
+    nsim = length(prize_door)
+    # Pythonic way works in R too!
+    nwin = sum(guess == prize_door)
+    100 * (nwin/nsim)
+}
+
+switch_vs_stay <- function(nsim){
+    
+    prizes = sim_prizedoor(nsim)
+    guesses = sim_guess(nsim)
+    losers = bad_door(prizes, guesses)    
+    switch_choice = switch_guess(guesses,losers)
+    
+    winpct_switch = win_pct(switch_choice, prizes)
+    winpct_stay = win_pct(guesses, prizes)
+    
+    c(winpct_switch, winpct_stay)
+}
+results = switch_vs_stay(simulations)
+results
+system.time(switch_vs_stay(simulations))
+```
+
+## Inspect R Functions
+
+See below whether the output is as expected from select functions.
+```{r r_inspect}
+prizes = sim_prizedoor(10)
+guesses = sim_guess(10)
+goats = bad_door(prizes,guesses)
+switch = switch_guess(guesses,goats)
+paste0 ("prizes  = ", paste0(prizes,collapse = " "))
+paste0 ("guesses = ", paste0(guesses,collapse = " "))
+paste0 ("goats  = ", paste0(goats,collapse = " "))
+paste0 ("switch = ", paste0(switch,collapse = " "))
+
+```

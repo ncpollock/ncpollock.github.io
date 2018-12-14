@@ -426,83 +426,44 @@ div.tocify {
 
 <div id="scope" class="section level2">
 <h2>Scope</h2>
-<p>Pit Python and R against one another on simulating the Monty Hall problem.</p>
+<p>Use Python and R separately to solve the same problem.</p>
 </div>
 <div id="introduction-and-prerequisites" class="section level2">
 <h2>Introduction and Prerequisites</h2>
-<p>This is the first post in a series of posts that will pit R against Python. I hope to intentionally ad fuel to the fire of the language wars! Of course, In reality, I understand that there’s no one language to rule them all. Specific use-cases, personal tastes, and performance differences wax and wane within and between languages, but the R vs Python debate is a lot of fun to ignite.</p>
+<p>This is the first post in a series of posts that will pit R against Python. I hope that this series will eventually add fuel to the fire of the language wars. Of course, In reality, I understand that there’s no one language to rule them all. Specific use-cases, personal tastes, and performance differences wax and wane within and between languages, but the R vs Python debate is a lot of fun to ignite.</p>
 <p>For this first post, we will compare the two languages on how they handle simulating the classic Monty Hall problem. In case you’re unfamiliar with the problem, you are given the choice between three doors and behind one of them is a prize. One of the doors you didn’t pick is opened and you are asked whether you would like to keep your selection or choose the other unopened door. Does it matter whether your switch or stay? What is the probability that the prize is behind your door vs the other door?</p>
-<p><strong>Disclaimer:</strong> I hardly know Python, in fact, we just recently became acquainted. So, I’ll rely almost exclusively on other people’s Python solution(s) to a problem. I’ll then try to do better, or at least as good, in R.</p>
+<p><strong>Disclaimer:</strong> I hardly know Python, in fact, we just recently became acquainted. So, I’ll rely almost exclusively on other people’s Python solution(s) to a problem. I’ll then try to do better, or at least as good, in R. Naturally, my python selections may reflect poorly written Python, but surely it’s better than me writing the Python myself?</p>
 </div>
 <div id="python-solution" class="section level2">
 <h2>Python Solution</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np</code></pre></div>
-<p>If all the chunks below are python chunks, we can set the engine globally:</p>
-<p>Function</p>
-<p>simulate_prizedoor</p>
-<p>Generate a random array of 0s, 1s, and 2s, representing hiding a prize between door 0, door 1, and door 2</p>
-<p>Parameters</p>
-<p>nsim : int The number of simulations to run</p>
-<p>Returns</p>
-<p>sims : array Random array of 0s, 1s, and 2s</p>
-<p>Example</p>
-<p>print simulate_prizedoor(3) [0 0 2]</p>
-<p>Note that when you print a numpy array, by default, it displays it as above. If you do</p>
-<p>prize_doors = simulate_prizedoor(3) type(prize_doors)</p>
-<p>you’ll see that prize_doors is a numpy ndarray.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> timeit, functools
+simulations <span class="op">=</span> <span class="dv">10000</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> simulate_prizedoor(nsim):
     <span class="co">#compute here</span>
     answer <span class="op">=</span> np.random.randint(<span class="dv">3</span>,size<span class="op">=</span>nsim)
-    <span class="cf">return</span> answer</code></pre></div>
-<p>Function simulate_guess</p>
-<p>Return any strategy for guessing which door a prize is behind. This could be a random strategy, one that always guesses 2, whatever.</p>
-<p>Parameters nsim : int The number of simulations to generate guesses for</p>
-<p>Returns guesses : array An array of guesses. Each guess is a 0, 1, or 2</p>
-<p>Example # Here’s output from strategy of always guessing door 0 print simulate_guess(5) [0 0 0 0 0]</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> simulate_guess(nsim):
+    <span class="cf">return</span> answer
+<span class="kw">def</span> simulate_guess(nsim):
     <span class="co">#compute here</span>
     guess <span class="op">=</span> np.random.randint(<span class="dv">3</span>,size<span class="op">=</span>nsim)
     <span class="cf">return</span> guess
     
 <span class="kw">def</span> goat_door(prizedoors,guesses):
-    <span class="co"># Here&#39;s a shorter way</span>
     nsims <span class="op">=</span> <span class="bu">len</span>(prizedoors)
     goat <span class="op">=</span> np.zeros(nsims, dtype<span class="op">=</span>np.<span class="bu">int</span>)
     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(nsims):
         possible_goats <span class="op">=</span> [d <span class="cf">for</span> d <span class="kw">in</span> [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>] <span class="cf">if</span> prizedoors[i] <span class="op">!=</span> d <span class="kw">and</span> guesses[i] <span class="op">!=</span> d]
         goat[i] <span class="op">=</span> np.random.choice(possible_goats)
     <span class="cf">return</span> goat
-    
-prizes <span class="op">=</span> simulate_prizedoor(<span class="dv">10</span>)
-guesses <span class="op">=</span> simulate_guess(<span class="dv">10</span>)
-goats <span class="op">=</span> goat_door(prizes,guesses)
-<span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</code></pre></div>
-<pre><code>## prizes  =  [1 2 0 2 2 2 1 2 1 2]</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</code></pre></div>
-<pre><code>## guesses =  [1 1 0 0 1 1 1 1 2 1]</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats1  = &quot;</span>, goats)</code></pre></div>
-<pre><code>## goats1  =  [0 0 2 1 0 0 0 0 0 0]</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats2  = &quot;</span>, goat_door(prizes,guesses))</code></pre></div>
-<pre><code>## goats2  =  [0 0 2 1 0 0 2 0 0 0]</code></pre>
-<p>Function switch_guess</p>
-<p>The strategy that always switches a guess after the goat door is opened</p>
-<p>Parameters guesses : array Array of original guesses, for each simulation goatdoors : array Array of revealed goat doors for each simulation</p>
-<p>Returns The new door after switching. Should be different from both guesses and goatdoors</p>
-<p>Examples print(switch_guess(np.array([0, 1, 2]), np.array([1, 2, 1]))) array([2, 0, 0])</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> switch_guess(guesses, goatdoors):
+<span class="kw">def</span> switch_guess(guesses, goatdoors):
   
     nsims <span class="op">=</span> <span class="bu">len</span>(guesses)
     choice <span class="op">=</span> np.zeros(nsims, dtype<span class="op">=</span>np.<span class="bu">int</span>)
     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(nsims):
         choice[i] <span class="op">=</span> <span class="dv">3</span> <span class="op">-</span> (guesses[i] <span class="op">+</span> goatdoors[i])
     
-    <span class="cf">return</span> choice</code></pre></div>
-<p>Function win_percentage</p>
-<p>Calculate the percent of times that a simulation of guesses is correct</p>
-<p>Parameters guesses : array Guesses for each simulation prizedoors : array Location of prize for each simulation</p>
-<p>Returns percentage : number between 0 and 100 The win percentage</p>
-<p>Examples print(win_percentage(np.array([0, 1, 2]), np.array([0, 0, 0]))) 33.333</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#your code here</span>
+    <span class="cf">return</span> choice
+<span class="co">#your code here</span>
 <span class="kw">def</span> win_percentage(guesses, prizedoors):
     nsim <span class="op">=</span> <span class="bu">len</span>(prizedoors)
     nwin <span class="op">=</span> <span class="dv">0</span>
@@ -510,13 +471,8 @@ goats <span class="op">=</span> goat_door(prizes,guesses)
     <span class="co"># Pythonic way</span>
     nwin <span class="op">=</span> <span class="bu">sum</span>(guesses <span class="op">==</span> prizedoors)
             
-    <span class="cf">return</span> <span class="fl">100.0</span> <span class="op">*</span> (nwin<span class="op">/</span>nsim)</code></pre></div>
-<p>Function switch_vs_stay</p>
-<p>Calculate the percent of times that the switching strategy wins and pct of time that the stay strategy (don’t switch) wins</p>
-<p>Parameters nsim : int Number of simulations</p>
-<p>Returns wint_pct : List containing the two win percentages The win percentage for switch and for not switch</p>
-<p>Examples print switch_vs_stay(1000) [66.2, 33.8]</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> switch_vs_stay(nsim):
+    <span class="cf">return</span> <span class="fl">100.0</span> <span class="op">*</span> (nwin<span class="op">/</span>nsim)
+<span class="kw">def</span> switch_vs_stay(nsim):
     
     prizes <span class="op">=</span> simulate_prizedoor(nsim)
     guesses <span class="op">=</span> simulate_guess(nsim)
@@ -528,13 +484,89 @@ goats <span class="op">=</span> goat_door(prizes,guesses)
     
     <span class="cf">return</span> [winpct_switch, winpct_stay]
     
-results <span class="op">=</span> switch_vs_stay(<span class="dv">1000</span>)
+results <span class="op">=</span> switch_vs_stay(simulations)
 <span class="bu">print</span>(results)</code></pre></div>
-<pre><code>## [64.8, 35.199999999999996]</code></pre>
+<pre><code>## [66.99000000000001, 33.01]</code></pre>
+</div>
+<div id="inspect-python-functions" class="section level2">
+<h2>Inspect Python Functions</h2>
+<p>See below whether the output is as expected from select functions.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">prizes <span class="op">=</span> simulate_prizedoor(<span class="dv">10</span>)
+guesses <span class="op">=</span> simulate_guess(<span class="dv">10</span>)
+goats <span class="op">=</span> goat_door(prizes,guesses)
+switch <span class="op">=</span> switch_guess(prizes,goats)
+<span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</code></pre></div>
+<pre><code>## prizes  =  [0 2 0 1 0 1 2 1 2 1]</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</code></pre></div>
+<pre><code>## guesses =  [2 2 1 1 0 2 2 0 1 2]</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats  = &quot;</span>, goats)</code></pre></div>
+<pre><code>## goats  =  [1 1 2 0 1 0 0 2 0 0]</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;switch  = &quot;</span>, switch)</code></pre></div>
+<pre><code>## switch  =  [2 0 1 2 2 2 1 0 1 2]</code></pre>
 </div>
 <div id="r-solution" class="section level2">
 <h2>R Solution</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simulations &lt;-<span class="st"> </span><span class="dv">10000</span>
+
+sim_prizedoor &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">nsim =</span> <span class="dv">3</span>) <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">size =</span> nsim,<span class="dt">replace =</span> <span class="ot">TRUE</span>)
+sim_guess &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">nsim =</span> <span class="dv">3</span>) <span class="kw">sim_prizedoor</span>(nsim)
+bad_door &lt;-<span class="st"> </span><span class="cf">function</span>(prize,guess){
+  <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(prize),<span class="cf">function</span>(i) {
+    <span class="kw">sample</span>(
+      <span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[<span class="op">!</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(prize[i],guess[i]))],<span class="dv">2</span>) <span class="co"># because 1:x when length(x) = 1</span>
+      ,<span class="dv">1</span>)
+  })
+}
+
+switch_guess &lt;-<span class="st"> </span><span class="cf">function</span>(guess,bad_door){
+  <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(guess),<span class="cf">function</span>(i) {
+    <span class="kw">sample</span>(
+      <span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[<span class="op">!</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(guess[i],bad_door[i]))],<span class="dv">2</span>) <span class="co"># because 1:x when length(x) = 1</span>
+      ,<span class="dv">1</span>)
+  })
+}
+
+win_pct &lt;-<span class="st"> </span><span class="cf">function</span>(guess, prize_door){
+    nsim =<span class="st"> </span><span class="kw">length</span>(prize_door)
+    <span class="co"># Pythonic way works in R too!</span>
+    nwin =<span class="st"> </span><span class="kw">sum</span>(guess <span class="op">==</span><span class="st"> </span>prize_door)
+    <span class="dv">100</span> <span class="op">*</span><span class="st"> </span>(nwin<span class="op">/</span>nsim)
+}
+
+switch_vs_stay &lt;-<span class="st"> </span><span class="cf">function</span>(nsim){
+    
+    prizes =<span class="st"> </span><span class="kw">sim_prizedoor</span>(nsim)
+    guesses =<span class="st"> </span><span class="kw">sim_guess</span>(nsim)
+    losers =<span class="st"> </span><span class="kw">bad_door</span>(prizes, guesses)    
+    switch_choice =<span class="st"> </span><span class="kw">switch_guess</span>(guesses,losers)
+    
+    winpct_switch =<span class="st"> </span><span class="kw">win_pct</span>(switch_choice, prizes)
+    winpct_stay =<span class="st"> </span><span class="kw">win_pct</span>(guesses, prizes)
+    
+    <span class="kw">c</span>(winpct_switch, winpct_stay)
+}
+results =<span class="st"> </span><span class="kw">switch_vs_stay</span>(simulations)
+results</code></pre></div>
+<pre><code>## [1] 66.43 33.57</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">switch_vs_stay</span>(simulations))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##    0.18    0.00    0.17</code></pre>
+</div>
+<div id="inspect-r-functions" class="section level2">
+<h2>Inspect R Functions</h2>
+<p>See below whether the output is as expected from select functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prizes =<span class="st"> </span><span class="kw">sim_prizedoor</span>(<span class="dv">10</span>)
+guesses =<span class="st"> </span><span class="kw">sim_guess</span>(<span class="dv">10</span>)
+goats =<span class="st"> </span><span class="kw">bad_door</span>(prizes,guesses)
+<span class="cf">switch</span> =<span class="st"> </span><span class="kw">switch_guess</span>(guesses,goats)
+<span class="kw">paste0</span> (<span class="st">&quot;prizes  = &quot;</span>, <span class="kw">paste0</span>(prizes,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<pre><code>## [1] &quot;prizes  = 3 1 3 3 2 1 2 3 2 1&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;guesses = &quot;</span>, <span class="kw">paste0</span>(guesses,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<pre><code>## [1] &quot;guesses = 2 3 1 1 1 2 2 3 2 2&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;goats  = &quot;</span>, <span class="kw">paste0</span>(goats,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<pre><code>## [1] &quot;goats  = 1 2 2 2 3 3 3 1 3 3&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;switch = &quot;</span>, <span class="kw">paste0</span>(<span class="cf">switch</span>,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<pre><code>## [1] &quot;switch = 3 1 3 3 2 1 1 2 1 1&quot;</code></pre>
 </div>
 
 <footer id="site-footer">

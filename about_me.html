@@ -326,12 +326,16 @@ $(document).ready(function () {
 <style>
 #header {
   background: black url('images/diverge_and_me.JPG') center no-repeat;
-  background-size: auto;
-  height: 600px;
+  background-size: 1% auto;
+  height: 200px;
   position: relative; /* child absolute */
   margin: 0 -9999rem;
   /* add back section padding value */
   padding: .25rem 9999rem;
+}
+#header.centered {
+position: absolute;
+bottom: 0px;
 }
 </style>
 <div class="head-bar">
@@ -346,8 +350,39 @@ $(document).ready(function () {
 <div id="my-cv-with-ggplot2" class="section level2">
 <h2>My CV with ggplot2</h2>
 <p>Just for fun, I also recreated some of my CV using ggplot2. Obviously, it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.</p>
-<p>Now, I plot my CV!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(cv_df,<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1</span>,<span class="dt">y=</span>y)) <span class="op">+</span>
+<p>First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I add line breaks via <code>str_wrap()</code> and then I adjust the vertical width of points depending on the number of lines wrapped.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">line_length &lt;-<span class="st"> </span><span class="dv">110</span>
+
+cv_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;cv_df.csv&#39;</span>,
+                  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>,
+                  <span class="dt">na.strings =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># arrange section the order it appears in dataframe</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">section =</span> <span class="kw">factor</span>(section, <span class="dt">levels =</span> <span class="kw">unique</span>(section)),
+         <span class="dt">date_end =</span> <span class="kw">as.Date</span>(date_end),
+         <span class="dt">month =</span> lubridate<span class="op">::</span><span class="kw">month</span>(date_end
+                                  ,<span class="dt">label=</span><span class="ot">TRUE</span>
+                                  ,<span class="dt">abbr=</span><span class="ot">FALSE</span>),
+         <span class="dt">year =</span> lubridate<span class="op">::</span><span class="kw">year</span>(date_end)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="dt">.vars =</span> <span class="kw">vars</span>(experience, point_<span class="dv">1</span>, point_<span class="dv">2</span>, point_<span class="dv">3</span>),
+           <span class="dt">.funs =</span> <span class="kw">funs</span>(stringr<span class="op">::</span><span class="kw">str_wrap</span>(.,<span class="dt">width=</span>line_length))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(section)
+  
+cv_df &lt;-<span class="st"> </span>cv_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co">#adjust for number of lines</span>
+<span class="st">  </span><span class="kw">inner_join</span>(cv_df <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">gather</span>(line_type,text,<span class="op">-</span>section,<span class="op">-</span>date_start,<span class="op">-</span>date_end,<span class="op">-</span>month,<span class="op">-</span>year) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(text)) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">summarise</span>(<span class="dt">wraps =</span> <span class="kw">sum</span>(<span class="kw">floor</span>(<span class="kw">nchar</span>(text)<span class="op">/</span>line_length)),
+        <span class="dt">n =</span> <span class="kw">n</span>()),
+    <span class="dt">by =</span> <span class="st">&quot;section&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># adjust for wrapped text adding new lines</span>
+<span class="st">    </span><span class="co"># need to do better and evenly space each cluster of lines</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()<span class="op">*</span><span class="dv">10</span><span class="op">+</span>wraps,
+         <span class="dt">y_point_1 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(point_<span class="dv">1</span>),<span class="ot">NA</span>,y),
+         <span class="dt">y_point_2 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(point_<span class="dv">2</span>),<span class="ot">NA</span>,y),
+         <span class="dt">y_point_3 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(point_<span class="dv">3</span>),<span class="ot">NA</span>,y))
+
+<span class="kw">ggplot</span>(cv_df,<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1</span>,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>experience),<span class="dt">hjust=</span><span class="dv">0</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>date_end,<span class="dt">x=</span><span class="dv">250</span>),<span class="dt">hjust=</span><span class="dv">1</span>) <span class="op">+</span>
 <span class="st">  </span>
@@ -380,7 +415,7 @@ $(document).ready(function () {
         <span class="dt">strip.background =</span> <span class="kw">element_rect</span>(<span class="dt">colour=</span><span class="st">&quot;#323232&quot;</span>, <span class="dt">fill=</span><span class="st">&#39;#323232&#39;</span>),
         <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>),
         <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
-<p><img src="about_me_files/figure-html/cv_plot-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="about_me_files/figure-html/cv_df_plot-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 
 <footer id="site-footer">

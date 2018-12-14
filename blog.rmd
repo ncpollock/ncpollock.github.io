@@ -1,31 +1,54 @@
 ---
-title: "Blog"
+title: '"If I have seen further it is by standing on the shoulders of Giants."'
+author: -Sir Isaac Newton
 output: 
   html_document:
     toc: no
     code_folding: hide
 ---
 
+<style>
+#header {
+  background: black url('images/diverge_and_me.JPG') center no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  color: white;
+  height: 200px;
+position: relative; /* child absolute */
+  margin: 0 -9999rem;
+  /* add back section padding value */
+  padding: .25rem 9999rem;
+
+}
+</style>
+<div class="head-bar"></div>
+
+<br>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 library(DT)
 ```
 
-This my contribution to the fields of data science, business analytics, information technology, and variations on those themes.
+This is my contribution to the fields of data science, business analytics, information technology, and variations on those themes.
 
-```{r blog_df, echo=TRUE}
+```{r blog_df}
 
-# instead I should read all .rmd files in main dir
-  # and exclude non-blog posts!
-  # because blog posts will quickly outweigh non-blog posts
+# here I manually define which blog posts to include
 blog_df <- data.frame(
   filename = c("create_interesting_datasets"
                ,"ifelse_NA_trap"
                ,"building_this_site"
-               ,"ed_api")
+               ,"ed_api"
+               ,"monty_hall")
 )
+# eventually, I will read all .rmd files in main dir
+  # and exclude non-blog posts because blog posts will 
+    # quickly outweigh non-blog posts
 
-# pull some text from each file for a sample
+# pull some text from each post for a content sample
 blog_df$intros <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
     paste0(substr(gsub(".*##",
@@ -37,13 +60,14 @@ blog_df$intros <- sapply(
     }
   )
 
+# identify metadata
 blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
 blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
 blog_df$size <- file.info(paste0(blog_df$filename,".Rmd"))$size
 blog_df$lines <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x) blog_df$filename = length(readLines(x)))
 
-
+# extract post titles
 blog_df$titles <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
     gsub('"',
@@ -57,7 +81,7 @@ blog_df$titles <- sapply(
   )
 
 #wrap filename in raw html
-#give it the actual post title
+#use post title as visible text
 blog_df$filename <- paste0("<a href='",blog_df$filename,".html' target='_blank'>",blog_df$titles,"</a>")
 
 # no longer need plain text titles

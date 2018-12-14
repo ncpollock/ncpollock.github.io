@@ -14,6 +14,7 @@ library(leaflet)
 library(flexdashboard)
 library(gridExtra)
 library(scales)
+library(xtable)
 
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 
@@ -53,7 +54,7 @@ thm <-
 ## Mapping: {.tabset data-width=400}
 
 ### Cost x Earnings
-```{r lat}
+```{r cost_x_earnings}
 
 pdata <- ed_df %>%
   rename(
@@ -78,7 +79,6 @@ hcboxplot(x = pdata$earnings, var = pdata$bin_name,
   hc_chart(type = "column") # to put box vertical
 
 summary(lm(earnings ~ cost,data = pdata))
-
 # wanted to plot points, but too many for highcharter to handle in browser
 # pdata %>% 
 #   hchart("point",hcaes(x="cost",y="earnings")) %>% 
