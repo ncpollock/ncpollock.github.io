@@ -1,31 +1,30 @@
 ---
 title: "README"
 author: "Noah Pollock"
-date: "November 11, 2018"
+date: "December 12, 2018"
 output: md_document
 ---
 
-## Included Files
+## Scope
+I built a website and included some interesting content throughout including several posts and a shiny dashboard that mimics popular Business Intelligence tools.
+
+## Files Uploaded
+I have uploaded this README and most of the R Markdown files I wrote to generate the site. One R Markdown file was excluded because it contains an API Key to the U.S. Department of Education API. Hopefully you won't find it on github either (ha!).
+
+## Steps to Test
+The website is published on the internet at GitHub. Click the link below to test it.
+
+* [Website Link](https://ncpollock.github.io/)
+* [Screencast is included in a PPT presentation within the folder I uploaded or at this link](https://1drv.ms/p/s!AnbrF2Up8Q7Ag8w4bHkJS2mWR4b04Q)
+* [Post on how I created the site](https://ncpollock.github.io/building_this_site.html)
+
+Because my site is live on the web and per our conversation, I didn't spend time making the files included here executable. Still, you may be able to run a local version by simply initiating an R Project in the directory and then reopening RStudio. Also, the full code is available in my [GitHub Repo](https://github.com/ncpollock/)
+
+I leveraged the following tools and technologies:
+
+* R, RStudio, and shinyapps.io
+* Git and GitHub, and GitHub Pages
+* Python
+* HTML and CSS
 
 
-## Prerequisites
-
-1. R (tested on R-3.4.2)
-2. RStudio IDE (tested on )
-3. The following R packages:
- * dplyr
- * rmarkdown and knitr are included with RStudio and do not need to be installed.
-
-The above prerequisites will alow you to launch and test the application. In order to publish to the web, you need a few more pieces. There are many ways to acheive a similar result, here the tools I used.
-
-1. Github Account
-2. Github Pages
-
-## Steps to Launch
-
-1. Open .Rproj file in RStudio.
-2. Click something to launch in RStudio viewer pane.
-
-## Lessons Learned
-
-1. Github Pages takes time to update. In some cases, more than 30 minutes after committing and pushing changes to github. This was incredibly confusing for someone still learning git. I thought that my changes were not being logged.
