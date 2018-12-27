@@ -1,28 +1,29 @@
 ---
-title: "Who am I?"
+title: '"If you understood everything I said, you’d be me."'
+author: -Miles Davis
 output: 
   html_document:
     toc: no
     code_folding: hide
 ---
 
-
 <style>
 #header {
-  background: url('images/diverge_and_me.JPG') center no-repeat;
-  background-size: 1% auto;
+  background: url('images/main_banner_distort_blue.JPG') center no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  color: white;
+  text-align: center;
   height: 200px;
-  width: auto;
-  position: relative; /* child absolute */
-  margin: 0 -9999rem;
-  /* add back section padding value */
-  padding: .25rem 9999rem;
+  position: relative;
+  margin: 0 -30rem;
+  padding: .25rem 0;
 }
-
 </style>
-<div class="head-bar"></div>
-
 <br>
+
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
 
 * <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
@@ -37,9 +38,30 @@ library(tidyr)
 library(ggplot2)
 
 # or this instead of #header css
-#`r knitr::include_graphics('diverge_and_me.JPG')`
-```
+# `r knitr::include_graphics('diverge_and_me.JPG')`
 
+# #header {
+#   background: url('images/diverge_and_me.JPG') center no-repeat;
+#   background-size: 1% auto;
+#   height: 200px;
+#   width: auto;
+#   position: relative; /* child absolute */
+#   margin: 0 -9999rem;
+#   /* add back section padding value */
+#   padding: .25rem 9999rem;
+# }
+
+# <div>
+# <style>
+# html, body {
+#   background: url('images/diverge_and_me.JPG') center no-repeat;
+#     margin: 0;
+#     size: 10%;
+# }
+# </style>
+# <div class="head-bar"></div>
+
+```
 
 ## My CV with ggplot2
 

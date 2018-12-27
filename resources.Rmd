@@ -1,9 +1,28 @@
 ---
-title: "Resources"
+title: '"Divide each difficulty into as many parts as is feasible and necessary to resolve it."'
+author: -Rene Descartes
 output: 
   html_document:
     code_folding: none
+    toc_float: false
 ---
+
+<style>
+#header {
+  background: url('images/main_banner_distort_blue.JPG') center no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  color: white;
+  text-align: center;
+  height: 200px;
+  position: relative;
+  margin: 0 -30rem;
+  padding: .25rem 0;
+}
+</style>
+<br>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
