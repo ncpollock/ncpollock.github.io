@@ -4,7 +4,7 @@ author: -Miles Davis
 output: 
   html_document:
     toc: no
-    code_folding: hide
+    code_folding: none
 ---
 
 <style>
@@ -32,50 +32,167 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 
 ```{r setup, include=FALSE,warning=FALSE}
-knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE)
+library(leaflet)
+library(highcharter)
 library(dplyr)
 library(tidyr)
+library(lubridate)
 library(ggplot2)
 
-# or this instead of #header css
-# `r knitr::include_graphics('diverge_and_me.JPG')`
+# include font-awesome icons
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
-# #header {
-#   background: url('images/diverge_and_me.JPG') center no-repeat;
-#   background-size: 1% auto;
-#   height: 200px;
-#   width: auto;
-#   position: relative; /* child absolute */
-#   margin: 0 -9999rem;
-#   /* add back section padding value */
-#   padding: .25rem 9999rem;
-# }
+color_temp <- c("#ffa500","#1a6ecc", "#434348", "#90ed7d","#323232","#000000")
 
-# <div>
-# <style>
-# html, body {
-#   background: url('images/diverge_and_me.JPG') center no-repeat;
-#     margin: 0;
-#     size: 10%;
-# }
-# </style>
-# <div class="head-bar"></div>
+
+thm <- 
+  hc_theme(
+    colors = color_temp,
+    chart = list(
+      backgroundColor = "transparent",
+      style = list(fontFamily = "Source Sans Pro")
+    ),
+    xAxis = list(
+      gridLineWidth = 1
+    )
+  )
+
+cv_df <- read.csv('cv_df.csv',
+                  stringsAsFactors = FALSE,
+                  na.strings = "") %>%
+  mutate(date_end = as.Date(date_end),
+         date_start = as.Date(date_start))
 
 ```
 
-## My CV with ggplot2
+## Fun with My CV {.tabset data-width=400}
 
-Just for fun, I also recreated some of my CV using ggplot2. Obviously, it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
+Mostly for fun, I also recreated pieces of my CV in different formats. Although, they're not all practical and may be hardly legible (e.g., ggplot2 CV needs a lot of work).
+
+
+### Dashboard
+
+```{r education, results='asis'}
+
+tdata <- cv_df %>% 
+  filter(section=="Education")
+
+ed_tiles <- ""
+for(i in unique(tdata$experience)){
+
+ed_tiles <- paste0(
+  ed_tiles,
+  '<div class="col-md-4">',
+  '<div class="well">',
+  '<p style="text-align:center;padding: 15px 0; height:130px;font-size: x-large;"><strong>',i,'</strong></p></div></div>')
+
+}
+
+cat(
+  '<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title"><strong><i class="fa fa-graduation-cap"></i> Education</strong></h3>
+</div>
+<div class="panel-body">',
+ed_tiles,
+'</div></div>')
+
+```
+
+
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title"><strong><i class="fa fa-user-plus"></i> Skillset Refined through Work Experience</strong></h3>
+</div>
+<div class="panel-body">
+```{r skills}
+
+pdata <- cv_df %>%
+  filter(section=="Skills") %>%
+  mutate(date_end = if_else(is.na(date_end),Sys.Date(),date_end),
+         Months = (interval(as.Date(date_start),as.Date(date_end)) %/% months(1)))
+
+# create side-by-side bar charts for each institution type
+lapply(unique(pdata$category),function(skill_cat){
+  
+  # set each  chart with different color bars
+  color_select = color_temp[
+    (pdata %>% distinct(category) %>% mutate(index = 1:n()) %>% filter(category==skill_cat))$index
+  ]
+  
+  pdata %>%
+    arrange(desc(Months)) %>%
+    filter(category == skill_cat) %>%
+    select(experience,Months) %>%
+    hchart("bar",hcaes(x="experience",y="Months"),color=color_select) %>%
+    hc_add_theme(thm) %>%
+    hc_title(text = skill_cat) %>%
+      hc_tooltip(formatter = JS("function(){
+                            return (this.point.name + '<br>' + this.y + ' Months')
+                            }")
+  ) %>%
+    hc_xAxis(title = NA)
+}) %>%
+  hw_grid(rowheight = 400,
+          ncol = length(unique(pdata$category)))
+# ncol = ceiling(length(unique(pdata$category))/2)
+```  
+</div></div>
+
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title"><strong><i class="fa fa-microphone"></i> Presentations</strong></h3>
+</div>
+<div class="panel-body">
+<div class="row">
+  <div class="col-md-9">
+```{r present_map}
+pdata <- cv_df %>%
+  filter(section == "Presentations") %>%
+  group_by(lat,lon) %>%
+  summarise(Count = n(),
+            tooltip = paste(experience,collapse = "<br><br>"))
+  
+leaflet() %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    data = pdata,
+    lat = ~lat, lng = ~lon,
+    color = "blue",
+    weight = 1,
+    fillOpacity = .6,
+    radius = ~(Count*3),
+    stroke = FALSE,
+    popup = ~paste0("Presentations: ",Count,"<br>",
+                   tooltip),
+    labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "15px",
+    direction = "auto"))
+```
+  </div>
+  <div class="well">
+<p style="text-align:center;padding: 15px 0; height:130px;font-size: x-large;"><strong>Total Presentations
+<br><br>
+`r cv_df %>% filter(section == "Presentations") %>% nrow()`
+</strong></p>
+</div></div>
+</div></div>
+
+### ggplot2
+It needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
 
 First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I add line breaks via `str_wrap()` and then I adjust the vertical width of points depending on the number of lines wrapped.
 
-```{r cv_df_plot, echo=TRUE, warning=FALSE, fig.width=8.5, fig.height=25,fig.align='center'}
+```{r cv_df_plot, fig.width=8.5, fig.height=25,fig.align='center'}
 
 line_length <- 110
 
 cv_df <- read.csv('cv_df.csv',
                   stringsAsFactors = FALSE,
                   na.strings = "") %>%
+  filter(include == TRUE) %>%
   # arrange section the order it appears in dataframe
   mutate(section = factor(section, levels = unique(section)),
          date_end = as.Date(date_end),
@@ -140,7 +257,7 @@ ggplot(cv_df,aes(x=1,y=y)) +
 ```
 
 
-```{r sandbox, echo=FALSE, warning=FALSE, include=FALSE}
+```{r sandbox, echo=FALSE, warning=FALSE, include=FALSE,eval=FALSE}
 
 line_length <- 110
 
