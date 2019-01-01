@@ -456,11 +456,11 @@ div.tocify {
 <p>To efficiently create a dataset, we want to write the smallest amount of code as possible. That’s where <code>sample()</code> and <code>rep()</code> come in. With <code>sample()</code> we can randomly sample from a small subset of values (e.g., a validation-set) and then we could repeat that sampling, or anything else, with <code>rep()</code>. Let’s take a look.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># chose 3 random numbers from an integer vector of 1 to 10</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1]  2 10  4</code></pre>
+<pre><code>## [1] 2 1 8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># same as above except that I sample 11 times and</span>
 <span class="co"># every time a number is sampled it&#39;s then put back into the pool</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">11</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1]  5  8  9  4  6  8  2 10  1  3  9</code></pre>
+<pre><code>##  [1]  9  1  7  5  2  8  5  1 10  6  2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bonus, I won&#39;t run these, but try them at home!</span>
 
 <span class="co"># choose 1 to 10 random numbers from an integer vector of 1 to 10</span>
@@ -477,17 +477,17 @@ div.tocify {
 <span class="kw">rep</span>(
   <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),
   <span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] 1 1 2 2 3 2 1 1 2 2 3 2</code></pre>
+<pre><code>##  [1] 3 3 3 5 3 3 3 3 3 5 3 3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take a sample of 12 items from a pool of integers 1 to 5 </span>
   <span class="co"># don&#39;t use repeat so that all 12 are random</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span><span class="op">*</span><span class="dv">2</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1] 1 2 5 1 2 4 1 2 4 2 5 1</code></pre>
+<pre><code>##  [1] 3 1 1 5 1 1 4 5 4 2 5 2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample &quot;yes&quot; and &quot;no&quot; 10 times, </span>
   <span class="co"># force that sample to be %80 yes and %20 no</span>
   <span class="co"># repeat that exact sample twice</span>
 <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">80</span>,.<span class="dv">20</span>),<span class="dt">size =</span> <span class="dv">10</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),<span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;
-## [12] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;</code></pre>
+<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;
+## [12] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;</code></pre>
 </div>
 <div id="create-the-dataset" class="section level2">
 <h2>Create the Dataset</h2>

@@ -1,30 +1,60 @@
-section,experience,date_start,date_end,point_1,point_2,point_3
-Education,Bachelors of Arts in Psychology,,2013-04-01,Departmental Honors,Minor in Philosophy,
-Education,Masters of Science in Psychology,,2015-04-01,Thesis: Is “Average” Feedback Threatening? Performance Feedback and the Stress-Buffering Model of High Self-Esteem,,
-Education,Masters of Science in Information Technology Management,,2020-04-01,Concentration in Business Analytics,Concentration in Business Analytics ,
-Career,Research Assistant,,2015-10-15,Programmed automated analytic processes using SPSS syntax and R,Drafted reports to summarize institutional data,"Cleaned, organized, and analyzed datasets with over 1 million rows and 100 columns"
-Career,Data Transfer Specialist,,2016-02-15,Developed user-friendly databases connected to Banner (Ellucian ERP System),Explored data relevant to transfer student success and articulation,"Solved technical challenges using MS Access, SQL*Plus, VBA, and Batch scripting"
-Career,Research Area Specialist Intermediate,,2016-09-26,Coordinated with multiple departments to manage data definitions and integrity,Satisfied federal and state government reporting requirements,"Extracted, analyzed, and reported on student success and program review data"
-Career,Assistant Director of Assessment,,2099-09-09,"Collect, clean, analyze, and report on post-graduation success data",Supervise IT Interns and collaborate with departments across campus,Identify and report on key performance indicators within the department
-Publications,"Zeigler-Hill, V., Holden, C. J., Southard, A. C., Noser, A. E., Enjaian, B., & Pollock, N. C. (2016). The dark sides of high and low self-esteem. In V. Zeigler-Hill & D. K. Marcus (Eds.), The dark side of personality: Science and practice in social, personality, and clinical psychology (pp. 325-340). Washington, DC: American Psychological Association. ",,,,,
-Publications,"Pollock, N. C., McCabe, G. A., Southard, A. C., & Zeigler-Hill, V. (2016). Pathological personality traits and emotion regulation difficulties. Personality and Individual Differences. 95, 168-177 ",,,,,
-Publications,"Pollock, N. C., Noser, A. E., Holden, C. J., & Zeigler-Hill, V. (2015). Do orientations to happiness mediate the associations that personality traits have with subjective well-being? Journal of Happiness Studies. doi:10.1007/s10902-015-9617-9. ",,,,,
-Publications,"Southard, A. C., Noser, A. E., Pollock, N. C., Mercer, S. H., & Zeigler-Hill, V. (2015). The interpersonal nature of dark personality features. Journal of Social and Clinical Psychology, 34, 555-586. ",,,,,
-Presentations,"Pollock, N. C.  (2018, November). Introduction to R: Complete and Automate a Data Request. Pre-conference workshop presented at Michigan Association for Institutional Research, Midland, MI. ",,,,,
-Presentations,"Pollock, N. C., Gonzalez, J. (2017, November). Introduction to R: Practical Use for Institutional Research. Preconference workshop presented at Michigan Association for Institutional Research, Ann Arbor, MI. ",,,,,
-Presentations,"Thibodeau, W., Pollock, N. C. (2017, July). Embracing the 21st Century and Beyond: Transforming from a  Fixed to a Growth Mindset. Oral presentation to be presented at Midwest Association of Colleges and Employers Annual, Detroit, MI. ",,,,,
-Presentations,"Pollock, N. C. (2015, November). The Commute: The Battle of Finding Distance. Oral presentation at Michigan Association for Institutional Research, Traverse City, MI. ",,,,,
-Presentations,"Pollock, N. C., Holub, A. M., Zeigler-Hill, V. (2015, July). Performance Feedback and the Stress-Buffering Qualities of Stable Self-Esteem. Oral presentation at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,
-Presentations,"Pollock, N. C., Holub, A. M., Zeigler-Hill, V. (2015, July). Examining the Associations Between Dysfunction in Emotion Regulation and Pathological Personality Traits. Poster presented at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,
-Presentations,"Holub, A. M., Pollock, N. C., Zeigler-Hill, V. (2015, July). Does Knowing a Victim of Sexual Assault Moderate the Associations that Dark Personality Features Have with Cognitive Distortions Concerning Rape and Victim Empathy? Poster presented at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,
-Presentations,"Nofar, N., McCabe, G. A., Holub, A. M., Pollock, N. C., & Zeigler-Hill, V. (2015, July). Does Self-Esteem Instability Moderate Associations between Self-Esteem Level and Sociosexual Orientation? Poster presented at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,
-Presentations,"Pollock, N. C., McCabe, G., Southard, A. C., Zeigler-Hill, V. (2015, May). Do Pathological Personality Traits Moderate Reactions to Daily Events? Oral presentation at Midwestern Psychological Association, Chicago, IL.  ",,,,,
-Presentations,"Southard, A., Noser, A., Pollock, N. C., & Zeigler-Hill, V. (2015, February) The Interpersonal Core of Dark Personality. Poster presented at Society for Personality and Social Psychology Meeting, Long Beach, CA.  ",,,,,
-Presentations,"Pollock, N. C., Noser, A., Holden, C. J., & Zeigler-Hill, V. (2014, February) Maladaptive Personality Features and Subjective Well-Being.  Poster presented at Society for Personality and Social Psychology, Austin, TX.  ",,,,,
-Presentations,"Enjaian, B., Pollock, N. C., Holden, C. J., Southard, A. C., & Zeigler-Hill, V. (2014, February) Self-esteem instability and perceptions of personality features.  Poster session presented at Society for Personality and Social Psychology’s Fifteenth Annual Meeting, Austin, TX.  ",,,,,
-Presentations,"Pollock, N. C., Williams, K., Spaine, J., Coleman, A., (2014, March) Tools, tactics, and strategies for program improvement. Oral presentation presented at the Association for Orientation, Transition, and Retention in Higher Education, Columbus, OH. ",,,,,
-Presentations,"Pollock, N. C., Noser, A., Holden, C. J., & Zeigler-Hill, V. (2014, May) Personality, orientations to happiness, and subjective well-being.  Poster session presented at Midwestern Psychological Association’s Eighty-sixth Annual Meeting, Chicago, IL.  ",,,,,
-Presentations,"Pollock, N. C., Holden, C. J., & Zeigler-Hill, V. (2013, May) Self-esteem instability and personality. Poster session presented at Midwestern Psychological Association’s Eighty-fifth Annual Meeting, Chicago, IL. ",,,,,
-Acheivements,"Chair, Michigan Association for Institutional Research",,2020-11-06,,,
-Acheivements,Oakland University Advancement Core Value Award for Teamwork and Community,,2018-02-01,,,
-Acheivements,"John Steele Grant, Midwest Association of Colleges and Employers",,2018-05-01,,,
+section,experience,place,date_start,date_end,point_1,point_2,point_3,category,lat,lon,include
+Education,"B.A. Psychology, Cum Laude, Psychology GPA: 3.70",Oakland University,,2013-04-01,Departmental Honors,Minor in Philosophy,,,,,TRUE
+Education,"M.S. Psychology, GPA: 3.80",Oakland University,,2015-04-01,Thesis: Is “Average” Feedback Threatening? Performance Feedback and the Stress-Buffering Model of High Self-Esteem,,,,,,TRUE
+Education,"M.S. Information Technology Management, GPA: 3.85 ",Oakland University,,2020-04-01,Concentration in Business Analytics,,,,,,TRUE
+Career,Research Assistant,Oakland University,2014-09-01,2015-10-15,Programmed automated analytic processes using SPSS syntax and R,Drafted reports to summarize institutional data,"Cleaned, organized, and analyzed datasets with over 1 million rows and 100 columns",,42.672733,-83.21861,TRUE
+Career,Data Transfer Specialist,Oakland University,2015-05-01,2016-02-15,Developed user-friendly databases connected to Banner (Ellucian ERP System),Explored data relevant to transfer student success and articulation,"Solved technical challenges using MS Access, SQL*Plus, VBA, and Batch scripting",,42.672733,-83.21861,TRUE
+Career,Research Area Specialist Intermediate,University of Michigan Dearborn,2016-02-01,2016-09-26,Coordinated with multiple departments to manage data definitions and integrity,Satisfied federal and state government reporting requirements,"Extracted, analyzed, and reported on student success and program review data",,42.319777,-83.23507,TRUE
+Career,Assistant Director of Assessment,Oakland University,2016-09-28,2099-09-09,"Collect, clean, analyze, and report on post-graduation success data",Supervise IT Interns and collaborate with departments across campus,Identify and report on key performance indicators within the department,,42.672733,-83.21861,TRUE
+Publications,"Zeigler-Hill, V., Holden, C. J., Southard, A. C., Noser, A. E., Enjaian, B., & Pollock, N. C. (2016). The dark sides of high and low self-esteem. In V. Zeigler-Hill & D. K. Marcus (Eds.), The dark side of personality: Science and practice in social, personality, and clinical psychology (pp. 325-340). Washington, DC: American Psychological Association. ",,,,,,,,,,TRUE
+Publications,"Pollock, N. C., McCabe, G. A., Southard, A. C., & Zeigler-Hill, V. (2016). Pathological personality traits and emotion regulation difficulties. Personality and Individual Differences. 95, 168-177 ",,,,,,,,,,TRUE
+Publications,"Pollock, N. C., Noser, A. E., Holden, C. J., & Zeigler-Hill, V. (2015). Do orientations to happiness mediate the associations that personality traits have with subjective well-being? Journal of Happiness Studies. doi:10.1007/s10902-015-9617-9. ",,,,,,,,,,TRUE
+Publications,"Southard, A. C., Noser, A. E., Pollock, N. C., Mercer, S. H., & Zeigler-Hill, V. (2015). The interpersonal nature of dark personality features. Journal of Social and Clinical Psychology, 34, 555-586. ",,,,,,,,,,TRUE
+Presentations,"Pollock, N. C.  (2018, November). Introduction to R: Complete and Automate a Data Request. Pre-conference workshop presented at Michigan Association for Institutional Research, Midland, MI. ",,,,,,,,43.605649,-84.165764,TRUE
+Presentations,"Pollock, N. C., Gonzalez, J. (2017, November). Introduction to R: Practical Use for Institutional Research. Preconference workshop presented at Michigan Association for Institutional Research, Ann Arbor, MI. ",,,,,,,,42.23886,-83.740634,TRUE
+Presentations,"Thibodeau, W., Pollock, N. C. (2017, July). Embracing the 21st Century and Beyond: Transforming from a  Fixed to a Growth Mindset. Oral presentation presented at Midwest Association of Colleges and Employers, Detroit, MI. ",,,,,,,,42.328927,-83.03972,TRUE
+Presentations,"Thibodeau, W., Pollock, N. C. (2017, February). Supplementing Learning Outcomes with Destination Outcomes: A Shift in Mindset. Poster presented at Great Lakes Regional Student Success Conference, Detroit, MI. ",,,,,,,,42.328927,-83.03972,TRUE
+Presentations,"Pollock, N. C. (2015, November). The Commute: The Battle of Finding Distance. Oral presentation at Michigan Association for Institutional Research, Traverse City, MI. ",,,,,,,,44.762553,-85.617938,TRUE
+Presentations,"Pollock, N. C., Holub, A. M., Zeigler-Hill, V. (2015, July). Performance Feedback and the Stress-Buffering Qualities of Stable Self-Esteem. Oral presentation at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,,,,43.01041,-81.273265,TRUE
+Presentations,"Pollock, N. C., Holub, A. M., Zeigler-Hill, V. (2015, July). Examining the Associations Between Dysfunction in Emotion Regulation and Pathological Personality Traits. Poster presented at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,,,,43.01041,-81.273265,TRUE
+Presentations,"Holub, A. M., Pollock, N. C., Zeigler-Hill, V. (2015, July). Does Knowing a Victim of Sexual Assault Moderate the Associations that Dark Personality Features Have with Cognitive Distortions Concerning Rape and Victim Empathy? Poster presented at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,,,,43.01041,-81.273265,TRUE
+Presentations,"Nofar, N., McCabe, G. A., Holub, A. M., Pollock, N. C., & Zeigler-Hill, V. (2015, July). Does Self-Esteem Instability Moderate Associations between Self-Esteem Level and Sociosexual Orientation? Poster presented at International Society for the Study of Individual Differences, London, Ontario, Canada. ",,,,,,,,43.01041,-81.273265,TRUE
+Presentations,"Pollock, N. C., McCabe, G., Southard, A. C., Zeigler-Hill, V. (2015, May). Do Pathological Personality Traits Moderate Reactions to Daily Events? Oral presentation at Midwestern Psychological Association, Chicago, IL.  ",,,,,,,,41.880603,-87.626967,TRUE
+Presentations,"Southard, A., Noser, A., Pollock, N. C., & Zeigler-Hill, V. (2015, February) The Interpersonal Core of Dark Personality. Poster presented at Society for Personality and Social Psychology Meeting, Long Beach, CA.  ",,,,,,,,33.765136,-118.189398,TRUE
+Presentations,"Pollock, N. C., Noser, A., Holden, C. J., & Zeigler-Hill, V. (2014, February) Maladaptive Personality Features and Subjective Well-Being.  Poster presented at Society for Personality and Social Psychology, Austin, TX.  ",,,,,,,,30.263541,-97.739802,TRUE
+Presentations,"Enjaian, B., Pollock, N. C., Holden, C. J., Southard, A. C., & Zeigler-Hill, V. (2014, February) Self-esteem instability and perceptions of personality features.  Poster session presented at Society for Personality and Social Psychology, Austin, TX.  ",,,,,,,,30.263541,-97.739802,TRUE
+Presentations,"Pollock, N. C., Williams, K., Spaine, J., Coleman, A., (2014, March) Tools, tactics, and strategies for program improvement. Oral presentation presented at the Association for Orientation, Transition, and Retention in Higher Education, Columbus, OH. ",,,,,,,,39.997421,-83.014437,TRUE
+Presentations,"Pollock, N. C., Noser, A., Holden, C. J., & Zeigler-Hill, V. (2014, May) Personality, orientations to happiness, and subjective well-being.  Poster session presented at Midwestern Psychological Association, Chicago, IL.  ",,,,,,,,41.880603,-87.626967,TRUE
+Presentations,"Pollock, N. C., Holden, C. J., & Zeigler-Hill, V. (2013, May) Self-esteem instability and personality. Poster session presented at Midwestern Psychological Association, Chicago, IL. ",,,,,,,,41.880603,-87.626967,TRUE
+Acheivements,"Chair, Michigan Association for Institutional Research",,,2020-11-06,,,,,,,TRUE
+Acheivements,Oakland University Advancement Core Value Award for Teamwork and Community,,,2018-02-01,,,,,,,TRUE
+Acheivements,"John Steele Grant, Midwest Association of Colleges and Employers",,,2018-05-01,,,,,,,TRUE
+Acheivements,"Graduate Student Grant, Michigan Association for Institutional Research",,,2014-11-05,,,,,,,TRUE
+Acheivements,"Ad-hoc reviewer, Self and Identity: 2015 – 2016",,,,,,,,,,TRUE
+Acheivements,"Ad-hoc reviewer, Journal of Personality Assessment: 2014 – 2015",,,,,,,,,,TRUE
+Acheivements,"Ad-hoc reviewer, Journal of Happiness Studies: 2014 – 2015",,,,,,,,,,TRUE
+Acheivements,"Ad-hoc reviewer, Frontiers in Psychology: 2014",,,,,,,,,,TRUE
+Acheivements,"Outstanding Service Award, Center for Student Activities, Oakland University: April 2013",,,,,,,,,,TRUE
+Skills,Banner,,2014-09-01,,,,,Enterprise Systems and Data Solutions,,,FALSE
+Skills,Percussion,,2015-05-01,2016-02-15,,,,Enterprise Systems and Data Solutions,,,FALSE
+Skills,Argos,,2017-05-20,,,,,Enterprise Systems and Data Solutions,,,FALSE
+Skills,PostgreSQL,,2018-06-15,,,,,Enterprise Systems and Data Solutions,,,FALSE
+Skills,MS Access,,2015-05-01,,,,,Enterprise Systems and Data Solutions,,,FALSE
+Skills,Qualtrics,,2016-09-28,,,,,Research and Statistical Applications,,,FALSE
+Skills,RStudio,,2015-05-01,,,,,Research and Statistical Applications,,,FALSE
+Skills,SPSS,,2013-09-01,2016-09-26,,,,Research and Statistical Applications,,,FALSE
+Skills,R Markdown,,2018-09-01,,,,,Research and Statistical Applications,,,FALSE
+Skills,Git,,2018-10-15,,,,,Programming,,,FALSE
+Skills,R,,2014-09-01,,,,,Programming,,,FALSE
+Skills,VBA,,2015-08-01,2016-09-26,,,,Programming,,,FALSE
+Skills,VBScript,,2015-10-01,2015-11-01,,,,Programming,,,FALSE
+Skills,Batch Scripting,,2015-10-01,2015-11-01,,,,Programming,,,FALSE
+Skills,SQL,,2015-05-01,,,,,Programming,,,FALSE
+Skills,"Microsoft Office Suite (e.g., Word, PowerPoint, Excel)",,2003-09-01,,,,,General,,,FALSE
+Skills,"Google Suite (e.g., Sheets, Slides, Docs)",,2012-09-01,,,,,General,,,FALSE
+Musicianship,Cornet,NABBA,,2010,,,,,35.780238,-78.639205,FALSE
+Musicianship,Cornet,OU Brass Band,,,,,,,43.234869,-86.252467,FALSE
+Musicianship,Trumpet,The Hard Rock Café,,2009,,,,,29.425179,-98.489189,FALSE
+Musicianship,Trumpet,The Alamo,,2009,,,,,29.425965,-98.486201,FALSE
+Musicianship,Trumpet,Hope College,,2009,,,,,42.787149,-86.103856,FALSE
+Musicianship,Trumpet and Flugelhorn,Cliff Bell's,,,,,,,42.336843,-83.05265,FALSE
