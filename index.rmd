@@ -43,8 +43,7 @@ You may be familiar with the phrase "On the Shoulders of Giants". A nod to the f
 
 ### Site Metrics
 
-Just for fun, check out the table bar chart hybrid below to learn a bit about this website.
-
+To further emphasize the idea of standing on giants, check out the table and bar chart hybrid below to learn a bit about what's involved in building this website. I wrote or contributed all of the RMD, YML, PDFs, CSVs, JPGs, and PNGs, and I contributed a small sliver of the HTML and CSS. The files I did not author or contribute make up the vast majority of this site e.g., the JS, HTML, and CSS. Further consider that I did not develop the languages themselves, design any computer, nor develop the internet. With this in mind, I say thank you to those who made this site possible.
 
 ```{r about_this_site_table}
 
