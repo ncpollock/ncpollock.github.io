@@ -1,5 +1,5 @@
 ---
-title: '"If I have seen further it is by standing on the shoulders of Giants."'
+title: '"If I have seen further it is by standing<br>on the shoulders of Giants."'
 author: -Sir Isaac Newton
 output: 
   html_document:

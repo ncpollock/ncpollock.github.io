@@ -1,5 +1,5 @@
 ---
-title: '"Divide each difficulty into as many parts as is feasible and necessary to resolve it."'
+title: '"Divide each difficulty into as many parts<br>as is feasible and necessary to resolve it."'
 author: -Rene Descartes
 output: 
   html_document:
