@@ -17,3 +17,24 @@ position: relative; /* child absolute */
   /* add back section padding value */
   padding: 0 0;
 }
+
+
+body{
+  font-family: Helvetica;
+  font-size: 12pt;
+}
+
+/* Lines after major Headers */
+h2{
+  border-bottom:5px solid #CCC;
+  padding-bottom:3px;
+}
+h3{
+  border-bottom:2px solid #CCC;
+  padding-bottom:3px;
+}
+
+/* datatable hover */
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+background-color: #2c3e50 !important;
+color: white !important;}
