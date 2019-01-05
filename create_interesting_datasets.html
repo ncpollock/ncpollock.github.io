@@ -456,11 +456,11 @@ div.tocify {
 <p>To efficiently create a dataset, we want to write the smallest amount of code as possible. That’s where <code>sample()</code> and <code>rep()</code> come in. With <code>sample()</code> we can randomly sample from a small subset of values (e.g., a validation-set) and then we could repeat that sampling, or anything else, with <code>rep()</code>. Let’s take a look.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># chose 3 random numbers from an integer vector of 1 to 10</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 3 6 9</code></pre>
+<pre><code>## [1]  2 10  8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># same as above except that I sample 11 times and</span>
 <span class="co"># every time a number is sampled it&#39;s then put back into the pool</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">11</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1]  6  9  9 10  9  5  6  9  4  8  2</code></pre>
+<pre><code>##  [1]  4  1  4  8  2  2  9  9  5 10 10</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bonus, I won&#39;t run these, but try them at home!</span>
 
 <span class="co"># choose 1 to 10 random numbers from an integer vector of 1 to 10</span>
@@ -477,21 +477,42 @@ div.tocify {
 <span class="kw">rep</span>(
   <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),
   <span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] 1 5 5 5 3 3 1 5 5 5 3 3</code></pre>
+<pre><code>##  [1] 4 4 1 4 3 1 4 4 1 4 3 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take a sample of 12 items from a pool of integers 1 to 5 </span>
   <span class="co"># don&#39;t use repeat so that all 12 are random</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span><span class="op">*</span><span class="dv">2</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1] 1 1 1 3 5 3 5 2 2 1 1 3</code></pre>
+<pre><code>##  [1] 1 2 1 3 1 4 5 3 3 2 4 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample &quot;yes&quot; and &quot;no&quot; 10 times, </span>
-  <span class="co"># force that sample to be %80 yes and %20 no</span>
+  <span class="co"># encourage that sample to be %80 yes and %20 no</span>
   <span class="co"># repeat that exact sample twice</span>
 <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">80</span>,.<span class="dv">20</span>),<span class="dt">size =</span> <span class="dv">10</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),<span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot; 
-## [12] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;</code></pre>
+<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;
+## [12] &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;</code></pre>
 </div>
 <div id="create-the-dataset" class="section level2">
 <h2>Create the Dataset</h2>
-<p>Once you understand the basics of <code>rep()</code> and <code>sample()</code> creating a full on dataset is fairly straightforward.</p>
+<p>Once you understand the basics of <code>rep()</code> and <code>sample()</code> creating an interesting dataset is fairly straightforward. First, a simple example. Below, we force a main effect of the experimental condition onto the dependent variable where the Control condition exhibits far more Losses than the Experimental condition. A Chi-Square test of independence tells us that we succeeded in making the two variables related.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experiment_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="co">#independent / explanatory / predictor variable</span>
+  <span class="dt">IV =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;Control&quot;</span>,<span class="dv">1000</span>),<span class="kw">rep</span>(<span class="st">&quot;Experiment&quot;</span>,<span class="dv">1000</span>)),
+  
+  <span class="co"># dependent / response / outcome variable</span>
+  <span class="dt">DV =</span> <span class="kw">c</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Losses&quot;</span>,<span class="st">&quot;Wins&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">80</span>,.<span class="dv">20</span>),<span class="dt">size =</span> <span class="dv">1000</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),
+         <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Losses&quot;</span>,<span class="st">&quot;Wins&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">30</span>,.<span class="dv">70</span>),<span class="dt">size =</span> <span class="dv">1000</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>))
+)
+
+<span class="kw">table</span>(experiment_df) <span class="co"># contingency table</span></code></pre></div>
+<pre><code>##             DV
+## IV           Losses Wins
+##   Control       824  176
+##   Experiment    303  697</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(experiment_df<span class="op">$</span>IV,experiment_df<span class="op">$</span>DV) <span class="co"># chi-square test of independence</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+## 
+## data:  experiment_df$IV and experiment_df$DV
+## X-squared = 549.67, df = 1, p-value &lt; 2.2e-16</code></pre>
+<p>Now a more complex and interesting example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">100</span>) <span class="co"># number generator so &#39;random&#39; numbers are reproducibile</span>
 n_students &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># the number of number of grads per cohort</span>
 
@@ -570,11 +591,51 @@ air_df<span class="op">$</span>salary &lt;-<span class="st"> </span><span class=
 </div>
 <div id="show-interest" class="section level2">
 <h2>Show Interest</h2>
-<p>Here’s a basic plot showing the number of graduates with each post-graduation outcome and how we forced each level to exist in a specific proportion by specifying <code>post_grad_outcome = sample(c(&quot;Employed&quot;,&quot;Grad School&quot;,&quot;Still Seeking&quot;,&quot;Other&quot;),prob=c(.64,.27,.07,.02),size=n_students*n_terms,replace=TRUE)</code>.</p>
+<p>Here’s a basic plot showing the number of graduates with each post-graduation outcome and how we forced each level to exist in a specific proportion by specifying the <code>prob</code> argument in the <code>sample()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="kw">table</span>(air_df<span class="op">$</span>post_grad_outcome))</code></pre></div>
 <p><img src="create_interesting_datasets_files/figure-html/basic_plot-1.png" width="672" /></p>
-<p>Below, I included a report that I built with this dataset as a teaching tool at the 2018 Pre-conference for the Michigan Association for Institutional Research. Note that a few of the plots and tables below use recoded variables and two other datasets that I created as well. I included the data tidying we performed and one of the other datasets. The other dataset was a simple two column csv file with industries and counts. Eventually, I will create a blog post detailing this report.</p>
-<iframe src ="images/oi_report.pdf" height=800px width=600px />
+<p>I included a report that I built with this dataset as a teaching tool at the 2018 Pre-conference for the Michigan Association for Institutional Research. Note that a few of the plots and tables below use recoded variables and two other datasets that I created as well. I included the data tidying we performed and one of the other datasets. The other dataset was a simple two column csv file with industries and counts. Eventually, I will create a blog post detailing this report.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+air_df &lt;-<span class="st"> </span>air_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">admit_type =</span> ATYP) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">school_recode =</span> <span class="kw">recode</span>(school,
+           <span class="st">&quot;AS&quot;</span> =<span class="st"> &quot;Arts and Sciences&quot;</span>,
+           <span class="st">&quot;BA&quot;</span> =<span class="st"> &quot;Business&quot;</span>,
+           <span class="st">&quot;EG&quot;</span> =<span class="st"> &quot;Engineering and Computer Science&quot;</span>),
+    <span class="dt">year =</span> <span class="kw">substr</span>(term_code,<span class="dv">1</span>,<span class="dv">4</span>),
+    <span class="dt">term_type =</span> 
+      <span class="kw">ifelse</span>(
+        <span class="kw">substr</span>(term_code,<span class="dv">5</span>,<span class="dv">6</span>)<span class="op">==</span><span class="st">&quot;10&quot;</span>,
+        <span class="st">&quot;Winter&quot;</span>,
+        <span class="st">&quot;Fall&quot;</span>),
+    <span class="dt">term_desc =</span> 
+      <span class="kw">ifelse</span>(
+        <span class="kw">substr</span>(term_code,<span class="dv">5</span>,<span class="dv">6</span>)<span class="op">==</span><span class="st">&quot;10&quot;</span>,
+        <span class="kw">paste</span>(<span class="st">&quot;Winter&quot;</span>,<span class="kw">substr</span>(term_code,<span class="dv">1</span>,<span class="dv">4</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>),
+        <span class="kw">paste</span>(<span class="st">&quot;Fall&quot;</span>,<span class="kw">substr</span>(term_code,<span class="dv">1</span>,<span class="dv">4</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>)),
+    <span class="dt">career_use_bin =</span> <span class="kw">ifelse</span>(career_use<span class="op">&gt;</span><span class="dv">0</span>,<span class="st">&quot;Engaged&quot;</span>,<span class="st">&quot;Did Not Engage&quot;</span>), <span class="co">#use case_when instead?</span>
+    <span class="dt">pg_outcome_bin =</span> <span class="kw">case_when</span>(post_grad_outcome <span class="op">%in%</span><span class="st"> </span>
+<span class="st">                                 </span><span class="kw">c</span>(<span class="st">&quot;Employed&quot;</span>,<span class="st">&quot;Grad School&quot;</span>) <span class="op">~</span><span class="st"> </span><span class="ot">TRUE</span>
+                               ,post_grad_outcome <span class="op">%in%</span><span class="st"> </span>
+<span class="st">                                 </span><span class="kw">c</span>(<span class="st">&quot;Still Seeking&quot;</span>,<span class="st">&quot;Other&quot;</span>) <span class="op">~</span><span class="st"> </span><span class="ot">FALSE</span>
+                               )
+    )
+
+roi_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">income_source =</span> <span class="kw">c</span>(<span class="st">&quot;Minimum Wage&quot;</span>,
+                    <span class="st">&quot;High School Diploma&quot;</span>,
+                    <span class="st">&quot;Some College&quot;</span>,
+                    <span class="st">&quot;10 Years after Attending OI&quot;</span>,
+                    <span class="st">&quot;Bachelors&quot;</span>),
+  <span class="dt">amount =</span> <span class="kw">c</span>(<span class="fl">8.15</span><span class="op">*</span><span class="dv">40</span><span class="op">*</span><span class="dv">52</span>, <span class="co"># source: Department of Labor Statistics</span>
+             <span class="dv">26762</span>, <span class="co"># source: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF</span>
+             <span class="dv">31801</span>, <span class="co"># source: Census.gov ^</span>
+             <span class="dv">43100</span>, <span class="co"># source: college scorecard</span>
+             <span class="dv">49711</span>) <span class="co"># source: Census.gov ^</span>
+,<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<iframe src ="images/oi_report.pdf" height=800px width=100% />
 </div>
 
 <footer id="site-footer">

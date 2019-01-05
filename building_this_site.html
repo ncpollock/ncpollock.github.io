@@ -488,22 +488,32 @@ output_dir<span class="op">:</span><span class="st"> &quot;.&quot;</span></code>
 </div>
 <div id="step-5-customize-and-new-content" class="section level2">
 <h2>Step 5: Customize and New Content</h2>
-<p>Research and consider the following upgrades, additions, or customizations to your site!</p>
-<div id="choose-a-theme" class="section level5">
-<h5>Choose a theme:</h5>
-<p>In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output</p>
+<p>See the optional lines you can add into your _site.yml file to further upgrade or customize your site!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output<span class="op">:</span>
 <span class="st">  </span>html_document<span class="op">:</span>
-<span class="st">    </span>theme<span class="op">:</span><span class="st"> </span>flatly</code></pre></div>
+<span class="st">    </span>theme<span class="op">:</span><span class="st"> </span>flatly
+    css<span class="op">:</span><span class="st"> </span>my_style.css
+    include<span class="op">:</span>
+<span class="st">      </span>in_header<span class="op">:</span><span class="st"> </span>GA_Script.html</code></pre></div>
+<p><strong>theme: flatly</strong> Choose a theme<br />
+In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output. You can also style your site with CSS or Cascading Style Sheets.</p>
+<p><strong>css: my_style.css</strong> Custom CSS<br />
+To completely customize your theme or individual pages, you can add CSS. For example, add the following code immediately following your yaml header in any of your .rmd files. Make sure it’s outside of any code chunks. A better way to apply global styles to your entire site is to create a my_style.css <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> file with your css code, and tell your _site.yml file to include it for html output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&lt;</span>style<span class="op">&gt;</span>
+body{
+  font<span class="op">-</span>family<span class="op">:</span><span class="st"> </span>Helvetica;
+  font<span class="op">-</span>size<span class="op">:</span><span class="st"> </span>18pt;
+  background<span class="op">-</span>color<span class="op">:</span>orange;
+}
+<span class="op">&lt;</span><span class="er">/</span>style<span class="op">&gt;</span></code></pre></div>
+<p><strong>in_header: GA_Script.html</strong> Google Analytics<br />
+To track and understand who visits your website, how often, and what they do there. <a href="https://support.google.com/analytics/answer/1008080?hl=en">You can learn about how to do this via the Google support documentation</a>.</p>
 </div>
-<div id="custom-css" class="section level5">
-<h5>Custom CSS:</h5>
-<p>To further style your theme or individual pages</p>
-</div>
-<div id="google-analytics" class="section level5">
-<h5>Google Analytics</h5>
-<p>To track and understand who visits your website, how often, and what they do there.</p>
-</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Or name it whatever you like, as long as it’s a .css file and you specify the correct name in your _site.yml file.<a href="#fnref1">↩</a></p></li>
+</ol>
 </div>
 
 <footer id="site-footer">
