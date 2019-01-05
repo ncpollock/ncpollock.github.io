@@ -81,7 +81,7 @@ rep(
 sample(1:5,size = 6*2,replace = TRUE)
 
 # sample "yes" and "no" 10 times, 
-  # force that sample to be %80 yes and %20 no
+  # encourage that sample to be %80 yes and %20 no
   # repeat that exact sample twice
 rep(sample(c("Yes","No"),prob=c(.80,.20),size = 10,replace = TRUE),2)
 
@@ -89,7 +89,24 @@ rep(sample(c("Yes","No"),prob=c(.80,.20),size = 10,replace = TRUE),2)
 
 ## Create the Dataset
 
-Once you understand the basics of `rep()` and `sample()` creating a full on dataset is fairly straightforward.
+Once you understand the basics of `rep()` and `sample()` creating an interesting dataset is fairly straightforward. First, a simple example. Below, we force a main effect of the experimental condition onto the dependent variable where the Control condition exhibits far more Losses than the Experimental condition. A Chi-Square test of independence tells us that we succeeded in making the two variables related.
+
+```{r simple_init_data}
+
+experiment_df <- data.frame(
+  #independent / explanatory / predictor variable
+  IV = c(rep("Control",1000),rep("Experiment",1000)),
+  
+  # dependent / response / outcome variable
+  DV = c(sample(c("Losses","Wins"),prob=c(.80,.20),size = 1000,replace = TRUE),
+         sample(c("Losses","Wins"),prob=c(.30,.70),size = 1000,replace = TRUE))
+)
+
+table(experiment_df) # contingency table
+chisq.test(experiment_df$IV,experiment_df$DV) # chi-square test of independence
+```
+
+Now a more complex and interesting example.
 
 ```{r init_data}
 
@@ -173,15 +190,15 @@ air_df$salary <- ifelse(air_df$post_grad_outcome=="Employed",air_df$salary,NA)
 
 ## Show Interest
 
-Here's a basic plot showing the number of graduates with each post-graduation outcome and how we forced each level to exist in a specific proportion by specifying `post_grad_outcome = sample(c("Employed","Grad School","Still Seeking","Other"),prob=c(.64,.27,.07,.02),size=n_students*n_terms,replace=TRUE)`.
+Here's a basic plot showing the number of graduates with each post-graduation outcome and how we forced each level to exist in a specific proportion by specifying the `prob` argument in the `sample()` function.
 
 ```{r basic_plot}
 barplot(table(air_df$post_grad_outcome))
 ```
 
-Below, I included a report that I built with this dataset as a teaching tool at the 2018 Pre-conference for the Michigan Association for Institutional Research. Note that a few of the plots and tables below use recoded variables and two other datasets that I created as well. I included the data tidying we performed and one of the other datasets. The other dataset was a simple two column csv file with industries and counts. Eventually, I will create a blog post detailing this report.
+I included a report that I built with this dataset as a teaching tool at the 2018 Pre-conference for the Michigan Association for Institutional Research. Note that a few of the plots and tables below use recoded variables and two other datasets that I created as well. I included the data tidying we performed and one of the other datasets. The other dataset was a simple two column csv file with industries and counts. Eventually, I will create a blog post detailing this report.
 
-```{r main_effects, echo=FALSE, out.width = "100%",out.height="100%"}
+```{r report_code}
 library(dplyr)
 
 air_df <- air_df %>%
@@ -225,5 +242,5 @@ roi_df <- data.frame(
 
 ```
 
-<iframe src ="images/oi_report.pdf" height=800px width=600px />
+<iframe src ="images/oi_report.pdf" height=800px width=100% />
 
