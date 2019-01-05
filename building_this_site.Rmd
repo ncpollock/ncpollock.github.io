@@ -80,18 +80,34 @@ To get your website files onto GitHub, you can either use Git if you already kno
 
 ## Step 5: Customize and New Content
 
-Research and consider the following upgrades, additions, or customizations to your site!
+See the optional lines you can add into your _site.yml file to further upgrade or customize your site!
 
-##### Choose a theme: 
-In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output
-
-```{r theme, eval=FALSE,echo=TRUE}
+```{r better_yml, eval=FALSE,echo=TRUE}
 output:
   html_document:
     theme: flatly
+    css: my_style.css
+    include:
+      in_header: GA_Script.html
 ```
-##### Custom CSS: 
-To further style your theme or individual pages
 
-##### Google Analytics
-To track and understand who visits your website, how often, and what they do there.
+**theme: flatly** Choose a theme  
+In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output. You can also style your site with CSS or Cascading Style Sheets. 
+
+**css: my_style.css** Custom CSS  
+To completely customize your theme or individual pages, you can add CSS. For example, add the following code immediately following your yaml header in any of your .rmd files. Make sure it's outside of any code chunks. A better way to apply global styles to your entire site is to create a my_style.css [^1] file with your css code, and tell your _site.yml file to include it for html output.
+
+[^1]: Or name it whatever you like, as long as it's a .css file and you specify the correct name in your _site.yml file.
+
+```{r css, eval=FALSE,echo=TRUE}
+<style>
+body{
+  font-family: Helvetica;
+  font-size: 18pt;
+  background-color:orange;
+}
+</style>
+```
+
+**in_header: GA_Script.html** Google Analytics  
+To track and understand who visits your website, how often, and what they do there. [You can learn about how to do this via the Google support documentation](https://support.google.com/analytics/answer/1008080?hl=en).
