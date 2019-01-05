@@ -33,12 +33,11 @@ test_df <- data.frame(
   kaggle_score_percentile = c(seq(5,25,5),NA)
 )
 
-knitr::kable(test_df,align = 'l') # see results
+knitr::kable(test_df,align = 'l') # see results with kable formatting
 
 # apply conditional logic
-
 test_df$result <- ifelse(
-  test_df$kaggle_score_percentile >= 10, # conditional logic
+  test_df$kaggle_score_percentile <= 10, # conditional logic
   "New Laptop", # if true
   "No Netflix" # else (if false)
   ) 
@@ -47,14 +46,14 @@ knitr::kable(test_df,align = 'l') # see results
 
 ```
 
-Is that what you expected? `ifelse()` did not evaluate the way we might expect in natural langauge. My score did not meet the condition `kaggle_score_percentile >= 10`, but instead of receiving the else condition, I received an `NA`. In the same vein as `NA == NA` is not TRUE nor is it FALSE (it's `NA`) or for the MS Access users, you cannot join by missing values. 
+Is that what you expected? `ifelse()` did not evaluate the way we might expect in natural langauge. My score did not meet the condition `kaggle_score_percentile <= 10`, but instead of receiving the else condition, I received an `NA`. In the same vein as `NA == NA` is not TRUE nor is it FALSE (it's `NA`) or for the MS Access users, you cannot join by missing values. 
 
 Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here's a workaround.
 
 ```{r ifelse_fix}
 
 test_df$result <- ifelse(
-  test_df$kaggle_score_percentile >=10 # our logic from before
+  test_df$kaggle_score_percentile <= 10 # our logic from before
   & !is.na(test_df$kaggle_score_percentile), # explicit evaluation of na values
   "New Laptop",
   "No Netflix")
@@ -62,3 +61,5 @@ test_df$result <- ifelse(
 knitr::kable(test_df,align = 'l') # see results
 
 ```
+
+Success! Now my failture to submit to Kaggle leads to a `No Netflix` result.
