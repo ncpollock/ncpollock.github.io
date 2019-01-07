@@ -3,19 +3,20 @@
 */
 
 #site-footer {
-	height: 50px;
-	color: #2c3e50;
+
+	color: white;
 	background: #2c3e50 center no-repeat;
-	text-align: center;
+	border-top: 3px solid black;
+	text-align: left;
 	vertical-align: middle;
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;  
-position: relative; /* child absolute */
-  margin: 0 -30rem;
-  /* add back section padding value */
-  padding: 0 0;
+  padding-top: 25px;
+  padding-left: 5%;
+  padding-bottom: 5%;
+  box-shadow: 0 50vh 0 50vh #2c3e50;
 }
 
 
@@ -38,3 +39,28 @@ h3{
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 background-color: #2c3e50 !important;
 color: white !important;}
+
+
+div.polaroid {
+  width: 115px;
+  padding: 1%;
+  border: 1px solid #212121;
+  color: white;
+  font-size: 10pt;
+  background-color: #333333;
+  box-shadow: 10px 10px 5px #212121;
+}
+
+div.rotate_right {
+  float: left;
+  -ms-transform: rotate(7deg); /* IE 9 */
+  -webkit-transform: rotate(7deg); /* Safari */
+  transform: rotate(7deg);
+}
+
+div.rotate_left {
+  float: left;
+  -ms-transform: rotate(-8deg); /* IE 9 */
+  -webkit-transform: rotate(-8deg); /* Safari */
+  transform: rotate(-8deg);
+}
