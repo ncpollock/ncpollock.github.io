@@ -372,20 +372,13 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
   <a href="resources.html">
     <span class="fa fa-key"></span>
      
     Resources
-  </a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://google.com">
-    <span class="fa fa-question"></span>
-     
-    Help
   </a>
 </li>
 <li>
@@ -486,7 +479,7 @@ simulations <span class="op">=</span> <span class="dv">10000</span></code></pre>
     
 results <span class="op">=</span> switch_vs_stay(simulations)
 <span class="bu">print</span>(results)</code></pre></div>
-<pre><code>## [66.23, 33.77]</code></pre>
+<pre><code>## [66.83, 33.17]</code></pre>
 </div>
 <div id="inspect-python-functions" class="section level2">
 <h2>Inspect Python Functions</h2>
@@ -496,13 +489,13 @@ guesses <span class="op">=</span> simulate_guess(<span class="dv">10</span>)
 goats <span class="op">=</span> goat_door(prizes,guesses)
 switch <span class="op">=</span> switch_guess(prizes,goats)
 <span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</code></pre></div>
-<pre><code>## prizes  =  [0 1 2 0 2 0 2 0 2 2]</code></pre>
+<pre><code>## prizes  =  [0 1 1 2 0 0 0 0 1 1]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</code></pre></div>
-<pre><code>## guesses =  [1 2 1 0 0 1 2 1 1 1]</code></pre>
+<pre><code>## guesses =  [2 2 0 1 1 0 0 1 1 0]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats  = &quot;</span>, goats)</code></pre></div>
-<pre><code>## goats  =  [2 0 0 2 1 2 1 2 0 0]</code></pre>
+<pre><code>## goats  =  [1 0 2 0 2 1 1 2 2 2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;switch  = &quot;</span>, switch)</code></pre></div>
-<pre><code>## switch  =  [1 2 1 1 0 1 0 1 1 1]</code></pre>
+<pre><code>## switch  =  [2 2 0 1 1 2 2 1 0 0]</code></pre>
 </div>
 <div id="r-solution" class="section level2">
 <h2>R Solution</h2>
@@ -547,10 +540,10 @@ switch_vs_stay &lt;-<span class="st"> </span><span class="cf">function</span>(ns
 }
 results =<span class="st"> </span><span class="kw">switch_vs_stay</span>(simulations)
 results</code></pre></div>
-<pre><code>## [1] 66.43 33.57</code></pre>
+<pre><code>## [1] 66.04 33.96</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">switch_vs_stay</span>(simulations))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.16    0.00    0.16</code></pre>
+##    0.14    0.04    0.17</code></pre>
 </div>
 <div id="inspect-r-functions" class="section level2">
 <h2>Inspect R Functions</h2>
@@ -560,18 +553,48 @@ guesses =<span class="st"> </span><span class="kw">sim_guess</span>(<span class=
 goats =<span class="st"> </span><span class="kw">bad_door</span>(prizes,guesses)
 <span class="cf">switch</span> =<span class="st"> </span><span class="kw">switch_guess</span>(guesses,goats)
 <span class="kw">paste0</span> (<span class="st">&quot;prizes  = &quot;</span>, <span class="kw">paste0</span>(prizes,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;prizes  = 3 1 3 3 2 1 2 3 2 1&quot;</code></pre>
+<pre><code>## [1] &quot;prizes  = 1 1 2 3 3 3 3 3 3 2&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;guesses = &quot;</span>, <span class="kw">paste0</span>(guesses,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;guesses = 2 3 1 1 1 2 2 3 2 2&quot;</code></pre>
+<pre><code>## [1] &quot;guesses = 1 2 3 3 3 3 3 1 1 1&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;goats  = &quot;</span>, <span class="kw">paste0</span>(goats,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;goats  = 1 2 2 2 3 3 3 1 3 3&quot;</code></pre>
+<pre><code>## [1] &quot;goats  = 2 3 1 1 1 2 1 2 2 3&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;switch = &quot;</span>, <span class="kw">paste0</span>(<span class="cf">switch</span>,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;switch = 3 1 3 3 2 1 1 2 1 1&quot;</code></pre>
+<pre><code>## [1] &quot;switch = 3 1 2 2 2 1 2 3 3 2&quot;</code></pre>
+</div>
+
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+</div> <!-- floating toc -->
 </div>
 
 <footer id="site-footer">
-<br>
-<p>---</p>
+  <div class="col-md-4">
+  
+<div class="polaroid rotate_right">
+  <img src="images/wife_and_i.jpg" alt="My wifte and I." width="115" >
+  <p class="caption">My wife and I at a good friend's wedding.</p>
+</div>
+
+<div class="polaroid rotate_left">
+  <img src="images/dogs.jpg" alt="Our dogs Bambi and Lexi" width="115">
+  <p class="caption">Our furry family members, Bambi and Lexi.</p>
+</div>
+  </div>
+    <div class="col-md-4">
+      Connect with me: <br>
+      <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/">
+        <i class="fa fa-linkedin-square fa-lg"></i> Linkedin 
+      </a>
+      <br>
+      <a href="https://github.com/ncpollock/">
+        <i class="fa fa-github-square fa-lg"></i> GitHub 
+      </a>
+  </div>
+    <div class="col-md-4">
+      <a href="https://www.google.com/" target="_blank">
+        <i class="fa fa-question-circle fa-lg"></i> Help 
+      </a>
+  </div>
 </footer>
 
 

@@ -70,7 +70,7 @@ pdata <- ed_df %>%
   mutate(bin_name = paste0(dollar(min_cost,scale = .001,suffix = "k",decimal.mark = ",")
                            ,"-"
                            ,dollar(max_cost,scale = .001,suffix = "k",decimal.mark = ",")))
-# fict factor order
+# fix factor order
 pdata <- pdata %>%
   mutate(bin_name = factor(bin_name,levels = unique(pdata$bin_name)))
   
