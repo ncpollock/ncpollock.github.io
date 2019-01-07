@@ -22,13 +22,10 @@ navbar:
         - text: "Dynamic"
         - text: "BI with Shiny"
           href: shiny_bi.html
+  right:
     - text: "Resources"
       icon: fa-key
       href: resources.html
-  right:
-    - text: "Help"
-      icon: fa-question
-      href: https://google.com
     - icon: fa-linkedin
       href: https://www.linkedin.com/in/noah-pollock-5b5804157/
     - icon: fa-github
