@@ -40,9 +40,6 @@ library(tidyr)
 library(lubridate)
 library(ggplot2)
 
-# include font-awesome icons
-htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-
 color_temp <- c("#ffa500","#1a6ecc", "#434348", "#90ed7d","#323232","#000000")
 
 
@@ -272,17 +269,7 @@ cv_df <- read.csv('cv_df.csv',
                                   ,abbr=FALSE),
          year = lubridate::year(date_end)) %>% 
   mutate_at(.vars = vars(experience, point_1, point_2, point_3),
-           .funs = funs(stringr::str_wrap(.,width=line_length))) %>%
-    # gather(line_type,text,-section,-date_end,-month,-year) %>%
-    # mutate(line_type =  factor(line_type, levels = rev(c("experience","point_1","point_2","point_3")))) %>%
-    # slice(match(rev(c("experience","point_1","point_2","point_3")), line_type)) %>% # custome sort order
-  group_by(section)
-  # arrange(line_type) %>%
-  # mutate(y = 1:n()*10,
-  #        y = ifelse(is.na(text),NA,y)) %>%
-  # ungroup()
-  
-  #,-y,-y_point_1,-y_point_2,-y_point_3
+           .funs = funs(stringr::str_wrap(.,width=line_length)))
   
 cv_df <- cv_df %>%
   #adjust for number of lines
@@ -292,6 +279,7 @@ cv_df <- cv_df %>%
       summarise(wraps = sum(floor(nchar(text)/line_length)),
         n = n()),
     by = "section") %>%
+  group_by(section) %>%
   #adjust for wrapped text adding new lines
   #need to do this!
   # y = 1:n()*(n+wraps)
@@ -299,148 +287,6 @@ cv_df <- cv_df %>%
          y_point_1 = ifelse(is.na(point_1),NA,y),
          y_point_2 = ifelse(is.na(point_2),NA,y),
          y_point_3 = ifelse(is.na(point_3),NA,y))
-
-
-# try lag/lead to adjust distances for text that wraps
-
- #mutate case_when for dates on sections
-
-
-
-# or build cv points in R instead ###########
-# easier to put the essentials in a .csv file
-# cv_df <- data.frame(
-#   section = c(
-#     rep("Education",3)
-#     ,rep("Career",4)
-#     ,rep("Acheivements",3)),
-#   experience = c(
-#     "Bachelors of Arts in Psychology",
-#     "Masters of Science in Psychology",
-#     "Masters of Science in Information Technology Management",
-#     
-#     "Research Assistant",
-#     "Data Transfer Specialist",
-#     "Research Area Specialist Intermediate",
-#     "Assistant Director of Assessment",
-#     
-#     "Chair, Michigan Association for Institutional Research",
-#     "Oakland University Advancement Core Value Award for Teamwork and Community",
-#     "John Steele Grant, Midwest Association of Colleges and Employers"),
-#   date_end = c("2013-04-01",
-#            "2015-04-01",
-#            "2020-04-01",
-#            
-#            "2015-10-15",
-#            "2016-02-15",
-#            "2016-09-26",
-#            "2099-09-09",
-#            
-#            "2020-01-01",
-#            "2018-01-01",
-#            "2018-01-01"),
-#   point_1 = c("Departmental Honors",
-#               "Thesis: Is “Average” Feedback Threatening? Performance Feedback and the Stress-Buffering Model of High Self-Esteem",
-#               "Concentration in Business Analytics",
-#               "Programmed automated analytic processes using SPSS syntax and R",
-#               "Developed user-friendly databases connected to Banner (Ellucian ERP System)",
-#               "Coordinated with multiple departments to manage data definitions and integrity",
-#               "Collect, clean, analyze, and report on post-graduation success data",
-#               rep(NA,3)),
-#   point_2 = c("Minor in Philosophy",
-#               rep(NA,2),
-#               "Drafted reports to summarize institutional data",
-#               "Explored data relevant to transfer student success and articulation",
-#               "Satisfied federal and state government reporting requirements",
-#               "Supervise IT Interns and collaborate with departments across campus",
-#               rep(NA,3)),
-#   point_3 = c(rep(NA,3),
-#               "Cleaned, organized, and analyzed datasets with over 1 million rows and 100 columns",
-#               "Solved technical challenges using MS Access, SQL*Plus, VBA, and Batch scripting",
-#               "Extracted, analyzed, and reported on student success and program review data",
-#               "Identify and report on key performance indicators within the department",
-#               rep(NA,3))
-# ) # continue rest of code here...
-##########
-
-
-# ggplot(cv_df,aes(x=1,y=y)) +
-#   geom_text(aes(label=experience),hjust=0) +
-#   geom_text(aes(label=date_end,x=250),hjust=1) +
-#   
-#   #bullets
-#   geom_point(aes(x=5,y=y_point_1-2.5)) +
-#     geom_text(aes(label=point_1,x=10,y=y-2.5),hjust=0,size=3) +
-#   geom_point(aes(x=5,y=y_point_2-5)) +
-#     geom_text(aes(label=point_2,x=10,y=y-5),hjust=0,size=3) +
-#   geom_point(aes(x=5,y=y_point_3-7.5)) +
-#     geom_text(aes(label=point_3,x=10,y=y-7.5),hjust=0,size=3) +
-#   
-#   geom_point(aes(y=y+(line_length/10/n)),color="transparent") +
-#   
-#   facet_grid(section~.,switch = 'y',scales = 'free_y',space = "free_y") + 
-#   # facet_wrap(~section,ncol=1) + # more traditional section headers
-#   
-#   # scale_y_continuous(breaks = seq(0,nrow(cv_df)+1,by=.5)
-#   #                    ,minor_breaks = seq(.25,nrow(cv_df)+1,by=1)
-#   #                    # ,minor_breaks = seq(0,nrow(cv_df)+1,by=.1)
-#   #                    ,limits = c(0.5,round((nrow(cv_df)+1)/length(unique(cv_df$section)),1)
-#   #                                )) +
-#   
-#   scale_x_continuous(limits = c(1,250)) +
-#   ggtitle("Noah C. Pollock") +
-#   # expand_limits(x = 0.25, y = 0.25) +
-#   theme(panel.background = element_blank(),
-#         panel.border = element_rect(color='black',fill=NA),
-#         panel.grid.major.y = element_blank(),
-#         # panel.grid.minor.y = element_line(color="gray"),
-#         panel.grid.minor.y = element_blank(),
-#         axis.line = element_blank(),
-#         axis.text = element_blank(),
-#         axis.ticks = element_blank(),
-#         axis.title = element_blank(),
-#         strip.background = element_rect(colour="#323232", fill='#323232'),
-#         strip.text = element_text(color="white"),
-#         plot.title = element_text(hjust = 0.5))
-
-# sandbox
-# 
-# ggplot(cv_df,aes(x=1,y=y)) +
-#   geom_text(data=cv_df %>%
-#               filter(line_type=="experience"),aes(label=text),hjust=0) +
-#   geom_text(data=cv_df %>%
-#               filter(line_type=="experience"),aes(label=date_end,x=250),hjust=1) +
-#   
-#   #bullets
-#   geom_point(data=cv_df %>%
-#               filter(line_type!="experience"),aes(x=5,color=line_type)) +
-#     geom_text(data=cv_df %>%
-#               filter(line_type!="experience"),aes(label=text,x=10,color=line_type),hjust=0,size=3) +
-#   # geom_point(aes(x=5,y=y_point_2-4)) +
-#   #   geom_text(aes(label=point_2,x=10,y=y-4),hjust=0,size=3) +
-#   # geom_point(aes(x=5,y=y_point_3-6)) +
-#   #   geom_text(aes(label=point_3,x=10,y=y-6),hjust=0,size=3) +
-#   
-#   facet_grid(section~.,switch = 'y',scales = 'free_y') + 
-#   # facet_wrap(~section,ncol=1) + # more traditional section headers
-# 
-#   scale_x_continuous(limits = c(1,250)) +
-#   ggtitle("Noah c. Pollock") +
-#   # expand_limits(x = 0.25, y = 0.25) +
-#   theme(panel.background = element_blank(),
-#         panel.border = element_rect(color='black',fill=NA),
-#       panel.grid.major.y = element_blank(),
-#       # panel.grid.minor.y = element_line(color="gray"),
-#       panel.grid.minor.y = element_blank(),
-#       
-#       # axis.line = element_line(colour="black"),
-#       axis.line = element_blank(),
-#       axis.text = element_blank(),
-#       axis.ticks = element_blank(),
-#       axis.title = element_blank(),
-#       strip.background = element_rect(colour="#323232", fill='#323232'),
-#       strip.text = element_text(color="white"),
-#       plot.title = element_text(hjust = 0.5))
 
 ```
 

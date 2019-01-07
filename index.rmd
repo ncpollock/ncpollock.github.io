@@ -30,11 +30,10 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE, fig.align='center
 library(ggplot2)
 library(dplyr)
 library(DT)
-  # background: black url('images/diverge_and_me.JPG') center no-repeat;
 
 ```
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+## Welcome!
 
 This site is meant to be a resource for those interested in data science, data visualization, business intelligence, dashboarding, and databases. The site is primarily built using rmarkdown. You can check out the blog section for details on how you can build your own!
 
@@ -149,7 +148,8 @@ ggplot(site_df,aes(x = file_ext,y=value)) +
 ```
 
 
-```{r pretty_ggplot,include = FALSE}
+```{r pretty_ggplot,include = FALSE,eval=FALSE}
+#me attempting to 'paint' with ggplot...clearly I'm no artist
 plot_df <- data.frame(
   # x = rep(1:100,10),
   # y = rep(1:100,10),
