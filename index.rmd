@@ -48,8 +48,7 @@ To further emphasize the idea of standing on giants, check out the table and bar
 
 # identify all site files and directories
 site_df <- data.frame(
-  file.info(list.files(include.dirs = TRUE,recursive = TRUE))
-  ) %>%
+  file.info(list.files(include.dirs = TRUE,recursive = TRUE))) %>%
   tibble::rownames_to_column("filename")
 
 # calculate # of lines and file type / extension
@@ -61,8 +60,7 @@ site_df <- bind_rows(
     filename,function(x) filename = length(readLines(x))),
     file_ext = toupper(tools::file_ext(filename))
     )
-) %>%
-  mutate(size_mb = size * 0.000001) %>%
+  ) %>%
   filter(file_ext != "" & !is.na(file_ext)) %>%
   group_by(file_ext) %>%
   summarise(Count = n(),
@@ -111,7 +109,7 @@ datatable(site_df
 
 ```
 
-```{r about_this_site_plot,include=FALSE}
+```{r about_this_site_plot,include=FALSE,eval=FALSE}
 
 # identify all site files and directories
 site_df <- data.frame(
