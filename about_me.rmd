@@ -26,9 +26,11 @@ output:
 
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of sowftware, programming languages, and IT project types. You can learn more about me via the following resources:
 
-* <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>
-* <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a>
-* <a href="https://github.com/ncpollock/" target="_blank"> GitHub </a>
+<i class="fa fa-file-text" aria-hidden="true"></i> <a href="np_cv.pdf" target="_blank"> My Curriculum Vitae (aka my fancy resume) </a>  
+<i class="fa fa-linkedin-square" aria-hidden="true"></i>
+ <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank"> LinkedIn </a>  
+<i class="fa fa-github-square" aria-hidden="true"></i>
+ <a href="https://github.com/ncpollock/" target="_blank"> GitHub </a>  
 
 
 ```{r setup, include=FALSE,warning=FALSE}
