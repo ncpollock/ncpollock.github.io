@@ -4,7 +4,7 @@ author: -Miles Davis
 output: 
   html_document:
     toc: no
-    code_folding: none
+    code_folding: hide
 ---
 
 <style>
@@ -184,7 +184,7 @@ It needs some work (e.g., vertical spacing adjustments), but I hope it conveys m
 
 First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I add line breaks via `str_wrap()` and then I adjust the vertical width of points depending on the number of lines wrapped.
 
-```{r cv_df_plot, fig.width=8.5, fig.height=25,fig.align='center'}
+```{r cv_df_plot, fig.width=8.5, fig.height=25,fig.align='center',echo=TRUE}
 
 line_length <- 110
 
