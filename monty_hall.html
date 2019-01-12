@@ -479,7 +479,7 @@ simulations <span class="op">=</span> <span class="dv">10000</span></code></pre>
     
 results <span class="op">=</span> switch_vs_stay(simulations)
 <span class="bu">print</span>(results)</code></pre></div>
-<pre><code>## [66.83, 33.17]</code></pre>
+<pre><code>## [66.28, 33.72]</code></pre>
 </div>
 <div id="inspect-python-functions" class="section level2">
 <h2>Inspect Python Functions</h2>
@@ -489,13 +489,13 @@ guesses <span class="op">=</span> simulate_guess(<span class="dv">10</span>)
 goats <span class="op">=</span> goat_door(prizes,guesses)
 switch <span class="op">=</span> switch_guess(prizes,goats)
 <span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</code></pre></div>
-<pre><code>## prizes  =  [0 1 1 2 0 0 0 0 1 1]</code></pre>
+<pre><code>## prizes  =  [0 2 1 0 0 0 2 2 2 0]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</code></pre></div>
-<pre><code>## guesses =  [2 2 0 1 1 0 0 1 1 0]</code></pre>
+<pre><code>## guesses =  [0 2 1 2 1 2 1 2 2 2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats  = &quot;</span>, goats)</code></pre></div>
-<pre><code>## goats  =  [1 0 2 0 2 1 1 2 2 2]</code></pre>
+<pre><code>## goats  =  [1 1 2 1 2 1 0 0 1 1]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;switch  = &quot;</span>, switch)</code></pre></div>
-<pre><code>## switch  =  [2 2 0 1 1 2 2 1 0 0]</code></pre>
+<pre><code>## switch  =  [2 0 0 2 1 2 1 1 0 2]</code></pre>
 </div>
 <div id="r-solution" class="section level2">
 <h2>R Solution</h2>
@@ -543,7 +543,7 @@ results</code></pre></div>
 <pre><code>## [1] 66.04 33.96</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">switch_vs_stay</span>(simulations))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.14    0.04    0.17</code></pre>
+##    0.16    0.01    0.18</code></pre>
 </div>
 <div id="inspect-r-functions" class="section level2">
 <h2>Inspect R Functions</h2>
@@ -572,12 +572,12 @@ goats =<span class="st"> </span><span class="kw">bad_door</span>(prizes,guesses)
   
 <div class="polaroid rotate_right">
   <img src="images/wife_and_i.jpg" alt="My wifte and I." width="115" >
-  <p class="caption">My wife and I at a good friend's wedding.</p>
+  <p class="caption">My wife and I at a friend's wedding.</p>
 </div>
 
 <div class="polaroid rotate_left">
   <img src="images/dogs.jpg" alt="Our dogs Bambi and Lexi" width="115">
-  <p class="caption">Our furry family members, Bambi and Lexi.</p>
+  <p class="caption">Our furry children, Bambi and Lexi.</p>
 </div>
   </div>
     <div class="col-md-4">
