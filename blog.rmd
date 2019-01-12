@@ -60,7 +60,6 @@ blog_df$intros <- sapply(
 # identify metadata
 blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
 blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
-blog_df$size <- file.info(paste0(blog_df$filename,".Rmd"))$size
 blog_df$lines <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x) blog_df$filename = length(readLines(x)))
 
@@ -99,7 +98,6 @@ datatable(blog_df
                         'Content Snippet',
                        'Created At',
                        'Updated At',
-                       'Post Size (bytes)',
                        'Post Length (lines)')
           ,options=list(
             initComplete = col_format,
@@ -108,12 +106,6 @@ datatable(blog_df
               list(className = 'dt-center',targets=3:ncol(blog_df)-1)), 
             dom = 'frtpB'
           )) %>%
-      formatStyle(
-        'size',
-        background = styleColorBar(range(0,max(blog_df$size)), 'orange'),
-        backgroundSize = '98% 75%',
-        backgroundRepeat = 'no-repeat',
-        backgroundPosition = 'left') %>%
         formatStyle(
         'lines',
         background = styleColorBar(range(0,max(blog_df$lines)), 'orange'),
