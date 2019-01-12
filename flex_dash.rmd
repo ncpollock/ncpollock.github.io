@@ -1,5 +1,5 @@
 ---
-title: "Higher Education Data"
+title: "Static Dashboard with R Markdown"
 author: "Noah Pollock"
 output:
   html_document:
@@ -44,14 +44,9 @@ thm <-
     )
   )
 
-# would like to directly call api
-  # though not feasible with mapping...
-# use method to ask for API key
-  # is it still embedded somewhere in code?
-
 ```
 
-## Mapping: {.tabset data-width=400}
+## Exploring Higher Education Data: {.tabset data-width=400}
 
 ### Cost x Earnings
 ```{r cost_x_earnings}
@@ -78,15 +73,19 @@ hcboxplot(x = pdata$earnings, var = pdata$bin_name,
           outliers = FALSE,color="black") %>% 
   hc_chart(type = "column") # to put box vertical
 
-summary(lm(earnings ~ cost,data = pdata))
-# wanted to plot points, but too many for highcharter to handle in browser
-# pdata %>% 
-#   hchart("point",hcaes(x="cost",y="earnings")) %>% 
-#   hc_add_theme(thm)
+#model simple linear regression
+lm1 <- summary(lm(earnings ~ cost,data = pdata))
+
+knitr::kable(data.frame(lm1$r.squared),align="l")
+knitr::kable(
+  data.frame(lm1$coefficients) %>%
+    tibble::rownames_to_column("Variable") %>%
+    mutate(Pr...t.. = format.pval(Pr...t..,eps=.001)) %>%
+    rename("P Value" = Pr...t..))
 ```
 
 ### Size x Earnings
-```{r lon}
+```{r size_x_earnings}
 
 pdata <- ed_df %>%
   rename(
@@ -104,14 +103,23 @@ pdata <- ed_df %>%
                            paste0(number(min_size,scale = .001,suffix = "k")
                               ,"-"
                               ,number(max_size,scale = .001,suffix = "k"))))
-# fict factor order
+# fix factor order
 pdata <- pdata %>%
   mutate(bin_name = factor(bin_name,levels = unique(pdata$bin_name)))
 
 hcboxplot(x = pdata$earnings, var = pdata$bin_name,
           outliers = FALSE,color="black") %>% 
   hc_chart(type = "column") # to put box vertical
-summary(lm(earnings ~ size,data = pdata))
+
+#model simple linear regression
+lm2 <- summary(lm(earnings ~ size,data = pdata))
+
+knitr::kable(data.frame(lm2$r.squared),align="l")
+knitr::kable(
+  data.frame(lm2$coefficients) %>%
+    tibble::rownames_to_column("Variable") %>%
+    mutate(Pr...t.. = format.pval(Pr...t..,eps=.001)) %>%
+    rename("P Value" = Pr...t..))
 
 # wanted to plot points, but too many for highcharter to handle in browser
 # pdata %>% 
@@ -239,4 +247,40 @@ lapply(unique(ed_df$pred_award),function(pred_award_level){
 }) %>%
   hw_grid(rowheight = 500,
           ncol = ceiling(length(unique(ed_df$pred_award))/2))
+```
+
+
+
+```{r sandbox, eval=FALSE,include=FALSE,echo=FALSE}
+
+# I wanted to plot points, but too many for highcharter to handle in browser
+# pdata %>% 
+#   hchart("point",hcaes(x="cost",y="earnings")) %>% 
+#   hc_add_theme(thm)
+
+pdata <- ed_df %>%
+  rename(
+    cost = latest.cost.attendance.academic_year,
+    earnings =latest.earnings.10_yrs_after_entry.median,
+    ownership = school.ownership) %>%
+  select(cost,earnings,ownership) %>%
+  filter(!is.na(cost) & !is.na(earnings)) %>%
+  mutate(bin = ntile(cost,10)) %>%
+  arrange(bin) %>%
+  group_by(bin) %>%
+  mutate(min_cost = min(cost),
+         max_cost = max(cost)) %>%
+  mutate(bin_name = paste0(dollar(min_cost,scale = .001,suffix = "k",decimal.mark = ",")
+                           ,"-"
+                           ,dollar(max_cost,scale = .001,suffix = "k",decimal.mark = ","))) %>%
+  group_by(bin_name,ownership) %>%
+  summarise(Median = median(earnings),
+            low = quantile(earnings,probs = .25),
+            high = quantile(earnings,probs=.75))
+
+# highchart() %>% 
+#   hc_add_series(pdata, hcaes(x = bin_name, group=online, low = low, high = high), type = "arearange")
+
+hchart(pdata, "line",hcaes(x = bin_name, y=Median, group=ownership))
+
 ```
