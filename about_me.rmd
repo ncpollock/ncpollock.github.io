@@ -75,18 +75,32 @@ Mostly for fun, I also recreated pieces of my CV in different formats. Although,
 ```{r education, results='asis'}
 
 tdata <- cv_df %>% 
-  filter(section=="Education")
+  filter(section=="Education") %>%
+  mutate(experience = gsub(", GPA.*","",experience) # take out gpa
+         )
 
-ed_tiles <- ""
-for(i in unique(tdata$experience)){
+icon <- function(x) paste0('<i class="fa fa-',x,' fa-2x"></i>',collapse="")
 
-ed_tiles <- paste0(
-  ed_tiles,
+tdata$icon <- c(icon("user"),icon("users"),icon("database")) 
+tdata <- tdata %>%
+  mutate(ed_tiles = paste0(
   '<div class="col-md-4">',
   '<div class="well">',
-  '<p style="text-align:center;padding: 15px 0; height:130px;font-size: x-large;"><strong>',i,'</strong></p></div></div>')
+  '<p style="text-align:center;padding: 8px 0; height:130px;font-size: x-large;"><strong>',icon,'<br>',experience,'</strong></p></div></div>'))
 
-}
+
+
+ed_tiles <- paste0(tdata$ed_tiles,collaps="")
+# ed_tiles <- ""
+# for(i in unique(tdata$experience)){
+# 
+# ed_tiles <- paste0(
+#   ed_tiles,
+#   '<div class="col-md-4">',
+#   '<div class="well">',
+#   '<p style="text-align:center;padding: 15px 0; height:130px;font-size: x-large;"><strong>',i,'</strong></p></div></div>')
+# 
+# }
 
 cat(
   '<div class="panel panel-primary">
