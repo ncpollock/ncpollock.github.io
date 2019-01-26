@@ -1,6 +1,6 @@
 name: "np_site"
 navbar:
-  title: "Noah C. Pollock"
+  title: 'Noah C. Pollock'
   type: default
   left:
     - text: "Home"

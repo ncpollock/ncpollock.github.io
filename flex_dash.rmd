@@ -69,8 +69,8 @@ pdata <- ed_df %>%
 pdata <- pdata %>%
   mutate(bin_name = factor(bin_name,levels = unique(pdata$bin_name)))
   
-hcboxplot(x = pdata$earnings, var = pdata$bin_name,
-          outliers = FALSE,color="black") %>% 
+hcboxplot(x = pdata$earnings, var = pdata$bin_name, 
+          outliers = FALSE) %>% 
   hc_chart(type = "column") # to put box vertical
 
 #model simple linear regression
@@ -261,9 +261,8 @@ lapply(unique(ed_df$pred_award),function(pred_award_level){
 pdata <- ed_df %>%
   rename(
     cost = latest.cost.attendance.academic_year,
-    earnings =latest.earnings.10_yrs_after_entry.median,
-    ownership = school.ownership) %>%
-  select(cost,earnings,ownership) %>%
+    earnings =latest.earnings.10_yrs_after_entry.median) %>%
+  select(cost,earnings,pred_award) %>%
   filter(!is.na(cost) & !is.na(earnings)) %>%
   mutate(bin = ntile(cost,10)) %>%
   arrange(bin) %>%
@@ -273,14 +272,27 @@ pdata <- ed_df %>%
   mutate(bin_name = paste0(dollar(min_cost,scale = .001,suffix = "k",decimal.mark = ",")
                            ,"-"
                            ,dollar(max_cost,scale = .001,suffix = "k",decimal.mark = ","))) %>%
-  group_by(bin_name,ownership) %>%
+  ungroup()
+
+# fix factor order
+pdata <- pdata %>%
+  mutate(bin_name = factor(bin_name,levels = unique(pdata$bin_name)),
+         pred_award = factor(pred_award,levels = unique(pdata$pred_award)))
+
+pdata <- pdata %>%
+# ready for plot
+  group_by(bin_name,pred_award) %>%
   summarise(Median = median(earnings),
             low = quantile(earnings,probs = .25),
             high = quantile(earnings,probs=.75))
 
+
 # highchart() %>% 
 #   hc_add_series(pdata, hcaes(x = bin_name, group=online, low = low, high = high), type = "arearange")
 
-hchart(pdata, "line",hcaes(x = bin_name, y=Median, group=ownership))
+hchart(pdata, "line",hcaes(x = bin_name, y=Median, group=pred_award)) %>%
+    hc_exporting(
+    enabled = TRUE
+  )
 
 ```

@@ -1,5 +1,5 @@
 section,experience,place,date_start,date_end,point_1,point_2,point_3,category,lat,lon,include
-Education,"B.A. Psychology, Cum Laude, Psychology GPA: 3.70",Oakland University,,2013-04-01,Departmental Honors,Minor in Philosophy,,,,,TRUE
+Education,"B.A. Psychology, Cum Laude",Oakland University,,2013-04-01,Departmental Honors,Minor in Philosophy,,,,,TRUE
 Education,"M.S. Psychology, GPA: 3.80",Oakland University,,2015-04-01,Thesis: Is “Average” Feedback Threatening? Performance Feedback and the Stress-Buffering Model of High Self-Esteem,,,,,,TRUE
 Education,"M.S. Information Technology Management, GPA: 3.85 ",Oakland University,,2020-04-01,Concentration in Business Analytics,,,,,,TRUE
 Career,Research Assistant,Oakland University,2014-09-01,2015-10-15,Programmed automated analytic processes using SPSS syntax and R,Drafted reports to summarize institutional data,"Cleaned, organized, and analyzed datasets with over 1 million rows and 100 columns",,42.672733,-83.21861,TRUE
