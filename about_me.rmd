@@ -42,7 +42,7 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
   <div class="col-md-4">
   
   <div class="polaroid" style ="width: 100%">
-  <img src="images/diverge_and_me.jpg" alt="A picture of me and my bike.">
+  <img src="images/diverge_and_me.JPG" alt="A picture of me and my bike.">
   <p class="caption">My first organized cycling event! Zoo-De-Mack, a 51 mile roll from Boyne Highlands Resort to Mackinaw City.</p>
   </div>
   </div>
