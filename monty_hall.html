@@ -20,11 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
@@ -77,9 +73,6 @@ code > span.do { color: #7f9f7f; } /* Documentation */
 code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
 code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
 code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-div.sourceCode {
-  overflow-x: visible;
-}
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -210,111 +203,8 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -400,14 +290,6 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Language Wars One: Monty Hall</h1>
@@ -426,9 +308,9 @@ div.tocify {
 <p>This is the first post in a series of posts that will pit R against Python. I hope that this series will eventually add fuel to the fire of the language wars. Of course, In reality, I understand that there’s no one language to rule them all. Specific use-cases, personal tastes, and performance differences wax and wane within and between languages, but the R vs Python debate is a lot of fun to ignite.</p>
 <p>For this first post, we will compare the two languages on how they handle simulating the classic Monty Hall problem. In case you’re unfamiliar with the problem, you are given the choice between three doors and behind one of them is a prize. One of the doors you didn’t pick is opened and you are asked whether you would like to keep your selection or choose the other unopened door. Does it matter whether your switch or stay? What is the probability that the prize is behind your door vs the other door?</p>
 <p><strong>Disclaimer:</strong> I hardly know Python, in fact, we just recently became acquainted. So, I’ll rely almost exclusively on other people’s Python solution(s) to a problem. I’ll then try to do better, or at least as good, in R. Naturally, my python selections may reflect poorly written Python, but surely it’s better than me writing the Python myself?</p>
-</div>
-<div id="python-solution" class="section level2">
-<h2>Python Solution</h2>
+<div class="panel-body">
+<div class="col-md-6">
+<h2 id="python-solution">Python Solution</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
 <span class="im">import</span> timeit, functools
 simulations <span class="op">=</span> <span class="dv">10000</span></code></pre></div>
@@ -479,26 +361,24 @@ simulations <span class="op">=</span> <span class="dv">10000</span></code></pre>
     
 results <span class="op">=</span> switch_vs_stay(simulations)
 <span class="bu">print</span>(results)</code></pre></div>
-<pre><code>## [67.25999999999999, 32.74]</code></pre>
-</div>
-<div id="inspect-python-functions" class="section level2">
-<h2>Inspect Python Functions</h2>
+<pre><code>## [67.61, 32.39]</code></pre>
+<h2 id="inspect-python-functions">Inspect Python Functions</h2>
 <p>See below whether the output is as expected from select functions.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">prizes <span class="op">=</span> simulate_prizedoor(<span class="dv">10</span>)
 guesses <span class="op">=</span> simulate_guess(<span class="dv">10</span>)
 goats <span class="op">=</span> goat_door(prizes,guesses)
 switch <span class="op">=</span> switch_guess(prizes,goats)
 <span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</code></pre></div>
-<pre><code>## prizes  =  [1 0 2 0 1 0 2 0 0 2]</code></pre>
+<pre><code>## prizes  =  [1 1 2 2 1 2 2 1 0 2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</code></pre></div>
-<pre><code>## guesses =  [1 0 0 0 1 0 2 2 0 1]</code></pre>
+<pre><code>## guesses =  [0 2 2 1 2 2 1 2 1 2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats  = &quot;</span>, goats)</code></pre></div>
-<pre><code>## goats  =  [0 1 1 2 0 1 1 1 1 0]</code></pre>
+<pre><code>## goats  =  [2 0 1 0 0 1 0 0 2 1]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;switch  = &quot;</span>, switch)</code></pre></div>
-<pre><code>## switch  =  [2 2 0 1 2 2 0 2 2 1]</code></pre>
+<pre><code>## switch  =  [0 2 0 1 2 0 1 2 1 0]</code></pre>
 </div>
-<div id="r-solution" class="section level2">
-<h2>R Solution</h2>
+<div class="col-md-6">
+<h2 id="r-solution">R Solution</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simulations &lt;-<span class="st"> </span><span class="dv">10000</span>
 
 sim_prizedoor &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">nsim =</span> <span class="dv">3</span>) <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">size =</span> nsim,<span class="dt">replace =</span> <span class="ot">TRUE</span>)
@@ -543,10 +423,8 @@ results</code></pre></div>
 <pre><code>## [1] 66.04 33.96</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">switch_vs_stay</span>(simulations))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.15    0.03    0.18</code></pre>
-</div>
-<div id="inspect-r-functions" class="section level2">
-<h2>Inspect R Functions</h2>
+##    0.17    0.00    0.17</code></pre>
+<h2 id="inspect-r-functions">Inspect R Functions</h2>
 <p>See below whether the output is as expected from select functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prizes =<span class="st"> </span><span class="kw">sim_prizedoor</span>(<span class="dv">10</span>)
 guesses =<span class="st"> </span><span class="kw">sim_guess</span>(<span class="dv">10</span>)
@@ -560,6 +438,8 @@ goats =<span class="st"> </span><span class="kw">bad_door</span>(prizes,guesses)
 <pre><code>## [1] &quot;goats  = 2 3 1 1 1 2 1 2 2 3&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span> (<span class="st">&quot;switch = &quot;</span>, <span class="kw">paste0</span>(<span class="cf">switch</span>,<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
 <pre><code>## [1] &quot;switch = 3 1 2 2 2 1 2 3 3 2&quot;</code></pre>
+</div>
+</div>
 </div>
 
   </div> <!-- articleBandContent -->
@@ -598,8 +478,6 @@ goats =<span class="st"> </span><span class="kw">bad_door</span>(prizes,guesses)
 </footer>
 
 
-</div>
-</div>
 
 </div>
 

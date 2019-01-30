@@ -1,6 +1,6 @@
 ---
-title: '"Divide each difficulty into as many parts<br>as is feasible and necessary to resolve it."'
-author: -Rene Descartes
+title: '"Maybe stories are just data with a soul."'
+author: -Brené Brown
 output: 
   html_document:
     code_folding: none

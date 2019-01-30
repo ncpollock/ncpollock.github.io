@@ -36,7 +36,7 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 ## Personal
 
-I enjoy problem solving, cards, board-games, yard-games, cooking, eating, skiing, spending time with my family, and pushing my physical limits while exploring via cycling.
+I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creating (both physically with wood and digitally with CAD), skiing, spending time with my family, and pushing my physical limits while exploring via cycling.
 
 <div class="panel-body">
   <div class="col-md-4">
@@ -50,16 +50,16 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, skiing
   <div class="col-md-4">
   
   <div class="polaroid" style ="width: 100%">
-  <img src="images/family_camping.jpg" alt="Me, my wife, and our dogs camping.">
-  <p class="caption">Me my wife and our dogs camping.</p>
+  <img src="images/bus_card_holder.jpg" alt="A 3D printed business card holder">
+  <p class="caption">A business card holder I designed and 3D printed. Special thanks to the Oakland University Makerspace for printing!</p>
   </div>
   </div>
   
   <div class="col-md-4">
   
   <div class="polaroid" style ="width: 100%">
-  <img src="images/bus_card_holder.jpg" alt="A 3D printed business card holder">
-  <p class="caption">A business card holder I designed and 3D printed. Thanks to the OU Makerspace for their 3D printer!</p>
+  <img src="images/family_camping.jpg" alt="Me, my wife, and our dogs camping.">
+  <p class="caption">Me my wife and our dogs camping. It was our dogs' first time at the beach. </p>
   </div>
   </div>
   

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Noah Pollock" />
+
+
+<title>Grab-Bag of Report Features</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122098274-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122098274-2');
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Noah C. Pollock</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="about_me.html">
+    <span class="fa fa-info-circle"></span>
+     
+    About Me
+  </a>
+</li>
+<li>
+  <a href="blog.html">
+    <span class="fa fa-street-view"></span>
+     
+    Blog
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    Dashboards
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Static</li>
+    <li>
+      <a href="flex_dash.html">R Markdown</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Dynamic</li>
+    <li>
+      <a href="shiny_bi.html">BI with Shiny</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resources.html">
+    <span class="fa fa-key"></span>
+     
+    Resources
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/ncpollock/">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Grab-Bag of Report Features</h1>
+<h4 class="author"><em>Noah Pollock</em></h4>
+<h4 class="date"><em>January 2019</em></h4>
+
+</div>
+
+
+<div id="scope" class="section level2">
+<h2>Scope</h2>
+<p>See code and output for typical report features.</p>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This is a report I produced as a teaching tool for the Pre-Conference Workshop at the Michigan Association for Institutional Research. I modified it slightly so it’s for blog friendly (e.g., echo=TRUE on all code chunks), but the report was originally designed to be printed or saved as a PDF. Feel free to browse the report elements and expand the code chunmks that interest you. All the data here is fabricated. You can check-out <a href="https://ncpollock.github.io/create_interesting_datasets.html">my post about creating interesting datasets</a> to learn more about how I created the data here and to see the full report in pdf form.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#bootstrap themes: https://bootswatch.com/united/</span>
+
+knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>,<span class="dt">message=</span><span class="ot">FALSE</span>,<span class="dt">warning=</span><span class="ot">FALSE</span>)
+<span class="kw">options</span>(<span class="dt">scipen=</span><span class="dv">999</span>) <span class="co"># avoid scientifit notation</span>
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(scales)
+<span class="kw">library</span>(stringr)
+
+<span class="co"># include geospatial plotting!</span>
+<span class="co"># learning resource and inspiration</span>
+<span class="co"># http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html</span>
+<span class="kw">library</span>(maps)
+<span class="kw">library</span>(gridExtra)
+oi_colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gray&quot;</span>,<span class="st">&quot;#EFE8E2&quot;</span>,<span class="st">&quot;#323232&quot;</span>,<span class="st">&quot;#a3a3a3&quot;</span>,<span class="st">&quot;#88abfd&quot;</span>,<span class="st">&quot;#4221ec&quot;</span>)
+
+roi_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">income_source =</span> <span class="kw">c</span>(<span class="st">&quot;Minimum Wage&quot;</span>,
+                    <span class="st">&quot;High School Diploma&quot;</span>,
+                    <span class="st">&quot;Some College&quot;</span>,
+                    <span class="st">&quot;10 Years after Attending OI&quot;</span>,
+                    <span class="st">&quot;Bachelors&quot;</span>),
+  <span class="dt">amount =</span> <span class="kw">c</span>(<span class="fl">8.15</span><span class="op">*</span><span class="dv">40</span><span class="op">*</span><span class="dv">52</span>, <span class="co"># source: Department of Labor Statistics</span>
+             <span class="dv">26762</span>, <span class="co"># source: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF</span>
+             <span class="dv">31801</span>, <span class="co"># source: Census.gov ^</span>
+             <span class="dv">43100</span>, <span class="co"># source: college scorecard</span>
+             <span class="dv">49711</span>) <span class="co"># source: Census.gov ^</span>
+,<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+industry_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/industry_df.csv&quot;</span>,
+                        <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+air_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_df.csv&quot;</span>,
+                   <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+air_df &lt;-<span class="st"> </span>air_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">admit_type =</span> ATYP) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">school_recode =</span> <span class="kw">recode</span>(school,
+           <span class="st">&quot;AS&quot;</span> =<span class="st"> &quot;Arts and Sciences&quot;</span>,
+           <span class="st">&quot;BA&quot;</span> =<span class="st"> &quot;Business&quot;</span>,
+           <span class="st">&quot;EG&quot;</span> =<span class="st"> &quot;Engineering and Computer Science&quot;</span>),
+    <span class="dt">year =</span> <span class="kw">substr</span>(term_code,<span class="dv">1</span>,<span class="dv">4</span>),
+    <span class="dt">term_type =</span> 
+      <span class="kw">ifelse</span>(
+        <span class="kw">substr</span>(term_code,<span class="dv">5</span>,<span class="dv">6</span>)<span class="op">==</span><span class="st">&quot;10&quot;</span>,
+        <span class="st">&quot;Winter&quot;</span>,
+        <span class="st">&quot;Fall&quot;</span>),
+    <span class="dt">term_desc =</span> 
+      <span class="kw">ifelse</span>(
+        <span class="kw">substr</span>(term_code,<span class="dv">5</span>,<span class="dv">6</span>)<span class="op">==</span><span class="st">&quot;10&quot;</span>,
+        <span class="kw">paste</span>(<span class="st">&quot;Winter&quot;</span>,<span class="kw">substr</span>(term_code,<span class="dv">1</span>,<span class="dv">4</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>),
+        <span class="kw">paste</span>(<span class="st">&quot;Fall&quot;</span>,<span class="kw">substr</span>(term_code,<span class="dv">1</span>,<span class="dv">4</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>)),
+    <span class="dt">career_use_bin =</span> <span class="kw">ifelse</span>(career_use<span class="op">&gt;</span><span class="dv">0</span>,<span class="st">&quot;Engaged&quot;</span>,<span class="st">&quot;Did Not Engage&quot;</span>), <span class="co">#use case_when instead?</span>
+    <span class="dt">pg_outcome_bin =</span> <span class="kw">case_when</span>(post_grad_outcome <span class="op">%in%</span><span class="st"> </span>
+<span class="st">                                 </span><span class="kw">c</span>(<span class="st">&quot;Employed&quot;</span>,<span class="st">&quot;Grad School&quot;</span>) <span class="op">~</span><span class="st"> </span><span class="ot">TRUE</span>
+                               ,post_grad_outcome <span class="op">%in%</span><span class="st"> </span>
+<span class="st">                                 </span><span class="kw">c</span>(<span class="st">&quot;Still Seeking&quot;</span>,<span class="st">&quot;Other&quot;</span>) <span class="op">~</span><span class="st"> </span><span class="ot">FALSE</span>
+                               )
+    ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(industry_df,
+            <span class="dt">by=</span><span class="st">&quot;student_id&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>student_id)</code></pre></div>
+</div>
+<div id="about-the-data" class="section level2">
+<h2>About the Data</h2>
+<p>Data was integrated from three sources: Banner, Handshake, and the First-Destination Survey results. While data from Banner and Handshake can be considered extremely accurate, the First-Destination Survey (FDS) results should be interpreted with the understanding that the information is self-reported by students within 6 months of graduation.</p>
+</div>
+<div id="post-graduation-outcomes" class="section level2">
+<h2>Post-Graduation Outcomes</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">Outcome =</span> post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Percent=</span><span class="kw">percent</span>(Count<span class="op">/</span><span class="kw">sum</span>(Count)))</code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Outcome</th>
+<th align="right">Count</th>
+<th align="left">Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Employed</td>
+<td align="right">6367</td>
+<td align="left">63.7%</td>
+</tr>
+<tr class="even">
+<td align="left">Grad School</td>
+<td align="right">2721</td>
+<td align="left">27.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Other</td>
+<td align="right">194</td>
+<td align="left">1.9%</td>
+</tr>
+<tr class="even">
+<td align="left">Still Seeking</td>
+<td align="right">718</td>
+<td align="left">7.2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">group_by</span>(post_grad_outcome,school) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">rename</span>(<span class="dt">Outcome =</span> post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">summarise</span>(<span class="dt">Count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">group_by</span>(school) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">mutate</span>(<span class="dt">pct =</span> Count<span class="op">/</span><span class="kw">sum</span>(Count))
+       ,<span class="kw">aes</span>(<span class="dt">x=</span>school,<span class="dt">y=</span>pct,<span class="dt">fill=</span>Outcome)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">percent</span>(pct,<span class="dt">accuracy =</span> <span class="dv">1</span>),<span class="dt">y=</span>pct,<span class="dt">group=</span>Outcome),<span class="dt">position =</span> <span class="kw">position_stack</span>(.<span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(oi_colors[<span class="kw">length</span>(oi_colors)],oi_colors)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Figure 1: Post-Graduation Outcomes by School&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.line.x   =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.line.y   =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>),
+       <span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>,
+       <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Report_files/figure-html/post-grad-status-1.png" width="816" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(
+air_df <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">count</span>(pg_outcome_bin) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> n<span class="op">/</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(pg_outcome_bin<span class="op">==</span><span class="ot">TRUE</span>,year<span class="op">!=</span><span class="dv">2013</span>)
+,<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>pct,<span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>pct,<span class="dt">group=</span>post_grad_outcome,<span class="dt">fill=</span>post_grad_outcome),<span class="dt">data=</span>(air_df <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(year,post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">count</span>(pg_outcome_bin) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">pct =</span> n<span class="op">/</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(pg_outcome_bin<span class="op">==</span><span class="ot">TRUE</span>,year<span class="op">!=</span><span class="dv">2013</span>)),<span class="dt">alpha=</span>.<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">1.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,<span class="dt">stroke=</span><span class="dv">2</span>,<span class="dt">shape=</span><span class="dv">21</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">1</span>),
+                     <span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">1</span>))
+                     ,<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)
+                     ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(oi_colors[<span class="kw">length</span>(oi_colors)],<span class="st">&#39;black&#39;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Figure 2: Post-Graduation Outcomes over Time&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>),
+       <span class="dt">panel.grid.minor.y =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&#39;gray&#39;</span>),
+       <span class="dt">axis.line.x   =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>),
+       <span class="dt">axis.line.y   =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>),
+       <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
+       <span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>,
+       <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Report_files/figure-html/post-grad-status-time-1.png" width="816" style="display: block; margin: auto;" /></p>
+<P style="page-break-before: always">
+</div>
+<div id="post-graduation-outcomes-cont." class="section level2">
+<h2>Post-Graduation Outcomes cont.</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#note: I am creating dummy data on the fly for counts by region</span>
+states &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;state&quot;</span>)
+states &lt;-<span class="st"> </span>states <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="kw">cut</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(states), <span class="co">#dummy data</span>
+                     <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>,<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>, <span class="ot">Inf</span>),
+                     <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1-1k&quot;</span>,<span class="st">&quot;1k-5k&quot;</span>,<span class="st">&#39;5k-10k&#39;</span>,<span class="st">&#39;&gt;10k&#39;</span>)))
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> states) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">fill =</span> count, <span class="dt">group =</span> group), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="fl">1.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&#39;gray80&#39;</span>,<span class="st">&#39;gray50&#39;</span>,<span class="st">&#39;black&#39;</span>,oi_colors[<span class="kw">length</span>(oi_colors)])) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Employment by US State&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;left&quot;</span>,
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Report_files/figure-html/mapping-1.png" width="816" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counties &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;county&quot;</span>)
+counties &lt;-<span class="st"> </span><span class="kw">subset</span>(counties, region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;michigan&quot;</span>))
+
+counties &lt;-<span class="st"> </span>counties <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="kw">cut</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(counties),
+                     <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="ot">Inf</span>),
+                     <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;1-100&quot;</span>,<span class="st">&quot;101-500&quot;</span>,<span class="st">&#39;501-1000&#39;</span>,<span class="st">&#39;&gt;1k&#39;</span>)))
+
+g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> counties) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">fill =</span> count, <span class="dt">group =</span> group), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="fl">1.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&#39;gray80&#39;</span>,<span class="st">&#39;gray50&#39;</span>,<span class="st">&#39;black&#39;</span>,oi_colors[<span class="kw">length</span>(oi_colors)])) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Employment by MI County&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,<span class="dt">vjust =</span> <span class="dv">3</span>))
+
+
+g2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(air_df <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(industry)) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">count</span>(industry) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">arrange</span>(n) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw">mutate</span>(<span class="dt">industry =</span> <span class="kw">factor</span>(industry,<span class="dt">levels=</span>industry))
+  ,<span class="kw">aes</span>(<span class="dt">x=</span>industry,<span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) stringr<span class="op">::</span><span class="kw">str_wrap</span>(x,<span class="dt">width=</span><span class="dv">20</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>n),<span class="dt">hjust=</span><span class="fl">1.1</span> ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span>oi_colors) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Top Industries Graduates Employed In&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,
+      <span class="dt">axis.line.x   =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.line.y   =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>),
+      <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))
+
+<span class="kw">grid.arrange</span>(g1,g2,<span class="dt">nrow=</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="Report_files/figure-html/mapping-2.png" width="816" style="display: block; margin: auto;" /></p>
+<P style="page-break-before: always">
+</div>
+<div id="salary" class="section level2">
+<h2>Salary</h2>
+<p>Median annual salary for Our University graduates are observed to be higher than the yearly earnings of a full-time employee at minimum wage, a high school graduate with no college, an individual with some college, and graduates from other institutions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
+air_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(salary)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>(),
+            <span class="dt">Median =</span> <span class="kw">median</span>(salary)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">school=</span><span class="st">&quot;All&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>(air_df <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(salary)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(school) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>(),
+              <span class="dt">Median =</span> <span class="kw">median</span>(salary))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(school,<span class="kw">everything</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Median =</span> scales<span class="op">::</span><span class="kw">dollar</span>(Median))
+,<span class="dt">caption=</span><span class="st">&quot;Table 2: Median annual salary by school.&quot;</span>)</code></pre></div>
+<table>
+<caption>Table 2: Median annual salary by school.</caption>
+<thead>
+<tr class="header">
+<th align="left">school</th>
+<th align="right">Count</th>
+<th align="left">Median</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">All</td>
+<td align="right">6367</td>
+<td align="left">$53,961.75</td>
+</tr>
+<tr class="even">
+<td align="left">AS</td>
+<td align="right">2119</td>
+<td align="left">$47,983.14</td>
+</tr>
+<tr class="odd">
+<td align="left">BA</td>
+<td align="right">2095</td>
+<td align="left">$53,406.32</td>
+</tr>
+<tr class="even">
+<td align="left">EG</td>
+<td align="right">2153</td>
+<td align="left">$68,963.44</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(roi_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">bind_rows</span>(air_df <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">income_source =</span> <span class="st">&quot;Our Institution Grads&quot;</span>,
+              <span class="dt">amount =</span> <span class="kw">round</span>(<span class="kw">median</span>(salary,<span class="dt">na.rm=</span><span class="ot">TRUE</span>)))) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">mutate</span>(<span class="dt">income_source =</span> <span class="kw">factor</span>(income_source, <span class="dt">levels =</span> income_source))
+  ,<span class="kw">aes</span>(<span class="dt">x=</span>income_source,<span class="dt">y=</span>amount,<span class="dt">fill=</span>income_source)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) stringr<span class="op">::</span><span class="kw">str_wrap</span>(x,<span class="dt">width=</span><span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>scales<span class="op">::</span><span class="kw">dollar</span>(amount)),<span class="dt">hjust=</span><span class="fl">1.1</span> ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span>oi_colors) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Salary Estimates at Varying Education Levels&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,
+      <span class="dt">axis.line.x   =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.line.y   =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>),
+      <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Report_files/figure-html/post-grad-salary-1.png" width="816" /></p>
+<P style="page-break-before: always">
+</div>
+<div id="career-services-effectiveness" class="section level2">
+<h2>Career Services Effectiveness</h2>
+<p>The charts and inferential statistics below show that engagement with Career Services is associated with post-graduation employment and salary. They also highlight differences by academic school. However, we cannot be sure that this association is causal. That is, other variables may account for the positive relationship between Career Services engagement and salary such as personality factors (e.g., students who are likely to seek out support services are also likely to acquire higher salaries).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cu_x_school_to_co_df &lt;-<span class="st"> </span>air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(career_use_bin,school) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> n<span class="op">/</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>(air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(career_use_bin) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(post_grad_outcome) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> n<span class="op">/</span><span class="kw">sum</span>(n),
+         <span class="dt">school=</span><span class="st">&quot;All&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>)
+
+<span class="kw">ggplot</span>(cu_x_school_to_co_df,
+       <span class="kw">aes</span>(<span class="dt">x=</span>school,<span class="dt">y=</span>pct,<span class="dt">fill=</span>career_use_bin)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dv">1</span>), 
+            <span class="dt">vjust=</span><span class="op">-</span><span class="fl">1.75</span>,
+            <span class="dt">size =</span> <span class="fl">2.5</span>,
+            <span class="kw">aes</span>(<span class="dt">x =</span> school,
+                <span class="dt">y =</span> pct,
+                <span class="dt">group =</span> career_use_bin,
+                <span class="dt">label=</span>scales<span class="op">::</span><span class="kw">percent</span>(pct))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Effect of Career Services Engagement on Employment&quot;</span>,
+       <span class="dt">x=</span><span class="st">&quot;School&quot;</span>,
+       <span class="dt">y=</span><span class="st">&quot;Employment Rate&quot;</span>,
+       <span class="dt">fill =</span> <span class="st">&quot;Engaged with CS&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>),<span class="dt">limits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,
+                     <span class="dt">labels=</span>scales<span class="op">::</span>percent) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>,oi_colors[<span class="kw">length</span>(oi_colors)])) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">panel.grid.minor.y=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">axis.line   =</span> <span class="kw">element_line</span>(<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>),
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Report_files/figure-html/cu_x_school_to_sal-1.png" width="816" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cu_x_school_to_sal_df &lt;-<span class="st"> </span>air_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(career_use,school) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">gpa_mean =</span> <span class="kw">mean</span>(gpa),
+            <span class="dt">salary_median =</span> <span class="kw">median</span>(salary,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+
+<span class="kw">ggplot</span>(cu_x_school_to_sal_df,
+       <span class="kw">aes</span>(<span class="dt">x=</span>career_use,<span class="dt">y=</span>salary_median)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>school) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">fill=</span><span class="st">&quot;#cdcdcd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">2</span>,<span class="dt">colour=</span>oi_colors[<span class="kw">length</span>(oi_colors)]) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">fill =</span> oi_colors[<span class="kw">length</span>(oi_colors)],<span class="dt">stroke=</span><span class="dv">2</span>,<span class="dt">shape=</span><span class="dv">21</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> .<span class="dv">7</span>),
+            <span class="dt">vjust=</span><span class="fl">2.25</span>,
+            <span class="dt">size =</span> <span class="fl">2.5</span>,
+            <span class="kw">aes</span>(<span class="dt">x =</span> career_use,
+                <span class="dt">y =</span> salary_median,
+                <span class="co"># group = p_outcome,</span>
+                <span class="dt">label=</span><span class="kw">paste0</span>(<span class="kw">substr</span>(salary_median,<span class="dv">1</span>,<span class="dv">2</span>),<span class="st">&quot;k&quot;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Effect of Career Services on FDS Salary&quot;</span>,
+       <span class="dt">x=</span><span class="st">&quot;Engagements with Career Services&quot;</span>,
+       <span class="dt">y=</span><span class="st">&quot;FDS Salary ($)&quot;</span>,
+       <span class="dt">fill =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>salary_median),<span class="dv">10000</span>),
+                     <span class="dt">labels=</span><span class="kw">format</span>(
+                       <span class="kw">seq</span>(<span class="dv">0</span>,<span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>salary_median),<span class="dv">10000</span>),<span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>),
+                     <span class="dt">minor_breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>salary_median),<span class="dv">5000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="dv">0</span><span class="op">:</span><span class="kw">max</span>(cu_x_school_to_sal_df<span class="op">$</span>career_use)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">panel.grid.minor.y=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">axis.line   =</span> <span class="kw">element_line</span>(<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>),
+        <span class="dt">strip.background =</span> <span class="kw">element_rect</span>(<span class="dt">colour=</span><span class="st">&quot;#323232&quot;</span>, <span class="dt">fill=</span><span class="st">&#39;#323232&#39;</span>),
+        <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>),
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Report_files/figure-html/cu_x_school_to_sal-2.png" width="816" /></p>
+<P style="page-break-before: always">
+</div>
+<div id="supporting-inferential-statistics" class="section level2">
+<h2>Supporting Inferential Statistics</h2>
+<div id="career-use-effect-on-salary" class="section level4">
+<h4>Career Use Effect on Salary</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_test &lt;-<span class="st"> </span><span class="kw">summary</span>(
+<span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span>career_use,
+   <span class="dt">data=</span>air_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>))
+)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(stat_test<span class="op">$</span>r.squared),<span class="dt">align=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">stat_test.r.squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0.0141095</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(stat_test<span class="op">$</span>coefficients) <span class="op">%&gt;%</span>
+<span class="st">               </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pr...t.. =</span> <span class="kw">format.pval</span>(Pr...t..,<span class="dt">eps=</span>.<span class="dv">001</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="st">&quot;P Value&quot;</span> =<span class="st"> </span>Pr...t..))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Estimate</th>
+<th align="right">Std..Error</th>
+<th align="right">t.value</th>
+<th align="left">P Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">54390.7059</td>
+<td align="right">275.67125</td>
+<td align="right">197.302786</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td align="left">career_use</td>
+<td align="right">380.9833</td>
+<td align="right">39.91773</td>
+<td align="right">9.544214</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="career-use-and-school-effect-on-salary" class="section level4">
+<h4>Career Use and School Effect on Salary</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_test2 &lt;-<span class="st"> </span><span class="kw">summary</span>(
+<span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span>career_use <span class="op">+</span><span class="st"> </span>school,
+   <span class="dt">data=</span>air_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>))
+)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(stat_test2<span class="op">$</span>r.squared),<span class="dt">align=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">stat_test2.r.squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0.8981245</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(stat_test2<span class="op">$</span>coefficients) <span class="op">%&gt;%</span>
+<span class="st">               </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pr...t.. =</span> <span class="kw">format.pval</span>(Pr...t..,<span class="dt">eps=</span>.<span class="dv">001</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="st">&quot;P Value&quot;</span> =<span class="st"> </span>Pr...t..))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Estimate</th>
+<th align="right">Std..Error</th>
+<th align="right">t.value</th>
+<th align="left">P Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">45615.7687</td>
+<td align="right">103.99511</td>
+<td align="right">438.63379</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td align="left">career_use</td>
+<td align="right">374.2273</td>
+<td align="right">12.83796</td>
+<td align="right">29.15006</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">schoolBA</td>
+<td align="right">5489.4561</td>
+<td align="right">92.15048</td>
+<td align="right">59.57057</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td align="left">schoolEG</td>
+<td align="right">20733.3135</td>
+<td align="right">91.49875</td>
+<td align="right">226.59668</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="interaction-effect-of-career-use-and-school-on-salary" class="section level4">
+<h4>Interaction Effect of Career Use and School on Salary</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_test3 &lt;-<span class="st"> </span><span class="kw">summary</span>(
+<span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span>career_use <span class="op">*</span><span class="st"> </span>school,
+   <span class="dt">data=</span>air_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(post_grad_outcome<span class="op">==</span><span class="st">&quot;Employed&quot;</span>))
+)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(stat_test3<span class="op">$</span>r.squared),<span class="dt">align=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">stat_test3.r.squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0.9084725</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(stat_test3<span class="op">$</span>coefficients) <span class="op">%&gt;%</span>
+<span class="st">               </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pr...t.. =</span> <span class="kw">format.pval</span>(Pr...t..,<span class="dt">eps=</span>.<span class="dv">001</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="st">&quot;P Value&quot;</span> =<span class="st"> </span>Pr...t..))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Estimate</th>
+<th align="right">Std..Error</th>
+<th align="right">t.value</th>
+<th align="left">P Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">48250.72541</td>
+<td align="right">147.71121</td>
+<td align="right">326.655805</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td align="left">career_use</td>
+<td align="right">-42.29443</td>
+<td align="right">21.22378</td>
+<td align="right">-1.992785</td>
+<td align="left">0.046328</td>
+</tr>
+<tr class="odd">
+<td align="left">schoolBA</td>
+<td align="right">2695.45238</td>
+<td align="right">205.63893</td>
+<td align="right">13.107695</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td align="left">schoolEG</td>
+<td align="right">15681.54468</td>
+<td align="right">207.64800</td>
+<td align="right">75.519846</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">career_use:schoolBA</td>
+<td align="right">442.36745</td>
+<td align="right">29.82779</td>
+<td align="right">14.830713</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td align="left">career_use:schoolEG</td>
+<td align="right">800.53619</td>
+<td align="right">29.89925</td>
+<td align="right">26.774456</td>
+<td align="left">&lt; 0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+</div> <!-- floating toc -->
+</div>
+
+<footer id="site-footer">
+  <div class="col-md-4">
+  
+<div class="polaroid rotate_right">
+  <img src="images/wife_and_i.jpg" alt="My wifte and I." width="115" >
+  <p class="caption">My wife and I at a friend's wedding.</p>
+</div>
+
+<div class="polaroid rotate_left">
+  <img src="images/dogs.jpg" alt="Our dogs Bambi and Lexi" width="115">
+  <p class="caption">Our furry children, Bambi and Lexi.</p>
+</div>
+  </div>
+    <div class="col-md-4">
+      Connect with me: <br>
+      <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/">
+        <i class="fa fa-linkedin-square fa-lg"></i> Linkedin 
+      </a>
+      <br>
+      <a href="https://github.com/ncpollock/">
+        <i class="fa fa-github-square fa-lg"></i> GitHub 
+      </a>
+  </div>
+    <div class="col-md-4">
+      <a href="https://www.google.com/" target="_blank">
+        <i class="fa fa-question-circle fa-lg"></i> Help 
+      </a>
+  </div>
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
