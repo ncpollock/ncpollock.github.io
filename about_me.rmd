@@ -158,7 +158,6 @@ lapply(unique(pdata$category),function(skill_cat){
 <h3 class="panel-title"><strong><i class="fa fa-microphone"></i> Presentations</strong></h3>
 </div>
 <div class="panel-body">
-<div class="row">
   <div class="col-md-9">
 ```{r present_map}
 pdata <- cv_df %>%
@@ -185,8 +184,9 @@ leaflet() %>%
     direction = "auto"))
 ```
   </div>
+  <div class="col-md-3">
   <div class="well">
-<p style="text-align:center;padding: 15px 0; height:130px;font-size: x-large;"><strong>Total Presentations
+<p style="text-align:center;padding: 8px 0; height:130px;font-size: x-large; background-color: #ecf0f1;"><strong>Total Presentations
 <br><br>
 `r cv_df %>% filter(section == "Presentations") %>% nrow()`
 </strong></p>
