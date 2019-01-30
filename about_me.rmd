@@ -65,6 +65,8 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
   
 </div>
 
+<br>
+
 ```{r setup, include=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE)
 library(leaflet)
