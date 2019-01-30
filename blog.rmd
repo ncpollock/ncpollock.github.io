@@ -1,6 +1,6 @@
 ---
-title: '"Maybe stories are just data with a soul."'
-author: -Brené Brown
+title: '"Divide each difficulty into as many parts<br>as is feasible and necessary to resolve it."'
+author: -Rene Descartes
 output: 
   html_document:
     toc: no
@@ -39,7 +39,8 @@ blog_df <- data.frame(
                ,"ifelse_NA_trap"
                ,"building_this_site"
                ,"ed_api"
-               ,"monty_hall")
+               ,"monty_hall"
+               ,"Report")
 )
 # eventually, I will read all .rmd files in main dir
   # and exclude non-blog posts because blog posts will 
