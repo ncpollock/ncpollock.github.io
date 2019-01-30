@@ -2,6 +2,10 @@
 title: "Language Wars One: Monty Hall"
 author: "Noah Pollock"
 date: "December 5, 2018"
+output: 
+  html_document:
+    code_folding: none
+    toc: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -17,6 +21,9 @@ This is the first post in a series of posts that will pit R against Python. I ho
 For this first post, we will compare the two languages on how they handle simulating the classic Monty Hall problem. In case you're unfamiliar with the problem, you are given the choice between three doors and behind one of them is a prize. One of the doors you didn't pick is opened and you are asked whether you would like to keep your selection or choose the other unopened door. Does it matter whether your switch or stay? What is the probability that the prize is behind your door vs the other door?
 
 **Disclaimer:** I hardly know Python, in fact, we just recently became acquainted. So, I'll rely almost exclusively on other people's Python solution(s) to a problem. I'll then try to do better, or at least as good, in R. Naturally, my python selections may reflect poorly written Python, but surely it's better than me writing the Python myself?
+
+<div class="panel-body">
+  <div class="col-md-6">
 
 ## Python Solution
 
@@ -100,6 +107,10 @@ print ("switch  = ", switch)
 
 ```
 
+</div>
+
+<div class="col-md-6">
+
 ## R Solution
 
 ```{r r_full_script}
@@ -161,3 +172,6 @@ paste0 ("goats  = ", paste0(goats,collapse = " "))
 paste0 ("switch = ", paste0(switch,collapse = " "))
 
 ```
+
+</div>
+</div>
