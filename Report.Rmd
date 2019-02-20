@@ -15,7 +15,7 @@ output:
 See code and output for typical report features.
 
 ## Introduction
-This is a report I produced as a teaching tool for the Pre-Conference Workshop at the Michigan Association for Institutional Research. I modified it slightly so it's for blog friendly (e.g., echo=TRUE on all code chunks), but the report was originally designed to be printed or saved as a PDF. Feel free to browse the report elements and expand the code chunmks that interest you. All the data here is fabricated. You can check-out [my post about creating interesting datasets](https://ncpollock.github.io/create_interesting_datasets.html) to learn more about how I created the data here and to see the full report in pdf form.
+This is a report I produced as a teaching tool for the Pre-Conference Workshop at the Michigan Association for Institutional Research. I modified it slightly so it's more blog friendly (e.g., echo=TRUE on all code chunks), but the report was originally designed to be printed or saved as a PDF. Feel free to browse the report elements and expand the code chunks that interest you. All the data here is fabricated. You can check-out [my post about creating interesting datasets](https://ncpollock.github.io/create_interesting_datasets.html) to learn more about how I created the data here and to see the full report in pdf form.
 
 ```{r include=TRUE,results='hide',message=FALSE,warning=FALSE}
 #bootstrap themes: https://bootswatch.com/united/
