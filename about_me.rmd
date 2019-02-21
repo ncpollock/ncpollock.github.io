@@ -30,16 +30,16 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 <div class="list-group">
 <a href="np_cv.pdf" class="list-group-item" target="_blank">
-  <i class="fa fa-file-text" aria-hidden="true"></i> My Curriculum Vitae (aka my fancy resume) </a>  
+  <i class="fa fa-file-text fa-fw" aria-hidden="true"></i> My Curriculum Vitae (aka my fancy resume) </a>  
   
 <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="list-group-item" target="_blank">
-  <i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn </a>  
+  <i class="fa fa-linkedin-square fa-fw" aria-hidden="true"></i> LinkedIn </a>  
   
 <a href="https://github.com/ncpollock/" class="list-group-item" target="_blank">
-  <i class="fa fa-github-square" aria-hidden="true"></i> GitHub </a>  
+  <i class="fa fa-github-square fa-fw" aria-hidden="true"></i> GitHub </a>  
 
 <a href="https://scholar.google.com/citations?user=yDTR-BMAAAAJ&hl=en" class="list-group-item" target="_blank">
-  <i class="fa fa-graduation-cap" aria-hidden="true"></i> Google Scholar</a>  
+  <i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i> Google Scholar</a>  
 </div>
 
 ## Personal
@@ -236,7 +236,7 @@ leaflet() %>%
 </div></div>
 
 ### ggplot2
-It needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
+It's not practical and it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
 
 First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I add line breaks via `str_wrap()` and then I adjust the vertical width of points depending on the number of lines wrapped.
 
