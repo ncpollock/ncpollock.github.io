@@ -68,8 +68,9 @@ datatable(public_data_df
 
 
 ##Learning Opportunities
-A list of places to learn more about R, data science, programming, and other fun stuff.
+A list of websites I found useful to learn more about R, data science, programming, and other fun stuff.
 
 * [Professor Mark Isken's Website](http://www.sba.oakland.edu/faculty/isken/)
+* [Dean Attali's Blog](https://deanattali.com/)
 
 
