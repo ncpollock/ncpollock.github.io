@@ -6,9 +6,8 @@ IRS (SOI),https://www.irs.gov/uac/soi-tax-stats-individual-income-tax-statistics
 Monster API,http://partner.monster.com/job-search-specification,API for job postings on Monster.com
 US Census Bureau,https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html,Shape Files
 MI LMISI,http://milmi.org/datasearch,Labor Statistics
-ED API,https://collegescorecard.ed.gov/data/documentation/,College Scorecard
+Dept. Ed API,https://collegescorecard.ed.gov/data/documentation/,College Scorecard
 Gov API,https://api.data.gov/docs/,Collection of U.S. Government agency APIs
 BLS API,https://www.bls.gov/data/,"Salaries, Unemployment, and more!"
 MI Dept Treasury,"http://www.michigan.gov/treasury/0,1607,7-121-1751_2228_21957_45818---,00.html",Property Value
 Carnegie Classification,http://carnegieclassifications.iu.edu/downloads.php,"IHE data on classification, enrollment, and more"
-Kresge Library Repositories,https://library.oakland.edu/services/research-data/data-rep.html,Huge Repository of Other Datasets
