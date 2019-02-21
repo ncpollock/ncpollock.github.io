@@ -28,19 +28,19 @@ output:
 
 I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. For the past `r round(as.numeric(difftime(Sys.Date(),as.Date("2016-09-28"),unit="weeks"))/52.25,2)` years, R has been my tool of choice. Nevertheless, I have experience with a variety of software, programming languages, and IT project types. You can learn more about me via the following resources:
 
-
-<a href="np_cv.pdf" class="btn btn-primary btn-block" target="_blank">
+<div class="list-group">
+<a href="np_cv.pdf" class="list-group-item" target="_blank">
   <i class="fa fa-file-text" aria-hidden="true"></i> My Curriculum Vitae (aka my fancy resume) </a>  
   
-<a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="btn btn-primary btn-block" target="_blank">
+<a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="list-group-item" target="_blank">
   <i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn </a>  
   
-<a href="https://github.com/ncpollock/" class="btn btn-primary btn-block" target="_blank">
+<a href="https://github.com/ncpollock/" class="list-group-item" target="_blank">
   <i class="fa fa-github-square" aria-hidden="true"></i> GitHub </a>  
 
-<a href="https://scholar.google.com/citations?user=yDTR-BMAAAAJ&hl=en" class="btn btn-primary btn-block" target="_blank">
+<a href="https://scholar.google.com/citations?user=yDTR-BMAAAAJ&hl=en" class="list-group-item" target="_blank">
   <i class="fa fa-graduation-cap" aria-hidden="true"></i> Google Scholar</a>  
-
+</div>
 
 ## Personal
 
