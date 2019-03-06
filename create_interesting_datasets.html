@@ -357,17 +357,17 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-gear"></span>
      
-    Dashboards
+    Projects
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Static</li>
+    <li class="dropdown-header">Dashboards</li>
     <li>
       <a href="flex_dash.html">R Markdown</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Dynamic</li>
+    <li class="dropdown-header">Web Apps</li>
     <li>
       <a href="shiny_bi.html">BI with Shiny</a>
     </li>
@@ -449,11 +449,11 @@ div.tocify {
 <p>To efficiently create a dataset, we want to write the smallest amount of code as possible. That’s where <code>sample()</code> and <code>rep()</code> come in. With <code>sample()</code> we can randomly sample from a small subset of values (e.g., a validation-set) and then we could repeat that sampling, or anything else, with <code>rep()</code>. Let’s take a look.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># chose 3 random numbers from an integer vector of 1 to 10</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 2 1 3</code></pre>
+<pre><code>## [1] 7 2 5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># same as above except that I sample 11 times and</span>
 <span class="co"># every time a number is sampled it&#39;s then put back into the pool</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">11</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1] 5 3 6 3 4 3 8 4 5 9 9</code></pre>
+<pre><code>##  [1]  3  9  8  7 10  2  1  6  1  9  6</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bonus, I won&#39;t run these, but try them at home!</span>
 
 <span class="co"># choose 1 to 10 random numbers from an integer vector of 1 to 10</span>
@@ -470,17 +470,17 @@ div.tocify {
 <span class="kw">rep</span>(
   <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),
   <span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] 1 1 5 2 1 4 1 1 5 2 1 4</code></pre>
+<pre><code>##  [1] 1 1 4 5 3 3 1 1 4 5 3 3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take a sample of 12 items from a pool of integers 1 to 5 </span>
   <span class="co"># don&#39;t use repeat so that all 12 are random</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span><span class="op">*</span><span class="dv">2</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1] 3 2 3 3 4 5 1 2 5 5 2 3</code></pre>
+<pre><code>##  [1] 2 1 4 1 1 2 1 5 1 3 4 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample &quot;yes&quot; and &quot;no&quot; 10 times, </span>
   <span class="co"># encourage that sample to be %80 yes and %20 no</span>
   <span class="co"># repeat that exact sample twice</span>
 <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">80</span>,.<span class="dv">20</span>),<span class="dt">size =</span> <span class="dv">10</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),<span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot; 
-## [12] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;</code></pre>
+<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot;
+## [12] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;Yes&quot;</code></pre>
 </div>
 <div id="create-the-dataset" class="section level2">
 <h2>Create the Dataset</h2>
@@ -497,14 +497,14 @@ div.tocify {
 <span class="kw">table</span>(experiment_df) <span class="co"># contingency table</span></code></pre></div>
 <pre><code>##             DV
 ## IV           Losses Wins
-##   Control       792  208
-##   Experiment    285  715</code></pre>
+##   Control       778  222
+##   Experiment    303  697</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(experiment_df<span class="op">$</span>IV,experiment_df<span class="op">$</span>DV) <span class="co"># chi-square test of independence</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
 ## data:  experiment_df$IV and experiment_df$DV
-## X-squared = 515.13, df = 1, p-value &lt; 2.2e-16</code></pre>
+## X-squared = 452.32, df = 1, p-value &lt; 2.2e-16</code></pre>
 <p>Now a more complex and interesting example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">100</span>) <span class="co"># number generator so &#39;random&#39; numbers are reproducibile</span>
 n_students &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># the number of number of grads per cohort</span>
