@@ -12,14 +12,14 @@ navbar:
     - text: "Blog"
       icon: fa-street-view
       href: blog.html
-    - text: "Dashboards"
+    - text: "Projects"
       icon: fa-gear
       menu:
-        - text: "Static"
+        - text: "Dashboards"
         - text: "R Markdown"
           href: flex_dash.html
         - text: "---------"
-        - text: "Dynamic"
+        - text: "Web Apps"
         - text: "BI with Shiny"
           href: shiny_bi.html
   right:
