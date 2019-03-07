@@ -3,13 +3,31 @@ title: "Shiny BI"
 output: 
   html_document:
     toc: no
+    code_folding: none
 ---
 
 Here's a proof of concept Business Intelligence tool built with R via Shiny and related packages. You can also open my [Shiny BI Dashboard in fullscreen](https://ncpolloc.shinyapps.io/shiny_bi/) instead of using it embedded on this page.
 
 <iframe src ="https://ncpolloc.shinyapps.io/shiny_bi/" height=1000px width=1000px />
 
-```{r notes, include=FALSE}
-# Look at first shiny app for selecting colums from datatables:
-# https://ncpolloc.shinyapps.io/first_shiny_app/
-```
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'https://ncpollock.github.io/shiny_bi.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 'https://ncpollock.github.io/shiny_bi.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://nc-blog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
