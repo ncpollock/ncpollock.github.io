@@ -8,8 +8,9 @@ output:
 
 Here's a proof of concept Business Intelligence tool built with R via Shiny and related packages. You can also open my [Shiny BI Dashboard in fullscreen](https://ncpolloc.shinyapps.io/shiny_bi/) instead of using it embedded on this page.
 
-<iframe src ="https://ncpolloc.shinyapps.io/shiny_bi/" height=1000px width=1000px />
+<iframe src ="https://ncpolloc.shinyapps.io/shiny_bi/" height=1000px width=1000px ></iframe>
 
+<br><br>
 
 <div id="disqus_thread"></div>
 <script>

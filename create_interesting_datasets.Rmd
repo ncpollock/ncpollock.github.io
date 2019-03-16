@@ -242,8 +242,8 @@ roi_df <- data.frame(
 
 ```
 
-<iframe src ="images/oi_report.pdf" height=800px width=100% />
-
+<iframe src ="images/oi_report.pdf" height=800px width=100% ></iframe>
+<br><br>
 
 <div id="disqus_thread"></div>
 <script>
