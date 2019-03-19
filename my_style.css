@@ -33,6 +33,9 @@ h3{
   border-bottom:2px solid #CCC;
   padding-bottom:3px;
 }
+h7{
+  font-size: 18pt;
+}
 
 /* datatable hover */
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
@@ -62,4 +65,9 @@ div.rotate_left {
   -ms-transform: rotate(-8deg); /* IE 9 */
   -webkit-transform: rotate(-8deg); /* Safari */
   transform: rotate(-8deg);
+}
+
+a.minimal:link {
+  background-color: transparent; 
+  text-decoration: none;
 }
