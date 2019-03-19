@@ -449,11 +449,11 @@ div.tocify {
 <p>To efficiently create a dataset, we want to write the smallest amount of code as possible. That’s where <code>sample()</code> and <code>rep()</code> come in. With <code>sample()</code> we can randomly sample from a small subset of values (e.g., a validation-set) and then we could repeat that sampling, or anything else, with <code>rep()</code>. Let’s take a look.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># chose 3 random numbers from an integer vector of 1 to 10</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 10  7  3</code></pre>
+<pre><code>## [1] 3 8 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># same as above except that I sample 11 times and</span>
 <span class="co"># every time a number is sampled it&#39;s then put back into the pool</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size =</span> <span class="dv">11</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1]  4 10  6  6  5  1  7  7  5  8  9</code></pre>
+<pre><code>##  [1]  5 10  7  3  6  7  7  3  8  5  4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bonus, I won&#39;t run these, but try them at home!</span>
 
 <span class="co"># choose 1 to 10 random numbers from an integer vector of 1 to 10</span>
@@ -470,17 +470,17 @@ div.tocify {
 <span class="kw">rep</span>(
   <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),
   <span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] 1 2 1 5 2 3 1 2 1 5 2 3</code></pre>
+<pre><code>##  [1] 4 3 1 2 4 4 4 3 1 2 4 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take a sample of 12 items from a pool of integers 1 to 5 </span>
   <span class="co"># don&#39;t use repeat so that all 12 are random</span>
 <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">size =</span> <span class="dv">6</span><span class="op">*</span><span class="dv">2</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##  [1] 4 2 4 2 2 5 1 3 3 1 1 1</code></pre>
+<pre><code>##  [1] 2 5 3 5 5 1 4 1 3 2 3 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample &quot;yes&quot; and &quot;no&quot; 10 times, </span>
   <span class="co"># encourage that sample to be %80 yes and %20 no</span>
   <span class="co"># repeat that exact sample twice</span>
 <span class="kw">rep</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>),<span class="dt">prob=</span><span class="kw">c</span>(.<span class="dv">80</span>,.<span class="dv">20</span>),<span class="dt">size =</span> <span class="dv">10</span>,<span class="dt">replace =</span> <span class="ot">TRUE</span>),<span class="dv">2</span>)</code></pre></div>
-<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot;
-## [12] &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot;</code></pre>
+<pre><code>##  [1] &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;
+## [12] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;</code></pre>
 </div>
 <div id="create-the-dataset" class="section level2">
 <h2>Create the Dataset</h2>
@@ -497,14 +497,14 @@ div.tocify {
 <span class="kw">table</span>(experiment_df) <span class="co"># contingency table</span></code></pre></div>
 <pre><code>##             DV
 ## IV           Losses Wins
-##   Control       791  209
-##   Experiment    289  711</code></pre>
+##   Control       816  184
+##   Experiment    287  713</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(experiment_df<span class="op">$</span>IV,experiment_df<span class="op">$</span>DV) <span class="co"># chi-square test of independence</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
 ## data:  experiment_df$IV and experiment_df$DV
-## X-squared = 505.24, df = 1, p-value &lt; 2.2e-16</code></pre>
+## X-squared = 563.55, df = 1, p-value &lt; 2.2e-16</code></pre>
 <p>Now a more complex and interesting example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">100</span>) <span class="co"># number generator so &#39;random&#39; numbers are reproducibile</span>
 n_students &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># the number of number of grads per cohort</span>
@@ -628,7 +628,9 @@ roi_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
              <span class="dv">43100</span>, <span class="co"># source: college scorecard</span>
              <span class="dv">49711</span>) <span class="co"># source: Census.gov ^</span>
 ,<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<iframe src ="images/oi_report.pdf" height=800px width=100% />
+<iframe src="images/oi_report.pdf" height="800px" width="100%">
+</iframe>
+<p><br><br></p>
 <div id="disqus_thread">
 
 </div>

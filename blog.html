@@ -354,23 +354,28 @@ blog_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
 )
 <span class="co"># eventually, I will read all .rmd files in main dir</span>
   <span class="co"># and exclude non-blog posts because blog posts will </span>
-    <span class="co"># quickly outweigh non-blog posts</span>
+    <span class="co"># quickly outnumber non-blog posts</span>
 
 <span class="co"># pull some text from each post for a content sample</span>
 blog_df<span class="op">$</span>intros &lt;-<span class="st"> </span><span class="kw">sapply</span>(
   <span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.Rmd&quot;</span>),<span class="cf">function</span>(x){
     <span class="kw">paste0</span>(<span class="kw">substr</span>(<span class="kw">gsub</span>(<span class="st">&quot;.*##&quot;</span>,
      <span class="st">&quot;&quot;</span>,
-     <span class="kw">paste</span>(<span class="kw">readLines</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>],<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>),
+     <span class="kw">paste</span>(<span class="kw">readLines</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>],<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>),
      <span class="dt">perl =</span> <span class="ot">TRUE</span>
     ),
-    <span class="dv">1</span>,<span class="dv">70</span>),<span class="st">&quot; ...&quot;</span>)
+    <span class="dv">1</span>,<span class="dv">140</span>),<span class="st">&quot; ...&quot;</span>)
     }
   )
 
 <span class="co"># identify metadata</span>
 blog_df<span class="op">$</span>created_at &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">file.info</span>(<span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.html&quot;</span>))<span class="op">$</span>ctime)
 blog_df<span class="op">$</span>updated_at &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">file.info</span>(<span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.html&quot;</span>))<span class="op">$</span>mtime)
+blog_df<span class="op">$</span>created_updated_at &lt;-<span class="st"> </span><span class="kw">paste0</span>(
+  blog_df<span class="op">$</span>created_at
+  , <span class="st">&quot; /&lt;br&gt;&quot;</span>
+  , blog_df<span class="op">$</span>updated_at
+  )
 blog_df<span class="op">$</span>lines &lt;-<span class="st"> </span><span class="kw">sapply</span>(
   <span class="kw">paste0</span>(blog_df<span class="op">$</span>filename,<span class="st">&quot;.Rmd&quot;</span>),<span class="cf">function</span>(x) blog_df<span class="op">$</span><span class="dt">filename =</span> <span class="kw">length</span>(<span class="kw">readLines</span>(x)))
 
@@ -389,12 +394,19 @@ blog_df<span class="op">$</span>titles &lt;-<span class="st"> </span><span class
 
 <span class="co">#wrap filename in raw html</span>
 <span class="co">#use post title as visible text</span>
-blog_df<span class="op">$</span>filename &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;&lt;a href=&#39;&quot;</span>,blog_df<span class="op">$</span>filename,<span class="st">&quot;.html&#39; target=&#39;_blank&#39;&gt;&quot;</span>,blog_df<span class="op">$</span>titles,<span class="st">&quot;&lt;/a&gt;&quot;</span>)
+blog_df<span class="op">$</span>filename &lt;-<span class="st"> </span><span class="kw">paste0</span>(
+  <span class="st">&quot;&lt;h7&gt; &lt;a class=&#39;minimal&#39; href=&#39;&quot;</span>
+  , blog_df<span class="op">$</span>filename
+  , <span class="st">&quot;.html&#39; target=&#39;_blank&#39;&gt;&quot;</span>
+  , blog_df<span class="op">$</span>titles,<span class="st">&quot; &quot;</span>
+  , <span class="st">&quot;&lt;i class=&#39;fa fa-sign-in fa-lg&#39;&gt;&lt;/i&gt;&quot;</span>,<span class="st">&quot;&lt;/a&gt;&lt;/h7&gt;&quot;</span>)
 
 <span class="co"># no longer need plain text titles</span>
 blog_df<span class="op">$</span>titles &lt;-<span class="st"> </span><span class="ot">NULL</span>
 
-blog_df &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(blog_df,dplyr<span class="op">::</span><span class="kw">desc</span>(created_at))
+blog_df &lt;-<span class="st"> </span>blog_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(created_at)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>created_at,<span class="op">-</span>updated_at)
 
 <span class="co"># define formate for header</span>
 col_format &lt;-<span class="st"> </span><span class="kw">JS</span>(
@@ -407,27 +419,35 @@ col_format &lt;-<span class="st"> </span><span class="kw">JS</span>(
           ,<span class="dt">rownames=</span><span class="ot">FALSE</span>
           ,<span class="dt">colnames =</span> <span class="kw">c</span>(<span class="st">&#39;Title&#39;</span>,
                         <span class="st">&#39;Content Snippet&#39;</span>,
-                       <span class="st">&#39;Created At&#39;</span>,
-                       <span class="st">&#39;Updated At&#39;</span>,
+                        <span class="st">&#39;Created / Updated&#39;</span>,
+                       <span class="co"># &#39;Created At&#39;,</span>
+                       <span class="co"># &#39;Updated At&#39;,</span>
                        <span class="st">&#39;Post Length (lines)&#39;</span>)
           ,<span class="dt">options=</span><span class="kw">list</span>(
+            <span class="dt">autoWidth =</span> <span class="ot">TRUE</span>,
             <span class="dt">initComplete =</span> col_format,
             <span class="dt">pageLength=</span><span class="dv">25</span>,
             <span class="dt">columnDefs =</span> <span class="kw">list</span>( <span class="co"># center all but first column</span>
-              <span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-center&#39;</span>,<span class="dt">targets=</span><span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(blog_df)<span class="op">-</span><span class="dv">1</span>)), 
+              <span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-center&#39;</span>,<span class="dt">targets=</span><span class="dv">2</span>)
+              , <span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-right&#39;</span>,<span class="dt">targets=</span><span class="dv">3</span>)
+              , <span class="kw">list</span>(<span class="dt">width =</span> <span class="st">&#39;100px&#39;</span>, <span class="dt">targets =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))
+              , <span class="kw">list</span>(<span class="dt">width =</span> <span class="st">&#39;250px&#39;</span>, <span class="dt">targets =</span> <span class="dv">0</span>)
+              , <span class="kw">list</span>(<span class="dt">verticalAlign =</span> <span class="st">&#39;top&#39;</span>, <span class="dt">targets =</span> <span class="st">&quot;_all&quot;</span>)), 
             <span class="dt">dom =</span> <span class="st">&#39;frtpB&#39;</span>
           )) <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">formatStyle</span>(
         <span class="st">&#39;lines&#39;</span>,
         <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(blog_df<span class="op">$</span>lines)), <span class="st">&#39;orange&#39;</span>),
-        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
+        <span class="dt">align =</span> <span class="st">&#39;bottom&#39;</span>,
+        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 45%&#39;</span>,
         <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
         <span class="dt">backgroundPosition =</span> <span class="st">&#39;left&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">      </span><span class="kw">formatStyle</span>(<span class="dt">columns =</span> <span class="st">&quot;filename&quot;</span>, 
               <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>,
-              <span class="dt">fontWeight =</span> <span class="st">&#39;bold&#39;</span>)</code></pre></div>
-<div id="htmlwidget-10159ec8ac3f57542f0a" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-10159ec8ac3f57542f0a">{"x":{"filter":"none","data":[["<a href='Report.html' target='_blank'>Grab-Bag of Report Features<\/a>","<a href='monty_hall.html' target='_blank'>Language Wars One: Monty Hall<\/a>","<a href='ed_api.html' target='_blank'>Department of Ed API<\/a>","<a href='ifelse_NA_trap.html' target='_blank'>NA Values in ifelse(): It's Not What You Think<\/a>","<a href='building_this_site.html' target='_blank'>Building This Site<\/a>","<a href='create_interesting_datasets.html' target='_blank'>Create Interesting Datasets<\/a>"],[" Introduction This is a report I produced as a teaching tool for the P ..."," Python Solution  ```{python setup_python} import numpy as np import t ..."," API Basics In the way we're using it, an API is a set of tools and pr ..."," Example Imagine I'm one of six people who all follow this same condit ..."," Step 1: Setup in RStudio  Open RStudio and create an R Project (File  ..."," The Basics  We'll need to learn to use a few base R functions such as ..."],["2019-01-30","2018-12-14","2018-12-11","2018-12-05","2018-11-17","2018-11-15"],["2019-03-06","2019-03-06","2019-03-06","2019-03-06","2019-03-06","2019-03-06"],[418,200,188,89,135,267]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Title<\/th>\n      <th>Content Snippet<\/th>\n      <th>Created At<\/th>\n      <th>Updated At<\/th>\n      <th>Post Length (lines)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[2,3,4]}],"dom":"frtpB","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (418.000000 - value)/418.000000 * 100 + '%, orange ' + (418.000000 - value)/418.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':'bold','color':'black'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+              <span class="dt">fontWeight =</span> <span class="st">&#39;bold&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">formatStyle</span>(<span class="kw">names</span>(blog_df), <span class="st">&#39;vertical-align&#39;</span>=<span class="st">&#39;top&#39;</span>)</code></pre></div>
+<div id="htmlwidget-0f679603339276045137" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0f679603339276045137">{"x":{"filter":"none","data":[["<h7> <a class='minimal' href='Report.html' target='_blank'>Grab-Bag of Report Features <i class='fa fa-sign-in fa-lg'><\/i><\/a><\/h7>","<h7> <a class='minimal' href='monty_hall.html' target='_blank'>Language Wars One: Monty Hall <i class='fa fa-sign-in fa-lg'><\/i><\/a><\/h7>","<h7> <a class='minimal' href='ed_api.html' target='_blank'>Department of Ed API <i class='fa fa-sign-in fa-lg'><\/i><\/a><\/h7>","<h7> <a class='minimal' href='ifelse_NA_trap.html' target='_blank'>NA Values in ifelse(): It's Not What You Think <i class='fa fa-sign-in fa-lg'><\/i><\/a><\/h7>","<h7> <a class='minimal' href='building_this_site.html' target='_blank'>Building This Site <i class='fa fa-sign-in fa-lg'><\/i><\/a><\/h7>","<h7> <a class='minimal' href='create_interesting_datasets.html' target='_blank'>Create Interesting Datasets <i class='fa fa-sign-in fa-lg'><\/i><\/a><\/h7>"],[" Post-Graduation Outcomes ```{r post-grad-status,fig.align='center',fig.height=1.5} air_df %>%   group_by(post_grad_outcome) %>%   rename(Ou ..."," Inspect Python Functions  See below whether the output is as expected from select functions.  ```{python p_inspect} prizes = simulate_prize ..."," A Function for Easy Calling  To help alleviate some of the headache, I wrote a function below that builds the call and traverses all pages  ..."," Example Imagine I'm one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or ..."," Step 5: Customize and New Content  See the optional lines you can add into your _site.yml file to further upgrade or customize your site!   ..."," Create the Dataset  Once you understand the basics of `rep()` and `sample()` creating an interesting dataset is fairly straightforward. Fir ..."],["2019-01-30 /<br>2019-03-07","2018-12-14 /<br>2019-03-07","2018-12-11 /<br>2019-03-07","2018-12-05 /<br>2019-03-07","2018-11-17 /<br>2019-03-07","2018-11-15 /<br>2019-03-16"],[418,200,188,89,135,267]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Title<\/th>\n      <th>Content Snippet<\/th>\n      <th>Created / Updated<\/th>\n      <th>Post Length (lines)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":true,"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":2},{"className":"dt-right","targets":3},{"width":"100px","targets":[2,3]},{"width":"250px","targets":0},{"verticalAlign":"top","targets":"_all"}],"dom":"frtpB","order":[],"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (418.000000 - value)/418.000000 * 100 + '%, orange ' + (418.000000 - value)/418.000000 * 100 + '%)','align':'bottom','background-size':'98% 45%','background-repeat':'no-repeat','background-position':'left'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':'bold','color':'black'});\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'vertical-align':'top'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'vertical-align':'top'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'vertical-align':'top'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'vertical-align':'top'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
 
   </div> <!-- articleBandContent -->
 </div> <!-- pageContent -->
