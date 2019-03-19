@@ -27,6 +27,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 library(DT)
+library(dplyr)
 ```
 
 This is my contribution to the fields of data science, business analytics, information technology, and variations on those themes.
@@ -44,23 +45,28 @@ blog_df <- data.frame(
 )
 # eventually, I will read all .rmd files in main dir
   # and exclude non-blog posts because blog posts will 
-    # quickly outweigh non-blog posts
+    # quickly outnumber non-blog posts
 
 # pull some text from each post for a content sample
 blog_df$intros <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
     paste0(substr(gsub(".*##",
      "",
-     paste(readLines(x)[1:50],collapse = " "),
+     paste(readLines(x)[1:100],collapse = " "),
      perl = TRUE
     ),
-    1,70)," ...")
+    1,140)," ...")
     }
   )
 
 # identify metadata
 blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
 blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
+blog_df$created_updated_at <- paste0(
+  blog_df$created_at
+  , " /<br>"
+  , blog_df$updated_at
+  )
 blog_df$lines <- sapply(
   paste0(blog_df$filename,".Rmd"),function(x) blog_df$filename = length(readLines(x)))
 
@@ -79,12 +85,19 @@ blog_df$titles <- sapply(
 
 #wrap filename in raw html
 #use post title as visible text
-blog_df$filename <- paste0("<a href='",blog_df$filename,".html' target='_blank'>",blog_df$titles,"</a>")
+blog_df$filename <- paste0(
+  "<h7> <a class='minimal' href='"
+  , blog_df$filename
+  , ".html' target='_blank'>"
+  , blog_df$titles," "
+  , "<i class='fa fa-sign-in fa-lg'></i>","</a></h7>")
 
 # no longer need plain text titles
 blog_df$titles <- NULL
 
-blog_df <- dplyr::arrange(blog_df,dplyr::desc(created_at))
+blog_df <- blog_df %>%
+  arrange(desc(created_at)) %>%
+  select(-created_at,-updated_at)
 
 # define formate for header
 col_format <- JS(
@@ -97,25 +110,34 @@ datatable(blog_df
           ,rownames=FALSE
           ,colnames = c('Title',
                         'Content Snippet',
-                       'Created At',
-                       'Updated At',
+                        'Created / Updated',
+                       # 'Created At',
+                       # 'Updated At',
                        'Post Length (lines)')
           ,options=list(
+            autoWidth = TRUE,
             initComplete = col_format,
             pageLength=25,
             columnDefs = list( # center all but first column
-              list(className = 'dt-center',targets=3:ncol(blog_df)-1)), 
+              list(className = 'dt-center',targets=2)
+              , list(className = 'dt-right',targets=3)
+              , list(width = '100px', targets = c(2,3))
+              , list(width = '250px', targets = 0)
+              , list(verticalAlign = 'top', targets = "_all")), 
             dom = 'frtpB'
           )) %>%
         formatStyle(
         'lines',
         background = styleColorBar(range(0,max(blog_df$lines)), 'orange'),
-        backgroundSize = '98% 75%',
+        align = 'bottom',
+        backgroundSize = '98% 45%',
         backgroundRepeat = 'no-repeat',
         backgroundPosition = 'left') %>%
       formatStyle(columns = "filename", 
               color = 'black',
-              fontWeight = 'bold')
+              fontWeight = 'bold') %>%
+      formatStyle(names(blog_df), 'vertical-align'='top')
+
 
 ```
 
