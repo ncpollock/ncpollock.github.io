@@ -30,7 +30,7 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 <div class="list-group">
 <a href="np_cv.pdf" class="list-group-item" target="_blank">
-  <i class="fa fa-file-text fa-fw" aria-hidden="true"></i> My Curriculum Vitae (aka my fancy resume) </a>  
+  <i class="fa fa-file-text fa-fw" aria-hidden="true"></i> Curriculum Vitae </a>  
   
 <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="list-group-item" target="_blank">
   <i class="fa fa-linkedin-square fa-fw" aria-hidden="true"></i> LinkedIn </a>  
