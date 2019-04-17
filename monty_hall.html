@@ -361,7 +361,7 @@ simulations <span class="op">=</span> <span class="dv">10000</span></code></pre>
     
 results <span class="op">=</span> switch_vs_stay(simulations)
 <span class="bu">print</span>(results)</code></pre></div>
-<pre><code>## [68.14, 31.86]</code></pre>
+<pre><code>## [66.71000000000001, 33.29]</code></pre>
 <h2 id="inspect-python-functions">Inspect Python Functions</h2>
 <p>See below whether the output is as expected from select functions.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">prizes <span class="op">=</span> simulate_prizedoor(<span class="dv">10</span>)
@@ -369,13 +369,13 @@ guesses <span class="op">=</span> simulate_guess(<span class="dv">10</span>)
 goats <span class="op">=</span> goat_door(prizes,guesses)
 switch <span class="op">=</span> switch_guess(prizes,goats)
 <span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</code></pre></div>
-<pre><code>## prizes  =  [2 0 1 1 2 1 0 2 0 1]</code></pre>
+<pre><code>## prizes  =  [2 1 2 1 1 2 0 0 1 2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</code></pre></div>
-<pre><code>## guesses =  [1 2 0 1 2 1 0 2 2 1]</code></pre>
+<pre><code>## guesses =  [0 1 1 1 1 0 2 1 0 0]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;goats  = &quot;</span>, goats)</code></pre></div>
-<pre><code>## goats  =  [0 1 2 0 0 2 1 0 1 2]</code></pre>
+<pre><code>## goats  =  [1 2 0 0 2 1 1 2 2 1]</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span> (<span class="st">&quot;switch  = &quot;</span>, switch)</code></pre></div>
-<pre><code>## switch  =  [1 2 0 2 1 0 2 1 2 0]</code></pre>
+<pre><code>## switch  =  [0 0 1 2 0 0 2 1 0 0]</code></pre>
 </div>
 <div class="col-md-6">
 <h2 id="r-solution">R Solution</h2>
@@ -423,7 +423,7 @@ results</code></pre></div>
 <pre><code>## [1] 66.04 33.96</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">switch_vs_stay</span>(simulations))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.18    0.02    0.21</code></pre>
+##    0.19    0.00    0.19</code></pre>
 <h2 id="inspect-r-functions">Inspect R Functions</h2>
 <p>See below whether the output is as expected from select functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prizes =<span class="st"> </span><span class="kw">sim_prizedoor</span>(<span class="dv">10</span>)
