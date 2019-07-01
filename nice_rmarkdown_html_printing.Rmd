@@ -1,0 +1,24 @@
+---
+title: "Hack Nice Printing for HTML RMarkdown"
+author: "Noah Pollock"
+date: "January 2019"
+output: html_document
+---
+
+## Scope
+Print HTML knitted RMarkdown documents with all the formatting you see on the screen.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+RMarkdown documents knitted into HTML can look great on screen, but I was consistently disappointed when I needed to print them. When colors, shapes, charts, and images are stripped and page breaks occur at less than optimal locations, I am reminded that HTML documents are not *intended* to be printed, it is not their purpose. After all, LaTeX exists for the very purpose of formatting PDF/print-worthy reports. Nevertheless, I often need to create reports that look good on the screen and in hand.
+
+RStudio is working on a package to solve some of these problems with an R package [pagedown](https://github.com/rstudio/pagedown)
+
+```{r simple_example}
+datatable(iris, options = list(pageLength = 5)) %>%
+  formatStyle('Sepal.Length',  color = 'red', backgroundColor = 'orange', fontWeight = 'bold')
+```
+

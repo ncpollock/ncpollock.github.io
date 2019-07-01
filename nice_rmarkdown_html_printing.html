@@ -12,9 +12,9 @@
 <meta name="author" content="Noah Pollock" />
 
 
-<title>NA Values in ifelse(): It’s Not What You Think</title>
+<title>Hack Nice Printing for HTML RMarkdown</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -25,6 +25,14 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
@@ -397,176 +405,25 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">NA Values in ifelse(): It’s Not What You Think</h1>
+<h1 class="title toc-ignore">Hack Nice Printing for HTML RMarkdown</h1>
 <h4 class="author"><em>Noah Pollock</em></h4>
-<h4 class="date"><em>December 4, 2018</em></h4>
+<h4 class="date"><em>January 2019</em></h4>
 
 </div>
 
 
 <div id="scope" class="section level2">
 <h2>Scope</h2>
-<p>Do you know how ifelse() operates when faced with missing data? Are you sure you know? Read more to avoid catastrophic data errors when using ifelse().</p>
+<p>Print HTML knitted RMarkdown documents with all the formatting you see on the screen.</p>
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Consider this plain english if then logic:</p>
-<p><strong>If</strong> my Kaggle score is in the top 10%, <strong>then</strong> I am treating myself to a new laptop, <strong>else</strong> I’m taking away my Netflix privileges.</p>
-<p>In short: Top 10% = New Laptop, Anything Else = No Netflix.</p>
-<p>Obviously, if I don’t enter a submission into Kaggle, my score cannot possibly be in the top 10%, therefore I should revoke my Netflix privileges! However, this is not how ifelse() evaluates this situation. Specifically, ifelse() only operates on non-missing values unless explicitly told to do otherwise.</p>
-</div>
-<div id="example" class="section level2">
-<h2>Example</h2>
-<p>Imagine I’m one of six people who all follow this same conditional logic, perform well in Kaggle and be rewarded, perform poorly or not at all and receive punishment <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The others all at least put forth an effort and submitted. My <code>kaggle_score_percentile</code> is <code>NA</code> because I did not submit. I should have my Netflix revoked, and so should the others who did not score in the top 10%.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build a dataframe</span>
-test_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">kaggle_score_percentile =</span> <span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">25</span>,<span class="dv">5</span>),<span class="ot">NA</span>)
-)
-
-knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see results with kable formatting</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">kaggle_score_percentile</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">5</td>
-</tr>
-<tr class="even">
-<td align="left">10</td>
-</tr>
-<tr class="odd">
-<td align="left">15</td>
-</tr>
-<tr class="even">
-<td align="left">20</td>
-</tr>
-<tr class="odd">
-<td align="left">25</td>
-</tr>
-<tr class="even">
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># apply conditional logic</span>
-test_df<span class="op">$</span>result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
-  test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>, <span class="co"># conditional logic</span>
-  <span class="st">&quot;New Laptop&quot;</span>, <span class="co"># if true</span>
-  <span class="st">&quot;No Netflix&quot;</span> <span class="co"># else (if false)</span>
-  ) 
-
-knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see results</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">kaggle_score_percentile</th>
-<th align="left">result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">5</td>
-<td align="left">New Laptop</td>
-</tr>
-<tr class="even">
-<td align="left">10</td>
-<td align="left">New Laptop</td>
-</tr>
-<tr class="odd">
-<td align="left">15</td>
-<td align="left">No Netflix</td>
-</tr>
-<tr class="even">
-<td align="left">20</td>
-<td align="left">No Netflix</td>
-</tr>
-<tr class="odd">
-<td align="left">25</td>
-<td align="left">No Netflix</td>
-</tr>
-<tr class="even">
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
-<p>Is that what you expected? <code>ifelse()</code> did not evaluate the way we might expect in natural langauge. My score did not meet the condition <code>kaggle_score_percentile &lt;= 10</code>, but instead of receiving the else condition, I received an <code>NA</code>. In the same vein as <code>NA == NA</code> is not TRUE nor is it FALSE (it’s <code>NA</code>) or for the MS Access users, you cannot join by missing values.</p>
-<p>Well, most of the time when I write conditional logic, I want the else condition to evaluate on missing values, so here’s a workaround.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_df<span class="op">$</span>result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
-  test_df<span class="op">$</span>kaggle_score_percentile <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span> <span class="co"># our logic from before</span>
-  <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(test_df<span class="op">$</span>kaggle_score_percentile), <span class="co"># explicit evaluation of na values</span>
-  <span class="st">&quot;New Laptop&quot;</span>,
-  <span class="st">&quot;No Netflix&quot;</span>)
-
-knitr<span class="op">::</span><span class="kw">kable</span>(test_df,<span class="dt">align =</span> <span class="st">&#39;l&#39;</span>) <span class="co"># see results</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">kaggle_score_percentile</th>
-<th align="left">result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">5</td>
-<td align="left">New Laptop</td>
-</tr>
-<tr class="even">
-<td align="left">10</td>
-<td align="left">New Laptop</td>
-</tr>
-<tr class="odd">
-<td align="left">15</td>
-<td align="left">No Netflix</td>
-</tr>
-<tr class="even">
-<td align="left">20</td>
-<td align="left">No Netflix</td>
-</tr>
-<tr class="odd">
-<td align="left">25</td>
-<td align="left">No Netflix</td>
-</tr>
-<tr class="even">
-<td align="left">NA</td>
-<td align="left">No Netflix</td>
-</tr>
-</tbody>
-</table>
-<p>Success! Now my failture to submit to Kaggle leads to a <code>No Netflix</code> result.</p>
-<div id="disqus_thread">
-
-</div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-
-var disqus_config = function () {
-this.page.url = 'https://ncpollock.github.io/ifelse_NA_trap.html';  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = 'https://ncpollock.github.io/ifelse_NA_trap.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://nc-blog-1.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>
-Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Can you tell I studied Psychology?<a href="#fnref1">↩</a></p></li>
-</ol>
+<p>RMarkdown documents knitted into HTML can look great on screen, but I was consistently disappointed when I needed to print them. When colors, shapes, charts, and images are stripped and page breaks occur at less than optimal locations, I am reminded that HTML documents are not <em>intended</em> to be printed, it is not their purpose. After all, LaTeX exists for the very purpose of formatting PDF/print-worthy reports. Nevertheless, I often need to create reports that look good on the screen and in hand.</p>
+<p>RStudio is working on a package to solve some of these problems with an R package <a href="https://github.com/rstudio/pagedown">pagedown</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">datatable</span>(iris, <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">formatStyle</span>(<span class="st">&#39;Sepal.Length&#39;</span>,  <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">backgroundColor =</span> <span class="st">&#39;orange&#39;</span>, <span class="dt">fontWeight =</span> <span class="st">&#39;bold&#39;</span>)</code></pre></div>
+<div id="htmlwidget-a51f6710b5c49a8939b3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a51f6710b5c49a8939b3">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-weight':'bold','color':'red','background-color':'orange'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 </div>
 
   </div> <!-- articleBandContent -->

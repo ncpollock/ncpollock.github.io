@@ -43,7 +43,7 @@ background-color: #2c3e50 !important;
 color: white !important;}
 
 
-div.polaroid {
+.polaroid {
   width: 115px;
   padding: 1%;
   border: 1px solid #212121;
@@ -53,7 +53,7 @@ div.polaroid {
   box-shadow: 10px 10px 5px #212121;
 }
 
-div.rotate_right {
+.rotate_right {
   float: left;
   -ms-transform: rotate(7deg); /* IE 9 */
   -webkit-transform: rotate(7deg); /* Safari */
@@ -70,4 +70,39 @@ div.rotate_left {
 a.minimal:link {
   background-color: transparent; 
   text-decoration: none;
+}
+
+.img-tile {
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 3%;
+  margin: 4%;
+  border: 1px solid #212121;
+  color: black;
+  font-size: 10pt;
+  background-color: white;
+  box-shadow: 10px 10px 5px #212121;
+}
+
+.img-tile:hover {
+  opacity: 0.6;
+  cursor: pointer; 
+  padding: 3%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.img-tile-inert {
+  float: left;
+  opacity: 0.4;
+  cursor: default;
+  width: 100%;
+  height: auto;
+  padding: 3%;
+  margin: 4%;
+  border: 1px solid #212121;
+  color: black;
+  font-size: 10pt;
+  background-color: white;
+  box-shadow: 10px 10px 5px #212121;
 }

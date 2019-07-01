@@ -75,6 +75,7 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
 
 <br>
 
+
 ```{r setup, include=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE)
 library(leaflet)
@@ -106,6 +107,7 @@ cv_df <- read.csv('cv_df.csv',
          date_start = as.Date(date_start))
 
 ```
+
 
 ## Fun with My CV {.tabset data-width=400}
 

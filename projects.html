@@ -9,11 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Noah Pollock" />
 
-<meta name="date" content="2018-12-12" />
 
-<title>README</title>
+<title>A Sampling of My Public Projects</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,11 +19,7 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
@@ -164,111 +158,8 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -341,48 +232,104 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
 
 
-
-<h1 class="title toc-ignore">README</h1>
-<h4 class="author"><em>Noah Pollock</em></h4>
-<h4 class="date"><em>December 12, 2018</em></h4>
+<h1 class="title toc-ignore">A Sampling of My Public Projects</h1>
 
 </div>
 
 
-<div id="scope" class="section level2">
-<h2>Scope</h2>
-<p>I built a website and included some interesting content throughout including several posts and a shiny dashboard that mimics popular Business Intelligence tools.</p>
+<p>These are a few of my personal projects. Each one is a work in progress, but some are more refined than others.</p>
 </div>
-<div id="files-uploaded" class="section level2">
-<h2>Files Uploaded</h2>
-<p>I have uploaded this README and most of the R Markdown files I wrote to generate the site. One R Markdown file was excluded because it contains an API Key to the U.S. Department of Education API. Hopefully you won’t find it on github either (ha!).</p>
 </div>
-<div id="steps-to-test" class="section level2">
-<h2>Steps to Test</h2>
-<p>The website is published on the internet at GitHub. Click the link below to test it.</p>
-<ul>
-<li><a href="https://ncpollock.github.io/">Website Link</a></li>
-<li><a href="https://1drv.ms/p/s!AnbrF2Up8Q7Ag8w4bHkJS2mWR4b04Q">Screencast is included in a PPT presentation within the folder I uploaded or at this link</a></li>
-<li><a href="https://ncpollock.github.io/building_this_site.html">Post on how I created the site</a></li>
-</ul>
-<p>Because my site is live on the web and per our conversation, I didn’t spend time making the files included here executable. Still, you may be able to run a local version by simply initiating an R Project in the directory and then reopening RStudio. Also, the full code is available in my <a href="https://github.com/ncpollock/">GitHub Repo</a></p>
-<p>I leveraged the following tools and technologies:</p>
-<ul>
-<li>R, RStudio, and shinyapps.io</li>
-<li>Git and GitHub, and GitHub Pages</li>
-<li>Python</li>
-<li>HTML and CSS</li>
-</ul>
+<div style="padding-right: 2%;">
+<div class="panel-body">
+<div class="row">
+<div class="col-sm-4">
+<a href="https://ncpolloc.shinyapps.io/shiny_bi/" target="_blank">
+<div class="img-tile">
+<p>
+<strong>Business Intelligence with Shiny</strong>
+</p>
+<img src="images/shiny_bi.JPG" alt="Clickable image redirecting to project site."/>
+<p class="caption">Select or upload a dataset to explore and understand its variables and visualize relationships between variables.</p>
 </div>
+</a>
+</div>
+<div class="col-sm-4">
+<a href="https://ncpolloc.shinyapps.io/data_generator/" target="_blank">
+<div class="img-tile">
+<p>
+<strong>Fake Data Generator</strong>
+</p>
+<img src="images/data_generator.JPG" alt="Clickable image redirecting to project site."/>
+<p class="caption">Need a dataset for testing or for class? This tool allows you to create and download a dataset.</p>
+</div>
+</a>
+</div>
+<div class="col-sm-4">
+<a href="https://ncpolloc.shinyapps.io/REM_sample/" target="_blank">
+<div class="img-tile">
+<p>
+<strong>Random Employee Meetup</strong>
+</p>
+<img src="images/rem.JPG" alt="Clickable image redirecting to project site."/>
+<p class="caption">This web application connects employees for random meetups based upon their general availability.</p>
+</div>
+</a>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-4">
+<a href target="_blank">
+<div class="img-tile-inert">
+<p>
+<strong>(Coming Soon!) Pure RMarkdown Dashboard on Higher Education</strong>
+</p>
+<img src="images/higher_ed.JPG" alt="Clickable image redirecting to project site."/>
+<p class="caption">Gain insight into Higher Education and learn how RMarkdown can be leveraged to create dashboards without an R server.</p>
+</div>
+</a>
+</div>
+<div class="col-sm-4">
+<a href target="_blank">
+<div class="img-tile-inert">
+<p>
+<strong>(Coming Soon!) Bingo Generator</strong>
+</p>
+<img src="images/bingo.JPG" alt="Clickable image redirecting to project site."/>
+<p class="caption">Bingo, Bango, Bongo, whatever five letter word you call it and whatever theme you want it, you can create and download it.</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<p><br><br></p>
+</div>
+<div id="disqus_thread" class="container-fluid main-container">
+
+</div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'https://ncpollock.github.io/projects.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 'https://ncpollock.github.io/projects.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://nc-blog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>
+Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
 
   </div> <!-- articleBandContent -->
 </div> <!-- pageContent -->
@@ -420,8 +367,6 @@ div.tocify {
 </footer>
 
 
-</div>
-</div>
 
 </div>
 

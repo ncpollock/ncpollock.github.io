@@ -14,14 +14,7 @@ navbar:
       href: blog.html
     - text: "Projects"
       icon: fa-gear
-      menu:
-        - text: "Dashboards"
-        - text: "R Markdown"
-          href: flex_dash.html
-        - text: "---------"
-        - text: "Web Apps"
-        - text: "BI with Shiny"
-          href: shiny_bi.html
+      href: projects.html
   right:
     - text: "Resources"
       icon: fa-key
