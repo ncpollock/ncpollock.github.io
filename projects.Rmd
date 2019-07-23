@@ -66,7 +66,7 @@ tile(s = "images/shiny_bi.JPG", t="Business Intelligence with Shiny",h="https://
 , fluidRow(
 tile(s = "images/higher_ed.JPG", t="(Coming Soon!) Pure RMarkdown Dashboard on Higher Education"
        , d = "Gain insight into Higher Education and learn how RMarkdown can be leveraged to create dashboards without an R server.")
-, tile(s = "images/bingo_landscape.JPG", t="(Coming Soon!) Bingo Generator",h="https://ncpolloc.shinyapps.io/bingo/"
+, tile(s = "images/bingo_landscape.JPG", t="Bingo Generator",h="https://ncpolloc.shinyapps.io/bingo/"
        , d = "Bingo, Bango, Bongo, whatever five letter word you call it and whatever theme you want it, you can create and download it.")
 ))
 ```
