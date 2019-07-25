@@ -31,7 +31,7 @@ library(DT)
 library(dplyr)
 ```
 
-This is my contribution to the fields of data science, business analytics, information technology, and variations on those themes.
+This is my contribution to the fields of data science, business analytics, information technology, and related topics.
 
 ```{r blog_df}
 
