@@ -203,7 +203,7 @@ lapply(unique(pdata$category),function(skill_cat){
 </div>
 <div class="panel-body">
   <div class="col-md-9">
-```{r present_map}
+```{r present_map, out.width="97%"}
 pdata <- cv_df %>%
   filter(section == "Presentations") %>%
   group_by(lat,lon) %>%
