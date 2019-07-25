@@ -82,20 +82,19 @@ a.minimal:link {
   color: black;
   font-size: 10pt;
   background-color: white;
-  box-shadow: 10px 10px 5px #212121;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .img-tile:hover {
-  opacity: 0.6;
+  opacity: 0.8;
   cursor: pointer; 
   padding: 3%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 10px 10px 5px black;
 }
 
 .img-square {
   width: 380;
   height: 260px;
-  text-align: center;
 }
 
 .img-tile-inert {
@@ -110,5 +109,5 @@ a.minimal:link {
   color: black;
   font-size: 10pt;
   background-color: white;
-  box-shadow: 10px 10px 5px #212121;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
