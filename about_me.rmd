@@ -103,8 +103,8 @@ thm <-
 cv_df <- read.csv('cv_df.csv',
                   stringsAsFactors = FALSE,
                   na.strings = "") %>%
-  mutate(date_end = as.Date(date_end),
-         date_start = as.Date(date_start))
+  mutate(date_end = mdy(date_end),
+         date_start = mdy(date_start))
 
 ```
 
