@@ -44,7 +44,7 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 ## Personal
 
-I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creating (both physically with wood and digitally with CAD), skiing, spending time with my family, and pushing my physical limits while exploring via cycling.
+I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creating (both physically with wood and digitally with CAD), skiing, spending time with my family, and pushing my physical limits and exploring on road and gravel bikes.
 
 <div class="panel-body">
   <div class="col-md-4">
@@ -67,7 +67,7 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
   
   <div class="polaroid" style ="width: 100%">
   <img src="images/family_camping.jpg" alt="Me, my wife, and our dogs camping.">
-  <p class="caption">Me my wife and our dogs camping. It was our dogs' first time at the beach. </p>
+  <p class="caption">Me my wife and our dogs camping. It was their first time at the beach. They didn't like the waves crashing on the shore.</p>
   </div>
   </div>
   
