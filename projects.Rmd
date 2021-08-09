@@ -60,14 +60,15 @@ tile(s = "images/shiny_bi.JPG", t="Business Intelligence with Shiny",h="https://
        , d = "Select or upload a dataset to explore and understand its variables and visualize relationships between variables.")
 , tile(s = "images/data_generator.JPG", t="Fake Data Generator",h="https://ncpolloc.shinyapps.io/data_generator/"
        , d = "Need a dataset for testing or for class? This tool allows you to create and download a dataset.")
-, tile(s = "images/rem.JPG", t="Random Employee Meetup",h="https://ncpolloc.shinyapps.io/REM_sample/"
-       , d = "This web application connects employees for random meetups based upon their general availability.")
+, tile(s = "images/bingo_landscape.JPG", t="Bingo Generator",h="https://ncpolloc.shinyapps.io/bingo/"
+       , d = "Bingo, Bango, Bongo, whatever five letter word you call it and whatever theme you want it, you can create and download it.")
+# , tile(s = "images/rem.JPG", t="Random Employee Meetup",h="https://ncpolloc.shinyapps.io/REM_sample/"
+#        , d = "This web application connects employees for random meetups based upon their general availability.")
 )
 , fluidRow(
 tile(s = "images/higher_ed.JPG", t="(Coming Soon!) Pure RMarkdown Dashboard on Higher Education"
        , d = "Gain insight into Higher Education and learn how RMarkdown can be leveraged to create dashboards without an R server.")
-, tile(s = "images/bingo_landscape.JPG", t="Bingo Generator",h="https://ncpolloc.shinyapps.io/bingo/"
-       , d = "Bingo, Bango, Bongo, whatever five letter word you call it and whatever theme you want it, you can create and download it.")
+
 ))
 ```
 

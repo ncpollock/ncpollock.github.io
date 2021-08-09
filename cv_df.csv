@@ -1,15 +1,20 @@
 section,experience,place,date_start,date_end,point_1,point_2,point_3,category,lat,lon,include
 Education,"B.A. Psychology, Cum Laude",Oakland University,,4/1/2013,Departmental Honors,Minor in Philosophy,,,,,TRUE
 Education,"M.S. Psychology, GPA: 3.80",Oakland University,,4/1/2015,Thesis: Is “Average” Feedback Threatening? Performance Feedback and the Stress-Buffering Model of High Self-Esteem,,,,,,TRUE
-Education,"M.S. Information Technology Management, GPA: 3.85 ",Oakland University,,4/1/2020,Concentration in Business Analytics,,,,,,TRUE
+Education,"M.S. Information Technology Management, GPA: 3.85 ",Oakland University,,4/1/2021,Concentration in Business Analytics,,,,,,TRUE
 Career,Research Assistant,Oakland University,9/1/2014,10/15/2015,Programmed automated analytic processes using SPSS syntax and R,Drafted reports to summarize institutional data,"Cleaned, organized, and analyzed datasets with over 1 million rows and 100 columns",,42.672733,-83.21861,TRUE
 Career,Data Transfer Specialist,Oakland University,5/1/2015,2/15/2016,Developed user-friendly databases connected to Banner (Ellucian ERP System),Explored data relevant to transfer student success and articulation,"Solved technical challenges using MS Access, SQL*Plus, VBA, and Batch scripting",,42.672733,-83.21861,TRUE
 Career,Research Area Specialist Intermediate,University of Michigan Dearborn,2/1/2016,9/26/2016,Coordinated with multiple departments to manage data definitions and integrity,Satisfied federal and state government reporting requirements,"Extracted, analyzed, and reported on student success and program review data",,42.319777,-83.23507,TRUE
-Career,Assistant Director of Assessment,Oakland University,9/28/2016,9/9/2099,"Collect, clean, analyze, and report on post-graduation success data",Supervise IT Interns and collaborate with departments across campus,Identify and report on key performance indicators within the department,,42.672733,-83.21861,TRUE
+Career,Assistant Director of Assessment,Oakland University,9/28/2016,5/24/2019,"Collected, cleaned, analyzed, and reported on post-graduation success and engagement data",Supervised IT Interns and collaborated with diverse staff and departments,"Managed data integrations, Extract Transform and Load processes, and other IT projects",,42.672733,-83.21861,TRUE
+Career,Senior Systems and Data Analyst,Oakland University,5/27/2019,9/9/2099,Lead university-wide post-graduation outcome collection and reporting,"Support and lead assessment, reporting, and data integrations across 20+ departments",Manage software implementations and provide ongoing support,,42.672733,-83.21861,
+Publications,"Smydra, V. R., Ring Cebelak, A., Pollock, N. C. (2019, August). First steps to improving internship 
+participation. National Association of Colleges and Employers Journal. 40-44",,,,,,,,,,TRUE
 Publications,"Zeigler-Hill, V., Holden, C. J., Southard, A. C., Noser, A. E., Enjaian, B., & Pollock, N. C. (2016). The dark sides of high and low self-esteem. In V. Zeigler-Hill & D. K. Marcus (Eds.), The dark side of personality: Science and practice in social, personality, and clinical psychology (pp. 325-340). Washington, DC: American Psychological Association. ",,,,,,,,,,TRUE
 Publications,"Pollock, N. C., McCabe, G. A., Southard, A. C., & Zeigler-Hill, V. (2016). Pathological personality traits and emotion regulation difficulties. Personality and Individual Differences. 95, 168-177 ",,,,,,,,,,TRUE
 Publications,"Pollock, N. C., Noser, A. E., Holden, C. J., & Zeigler-Hill, V. (2015). Do orientations to happiness mediate the associations that personality traits have with subjective well-being? Journal of Happiness Studies. doi:10.1007/s10902-015-9617-9. ",,,,,,,,,,TRUE
 Publications,"Southard, A. C., Noser, A. E., Pollock, N. C., Mercer, S. H., & Zeigler-Hill, V. (2015). The interpersonal nature of dark personality features. Journal of Social and Clinical Psychology, 34, 555-586. ",,,,,,,,,,TRUE
+Presentations,"Pollock, N. C. (2021, April). Migrating Disability Support Services into Banner. Oral presentation recorded for 
+Ellucian LIVE 2021, Virtual.",,,,,,,,42.672733,-83.21861,TRUE
 Presentations,"Pollock, N. C., (2019, November). Collecting and Reporting Post-Graduation Outcomes. Oral presentation at Michigan Association for Institutional Research, Gaylord, MI.    ",,,,,,,,45.032985,-84.589533,TRUE
 Presentations,"Gonzalez, J., Pollock, N. C. (2019, November). Open-Sourced IR: Zero-Cost Solutions for Data Management, Analytics, and Reporting. Oral presentation at Michigan Association for Institutional Research, Gaylord, MI.  ",,,,,,,,45.032985,-84.589533,TRUE
 Presentations,"Thibodeau, W., Pollock, N. C.  (2019, June). Capitalize on Your First-Destination Survey: The Next Step. Oral presentation to be presented at National Association of Colleges and Employers, Orlando, FL. ",,,,,,,,28.367081,-81.560381,TRUE
@@ -29,7 +34,7 @@ Presentations,"Enjaian, B., Pollock, N. C., Holden, C. J., Southard, A. C., & Ze
 Presentations,"Pollock, N. C., Williams, K., Spaine, J., Coleman, A., (2014, March) Tools, tactics, and strategies for program improvement. Oral presentation presented at the Association for Orientation, Transition, and Retention in Higher Education, Columbus, OH. ",,,,,,,,39.997421,-83.014437,TRUE
 Presentations,"Pollock, N. C., Noser, A., Holden, C. J., & Zeigler-Hill, V. (2014, May) Personality, orientations to happiness, and subjective well-being.  Poster session presented at Midwestern Psychological Association, Chicago, IL.  ",,,,,,,,41.880603,-87.626967,TRUE
 Presentations,"Pollock, N. C., Holden, C. J., & Zeigler-Hill, V. (2013, May) Self-esteem instability and personality. Poster session presented at Midwestern Psychological Association, Chicago, IL. ",,,,,,,,41.880603,-87.626967,TRUE
-Acheivements,"Chair, Michigan Association for Institutional Research",,,11/6/2020,,,,,,,TRUE
+Acheivements,"President, Michigan Association for Institutional Research",,,11/6/2020,,,,,,,TRUE
 Acheivements,Oakland University Advancement Core Value Award for Teamwork and Community,,,2/1/2018,,,,,,,TRUE
 Acheivements,"John Steele Grant, Midwest Association of Colleges and Employers",,,5/1/2018,,,,,,,TRUE
 Acheivements,"Graduate Student Grant, Michigan Association for Institutional Research",,,11/5/2014,,,,,,,TRUE
@@ -42,6 +47,7 @@ Skills,Banner,,9/1/2014,,,,,Enterprise Systems and Data Solutions,,,FALSE
 Skills,Percussion,,5/1/2015,2/15/2016,,,,Enterprise Systems and Data Solutions,,,FALSE
 Skills,Argos,,5/20/2017,,,,,Enterprise Systems and Data Solutions,,,FALSE
 Skills,PostgreSQL,,6/15/2018,,,,,Enterprise Systems and Data Solutions,,,FALSE
+Skills,SQL Server,,6/15/2018,,,,,Enterprise Systems and Data Solutions,,,
 Skills,MS Access,,5/1/2015,,,,,Enterprise Systems and Data Solutions,,,FALSE
 Skills,Qualtrics,,9/28/2016,,,,,Research and Statistical Applications,,,FALSE
 Skills,RStudio,,5/1/2015,,,,,Research and Statistical Applications,,,FALSE
@@ -55,6 +61,7 @@ Skills,Batch Scripting,,10/1/2015,11/1/2015,,,,Programming,,,FALSE
 Skills,SQL,,5/1/2015,,,,,Programming,,,FALSE
 Skills,"Microsoft Office Suite (e.g., Word, PowerPoint, Excel)",,9/1/2003,,,,,General,,,FALSE
 Skills,"Google Suite (e.g., Sheets, Slides, Docs)",,9/1/2012,,,,,General,,,FALSE
+Skills,Tableau,,1/15/2020,12/17/2020,,,,Research and Statistical Applications,,,FALSE
 Musicianship,Cornet,NABBA,,2010,,,,,35.780238,-78.639205,FALSE
 Musicianship,Cornet,OU Brass Band,,,,,,,43.234869,-86.252467,FALSE
 Musicianship,Trumpet,The Hard Rock Café,,2009,,,,,29.425179,-98.489189,FALSE

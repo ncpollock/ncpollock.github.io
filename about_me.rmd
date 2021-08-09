@@ -26,7 +26,7 @@ output:
 
 ## Professional
 
-I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. Since 2017, R has been my tool of choice. Nevertheless, I have experience with a variety of software, programming languages, and IT project types. You can learn more about my work via the following resources:
+I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. Since 2017, R has been my tool of choice. However, I have experience with a variety of software, programming languages, and IT project types. You can learn more about my work via the following resources:
 
 <div class="list-group">
 <a href="np_cv.pdf" class="list-group-item" target="_blank">
@@ -50,8 +50,8 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
   <div class="col-md-4">
   
   <div class="polaroid" style ="width: 100%">
-  <img src="images/diverge_and_me.JPG" alt="A picture of me and my bike.">
-  <p class="caption">My first organized cycling event! Zoo-De-Mack, a 51 mile roll from Boyne Highlands Resort to Mackinaw City.</p>
+  <img src="images/wam_100.jpg" alt="My wife and I on a bike ride.">
+  <p class="caption">Halfway through my wife's first 100 mile bike ride, Make-A-Wish Wish-A-Mile 100, 2019.<br></p>
   </div>
   </div>
   
@@ -67,7 +67,7 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
   
   <div class="polaroid" style ="width: 100%">
   <img src="images/family_camping.jpg" alt="Me, my wife, and our dogs camping.">
-  <p class="caption">Me my wife and our dogs camping. It was their first time at the beach. They didn't like the waves crashing on the shore.</p>
+  <p class="caption">Me my wife and our dogs camping. It was their first time at the beach and they were scared of the waves crashing on the shore.</p>
   </div>
   </div>
   
@@ -111,7 +111,7 @@ cv_df <- read.csv('cv_df.csv',
 
 ## Fun with My CV {.tabset data-width=400}
 
-Mostly for fun, I also recreated pieces of my CV in different formats. Although, they're not all practical and may be hardly legible (e.g., ggplot2 CV needs a lot of work).
+Mostly for fun, I also recreated pieces of my CV in this dashboard-like format.
 
 
 ### Dashboard
@@ -237,12 +237,15 @@ leaflet() %>%
 </div></div>
 </div></div>
 
+
+```{r cv_df_plot, fig.width=8.5, fig.height=25,fig.align='center',echo=FALSE, include=FALSE,eval=FALSE}
+
+
 ### ggplot2
-It's not practical and it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
+#It's not practical and it needs some work (e.g., vertical spacing adjustments), but I hope it conveys my passion (obsession?) for coding in R.
+#
+#First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I #add line breaks via `str_wrap()` and then I adjust the vertical width of points depending on the number of lines wrapped.
 
-First, I read in a CSV file containing some examples from my CV. I reshape and mutate the file in a few ways to make it easier to plot. For example, I add line breaks via `str_wrap()` and then I adjust the vertical width of points depending on the number of lines wrapped.
-
-```{r cv_df_plot, fig.width=8.5, fig.height=25,fig.align='center',echo=TRUE}
 
 line_length <- 110
 
