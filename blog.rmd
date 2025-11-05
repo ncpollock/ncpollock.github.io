@@ -40,7 +40,7 @@ blog_df <- data.frame(
   filename = c("create_interesting_datasets"
                ,"ifelse_NA_trap"
                ,"building_this_site"
-               ,"ed_api"
+               # ,"ed_api"
                ,"monty_hall"
                ,"Report")
 )
@@ -49,7 +49,8 @@ blog_df <- data.frame(
     # quickly outnumber non-blog posts
 
 # pull some text from each post for a content sample
-blog_df$intros <- sapply(
+blog_df <- blog_df %>% 
+  mutate(intro = sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
     paste0(substr(gsub(".*##",
      "",
@@ -59,20 +60,9 @@ blog_df$intros <- sapply(
     1,140)," ...")
     }
   )
-
-# identify metadata
-blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
-blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
-blog_df$created_updated_at <- paste0(
-  blog_df$created_at
-  , " /<br>"
-  , blog_df$updated_at
-  )
-blog_df$lines <- sapply(
+  , lines = sapply(
   paste0(blog_df$filename,".Rmd"),function(x) blog_df$filename = length(readLines(x)))
-
-# extract post titles
-blog_df$titles <- sapply(
+  , title = sapply(
   paste0(blog_df$filename,".Rmd"),function(x){
     gsub('"',
          "",
@@ -82,6 +72,19 @@ blog_df$titles <- sapply(
           )
     )
     }
+  )) %>%
+  bind_rows(data.frame(filename = 'ed_api'
+                       ,intro = 'Function for Easy Calling To help alleviate some of the headache, I wrote a function below that builds the call and traverses all pages ...'
+                       ,lines = 188
+                       , title = 'Department of Ed API'))
+
+# identify metadata
+blog_df$created_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$ctime)
+blog_df$updated_at <- as.Date(file.info(paste0(blog_df$filename,".html"))$mtime)
+blog_df$created_updated_at <- paste0(
+  blog_df$created_at
+  , " /<br>"
+  , blog_df$updated_at
   )
 
 #wrap filename in raw html
@@ -90,15 +93,15 @@ blog_df$filename <- paste0(
   "<h7> <a class='minimal' href='"
   , blog_df$filename
   , ".html' target='_blank'>"
-  , blog_df$titles," "
+  , blog_df$title," "
   , "<i class='fa fa-sign-in fa-lg'></i>","</a></h7>")
 
 # no longer need plain text titles
-blog_df$titles <- NULL
+blog_df$title <- NULL
 
 blog_df <- blog_df %>%
   arrange(desc(created_at)) %>%
-  select(-created_at,-updated_at)
+  select(filename,intro,created_updated_at,lines)
 
 # define formate for header
 col_format <- JS(

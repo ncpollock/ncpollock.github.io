@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="-Sir Isaac Newton" />
 
 
-<title>If I have seen further it is by standing on the shoulders of Giants.</title>
+<title>“If I have seen further it is by standing on the shoulders of Giants.”</title>
 
-<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
-<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<script src="site_libs/datatables-binding-0.33/datatables.js"></script>
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122098274-2"></script>
 <script>
@@ -43,88 +53,135 @@
   gtag('config', 'UA-122098274-2');
 </script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
-td.sourceCode { padding-left: 5px; }
-pre, code { color: #cccccc; background-color: #303030; }
-code > span.kw { color: #f0dfaf; } /* Keyword */
-code > span.dt { color: #dfdfbf; } /* DataType */
-code > span.dv { color: #dcdccc; } /* DecVal */
-code > span.bn { color: #dca3a3; } /* BaseN */
-code > span.fl { color: #c0bed1; } /* Float */
-code > span.ch { color: #dca3a3; } /* Char */
-code > span.st { color: #cc9393; } /* String */
-code > span.co { color: #7f9f7f; } /* Comment */
-code > span.ot { color: #efef8f; } /* Other */
-code > span.al { color: #ffcfaf; } /* Alert */
-code > span.fu { color: #efef8f; } /* Function */
-code > span.er { color: #c3bf9f; } /* Error */
-code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code > span.sc { color: #dca3a3; } /* SpecialChar */
-code > span.vs { color: #cc9393; } /* VerbatimString */
-code > span.ss { color: #cc9393; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #f0dfaf; } /* ControlFlow */
-code > span.op { color: #f0efd0; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #7f9f7f; } /* Documentation */
-code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-div.sourceCode {
-  overflow-x: visible;
-}
-</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
   }
 </style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 
-
-<style type="text/css">
-h1 {
-  font-size: 34px;
+.sourceCode .row {
+  width: 100%;
 }
-h1.title {
-  font-size: 38px;
+.sourceCode {
+  overflow-x: auto;
 }
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
+.code-folding-btn {
+  margin-right: -30px;
 }
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
 
 <link rel="stylesheet" href="my_style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -132,13 +189,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -149,44 +201,59 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+.dropdown-submenu {
+  position: relative;
 }
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
 }
-
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
 }
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
 }
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
 }
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu.pull-left {
+  float: none;
 }
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -196,35 +263,94 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
-
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -232,7 +358,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -295,11 +421,11 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -307,8 +433,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">“If I have seen further it is by standing<br>on the shoulders of Giants.”</h1>
-<h4 class="author"><em>-Sir Isaac Newton</em></h4>
+<h1 class="title toc-ignore">“If I have seen further it is by
+standing<br>on the shoulders of Giants.”</h1>
+<h4 class="author">-Sir Isaac Newton</h4>
 
 </div>
 
@@ -331,74 +458,91 @@ $(document).ready(function () {
 </style>
 <p><br></p>
 <div id="welcome" class="section level2">
-<h2>Welcome!</h2>
-<p>This site is meant to be a resource for those interested in data science, data visualization, business intelligence, dashboarding, and databases. The site is primarily built using rmarkdown. You can check out the blog section for details on how you can build your own!</p>
-<p>You may be familiar with the phrase “On the Shoulders of Giants”. A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon required the wheel, the modern computer required the transistor, the light bulb required electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It’s amazing what we can accomplish with just a bit of giant-hunting (e.g., research).</p>
+<h2>Welcome</h2>
+<p>This site is meant to be a resource for those interested in data
+science, data visualization, business intelligence, dashboarding, and
+databases. The site is primarily built using rmarkdown. You can check
+out the blog section for details on how you can build your own.</p>
+<p>You may be familiar with the phrase “On the Shoulders of Giants”. A
+nod to the fact that virtually nothing great is accomplished without the
+effort and aptitude of those who came before. The wagon required the
+wheel, the modern computer required the transistor, the light bulb
+required electricity, ad infinitum. Likewise, this site (and every site
+for that matter) is built on the shoulders of giants. It’s amazing what
+we can accomplish with just a bit of giant-hunting (e.g., research).</p>
 <div id="site-metrics" class="section level3">
 <h3>Site Metrics</h3>
-<p>To further emphasize the idea of standing on giants, check out the table and bar chart hybrid below to learn a bit about what’s involved in building this website. I wrote or contributed all of the RMD, YML, PDFs, CSVs, JPGs, and PNGs, and I contributed a small sliver of the HTML and CSS. The files I did not author or contribute make up the vast majority of this site e.g., the JS, HTML, and CSS. Further consider that I did not develop the languages themselves, design any computer, nor develop the internet. With this in mind, I say thank you to those who made this site possible.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># identify all site files and directories</span>
-site_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="kw">file.info</span>(<span class="kw">list.files</span>(<span class="dt">include.dirs =</span> <span class="ot">TRUE</span>,<span class="dt">recursive =</span> <span class="ot">TRUE</span>))) <span class="op">%&gt;%</span>
-<span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;filename&quot;</span>)
-
-<span class="co"># calculate # of lines and file type / extension</span>
-site_df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
-  site_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(isdir <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>),
-  site_df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(isdir <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lines =</span> <span class="kw">sapply</span>(
-    filename,<span class="cf">function</span>(x) <span class="dt">filename =</span> <span class="kw">length</span>(<span class="kw">readLines</span>(x))),
-    <span class="dt">file_ext =</span> <span class="kw">toupper</span>(tools<span class="op">::</span><span class="kw">file_ext</span>(filename))
-    )
-  ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(file_ext <span class="op">!=</span><span class="st"> &quot;&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(file_ext)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(file_ext) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>(),
-            <span class="dt">size_mb =</span> <span class="kw">sum</span>(size <span class="op">*</span><span class="st"> </span><span class="fl">0.000001</span>),
-            <span class="dt">lines =</span> <span class="kw">sum</span>(lines)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Count))
-
-
-<span class="co"># define format for header</span>
-col_format &lt;-<span class="st"> </span><span class="kw">JS</span>(
-  <span class="st">&quot;function(settings, json) {&quot;</span>,
-  <span class="st">&quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#252525&#39;, &#39;color&#39;: &#39;#FFFFFF&#39;});&quot;</span>,
-  <span class="st">&quot;}&quot;</span>)
-
-<span class="kw">datatable</span>(site_df
-          ,<span class="dt">rownames =</span> <span class="ot">FALSE</span>
-          ,<span class="dt">colnames =</span> <span class="kw">c</span>(<span class="st">&#39;Filetype&#39;</span>,
-                        <span class="st">&#39;Count of Files&#39;</span>,
-                        <span class="st">&#39;Filesize (MB)&#39;</span>,
-                        <span class="st">&#39;Lines of Code&#39;</span>)
-          ,<span class="dt">options=</span><span class="kw">list</span>(
-            <span class="dt">initComplete =</span> col_format,
-            <span class="dt">pageLength=</span><span class="dv">25</span>,
-            <span class="co">#center all but first column</span>
-            <span class="dt">columnDefs =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-center&#39;</span>,<span class="dt">targets=</span><span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(site_df)<span class="op">-</span><span class="dv">1</span>)), 
-            <span class="dt">dom =</span> <span class="st">&#39;t&#39;</span>
-          )) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw">formatStyle</span>(
-        <span class="st">&#39;size_mb&#39;</span>,
-        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(site_df<span class="op">$</span>size_mb)), <span class="st">&#39;orange&#39;</span>),
-        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
-        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
-        <span class="dt">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">formatStyle</span>(
-        <span class="st">&#39;lines&#39;</span>,
-        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(site_df<span class="op">$</span>lines)), <span class="st">&#39;orange&#39;</span>),
-        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
-        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
-        <span class="dt">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">formatStyle</span>(
-        <span class="st">&#39;Count&#39;</span>,
-        <span class="dt">background =</span> <span class="kw">styleColorBar</span>(<span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">max</span>(site_df<span class="op">$</span>Count)), <span class="st">&#39;orange&#39;</span>),
-        <span class="dt">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,
-        <span class="dt">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,
-        <span class="dt">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>)</code></pre></div>
-<div id="htmlwidget-89a2bfb45228990a8746" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-89a2bfb45228990a8746">{"x":{"filter":"none","data":[["JS","CSS","PNG","TTF","HTML","JPG","RMD","MAP","CSV","EOT","SVG","WOFF","WOFF2","PDF","MD","OTF","RPROJ","YML"],[66,47,42,31,17,16,14,8,6,6,6,6,6,2,1,1,1,1],[3.348779,2.549307,1.908323,1.823512,2.016394,17.231917,0.093837,1.54758,2.837563,0.450917,2.054788,0.311824,0.250264,0.740126,0.001394,0.109688,0.00024,0.000913],[32187,25171,42,149,8545,26,2514,44,30804,20,5296,21,14,38,40,8,15,39]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Filetype<\/th>\n      <th>Count of Files<\/th>\n      <th>Filesize (MB)<\/th>\n      <th>Lines of Code<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[1,2,3]}],"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (17.231917 - value)/17.231917 * 100 + '%, orange ' + (17.231917 - value)/17.231917 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (32187.000000 - value)/32187.000000 * 100 + '%, orange ' + (32187.000000 - value)/32187.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + (66.000000 - value)/66.000000 * 100 + '%, orange ' + (66.000000 - value)/66.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+<p>To further emphasize the idea of standing on giants, check out the
+table and bar chart hybrid below to learn a bit about what’s involved in
+building this website. I wrote or contributed all of the RMD, YML, PDFs,
+CSVs, JPGs, and PNGs, and I contributed a small sliver of the HTML and
+CSS. The files I did not author or contribute make up the vast majority
+of this site e.g., the JS, HTML, and CSS. Further consider that I did
+not develop the languages themselves, design any computer, nor develop
+the internet. With this in mind, I say thank you to those who made this
+site possible.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># identify all site files and directories</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>site_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">file.info</span>(<span class="fu">list.files</span>(<span class="at">include.dirs =</span> <span class="cn">TRUE</span>,<span class="at">recursive =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">&quot;filename&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># calculate # of lines and file type / extension</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>site_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  site_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(isdir <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  site_df <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">filter</span>(isdir <span class="sc">==</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lines =</span> <span class="fu">sapply</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    filename,<span class="cf">function</span>(x) <span class="at">filename =</span> <span class="fu">length</span>(<span class="fu">readLines</span>(x))),</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="at">file_ext =</span> <span class="fu">toupper</span>(tools<span class="sc">::</span><span class="fu">file_ext</span>(filename))</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    )</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="fu">filter</span>(file_ext <span class="sc">!=</span> <span class="st">&quot;&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(file_ext)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="fu">group_by</span>(file_ext) <span class="sc">%&gt;%</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(),</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>            <span class="at">size_mb =</span> <span class="fu">sum</span>(size <span class="sc">*</span> <span class="fl">0.000001</span>),</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>            <span class="at">lines =</span> <span class="fu">sum</span>(lines)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Count))</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="co"># define format for header</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>col_format <span class="ot">&lt;-</span> <span class="fu">JS</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  <span class="st">&quot;function(settings, json) {&quot;</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  <span class="st">&quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#252525&#39;, &#39;color&#39;: &#39;#FFFFFF&#39;});&quot;</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  <span class="st">&quot;}&quot;</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="fu">datatable</span>(site_df</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>          ,<span class="at">rownames =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>          ,<span class="at">colnames =</span> <span class="fu">c</span>(<span class="st">&#39;Filetype&#39;</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>                        <span class="st">&#39;Count of Files&#39;</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>                        <span class="st">&#39;Filesize (MB)&#39;</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>                        <span class="st">&#39;Lines of Code&#39;</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>          ,<span class="at">options=</span><span class="fu">list</span>(</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>            <span class="at">initComplete =</span> col_format,</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>            <span class="at">pageLength=</span><span class="dv">25</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>            <span class="co">#center all but first column</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>            <span class="at">columnDefs =</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">className =</span> <span class="st">&#39;dt-center&#39;</span>,<span class="at">targets=</span><span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(site_df)<span class="sc">-</span><span class="dv">1</span>)), </span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>            <span class="at">dom =</span> <span class="st">&#39;t&#39;</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>          )) <span class="sc">%&gt;%</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>      <span class="fu">formatStyle</span>(</span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>        <span class="st">&#39;size_mb&#39;</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>        <span class="at">background =</span> <span class="fu">styleColorBar</span>(<span class="fu">range</span>(<span class="dv">0</span>,<span class="fu">max</span>(site_df<span class="sc">$</span>size_mb)), <span class="st">&#39;orange&#39;</span>),</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>        <span class="at">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>        <span class="at">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>        <span class="at">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a>        <span class="fu">formatStyle</span>(</span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a>        <span class="st">&#39;lines&#39;</span>,</span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a>        <span class="at">background =</span> <span class="fu">styleColorBar</span>(<span class="fu">range</span>(<span class="dv">0</span>,<span class="fu">max</span>(site_df<span class="sc">$</span>lines)), <span class="st">&#39;orange&#39;</span>),</span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a>        <span class="at">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,</span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a>        <span class="at">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,</span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a>        <span class="at">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-55"><a href="#cb1-55" tabindex="-1"></a>        <span class="fu">formatStyle</span>(</span>
+<span id="cb1-56"><a href="#cb1-56" tabindex="-1"></a>        <span class="st">&#39;Count&#39;</span>,</span>
+<span id="cb1-57"><a href="#cb1-57" tabindex="-1"></a>        <span class="at">background =</span> <span class="fu">styleColorBar</span>(<span class="fu">range</span>(<span class="dv">0</span>,<span class="fu">max</span>(site_df<span class="sc">$</span>Count)), <span class="st">&#39;orange&#39;</span>),</span>
+<span id="cb1-58"><a href="#cb1-58" tabindex="-1"></a>        <span class="at">backgroundSize =</span> <span class="st">&#39;98% 75%&#39;</span>,</span>
+<span id="cb1-59"><a href="#cb1-59" tabindex="-1"></a>        <span class="at">backgroundRepeat =</span> <span class="st">&#39;no-repeat&#39;</span>,</span>
+<span id="cb1-60"><a href="#cb1-60" tabindex="-1"></a>        <span class="at">backgroundPosition =</span> <span class="st">&#39;center&#39;</span>)</span></code></pre></div>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-be6157b011f64ecf9faf" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-be6157b011f64ecf9faf">{"x":{"filter":"none","vertical":false,"data":[["JS","CSS","PNG","TTF","HTML","JPG","RMD","MAP","WOFF2","CSV","EOT","SVG","WOFF","TXT","PDF","MD","OTF","RPROJ","SCSS","YML"],[160,67,48,35,18,16,13,11,10,6,6,6,6,3,2,1,1,1,1,1],[6.676208,3.17887,1.943525,2.531664,2.19601,17.231917,0.086338,1.790779,0.5547,2.839652,0.450917,2.05914,0.311824,0.017714,0.740126,0.001394,0.109688,0.00024,0.001816,0.000913],[75804,38852,1271,6170,10918,8890,2330,83,294,30815,516,5296,143,452,487,40,103,15,75,39]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Filetype<\/th>\n      <th>Count of Files<\/th>\n      <th>Filesize (MB)<\/th>\n      <th>Lines of Code<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#252525', 'color': '#FFFFFF'});\n}","pageLength":25,"columnDefs":[{"className":"dt-center","targets":[1,2,3]},{"name":"file_ext","targets":0},{"name":"Count","targets":1},{"name":"size_mb","targets":2},{"name":"lines","targets":3}],"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + Math.max(17.231917 - value, 0)/17.231917 * 100 + '%, orange ' + Math.max(17.231917 - value, 0)/17.231917 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + Math.max(75804.000000 - value, 0)/75804.000000 * 100 + '%, orange ' + Math.max(75804.000000 - value, 0)/75804.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + Math.max(160.000000 - value, 0)/160.000000 * 100 + '%, orange ' + Math.max(160.000000 - value, 0)/160.000000 * 100 + '%)','background-size':'98% 75%','background-repeat':'no-repeat','background-position':'center'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 
@@ -445,7 +589,7 @@ col_format &lt;-<span class="st"> </span><span class="kw">JS</span>(
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -453,6 +597,28 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

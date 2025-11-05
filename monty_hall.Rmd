@@ -49,7 +49,7 @@ def simulate_guess(nsim):
 def goat_door(prizedoors,guesses):
 
     nsims = len(prizedoors)
-    goat = np.zeros(nsims, dtype=np.int)
+    goat = np.zeros(nsims, dtype=int)
     for i in range(nsims):
         possible_goats = [d for d in [0,1,2] if prizedoors[i] != d and guesses[i] != d]
         goat[i] = np.random.choice(possible_goats)
@@ -58,7 +58,7 @@ def goat_door(prizedoors,guesses):
 def switch_guess(guesses, goatdoors):
   
     nsims = len(guesses)
-    choice = np.zeros(nsims, dtype=np.int)
+    choice = np.zeros(nsims, dtype=int)
     for i in range(nsims):
         choice[i] = 3 - (guesses[i] + goatdoors[i])
     

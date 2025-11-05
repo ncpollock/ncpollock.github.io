@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Noah Pollock" />
@@ -14,20 +14,29 @@
 
 <title>Building This Site</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122098274-2"></script>
 <script>
@@ -38,88 +47,135 @@
   gtag('config', 'UA-122098274-2');
 </script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
-td.sourceCode { padding-left: 5px; }
-pre, code { color: #cccccc; background-color: #303030; }
-code > span.kw { color: #f0dfaf; } /* Keyword */
-code > span.dt { color: #dfdfbf; } /* DataType */
-code > span.dv { color: #dcdccc; } /* DecVal */
-code > span.bn { color: #dca3a3; } /* BaseN */
-code > span.fl { color: #c0bed1; } /* Float */
-code > span.ch { color: #dca3a3; } /* Char */
-code > span.st { color: #cc9393; } /* String */
-code > span.co { color: #7f9f7f; } /* Comment */
-code > span.ot { color: #efef8f; } /* Other */
-code > span.al { color: #ffcfaf; } /* Alert */
-code > span.fu { color: #efef8f; } /* Function */
-code > span.er { color: #c3bf9f; } /* Error */
-code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code > span.sc { color: #dca3a3; } /* SpecialChar */
-code > span.vs { color: #cc9393; } /* VerbatimString */
-code > span.ss { color: #cc9393; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #f0dfaf; } /* ControlFlow */
-code > span.op { color: #f0efd0; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #7f9f7f; } /* Documentation */
-code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-div.sourceCode {
-  overflow-x: visible;
-}
-</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
   }
 </style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 
-
-<style type="text/css">
-h1 {
-  font-size: 34px;
+.sourceCode .row {
+  width: 100%;
 }
-h1.title {
-  font-size: 38px;
+.sourceCode {
+  overflow-x: auto;
 }
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
+.code-folding-btn {
+  margin-right: -30px;
 }
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
 
 <link rel="stylesheet" href="my_style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -127,13 +183,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -144,44 +195,59 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+.dropdown-submenu {
+  position: relative;
 }
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
 }
-
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
 }
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
 }
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
 }
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu.pull-left {
+  float: none;
 }
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -191,63 +257,86 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
-
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -261,6 +350,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -296,8 +391,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -307,8 +400,18 @@ div.tocify {
 
 </style>
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -322,7 +425,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -385,11 +488,11 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -398,24 +501,29 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Building This Site</h1>
-<h4 class="author"><em>Noah Pollock</em></h4>
+<h4 class="author">Noah Pollock</h4>
 
 </div>
 
 
 <div id="scope" class="section level2">
 <h2>Scope</h2>
-<p>Learn to buid a website like this one using R, RStudio, and GitHub.</p>
+<p>Learn to buid a website like this one using R, RStudio, and
+GitHub.</p>
 </div>
 <div id="introduction-and-prerequisites" class="section level2">
 <h2>Introduction and Prerequisites</h2>
-<p>There are many ways to build and publish a website using R. Here, I chronicle only one method using pre-built functionality in RStudio. Here are some things you’ll need before we get started:</p>
+<p>There are many ways to build and publish a website using R. Here, I
+chronicle only one method using pre-built functionality in RStudio. Here
+are some things you’ll need before we get started:</p>
 <ol style="list-style-type: decimal">
 <li>R (I used version R-3.4.2)</li>
 <li>RStudio IDE (I used version 1.1.383)</li>
 <li>Familiarity with rmarkdown and knitr</li>
 </ol>
-<p>The above prerequisites will allow you to launch and test the application. In order to publish to the web, you need a few more pieces.</p>
+<p>The above prerequisites will allow you to launch and test the
+application. In order to publish to the web, you need a few more
+pieces.</p>
 <ol style="list-style-type: decimal">
 <li>Github Account</li>
 <li>Github Pages (a GitHub Repo configured in a specific way)</li>
@@ -423,38 +531,61 @@ div.tocify {
 </div>
 <div id="step-1-setup-in-rstudio" class="section level2">
 <h2>Step 1: Setup in RStudio</h2>
-<p>Open RStudio and create an R Project (File -&gt; New Project). Then create a new R Script (File -&gt; New File -&gt; R Script), copy and paste the code below into it, and save it within your R Project directory with the name _site.yml.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name<span class="op">:</span><span class="st"> &quot;awesome_site&quot;</span>  
-navbar<span class="op">:</span><span class="st">  </span>
-<span class="st">  </span>title<span class="op">:</span><span class="st"> &quot;Awesome Site!&quot;</span>  
-  type<span class="op">:</span><span class="st"> </span>default  
-  left<span class="op">:</span><span class="st">  </span>
-<span class="st">    </span><span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;Home&quot;</span>
-      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>home
-      href<span class="op">:</span><span class="st"> </span>index.html
-    <span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;About&quot;</span>
-      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>info
-      href<span class="op">:</span><span class="st"> </span>about_me.html
-    <span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;Blog&quot;</span>
-      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>street<span class="op">-</span>view
-      href<span class="op">:</span><span class="st"> </span>blog.html
-  right<span class="op">:</span>
-<span class="st">    </span><span class="op">-</span><span class="st"> </span>text<span class="op">:</span><span class="st"> &quot;Need Help&quot;</span>
-      icon<span class="op">:</span><span class="st"> </span>fa<span class="op">-</span>question
-      href<span class="op">:</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>google.com
-output<span class="op">:</span>
-<span class="st">  </span>html_document<span class="op">:</span>
-<span class="st">    </span>df_print<span class="op">:</span><span class="st"> </span>kable
-output_dir<span class="op">:</span><span class="st"> &quot;.&quot;</span></code></pre></div>
-<p>The _site.yml file is your website configuration file, it will define some the elements that persist across your site such as the navigation bar, headers or footers, or the global theme. For the most part you have a lot of customization here. However, one piece that is extremely important not to change is the <code>output_dir: &quot;.&quot;</code> line. This tells RStudio to keep important files in the root directory of the R Project folder which is how Github Pages will expect it to be.</p>
-<p>You can read more about <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">R Markdown Websites and _site.yml here.</a></p>
+<p>Open RStudio and create an R Project (File -&gt; New Project). Then
+create a new R Script (File -&gt; New File -&gt; R Script), copy and
+paste the code below into it, and save it within your R Project
+directory with the name _site.yml.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>name<span class="sc">:</span> <span class="st">&quot;awesome_site&quot;</span>  </span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>navbar<span class="sc">:</span>  </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  title<span class="sc">:</span> <span class="st">&quot;Awesome Site!&quot;</span>  </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  type<span class="sc">:</span> default  </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  left<span class="sc">:</span>  </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="sc">-</span> text<span class="sc">:</span> <span class="st">&quot;Home&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>      icon<span class="sc">:</span> fa<span class="sc">-</span>home</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>      href<span class="sc">:</span> index.html</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="sc">-</span> text<span class="sc">:</span> <span class="st">&quot;About&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>      icon<span class="sc">:</span> fa<span class="sc">-</span>info</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>      href<span class="sc">:</span> about_me.html</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    <span class="sc">-</span> text<span class="sc">:</span> <span class="st">&quot;Blog&quot;</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>      icon<span class="sc">:</span> fa<span class="sc">-</span>street<span class="sc">-</span>view</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      href<span class="sc">:</span> blog.html</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  right<span class="sc">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="sc">-</span> text<span class="sc">:</span> <span class="st">&quot;Need Help&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>      icon<span class="sc">:</span> fa<span class="sc">-</span>question</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      href<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>google.com</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>output<span class="sc">:</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  html_document<span class="sc">:</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    df_print<span class="sc">:</span> kable</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>output_dir<span class="sc">:</span> <span class="st">&quot;.&quot;</span></span></code></pre></div>
+<p>The _site.yml file is your website configuration file, it will define
+some the elements that persist across your site such as the navigation
+bar, headers or footers, or the global theme. For the most part you have
+a lot of customization here. However, one piece that is extremely
+important not to change is the <code>output_dir: "."</code> line. This
+tells RStudio to keep important files in the root directory of the R
+Project folder which is how Github Pages will expect it to be.</p>
+<p>You can read more about <a
+href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">R Markdown
+Websites and _site.yml here.</a></p>
 </div>
 <div id="step-2-build-webpages-from-rmarkdown" class="section level2">
 <h2>Step 2: Build Webpages from Rmarkdown</h2>
-<p>There’s one more piece we need for RStudio to completely handle our new website, a main/landing page! Create a new R Markdown file (File -&gt; New File -&gt; R Markdown, choose HTML and give it a title like “Welcome!”). Make some simple changes to the R Markdown template RStudio provides so you know that the site you render is truly yours. For example, write yourself a congratulatory message as the first paragraph. Now save this file as index.Rmd.</p>
-<p>Confirm that your _site.yml and your index.Rmd files exist in your R Project folder. Close and reopen RStudio. Now you should see a new tab near the Environment pane called “Build”. Navigate to that tab and click “Build Website”. The Build Website button knits every .Rmd file in your R Project root directory. Voila! Your site should open in the viewer pane or in a new window.</p>
-<p>Now, create more pages (e.g., about_me.Rmd, blog.Rmd, any page you like!).</p>
-<p><img src="images/build_window.JPG" width="3832" /></p>
+<p>There’s one more piece we need for RStudio to completely handle our
+new website, a main/landing page! Create a new R Markdown file (File
+-&gt; New File -&gt; R Markdown, choose HTML and give it a title like
+“Welcome!”). Make some simple changes to the R Markdown template RStudio
+provides so you know that the site you render is truly yours. For
+example, write yourself a congratulatory message as the first paragraph.
+Now save this file as index.Rmd.</p>
+<p>Confirm that your _site.yml and your index.Rmd files exist in your R
+Project folder. Close and reopen RStudio. Now you should see a new tab
+near the Environment pane called “Build”. Navigate to that tab and click
+“Build Website”. The Build Website button knits every .Rmd file in your
+R Project root directory. Voila! Your site should open in the viewer
+pane or in a new window.</p>
+<p>Now, create more pages (e.g., about_me.Rmd, blog.Rmd, any page you
+like!).</p>
+<p><img src="images/build_window.JPG" /><!-- --></p>
 </div>
 <div id="step-3-setup-github" class="section level2">
 <h2>Step 3: Setup GitHub</h2>
@@ -463,31 +594,49 @@ output_dir<span class="op">:</span><span class="st"> &quot;.&quot;</span></code>
 </div>
 <div id="step-4-publish" class="section level2">
 <h2>Step 4: Publish</h2>
-<p>Before sending all of your files to your GitHub repo, you’ll need an empty file titled .nojekyll within your R Project directory. When this file is pushed or uploaded to your GitHub repo, it tells GitHub not to publish your website using Jekyll.</p>
-<p>To get your website files onto GitHub, you can either use Git if you already know how, <a href="https://guides.github.com/activities/hello-world/">learn Git</a>, or manually upload all of your files to your Github repo.</p>
+<p>Before sending all of your files to your GitHub repo, you’ll need an
+empty file titled .nojekyll within your R Project directory. When this
+file is pushed or uploaded to your GitHub repo, it tells GitHub not to
+publish your website using Jekyll.</p>
+<p>To get your website files onto GitHub, you can either use Git if you
+already know how, <a
+href="https://guides.github.com/activities/hello-world/">learn Git</a>,
+or manually upload all of your files to your Github repo.</p>
 </div>
 <div id="step-5-customize-and-new-content" class="section level2">
 <h2>Step 5: Customize and New Content</h2>
-<p>See the optional lines you can add into your _site.yml file to further upgrade or customize your site!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output<span class="op">:</span>
-<span class="st">  </span>html_document<span class="op">:</span>
-<span class="st">    </span>theme<span class="op">:</span><span class="st"> </span>flatly
-    css<span class="op">:</span><span class="st"> </span>my_style.css
-    include<span class="op">:</span>
-<span class="st">      </span>in_header<span class="op">:</span><span class="st"> </span>GA_Script.html</code></pre></div>
+<p>See the optional lines you can add into your _site.yml file to
+further upgrade or customize your site!</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>output<span class="sc">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  html_document<span class="sc">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    theme<span class="sc">:</span> flatly</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    css<span class="sc">:</span> my_style.css</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    include<span class="sc">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      in_header<span class="sc">:</span> GA_Script.html</span></code></pre></div>
 <p><strong>theme: flatly</strong> Choose a theme<br />
-In your _site.yml file you can specify a global theme to be applied. Simply include theme: theme_name under html_output. You can also style your site with CSS or Cascading Style Sheets.</p>
+In your _site.yml file you can specify a global theme to be applied.
+Simply include theme: theme_name under html_output. You can also style
+your site with CSS or Cascading Style Sheets.</p>
 <p><strong>css: my_style.css</strong> Custom CSS<br />
-To completely customize your theme or individual pages, you can add CSS. For example, add the following code immediately following your yaml header in any of your .rmd files. Make sure it’s outside of any code chunks. A better way to apply global styles to your entire site is to create a my_style.css <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> file with your css code, and tell your _site.yml file to include it for html output.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&lt;</span>style<span class="op">&gt;</span>
-body{
-  font<span class="op">-</span>family<span class="op">:</span><span class="st"> </span>Helvetica;
-  font<span class="op">-</span>size<span class="op">:</span><span class="st"> </span>18pt;
-  background<span class="op">-</span>color<span class="op">:</span>orange;
-}
-<span class="op">&lt;</span><span class="er">/</span>style<span class="op">&gt;</span></code></pre></div>
+To completely customize your theme or individual pages, you can add CSS.
+For example, add the following code immediately following your yaml
+header in any of your .rmd files. Make sure it’s outside of any code
+chunks. A better way to apply global styles to your entire site is to
+create a my_style.css <a href="#fn1" class="footnote-ref"
+id="fnref1"><sup>1</sup></a> file with your css code, and tell your
+_site.yml file to include it for html output.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="sc">&lt;</span>style<span class="sc">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>body{</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  font<span class="sc">-</span>family<span class="sc">:</span> Helvetica;</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  font<span class="sc">-</span>size<span class="sc">:</span> <span class="dv">18</span>pt;</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  background<span class="sc">-</span>color<span class="sc">:</span>orange;</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">/</span>style<span class="sc">&gt;</span></span></code></pre></div>
 <p><strong>in_header: GA_Script.html</strong> Google Analytics<br />
-To track and understand who visits your website, how often, and what they do there. <a href="https://support.google.com/analytics/answer/1008080?hl=en">You can learn about how to do this via the Google support documentation</a>.</p>
+To track and understand who visits your website, how often, and what
+they do there. <a
+href="https://support.google.com/analytics/answer/1008080?hl=en">You can
+learn about how to do this via the Google support documentation</a>.</p>
 <div id="disqus_thread">
 
 </div>
@@ -510,13 +659,17 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>
-Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">comments powered by
+Disqus.</a>
 </noscript>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
-<li id="fn1"><p>Or name it whatever you like, as long as it’s a .css file and you specify the correct name in your _site.yml file.<a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>Or name it whatever you like, as long as it’s a .css
+file and you specify the correct name in your _site.yml file.<a
+href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
@@ -565,13 +718,64 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

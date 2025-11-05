@@ -26,10 +26,10 @@ output:
 
 ## Professional
 
-I'm excited about Data: extracting, processing, analyzing, reporting, dashboarding, and everything in between. Since 2017, R has been my tool of choice. However, I have experience with a variety of software, programming languages, and IT project types. You can learn more about my work via the following resources:
+I'm excited about Data: database architecture, warehousing, machine learning and AI, transaction processing, ETL/ELT, analyzing, reporting, dashboarding, statistics, research, and everything in between. Since 2017, R and SQL have been my go-to tools. However, I have experience with a variety of software, programming languages, and IT project types. You can learn more about my work via the following resources:
 
 <div class="list-group">
-<a href="np_cv.pdf" class="list-group-item" target="_blank">
+<a href="https://oakland0-my.sharepoint.com/:w:/g/personal/noahpollock_oakland_edu/Ec_M4rSn7a5Ep4MCYdpE9IQBxQiBlZdLkzR51keNCJogng?e=z8UIoq" class="list-group-item" target="_blank">
   <i class="fa fa-file-text fa-fw" aria-hidden="true"></i> Curriculum Vitae </a>  
   
 <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="list-group-item" target="_blank">
@@ -44,14 +44,14 @@ I'm excited about Data: extracting, processing, analyzing, reporting, dashboardi
 
 ## Personal
 
-I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creating (both physically with wood and digitally with CAD), skiing, spending time with my family, and pushing my physical limits and exploring on road and gravel bikes.
+I enjoy teaching new skills to my daughter, cycling, running, skiing, problem solving, board-games / cards, and DIY with power tools and 3D printing.
 
 <div class="panel-body">
   <div class="col-md-4">
   
   <div class="polaroid" style ="width: 100%">
   <img src="images/wam_100.jpg" alt="My wife and I on a bike ride.">
-  <p class="caption">Halfway through my wife's first 100 mile bike ride, Make-A-Wish Wish-A-Mile 100, 2019.<br></p>
+  <p class="caption">Halfway through cycling a century (100 miles) with my wife for the Make-A-Wish Wish-A-Mile 100 fundraiser, 2019.<br></p>
   </div>
   </div>
   
@@ -59,7 +59,7 @@ I enjoy problem solving, cards, board-games, yard-games, cooking, eating, creati
   
   <div class="polaroid" style ="width: 100%">
   <img src="images/bus_card_holder.jpg" alt="A 3D printed business card holder">
-  <p class="caption">A business card holder I designed and 3D printed. Special thanks to the Oakland University Makerspace for printing!</p>
+  <p class="caption">A business card holder I designed. Mid-print at the Oakland University Makerspace before I invested in my own machine.</p>
   </div>
   </div>
   
@@ -109,9 +109,9 @@ cv_df <- read.csv('cv_df.csv',
 ```
 
 
-## Fun with My CV {.tabset data-width=400}
+## Resume Fun {.tabset data-width=400}
 
-Mostly for fun, I also recreated pieces of my CV in this dashboard-like format.
+Below are some highlights from my Resume in this dashboard-like format.
 
 
 ### Dashboard
@@ -168,7 +168,8 @@ ed_tiles,
 pdata <- cv_df %>%
   filter(section=="Skills") %>%
   mutate(date_end = if_else(is.na(date_end),Sys.Date(),date_end),
-         Months = (interval(as.Date(date_start),as.Date(date_end)) %/% months(1)))
+         Months = (interval(as.Date(date_start),as.Date(date_end)) %/% months(1))
+         , Years = round(time_length(interval(as.Date(date_start),as.Date(date_end)),'years'),1))
 
 # create side-by-side bar charts for each institution type
 lapply(unique(pdata$category),function(skill_cat){
@@ -179,14 +180,14 @@ lapply(unique(pdata$category),function(skill_cat){
   ]
   
   pdata %>%
-    arrange(desc(Months)) %>%
+    arrange(desc(Years)) %>%
     filter(category == skill_cat) %>%
-    select(experience,Months) %>%
-    hchart("bar",hcaes(x="experience",y="Months"),color=color_select) %>%
+    select(experience,Years) %>%
+    hchart("bar",hcaes(x="experience",y="Years"),color=color_select) %>%
     hc_add_theme(thm) %>%
     hc_title(text = skill_cat) %>%
       hc_tooltip(formatter = JS("function(){
-                            return (this.point.name + '<br>' + this.y + ' Months')
+                            return (this.point.name + '<br>' + this.y + ' Year(s)')
                             }")
   ) %>%
     hc_xAxis(title = NA)
@@ -230,7 +231,7 @@ leaflet() %>%
   </div>
   <div class="col-md-3">
   <div class="well">
-<p style="text-align:center;padding: 8px 0; height:130px;font-size: x-large; background-color: #ecf0f1;"><strong>Total Presentations
+<p style="text-align:center;padding: 8px 0; height:130px;font-size: x-large; background-color: #ecf0f1;"><strong>Total Conference Presentations
 <br><br>
 `r cv_df %>% filter(section == "Presentations") %>% nrow()`
 </strong></p>
