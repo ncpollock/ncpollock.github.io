@@ -64,6 +64,8 @@ div(class="panel-body"
 , fluidRow(
 tile(s = "images/prof_handshake.jpg", t="Data Pipeline: Handshake",h="https://joinhandshake.com/"
        , d = "Migrated data from an Oracle based ERP to a SaaS product powering on-campus jobs, community internships, and post-graduation employment. More than 8 years later, this pipeline continues to create and refresh 20,000+ customer profiles daily. I wrote the entire ETL process, coordinated with security, and collaborated with the functional business area, vendor, and customers to refine needs.")
+, tile(s = "images/prof_rental_ERD.jpg", t="Equipment Rental Database and Web App",h="https://www.oakland.edu/stc/loans/"
+       , d = "Collaborated with stakeholders to define business needs and functional requirements. Designed relational database (PostgreSQL hosted in AWS) and front-end web app (Argos). The database and app power on-campus equipment inventory and rentals.")
 , tile(s = "images/prof_fusion.jpg", t="Data Pipeline: Fusion",h="https://www.fusionfamily.com/"
        , d = "Implemented cloud SaaS, including a data integration, SSO, SMTP, and swipe access. I served as the IT project manager, designed the data pipeline, coordinated the full implementation, and ensured ROI. More than 5 years later, this pipeline continues to create and refresh 20,000+ customer profiles daily.")
 )
