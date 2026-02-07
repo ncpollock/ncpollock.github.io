@@ -62,8 +62,10 @@ tile <- function(w = 4, s, t="Project Tile",a = "Clickable image redirecting to 
 ```{r professional, results='asis'}
 div(class="panel-body"
 , fluidRow(
-tile(s = "images/flow_handshake.JPG", t="Data Pipeline to Handshake",h="https://joinhandshake.com/"
-       , d = "Oakland University Career Services needed to move fresh data daily over from their ERP to a SaaS product powering on-campus jobs, community internships, and post-graduation employment for the entire campus community.")
+tile(s = "images/prof_handshake.jpg", t="Data Pipeline: Handshake",h="https://joinhandshake.com/"
+       , d = "Migrated data from an Oracle based ERP to a SaaS product powering on-campus jobs, community internships, and post-graduation employment. More than 8 years later, this pipeline continues to create and refresh 20,000+ customer profiles daily. I wrote the entire ETL process, coordinated with security, and collaborated with the functional business area, vendor, and customers to refine needs.")
+, tile(s = "images/prof_fusion.jpg", t="Data Pipeline: Fusion",h="https://www.fusionfamily.com/"
+       , d = "Implemented cloud SaaS, including a data integration, SSO, SMTP, and swipe access. I served as the IT project manager, designed the data pipeline, coordinated the full implementation, and ensured ROI. More than 5 years later, this pipeline continues to create and refresh 20,000+ customer profiles daily.")
 )
 )
 ```
@@ -93,7 +95,7 @@ tile(s = "images/shiny_bi.JPG", t="Business Intelligence with Shiny",h="https://
 )
 , fluidRow(
 tile(s = "images/higher_ed.JPG", t="(Coming Soon!) Pure RMarkdown Dashboard on Higher Education"
-       , d = "Gain insight into Higher Education and learn how RMarkdown can be leveraged to create dashboards without an R server.")
+       , d = "Gain insight into Higher Education and learn how RMarkdown can be leveraged to create dashboards without a server.")
 
 ))
 ```
