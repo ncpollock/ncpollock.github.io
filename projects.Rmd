@@ -24,9 +24,6 @@ output:
 </style>
 <br>
 
-
-These are a few of my personal projects. Each one is a work in progress, but some are more refined than others.
-
 </div>
 </div>
 <div style="padding-right: 2%;">
@@ -52,8 +49,37 @@ tile <- function(w = 4, s, t="Project Tile",a = "Clickable image redirecting to 
 }
 ```
 
+<div class="panel-body">
+<div class="row">
+<div class="col-sm-12">
 
-```{r test, results='asis'}
+## Professional
+
+</div>
+</div>
+</div>
+
+```{r professional, results='asis'}
+div(class="panel-body"
+, fluidRow(
+tile(s = "images/flow_handshake.JPG", t="Data Pipeline to Handshake",h="https://joinhandshake.com/"
+       , d = "Oakland University Career Services needed to move fresh data daily over from their ERP to a SaaS product powering on-campus jobs, community internships, and post-graduation employment for the entire campus community.")
+)
+)
+```
+
+<div class="panel-body">
+<div class="row">
+<div class="col-sm-12">
+
+##  Personal
+A few personal projects I've tinkered with in my spare time.
+
+</div>
+</div>
+</div>
+
+```{r personal, results='asis'}
 div(class="panel-body"
 , fluidRow(
 tile(s = "images/shiny_bi.JPG", t="Business Intelligence with Shiny",h="https://ncpolloc.shinyapps.io/shiny_bi/"
