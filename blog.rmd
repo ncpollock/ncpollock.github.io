@@ -46,7 +46,7 @@ blog_df <- data.frame(
 )
 # eventually, I will read all .rmd files in main dir
   # and exclude non-blog posts because blog posts will 
-    # quickly outnumber non-blog posts
+    # outnumber non-blog posts
 
 # pull some text from each post for a content sample
 blog_df <- blog_df %>% 
@@ -73,6 +73,7 @@ blog_df <- blog_df %>%
     )
     }
   )) %>%
+  # handle ed_api manually to safeguard API key.
   bind_rows(data.frame(filename = 'ed_api'
                        ,intro = 'Function for Easy Calling To help alleviate some of the headache, I wrote a function below that builds the call and traverses all pages ...'
                        ,lines = 188
@@ -101,7 +102,7 @@ blog_df$title <- NULL
 
 blog_df <- blog_df %>%
   arrange(desc(created_at)) %>%
-  select(filename,intro,created_updated_at,lines)
+  select(filename,intro,lines)
 
 # define formate for header
 col_format <- JS(
@@ -114,18 +115,15 @@ datatable(blog_df
           ,rownames=FALSE
           ,colnames = c('Title',
                         'Content Snippet',
-                        'Created / Updated',
-                       # 'Created At',
-                       # 'Updated At',
+                        # 'Created / Updated',
                        'Post Length (lines)')
           ,options=list(
             autoWidth = TRUE,
             initComplete = col_format,
             pageLength=25,
             columnDefs = list( # center all but first column
-              list(className = 'dt-center',targets=2)
-              , list(className = 'dt-right',targets=3)
-              , list(width = '100px', targets = c(2,3))
+              list(className = 'dt-right',targets=2)
+              , list(width = '100px', targets = 2)
               , list(width = '250px', targets = 0)
               , list(verticalAlign = 'top', targets = "_all")), 
             dom = 'frtpB'
