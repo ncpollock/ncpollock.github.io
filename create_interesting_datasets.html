@@ -563,11 +563,11 @@ we could repeat that sampling, or anything else, with
 <code>rep()</code>. Let’s take a look.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># chose 3 random numbers from an integer vector of 1 to 10</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1] 3 6 1</code></pre>
+<pre><code>## [1] 10  5  6</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># same as above except that I sample 11 times and</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># every time a number is sampled it&#39;s then put back into the pool</span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">size =</span> <span class="dv">11</span>,<span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##  [1] 4 7 6 1 9 3 6 8 2 5 1</code></pre>
+<pre><code>##  [1] 4 3 5 7 5 8 9 7 1 8 2</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># bonus, I won&#39;t run these, but try them at home!</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># choose 1 to 10 random numbers from an integer vector of 1 to 10</span></span>
@@ -584,17 +584,17 @@ we could repeat that sampling, or anything else, with
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">rep</span>(</span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">size =</span> <span class="dv">6</span>,<span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 5 2 1 1 4 4 5 2 1 1 4 4</code></pre>
+<pre><code>##  [1] 5 2 5 2 2 5 5 2 5 2 2 5</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># take a sample of 12 items from a pool of integers 1 to 5 </span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="co"># don&#39;t use repeat so that all 12 are random</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">size =</span> <span class="dv">6</span><span class="sc">*</span><span class="dv">2</span>,<span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##  [1] 4 2 2 3 2 1 1 5 1 5 4 2</code></pre>
+<pre><code>##  [1] 2 1 2 4 5 5 1 3 1 5 4 4</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># sample &quot;yes&quot; and &quot;no&quot; 10 times, </span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="co"># encourage that sample to be %80 yes and %20 no</span></span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="co"># repeat that exact sample twice</span></span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>),<span class="at">prob=</span><span class="fu">c</span>(.<span class="dv">80</span>,.<span class="dv">20</span>),<span class="at">size =</span> <span class="dv">10</span>,<span class="at">replace =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;
-## [13] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot;</code></pre>
+<pre><code>##  [1] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot;
+## [13] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;Yes&quot; &quot;Yes&quot;</code></pre>
 </div>
 <div id="create-the-dataset" class="section level2">
 <h2>Create the Dataset</h2>
@@ -617,14 +617,14 @@ in making the two variables related.</p>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="fu">table</span>(experiment_df) <span class="co"># contingency table</span></span></code></pre></div>
 <pre><code>##             DV
 ## IV           Losses Wins
-##   Control       808  192
-##   Experiment    314  686</code></pre>
+##   Control       811  189
+##   Experiment    284  716</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">chisq.test</span>(experiment_df<span class="sc">$</span>IV,experiment_df<span class="sc">$</span>DV) <span class="co"># chi-square test of independence</span></span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
 ## data:  experiment_df$IV and experiment_df$DV
-## X-squared = 493.44, df = 1, p-value &lt; 2.2e-16</code></pre>
+## X-squared = 558.39, df = 1, p-value &lt; 2.2e-16</code></pre>
 <p>Now a more complex and interesting example.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># number generator so &#39;random&#39; numbers are reproducibile</span></span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>n_students <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># the number of number of grads per cohort</span></span>
@@ -794,25 +794,18 @@ Disqus.</a>
 </div>
 
 <footer id="site-footer">
-  <div class="col-md-4">
   
-<div class="polaroid rotate_right">
-  <img src="images/wife_and_i.jpg" alt="My wifte and I." width="115" >
-  <p class="caption">My wife and I.</p>
+<div class="col-md-4">
+  <img src="images/NP_Headshot_2025_small.jpg" id="headshot">
 </div>
-
-<div class="polaroid rotate_left">
-  <img src="images/dogs.jpg" alt="Our dogs Bambi and Lexi" width="115">
-  <p class="caption">Our furry children, Bambi and Lexi.</p>
-</div>
-  </div>
+  
     <div class="col-md-4">
       Connect with me: <br>
-      <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/">
+      <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank">
         <i class="fa fa-linkedin-square fa-lg"></i> Linkedin
       </a>
       <br>
-      <a href="https://github.com/ncpollock/">
+      <a href="https://github.com/ncpollock/" target="_blank">
         <i class="fa fa-github-square fa-lg"></i> GitHub
       </a>
   </div>

@@ -500,7 +500,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a hr
 <span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a>    </span>
 <span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a>results <span class="op">=</span> switch_vs_stay(simulations)</span>
 <span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a><span class="bu">print</span>(results)</span></code></pre></div>
-<pre><code>## [np.float64(66.61), np.float64(33.39)]</code></pre>
+<pre><code>## [np.float64(66.64), np.float64(33.36)]</code></pre>
 </div>
 <div id="inspect-python-functions" class="section level2">
 <h2>Inspect Python Functions</h2>
@@ -512,16 +512,16 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a hr
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>goats <span class="op">=</span> goat_door(prizes,guesses)</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>switch <span class="op">=</span> switch_guess(prizes,goats)</span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;prizes  = &quot;</span>, prizes)</span></code></pre></div>
-<pre><code>## prizes  =  [0 1 1 0 2 0 0 1 2 2]</code></pre>
+<pre><code>## prizes  =  [1 2 0 2 2 1 2 1 2 1]</code></pre>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;guesses = &quot;</span>, guesses)</span></code></pre></div>
-<pre><code>## guesses =  [1 2 0 2 1 2 2 2 2 1]</code></pre>
+<pre><code>## guesses =  [1 0 2 0 1 0 0 0 0 1]</code></pre>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;goats  = &quot;</span>, goats)</span></code></pre></div>
-<pre><code>## goats  =  [2 0 2 1 0 1 1 0 1 0]</code></pre>
+<pre><code>## goats  =  [2 1 1 1 0 2 1 2 1 0]</code></pre>
 <div class="sourceCode" id="cb10"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;switch  = &quot;</span>, switch)</span></code></pre></div>
-<pre><code>## switch  =  [1 2 0 2 1 2 2 2 0 1]</code></pre>
+<pre><code>## switch  =  [0 0 2 0 1 0 0 0 0 2]</code></pre>
 </div>
 </div>
 <div class="col-md-6">
@@ -571,7 +571,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a h
 <pre><code>## [1] 67.24 32.76</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">switch_vs_stay</span>(simulations))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.12    0.00    0.10</code></pre>
+##    0.09    0.00    0.08</code></pre>
 </div>
 <div id="inspect-r-functions" class="section level2">
 <h2>Inspect R Functions</h2>
@@ -625,25 +625,18 @@ Disqus.</a>
 </div>
 
 <footer id="site-footer">
-  <div class="col-md-4">
   
-<div class="polaroid rotate_right">
-  <img src="images/wife_and_i.jpg" alt="My wifte and I." width="115" >
-  <p class="caption">My wife and I.</p>
+<div class="col-md-4">
+  <img src="images/NP_Headshot_2025_small.jpg" id="headshot">
 </div>
-
-<div class="polaroid rotate_left">
-  <img src="images/dogs.jpg" alt="Our dogs Bambi and Lexi" width="115">
-  <p class="caption">Our furry children, Bambi and Lexi.</p>
-</div>
-  </div>
+  
     <div class="col-md-4">
       Connect with me: <br>
-      <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/">
+      <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" target="_blank">
         <i class="fa fa-linkedin-square fa-lg"></i> Linkedin
       </a>
       <br>
-      <a href="https://github.com/ncpollock/">
+      <a href="https://github.com/ncpollock/" target="_blank">
         <i class="fa fa-github-square fa-lg"></i> GitHub
       </a>
   </div>

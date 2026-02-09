@@ -68,6 +68,11 @@ tile(s = "images/prof_handshake.jpg", t="Data Pipeline: Handshake",h="https://jo
        , d = "Collaborated with stakeholders to define business needs and functional requirements. Designed relational database (PostgreSQL hosted in AWS) and front-end web app (Argos). The database and app power on-campus equipment inventory and rentals.")
 , tile(s = "images/prof_fusion.jpg", t="Data Pipeline: Fusion",h="https://www.fusionfamily.com/"
        , d = "Implemented cloud SaaS, including a data integration, SSO, SMTP, and swipe access. I served as the IT project manager, designed the data pipeline, coordinated the full implementation, and ensured ROI. More than 5 years later, this pipeline continues to create and refresh 20,000+ customer profiles daily.")
+
+# , tile(s = "images/...", t="Post-Graduation Outcomes",h=""
+#        , d = "Leveraged Qualtrics, R, research methods, sampling techniques, BI, project management, and more to collect, report, and communicate university-wide post-graduation outcomes.")
+# , tile(s = "images/...", t="COVID-19 Hotfix",h=""
+#        , d = "In less than two weeks, I designed a relational database, ETL process, reporting, and a web-app and I collaborated with executive leadership, security, human resources, and SMEs to empower institutional compliance with student and employee vaccination mandates.")
 )
 )
 ```
