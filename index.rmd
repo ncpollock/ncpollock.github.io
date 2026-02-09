@@ -35,14 +35,14 @@ library(DT)
 
 ## Welcome
 
-This site is meant to be a resource for those interested in data science, data visualization, business intelligence, dashboarding, and databases. The site is primarily built using rmarkdown. You can check out the blog section for details on how you can build your own.
+This site is a resource for data science, data visualization, business intelligence, dashboarding, and databases. The site is primarily built using rmarkdown. You can check out the blog section for details on how you can build your own.
 
-You may be familiar with the phrase "On the Shoulders of Giants". A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon required the wheel, the modern computer required the transistor, the light bulb required electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants. It's amazing what we can accomplish with just a bit of giant-hunting (e.g., research).
+You may be familiar with the phrase "On the Shoulders of Giants". A nod to the fact that virtually nothing great is accomplished without the effort and aptitude of those who came before. The wagon required the wheel, the modern computer required the transistor, the light bulb required electricity, ad infinitum. Likewise, this site (and every site for that matter) is built on the shoulders of giants.
 
 
 ### Site Metrics
 
-To further emphasize the idea of standing on giants, check out the table and bar chart hybrid below to learn a bit about what's involved in building this website. I wrote or contributed all of the RMD, YML, PDFs, CSVs, JPGs, and PNGs, and I contributed a small sliver of the HTML and CSS. The files I did not author or contribute make up the vast majority of this site e.g., the JS, HTML, and CSS. Further consider that I did not develop the languages themselves, design any computer, nor develop the internet. With this in mind, I say thank you to those who made this site possible.
+To further emphasize the idea of giant shoulders check out the table below to learn a bit about what's involved in building this website. I wrote or contributed all of the RMD, YML, PDFs, CSVs, JPGs, and PNGs, and I contributed a small sliver of the HTML and CSS. The files I did not author or contribute make up the vast majority of this site e.g., the JS, HTML, and CSS. Further consider that I did not develop the languages themselves, design the computer, nor develop the internet. With this in mind, I say thank you to those who made this site possible.
 
 ```{r about_this_site_table}
 
