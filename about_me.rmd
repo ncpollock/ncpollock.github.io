@@ -4,7 +4,7 @@ author: -Miles Davis
 output: 
   html_document:
     toc: no
-    code_folding: hide
+    # code_folding: hide
 ---
 
 <style>
@@ -26,10 +26,10 @@ output:
 
 ## Professional
 
-I'm excited about Data: database architecture, warehousing, machine learning and AI, transaction processing, ETL/ELT, analyzing, reporting, dashboarding, statistics, research, and everything in between. Since 2017, R and SQL have been my go-to tools. However, I have experience with a variety of software, programming languages, and IT project types. You can learn more about my work via the following resources:
+I'm an effective IT leader with extensive technical expertise and a passion for generating value, solving problems, and supporting people and teams. I'm also excited about Data: database architecture, warehousing, machine learning and AI, transaction processing, ETL/ELT, analyzing, reporting, dashboarding, statistics, research, and everything in between. Since 2017, R and SQL have been my go-to tools. However, I have experience with a variety of software, programming languages, and IT project types. You can learn more about my work via the following resources:
 
 <div class="list-group">
-<a href="https://oakland0-my.sharepoint.com/:w:/g/personal/noahpollock_oakland_edu/Ec_M4rSn7a5Ep4MCYdpE9IQBxQiBlZdLkzR51keNCJogng?e=z8UIoq" class="list-group-item" target="_blank">
+<a href="https://oakland0-my.sharepoint.com/:b:/g/personal/noahpollock_oakland_edu/IQB7S16yaqnoSZjh-mmIBamkAXp4yeEtw3K5lUifPrPRFgM?e=BO4VQK" class="list-group-item" target="_blank">
   <i class="fa fa-file-text fa-fw" aria-hidden="true"></i> Curriculum Vitae </a>  
   
 <a href="https://www.linkedin.com/in/noah-pollock-5b5804157/" class="list-group-item" target="_blank">
@@ -44,7 +44,7 @@ I'm excited about Data: database architecture, warehousing, machine learning and
 
 ## Personal
 
-I enjoy teaching new skills to my daughter, cycling, running, skiing, problem solving, board-games / cards, and DIY with power tools and 3D printing.
+I enjoy teaching new skills to my daughter, cycling, running, skiing, problem solving, board-games / cards, DIY, woodworking, power tools, and 3D printing.
 
 <div class="panel-body">
   <div class="col-md-4">
@@ -67,7 +67,7 @@ I enjoy teaching new skills to my daughter, cycling, running, skiing, problem so
   
   <div class="polaroid" style ="width: 100%">
   <img src="images/family_camping.jpg" alt="Me, my wife, and our dogs camping.">
-  <p class="caption">Me my wife and our dogs camping. It was their first time at the beach and they were scared of the waves crashing on the shore.</p>
+  <p class="caption">Camping with my wife and dogs. Despite being effective guard dogs, they cower in sheer terror at waves crashing on the shore.</p>
   </div>
   </div>
   
@@ -109,12 +109,9 @@ cv_df <- read.csv('cv_df.csv',
 ```
 
 
-## Resume Fun {.tabset data-width=400}
+## Resume Highlights
 
-Below are some highlights from my Resume in this dashboard-like format.
-
-
-### Dashboard
+Below are some highlights from my Resume in a dashboard-esque format.
 
 ```{r education, results='asis'}
 
@@ -231,7 +228,7 @@ leaflet() %>%
   </div>
   <div class="col-md-3">
   <div class="well">
-<p style="text-align:center;padding: 8px 0; height:130px;font-size: x-large; background-color: #ecf0f1;"><strong>Total Conference Presentations
+<p style="text-align:center;padding: 8px 0; height:300px;font-size: x-large; background-color: #ecf0f1;"><strong>Select Conference Presentations
 <br><br>
 `r cv_df %>% filter(section == "Presentations") %>% nrow()`
 </strong></p>
